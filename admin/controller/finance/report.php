@@ -450,7 +450,6 @@ class ControllerFinanceReport extends Controller {
 			}
 			$this->model_tool_excel->createExcelFile( $aMatrix, $oStockFinances->getStock()->getCode() );
 		}
-
 	}
 }
 ?>

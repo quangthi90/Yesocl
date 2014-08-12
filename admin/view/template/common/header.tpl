@@ -121,6 +121,7 @@ $(document).ready(function(){
               <li><a href="<?php echo $finance_code; ?>"><?php echo $text_code; ?></a></li>
               <li><a href="<?php echo $finance_function; ?>"><?php echo $text_function; ?></a></li>
               <li><a href="<?php echo $finance_report; ?>"><?php echo $text_report; ?></a></li>
+              <li><a href="<?php echo $finance_export; ?>"><?php echo $text_export; ?></a></li>
             </ul>
           </li>
           <li><a href="<?php echo $finance_date; ?>"><?php echo $text_date; ?></a></li>

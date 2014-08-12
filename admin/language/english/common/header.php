@@ -37,6 +37,7 @@ $_['text_code']		              		= 'Code';
 $_['text_date']		              		= 'Date';
 $_['text_function']		              	= 'Function';
 $_['text_report']		              	= 'Report';
+$_['text_export']		              	= 'Export';
 
 // Branch
 $_['text_branches']                    	= 'Branches';

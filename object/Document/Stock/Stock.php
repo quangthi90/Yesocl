@@ -188,14 +188,6 @@ Class Stock {
 		return $this->isDown;
 	}
 
-	public function setFinance( $finance ){
-		$this->finance = $finance;
-	}
-
-	public function getFinance(){
-		return $this->finance;
-	}
-
 	public function setRangePrice( $rangePrice ){
 		$this->rangePrice = $rangePrice;
 	}

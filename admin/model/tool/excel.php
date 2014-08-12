@@ -8,7 +8,7 @@ class ModelToolExcel extends Model {
 		return $sheetData;
 	}
 
-	public function createExcelFile( $aMatrix, $sFilename ){
+	public function createExcelFile( $aMatrix, $sFileLink, $bIsDownload = false ){
 		$objPHPExcel = new PHPExcel();
 
 		// Set properties
@@ -18,28 +18,44 @@ class ModelToolExcel extends Model {
 		// $objPHPExcel->getProperties()->setSubject("Office 2007 XLSX Test Document");
 		// $objPHPExcel->getProperties()->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.");
 
+		ini_set("memory_limit", "384M"); // set in php.ini, I cannot change this
+		set_time_limit(0);
+
+		// Initiate cache
+		$cacheMethod = PHPExcel_CachedObjectStorageFactory::cache_to_phpTemp;
+		$cacheSettings = array( 'memoryCacheSize' => '32MB');
+		PHPExcel_Settings::setCacheStorageMethod($cacheMethod, $cacheSettings);
+
 		// Add data
 		$objPHPExcel->setActiveSheetIndex(0);
-		foreach ( $aMatrix as $iRowNum => $aCols ) {
-			$iRowNum += 1;
-			foreach ( $aCols as $sColName => $iValue ) {
-				$objPHPExcel->getActiveSheet()->SetCellValue($sColName.$iRowNum, $iValue);
+		$activeSheet = $objPHPExcel->getActiveSheet();
+		foreach ( $aMatrix as $sCol => $sValue ) {
+			$aCols = explode('-', $sCol);
+			if ( count($aCols) > 1 ){
+				$concat =  $aCols[0] . ":" . $aCols[1];
+    			$activeSheet->mergeCells($concat);
+    			$sCol = $aCols[0];
 			}
+			$activeSheet->SetCellValue($sCol, $sValue);
+			unset($aCols);
 		}
 
 		// Rename sheet
 		// $objPHPExcel->getActiveSheet()->setTitle('Simple');
-				
+
 		// Save Excel 2007 file
 		$objWriter = new PHPExcel_Writer_Excel2007( $objPHPExcel );
-		$objWriter->save( DIR_CACHE . $sFilename . '.xlsx' );
+		$objWriter->save( $sFileLink );
 
 		// Redirect output to a client’s web browser (Excel2007)
-		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-		header('Content-Disposition: attachment;filename="'.$sFilename.'.xlsx"');
-		header('Cache-Control: max-age=0');
-		readfile( DIR_CACHE . $sFilename . '.xlsx' );
-exit;
+		if ( $bIsDownload ){
+			header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+			header('Content-Disposition: attachment;filename="'.basename($sFileLink).'"');
+			header('Cache-Control: max-age=0');
+			readfile( $sFileLink );
+		}
+
+		exit;
 	}
 }
 ?>

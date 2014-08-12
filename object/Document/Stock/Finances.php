@@ -51,11 +51,16 @@ Class Finances {
     }
 
     public function getFinanceByFinanceId( $idFinance ){
+    	// print('<meta content="text/html; charset=utf-8" http-equiv="Content-Type">');
+    	// print($idFinance . "<br>");
     	foreach ( $this->getFinances() as $finance ) {
+    		// print($finance->getFinance()->getId() . " - " . $finance->getFinance()->getName() .  "<br>");
     		if ( $finance->getFinance()->getId() == $idFinance ){
+    			// print($finance->getId());
     			return $finance;
     		}
     	}
+    	// exit;
     	return null;
     }
 

@@ -97,6 +97,10 @@ class ModelFinanceFunction extends Model {
 		return $this->dm->getRepository('Document\Finance\Formual')->find( $id );
 	}
 
+	public function getFunctionByName( $sName ){
+		return $this->dm->getRepository('Document\Finance\Formual')->findOneByName( $sName );
+	}
+
 	private function isOperator( $token ) {
 		$aOperators = array( '+', '-', '*', '/' );
 

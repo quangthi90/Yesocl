@@ -60,6 +60,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_code'] = $this->language->get('text_code');
 		$this->data['text_function'] = $this->language->get('text_function');
 		$this->data['text_report'] = $this->language->get('text_report');
+		$this->data['text_export'] = $this->language->get('text_export');
 
 		// Branch
 		$this->data['text_branches'] = $this->language->get('text_branches');
@@ -72,7 +73,6 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_attribute_group'] = $this->language->get('text_attribute_group');
 		$this->data['text_attribute'] = $this->language->get('text_attribute');
 		$this->data['text_attribute_type'] = $this->language->get('text_attribute_type');
-		
 		
 		// System
 		$this->data['text_system'] = $this->language->get('text_system');
@@ -150,6 +150,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['finance_function'] = $this->url->link('finance/function', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['finance_date'] = $this->url->link('finance/date', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['finance_report'] = $this->url->link('finance/report', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['finance_export'] = $this->url->link('finance/export', 'token=' . $this->session->data['token'], 'SSL');
 
 			// Company
 			$this->data['company_group'] = $this->url->link('company/group', 'token=' . $this->session->data['token'], 'SSL');
