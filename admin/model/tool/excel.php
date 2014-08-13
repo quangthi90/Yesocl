@@ -54,8 +54,6 @@ class ModelToolExcel extends Model {
 			header('Cache-Control: max-age=0');
 			readfile( $sFileLink );
 		}
-
-		exit;
 	}
 }
 ?>

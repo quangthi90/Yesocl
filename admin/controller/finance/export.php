@@ -55,6 +55,13 @@ class ControllerFinanceExport extends Controller {
 		if ( empty($this->request->get['to']) ){
 			exit('Param To is empty');
 		}
+
+		if ( empty($this->request->get['start']) ){
+			$iStart = 0;
+		}else{
+			$iStart = $this->request->get['start'];
+		}
+
 		// $this->load->language('finance/export');
 		$this->load->model('stock/finance');
 		$this->load->model('finance/function');
@@ -95,7 +102,11 @@ class ControllerFinanceExport extends Controller {
 			$aFunctionDetails[$sFunctionName] = $this->model_finance_function->getFunctionDetail($oFunction->getFunction());
 		}
 		// Stock Finance Info
-		$lStockFinances = $this->model_stock_finance->getAllFinances();
+		$lStockFinances = $this->model_stock_finance->getAllFinances(array(
+			'limit' => 100,
+			'start' => $iStart * 100
+		));
+		if ( $lStockFinances->count(true) == 0 ) exit('export success');
 		$iRow = 3;
 		// Browsing list Finance Stocks
 		foreach ( $lStockFinances as $oStockFinances ) {
@@ -130,7 +141,10 @@ class ControllerFinanceExport extends Controller {
 		}
 
 		// Export excel file
-		$this->model_tool_excel->createExcelFile( $aMatrix, DIR_CACHE . 'Long Term.xlsx', true );
+		$this->model_tool_excel->createExcelFile( $aMatrix, DIR_DOWNLOAD . 'Long Term ' . ($iStart + 1) . '.xlsx' );
+
+		$url = $this->url->link('finance/export/longterm', 'token=' . $this->session->data['token'] . '&from=' . $this->request->get['from'] . '&to=' . $this->request->get['to'] . '&start=' . ($iStart + 1) );
+		$this->redirect($url);
 	}
 
 	public function shortterm(){

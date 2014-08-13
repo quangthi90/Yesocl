@@ -95,8 +95,19 @@ class ModelStockFinance extends Model {
 		));
 	}
 
-	public function getAllFinances(){
-		return $this->dm->getRepository('Document\Stock\Finances')->findAll();
+	public function getAllFinances( $aData = array() ){
+		if ( empty($aData) ){
+			return $this->dm->getRepository('Document\Stock\Finances')->findAll();
+		}
+
+		if ( empty($aData['limit']) || !isset($aData['start']) ){
+			return null;
+		}
+
+		return $this->dm->getRepository('Document\Stock\Finances')
+			->findAll()
+			->skip( $aData['start'] )
+			->limit( $aData['limit'] );
 	}
 }
 ?>
