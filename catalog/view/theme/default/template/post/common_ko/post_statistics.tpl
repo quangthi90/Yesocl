@@ -53,7 +53,7 @@
                         <!-- ko if: currentTime() != 0 -->
                         <i class="icon-arrow-right"></i>
                         <!-- /ko -->
-                        <span>Popular posts</span>
+                        <span>Popular posts</span> (<b style="font-size: 9px;" data-bind="text: totalPopularPost">0</b>)
                     </a>
                 </li>
                 <li>
