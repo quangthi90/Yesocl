@@ -331,7 +331,7 @@ class ModelUserPost extends Model {
             return true;
         });
 
-        $aPosts = $lPosts->toArray();
+        $aPosts = $lPosts->slice($aData['start'], $aData['limit']);
 
         if ( empty($aData['start_time']) && empty($aData['end_time']) ){
 			usort($aPosts, function ($a, $b){
