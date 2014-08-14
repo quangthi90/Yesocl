@@ -1,7 +1,7 @@
 <?php
 class ControllerFinanceExport extends Controller {
 	private $route = 'finance/export';
-	private $limit = 200;
+	private $limit = 100;
 
 	public function index(){
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_export')) ) {
