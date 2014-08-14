@@ -1,6 +1,7 @@
 <?php
 class ControllerFinanceExport extends Controller {
 	private $route = 'finance/export';
+	private $limit = 200;
 
 	public function index(){
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_export')) ) {
@@ -130,8 +131,8 @@ class ControllerFinanceExport extends Controller {
 		}
 		// Stock Finance Info
 		$lStockFinances = $this->model_stock_finance->getAllFinances(array(
-			'limit' => 100,
-			'start' => $iStart * 100
+			'limit' => $this->limit,
+			'start' => $iStart * $this->limit
 		));
 		if ( $lStockFinances->count(true) == 0 ){
 			$aLinks = array();
@@ -247,8 +248,8 @@ class ControllerFinanceExport extends Controller {
 		}
 		// Stock Finance Info
 		$lStockFinances = $this->model_stock_finance->getAllFinances(array(
-			'limit' => 100,
-			'start' => $iStart * 100
+			'limit' => $this->limit,
+			'start' => $iStart * $this->limit
 		));
 		if ( $lStockFinances->count(true) == 0 ){
 			$aLinks = array();

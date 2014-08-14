@@ -107,7 +107,8 @@ class ModelStockFinance extends Model {
 		return $this->dm->getRepository('Document\Stock\Finances')
 			->findAll()
 			->skip( $aData['start'] )
-			->limit( $aData['limit'] );
+			->limit( $aData['limit'] )
+			->sort( array('stock.$id' => 1) );
 	}
 }
 ?>
