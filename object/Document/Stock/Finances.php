@@ -14,7 +14,7 @@ Class Finances {
 	/** @MongoDB\EmbedMany(targetDocument="Finance") */
 	private $finances = array();
 
-	/** @MongoDB\ReferenceOne(targetDocument="Stock") */
+	/** @MongoDB\ReferenceOne(targetDocument="Stock") @MongoDB\Index */
 	private $stock;
 	
 	/** @MongoDB\Boolean */
