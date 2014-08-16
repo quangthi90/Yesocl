@@ -1518,12 +1518,24 @@ function PostStatisticsModel(options) {
 	self.types = ["user", "branch", "stock"];
 	self.currentType = ko.observable("user");
 	self.currentTime = ko.observable(0);
+	self.totalPopularPost = ko.observable(0);
 	self.userCaching = ko.observable(options.userCaching || false);
 
 	var cacheManager = new YesGlobal.CacheManager(false);
 	if(options.clearCacheWhenReload){
 		cacheManager.clearCache();
 	}
+
+	self.times.subscribe(function(value){
+		self.totalPopularPost(0);
+		if(value){
+			var total = 0;
+			ko.utils.arrayForEach(self.times(), function(item){
+				total += item.count;
+			});
+			self.totalPopularPost(total);
+		}
+	});
 	
 	self.loadMore = function() {
 		if(!self.canLoadMore() || self.isLoadingMore()) return;
@@ -1538,6 +1550,7 @@ function PostStatisticsModel(options) {
 	self.loadPosts = function(dataTime) {
 		self.currentPage(1);
 		self.currentTime(dataTime.time);
+		self.postList([]);
 		_loadPosts(function(data){
 		});
 	};
@@ -1555,6 +1568,7 @@ function PostStatisticsModel(options) {
 		self.currentPage(1);
 		_loadTimes(function(){
 			self.currentTime(0);
+			self.postList([]);
 			_loadPosts(function(data) {});
 		});
 	};
@@ -1587,7 +1601,7 @@ function PostStatisticsModel(options) {
 		
 		postContainer.on("scroll", function() {
 			var rootWidth = $(this).width();
-			if(postContainer.scrollLeft() + rootWidth >= postContainer[0].scrollWidth - 10) {
+			if(postContainer.scrollLeft() + rootWidth >= postContainer[0].scrollWidth - 20) {
 				self.loadMore();
 			}
 		});
@@ -1603,7 +1617,6 @@ function PostStatisticsModel(options) {
 			if(cachedObject != null) {
 				self.currentPage(cachedObject.currentPage);
 				self.canLoadMore(cachedObject.canLoadMore);
-				self.postList.removeAll();
 				ko.utils.arrayForEach(cachedObject.postList, function(p){
 					var postItem = new PostModel(p);
 					self.postList.push(postItem);
@@ -1647,7 +1660,6 @@ function PostStatisticsModel(options) {
 
 		//Reset params:
 		self.isLoadSuccess(false);
-		self.postList.removeAll();
 
 		//Call common ajax Call:
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
@@ -1737,7 +1749,7 @@ function PostStatisticsModel(options) {
 	}
 
 	function _getCachedKey() {
-		return "st-" + self.currentType() + "-" + self.currentTime();
+		return "st-" + self.currentType() + "-" + self.currentTime() + '-' + self.currentPage();
 	}
 
 	function _getTimeCachedKey(){

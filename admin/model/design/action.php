@@ -99,12 +99,10 @@ class ModelDesignAction extends Model {
 			$data['start'] = 0;
 		}
 
-		$query = $this->dm->createQueryBuilder( 'Document\Design\Action' )
+		return $this->dm->getRepository( 'Document\Design\Action' )->findAll()
     		->limit( $data['limit'] )
     		->skip( $data['start'] )
-    		->sort( 'order' );
-    	
-    	return $query->getQuery()->execute();
+    		->sort( array('order' => 1) );
 	}
 
 	public function getAllActions() {

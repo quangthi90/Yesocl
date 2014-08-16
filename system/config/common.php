@@ -43,4 +43,12 @@ $_['stock']['fund']['text']						= 'text';
 $_['stock']['fund']['rating']					= 'rating';
 $_['stock']['fund']['percent']					= 'percent';
 $_['stock']['fund']['buying']					= 'buying';
+
+$_['finance']['export']['longterm']				= 'Long Term';
+$_['finance']['export']['shortterm']			= 'Short Term';
+$_['finance']['longterm']['doanh-thu']			= 'Doanh thu';
+$_['finance']['longterm']['loi-nhuan']			= 'Lợi nhuận';
+$_['finance']['longterm']['roe']				= 'ROE';
+$_['finance']['shortterm']['doanh-thu']			= 'Doanh thu';
+$_['finance']['shortterm']['loi-nhuan']			= 'Lợi nhuận';
 ?>

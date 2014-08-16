@@ -15,6 +15,9 @@ $_['post']['cache']['group']				= 'Group';
 $_['post']['cache']['user']					= 'User';
 $_['post']['cache']['stock']				= 'Stock';
 
+$_['post']['time_limit']['edit']			= '1 day';
+
 $_['category']['cache']['folder']			= 'category';
+
 
 ?>

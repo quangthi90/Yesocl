@@ -1,4 +1,4 @@
-<?php  
+<?php
 class ControllerPostDetail extends Controller {
 	public function index() {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
@@ -30,25 +30,26 @@ class ControllerPostDetail extends Controller {
 		$oPost = $this->$sModelLink->getPost( $this->request->get, true );
 
 		$this->data['post_type'] = $this->request->get['post_type'];
+		$this->data['post_types'] = $this->config->get('post')['type'];
 
 		if ( !$oPost ){
 			print("not found post!"); exit;
 		}
 
 		$this->data['post'] = $this->model_tool_object->formatPost( $oPost );
-		
+
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/post/detail.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/post/detail.tpl';
 		} else {
 			$this->template = 'default/template/post/detail.tpl';
 		}
-		
+
 		$this->children = array(
 			'common/sidebar_control',
 			'common/footer',
 			'common/header'
 		);
-										
+
 		$this->response->setOutput($this->twig_render());
 	}
 }

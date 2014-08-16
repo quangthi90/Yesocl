@@ -117,6 +117,9 @@ class ModelCachePost extends Model {
 		$post->setView( $data['view'] );
 		$post->setCreated( $data['created'] );
 		$post->setHasTitle( $data['hasTitle'] );
+		if ( !empty($data['post_created']) ){
+			$post->setPostCreated( $data['post_created'] );
+		}
 
 		$this->dm->persist( $post );
 		$this->dm->flush();
@@ -343,6 +346,7 @@ class ModelCachePost extends Model {
 			}
 			$data['view'] = $post->getCountViewer();
 			$data['created'] = $post->getCreated();
+			$data['post_created'] = $post->getCreated();
 			$data['hasTitle'] = (strlen($post->getTitle()) > 0);
 
 			$this->editPost($data);

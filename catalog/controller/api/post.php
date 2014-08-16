@@ -626,7 +626,7 @@ class ControllerApiPost extends Controller {
         if ( !empty($this->request->post['limit']) ){
             $limit = $this->request->post['limit'];
         }else{
-            $limit = $this->limit;
+            $limit = 15;
         }
 
         if ( !empty($this->request->get['page']) ){
