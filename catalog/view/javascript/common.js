@@ -757,8 +757,14 @@ HorizontalBlock.prototype.LayoutAboutPage = function() {
 	var frontPage = this.root.find("#front-page");
 	var contentPage = this.root.find("#content-page");
 
-	this.root.width(frontPage.outerWidth() + contentPage.outerWidth() + 100);
-	this.rootContent.niceScroll();
+	var myMarker = $("#about-marker");
+	contentPage.width(myMarker.offset().left);
+	this.root.width(frontPage.outerWidth() + contentPage.outerWidth() + 400 + 200);
+	this.root.css({ "overflow-x" : "hidden", "opacity": "1" });
+
+	setTimeout(function(){
+		$("#y-content").niceScroll();
+	}, 100);
 };
 
 function BlockFeed(block, heightAverPost, widthAverPost) {

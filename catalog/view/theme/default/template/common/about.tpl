@@ -9,7 +9,7 @@
 
 {% block body %}
 	<div id="y-content">
-		<div id="y-main-content" class="has-horizontal about-page" style="width: 4500px;">
+		<div id="y-main-content" class="has-horizontal about-page" style="opacity: 0;">
 			<div class="about-part fl" id="front-page" style="margin-right: 50px;">
 				<div class="content-block" style="background-color: #56C2A9; color: #FFF;width: 300px;">
                     <p style="font-size: 20px; padding: 25px 25px 25px 5px; height: 160px;">
@@ -38,7 +38,7 @@
                     <p style="background-image: url(image/template/about-1.jpg); background-repeat:no-repeat; background-position: 100% top;width: 100%; min-height: 300px;"></p>
                 </div>
             </div>
-            <div class="about-part content-page fl" id="content-page">
+            <div class="about-part content-page fl" id="content-page" style="width: 2000px;">
             	<p>
                  <img src="image/template/about-2.jpg" alt="yesocl-about">   
                 </p>
@@ -125,6 +125,7 @@
                         <a href="www.yesocl.com">www.yesocl.com</a>
                     </p>
             	</div>
+                <span id="about-marker"></span>
             </div>
         </div>
 	</div>
