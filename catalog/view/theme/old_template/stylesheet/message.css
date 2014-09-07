@@ -1,0 +1,316 @@
+/* ======================================== START MESSAGE ============================================ */
+.message-page {
+
+}
+.message-page .message-box {
+    background-color: #fff;
+    opacity: 0;
+}
+.message-box .user-box {
+    float: left;
+    width: 350px;
+    height: 100%;
+}
+.user-box .user-box-menu {
+    padding: 15px 15px 5px 15px;
+}
+.user-box .user-box-menu a {
+    margin-right: 10px;
+}
+.user-box .user-box-menu a.active {
+    font-weight: bold;
+}
+.user-box .user-box-search {
+    padding: 5px 15px;
+    position: relative;
+}
+.user-box .user-box-search input.message-search {
+    width: 95%;
+}
+.user-box .user-box-search .mesage-search-loader {
+    position: absolute;
+    right: 23px;
+    top: 8px;
+    display: none;
+}
+.user-box .user-box-search .mesage-search-loader > i {
+    font-size: 14px;
+}
+.user-box .user-box-users {    
+}
+.user-box .user-box-users .user-message-li {
+    padding: 1px 0px 1px 15px;
+}
+.user-box .user-box-users .user-message-li:first-child {
+    padding-top: 0px;
+}
+.user-box .user-box-users .user-message-li .user-message-link {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    border-right: 1px solid #FFF;
+    background-color: #FAFAFA;
+}
+.user-box .user-box-users .user-message-li .user-message-link:hover,
+.user-box .user-box-users .user-message-li.active .user-message-link {
+    border-right: 1px solid #009B77;
+}
+.user-message-li .user-message-link img {
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin-right: 8px;
+}
+.user-message-li .user-message-link .user-message-info {    
+}
+.user-message-li .user-message-link strong.user-name {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #0e0e0e;
+    font-size: 12px;
+}
+.user-message-li .user-message-link span.message-overview {
+    font-size: 12px;
+    color: #5F5F5F;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+.user-message-li .user-message-link i {
+    font-size: 11px;
+    color: #b4b4b4;
+    margin-right: 2px;
+    display: none;
+}
+.user-box .user-box-users .user-message-li.read .user-message-link {
+}
+.user-box .user-box-users .user-message-li.unread .user-message-link {
+    background-color: #DFDFDF;
+}
+.user-message-li.sent-box .user-message-link span.message-overview > i.icon-mail-reply {
+    display: inline-block;
+}
+.user-message-li.inbox .user-message-link span.message-overview > i.icon-ok {
+    display: inline-block;
+}
+.user-message-li .user-message-link span.message-time {
+    font-size: 10px;
+    font-weight: bold;
+    color: #838383;
+    position: absolute;
+    top: 0px;
+    right: 5px;
+}
+.message-box .message-box-list {
+    float: left;    
+    min-width: 700px;
+    border-left: 1px solid #f0f0f0;
+    height: 100%;
+}
+.message-box .mesasage-box-header {
+    padding: 0px 15px 0px 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.message-box .mesasage-box-body {
+    padding-left: 15px;
+    position: relative;
+}
+.message-box .mesasage-box-footer {
+    padding: 5px 5px;
+
+    background-color: #f0f0f0;
+    margin: 0px auto;
+}
+.mesasage-box-header .message-box-name {
+    margin: 0px;
+    line-height: 42px;
+    float: left;
+    max-width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 18px;
+}
+.mesasage-box-header .message-box-tools {
+    text-align: right;  
+    float: right;
+    margin: 8px 0px 0px 0px;
+}
+.mesasage-box-header .message-box-tools a.tool-item {
+    font-weight: normal;    
+    padding: 3px 5px;
+}
+.mesasage-box-header .message-box-tools a.tool-item > i {
+    font-size: 15px;
+    margin: 0px 3px;
+}
+.mesasage-box-header .message-box-tools a.tool-item:hover {
+    
+}
+.mesasage-box-header .message-box-tools a.tool-item:hover > i {
+    color: #fff;    
+}
+.mesasage-box-body .mesasage-box-container {
+    height: 100%;
+
+}
+.mesasage-box-body .mesasage-box-container .message-item {
+    position: relative;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+.mesasage-box-body .mesasage-box-container .message-item.loadmore-waiting{
+    background-color: #ECECEC;
+    padding: 3px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #009B77;
+}
+.mesasage-box-body .mesasage-box-container .message-item.loadmore-waiting > i {
+    margin-left: 10px;
+}
+.mesasage-box-body .mesasage-box-container .message-item img {
+    width: 40px;    
+    height: 40px;
+    float: left;
+}
+.mesasage-box-body .mesasage-box-container .message-item .message-body {
+    float: left;
+    width: 600px;
+    margin-left: 10px;
+}
+.mesasage-box-body .mesasage-box-container .message-item .message-body .sender-name {
+    color: #5A5A5A;
+    margin: 0px;
+}
+.mesasage-box-body .mesasage-box-container .message-item .message-body .sender-time {
+    position: absolute; 
+    top: 0px;
+    right: 35px;
+    font-size: 11px;
+    color: #666666;
+}
+.mesasage-box-body .mesasage-box-container .message-item .message-body .message-content {
+    
+}
+.mesasage-box-body .mesasage-box-container .message-item .yes-dropdown {
+    display: none;
+}
+.mesasage-box-body .mesasage-box-container .message-item:hover .yes-dropdown {
+    display: block;
+}
+.mesasage-box-body .mesasage-box-container .message-item .dropdown-toggle {
+    background-color: #f0f0f0;
+    padding: 2px 5px;
+}
+.mesasage-box-body .mesasage-box-container .message-item .dropdown-toggle:hover i {
+    color: #009B77;
+}
+.mesasage-box-footer .message-editor {
+    width: 98%;
+    height: 45px;
+    resize: none;
+}
+.mesasage-box-footer .new-message-footer {
+    overflow: hidden;
+
+}
+.mesasage-box-footer .new-message-footer .enter-option {
+    float: right;
+
+    margin-right: 20px;
+}
+.mesasage-box-footer .new-message-footer .btn-send-msg {
+    float: right;
+
+    margin-right: 20px;
+    padding: 2px 10px;
+}
+#new-message-form {
+    max-width: 800px;
+    background-color: #fff;
+}
+#new-message-form .sent-user {
+    margin-bottom: 0px;
+    padding: 5px 0px;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;    
+}
+#new-message-form .sent-user:focus {    
+    outline: none;
+    border-color: rgba(82, 168, 236, 0.8);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+#new-message-form .message-editor {
+    width: 98%;
+    height: 100px;    
+    resize: none;
+}
+#new-message-form .enter-option {
+    float: right;
+    margin-right: 20px;
+    margin-top: 2px;
+}
+#new-message-form .btn-send-msg {
+    padding: 2px 10px;
+    float: right;
+}
+.message-waiting {
+    position: absolute;
+    top: -10px;
+    left: 0px;
+    right: 0px;
+    bottom: -100px;
+    text-align: center;
+    background-color: #FAFAFA;
+    z-index: 1;
+}
+.message-waiting .waiting-bg {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.message-waiting .waiting-bg i {
+    font-size: 40px;
+    color: #363636;
+    position: absolute;
+    top: 40%;
+}
+
+.message-page .mCSB_scrollTools .mCSB_draggerRail {
+    width: 6px;
+    background: #f0f0f0;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+.message-page .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    width: 6px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+.message-page .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ 
+    background: #b4b4b4;
+}
+.message-page .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{
+    background: #009B77;
+}
+.message-page .mCSB_container {
+    margin-right: 16px;
+}
+
+/* ========================================= END MESSAGE ============================================ */
