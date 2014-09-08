@@ -31,6 +31,24 @@
             </tr>
           </thead>
           <tbody>
+            <tr class="filter">
+              <td></td>
+              <td><input type="text" name="filter_name" value="<?php echo $filter_name; ?>" /></td>
+              <td><select name="filter_status">
+                  <option value="*"></option>
+                  <?php if ($filter_status) { ?>
+                  <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                  <?php } else { ?>
+                  <option value="1"><?php echo $text_enabled; ?></option>
+                  <?php } ?>
+                  <?php if (!is_null($filter_status) && !$filter_status) { ?>
+                  <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                  <?php } else { ?>
+                  <option value="0"><?php echo $text_disabled; ?></option>
+                  <?php } ?>
+                </select></td>
+              <td align="right"><a onclick="filter();" class="button"><?php echo $button_filter; ?></a></td>
+            </tr>
             <?php if ( $finances ) { ?>
             <?php foreach ( $finances as $finance ) { ?>
             <tr>
@@ -55,4 +73,57 @@
     </div>
   </div>
 </div>
+<script type="text/javascript"><!--
+  function filter() {
+    url = 'index.php?route=stock/finance<?php echo ($stock_id) ? '&stock_id=' . $stock_id : ''; ?>&token=<?php echo $token; ?>';
+
+    var filter_name = $('input[name=\'filter_name\']').attr('value');
+
+    if (filter_name) {
+      url += '&filter_name=' + encodeURIComponent(filter_name);
+    }
+
+    var filter_status = $('select[name=\'filter_status\']').attr('value');
+
+    if (filter_status != '*') {
+      url += '&filter_status=' + encodeURIComponent(filter_status);
+    }
+
+    location = url;
+  }
+//--></script>
+<script type="text/javascript"><!--
+$('#form input').keydown(function(e) {
+  if (e.keyCode == 13) {
+    filter();
+  }
+});
+//--></script>
+<script type="text/javascript"><!--
+$('input[name=\'filter_name\']').autocomplete({
+  delay: 500,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=finance/finance/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {
+        response($.map(json, function(item) {
+          return {
+            label: item.name,
+            value: item.id
+          }
+        }));
+      }
+    });
+  },
+  select: function(event, ui) {
+    $('input[name=\'filter_name\']').val(ui.item.label);
+
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script>
 <?php echo $footer; ?>
