@@ -37,6 +37,10 @@ class ControllerFinanceFinance extends Controller {
 			$url .= '&filter_group=' . urlencode(html_entity_decode($this->request->get['filter_group'], ENT_QUOTES, 'UTF-8'));
 		}
 
+		if (isset($this->request->get['filter_group_id'])) {
+			$url .= '&filter_group_id=' . urlencode(html_entity_decode($this->request->get['filter_group_id'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if (isset($this->request->get['filter_status'])) {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
@@ -93,6 +97,10 @@ class ControllerFinanceFinance extends Controller {
 				$url .= '&filter_group=' . urlencode(html_entity_decode($this->request->get['filter_group'], ENT_QUOTES, 'UTF-8'));
 			}
 
+			if (isset($this->request->get['filter_group_id'])) {
+				$url .= '&filter_group_id=' . urlencode(html_entity_decode($this->request->get['filter_group_id'], ENT_QUOTES, 'UTF-8'));
+			}
+
 			if (isset($this->request->get['filter_status'])) {
 				$url .= '&filter_status=' . $this->request->get['filter_status'];
 			}
@@ -136,9 +144,15 @@ class ControllerFinanceFinance extends Controller {
 		}
 
 		if (isset($this->request->get['filter_group'])) {
-			$filter_group = $this->request->get['filter_groupT'];
+			$filter_group = $this->request->get['filter_group'];
 		} else {
 			$filter_group = null;
+		}
+
+		if (isset($this->request->get['filter_group_id'])) {
+			$filter_group_id = $this->request->get['filter_group_id'];
+		} else {
+			$filter_group_id = null;
 		}
 
 		if (isset($this->request->get['filter_status'])) {
@@ -184,6 +198,10 @@ class ControllerFinanceFinance extends Controller {
 			$url .= '&filter_group=' . urlencode(html_entity_decode($this->request->get['filter_group'], ENT_QUOTES, 'UTF-8'));
 		}
 
+		if (isset($this->request->get['filter_group_id'])) {
+			$url .= '&filter_group_id=' . urlencode(html_entity_decode($this->request->get['filter_group_id'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if (isset($this->request->get['filter_status'])) {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
@@ -210,6 +228,8 @@ class ControllerFinanceFinance extends Controller {
 		// Text
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 		$this->data['text_edit'] = $this->language->get('text_edit');
+		$this->data['text_enabled'] = $this->language->get('text_enabled');
+		$this->data['text_disabled'] = $this->language->get('text_disabled');
 
 		// Column
 		$this->data['column_name'] = $this->language->get('column_name');
@@ -225,15 +245,22 @@ class ControllerFinanceFinance extends Controller {
 		// Button
 		$this->data['button_insert'] = $this->language->get('button_insert');
 		$this->data['button_delete'] = $this->language->get('button_delete');
+		$this->data['button_filter'] = $this->language->get('button_filter');
 
 		// Link
 		$this->data['insert'] = $this->url->link( 'finance/finance/insert', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 		$this->data['delete'] = $this->url->link( 'finance/finance/delete', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 
+		// TOKEN
+		$this->data['token'] = $this->session->data['token'];
+
 		// finance
 		$aData = array(
 			'start' => ($page - 1) * $this->limit,
-			'limit' => $this->limit
+			'limit' => $this->limit,
+			'filter_name' => $filter_name,
+			'filter_group_id' => $filter_group_id,
+			'filter_status' => $filter_status,
 		);
 
 		$lFinances = $this->model_finance_finance->getFinances( $aData );
@@ -273,6 +300,10 @@ class ControllerFinanceFinance extends Controller {
 			$url .= '&filter_group=' . urlencode(html_entity_decode($this->request->get['filter_group'], ENT_QUOTES, 'UTF-8'));
 		}
 
+		if (isset($this->request->get['filter_group_id'])) {
+			$url .= '&filter_group_id=' . urlencode(html_entity_decode($this->request->get['filter_group_id'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		if (isset($this->request->get['filter_status'])) {
 			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
@@ -288,6 +319,7 @@ class ControllerFinanceFinance extends Controller {
 
 		$this->data['filter_name'] = $filter_name;
 		$this->data['filter_group'] = $filter_group;
+		$this->data['filter_group_id'] = $filter_group_id;
 		$this->data['filter_status'] = $filter_status;
 
 		$this->template = 'finance/finance_list.tpl';
@@ -341,6 +373,10 @@ class ControllerFinanceFinance extends Controller {
 
 		if (isset($this->request->get['filter_group'])) {
 			$url .= '&filter_group=' . urlencode(html_entity_decode($this->request->get['filter_group'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_group_id'])) {
+			$url .= '&filter_group_id=' . urlencode(html_entity_decode($this->request->get['filter_group_id'], ENT_QUOTES, 'UTF-8'));
 		}
 
 		if (isset($this->request->get['filter_status'])) {
@@ -591,10 +627,10 @@ class ControllerFinanceFinance extends Controller {
 			$filter_name = null;
 		}
 
-		if ( isset( $this->request->get['filter_group'] ) ) {
-			$filter_group = $this->request->get['filter_group'];
+		if ( isset( $this->request->get['filter_group_id'] ) ) {
+			$filter_group_id = $this->request->get['filter_group_id'];
 		}else {
-			$filter_group = null;
+			$filter_group_id = null;
 		}
 
 		if ( isset( $this->request->get['filter_status'] ) ) {
@@ -605,7 +641,7 @@ class ControllerFinanceFinance extends Controller {
 
 		$data = array(
 			'filter_name' => $filter_name,
-			'filter_group' => $filter_group,
+			'filter_group_id' => $filter_group_id,
 			'filter_status' => $filter_status,
 			'limit'		  => 20,
 		);

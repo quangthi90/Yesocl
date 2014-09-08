@@ -37,7 +37,7 @@
             <tr class="filter">
               <td></td>
               <td><input type="text" name="filter_name" value="<?php echo $filter_name; ?>" /></td>
-              <td><input type="text" name="filter_group" value="<?php echo $filter_group; ?>" /></td>
+              <td><input type="text" name="filter_group" value="<?php echo $filter_group; ?>" /><input type="hidden" name="filter_group_id" value="<?php echo $filter_group_id; ?>" /></td>
               <td align="left"></td>
               <td align="right"></td>
               <td><select name="filter_status">
@@ -98,6 +98,12 @@
       url += '&filter_group=' + encodeURIComponent(filter_group);
     }
 
+    var filter_group_id = $('input[name=\'filter_group_id\']').attr('value');
+
+    if (filter_group_id) {
+      url += '&filter_group_id=' + encodeURIComponent(filter_group_id);
+    }
+
     var filter_status = $('select[name=\'filter_status\']').attr('value');
 
     if (filter_status != '*') {
@@ -145,12 +151,12 @@ $('input[name=\'filter_group\']').autocomplete({
   delay: 500,
   source: function(request, response) {
     $.ajax({
-      url: 'index.php?route=finance/finance/autocomplete&token=<?php echo $token; ?>&filter_group=' +  encodeURIComponent(request.term),
+      url: 'index.php?route=finance/group/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {
         response($.map(json, function(item) {
           return {
-            label: item.group,
+            label: item.name,
             value: item.id
           }
         }));
@@ -159,6 +165,7 @@ $('input[name=\'filter_group\']').autocomplete({
   },
   select: function(event, ui) {
     $('input[name=\'filter_group\']').val(ui.item.label);
+    $('input[name=\'filter_group_id\']').val(ui.item.value);
 
     return false;
   },

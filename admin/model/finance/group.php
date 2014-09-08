@@ -98,8 +98,14 @@ class ModelFinanceGroup extends Model {
 			$aData['sort'] = 'order';
 		}
 
+		$filter = array();
+
+		if (isset($aData['filter_name'])) {
+			$filter['name'] = new MongoRegex("/" . trim($aData['filter_name']) . "/i");
+		}
+
 		return $this->dm->getRepository('Document\Finance\Group')
-			->findAll()
+			->findBy( $filter )
 			->skip( $aData['start'] )
 			->limit( $aData['limit'] )
 			->sort( array($aData['sort'] => $aData['order']) );
