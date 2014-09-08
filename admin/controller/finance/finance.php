@@ -397,7 +397,7 @@ class ControllerFinanceFinance extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link( 'finance/finance', 'token=' . $this->session->data['token'] . $url, 'SSL' ),
+			'href'      => $this->url->link( 'finance/finance', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
