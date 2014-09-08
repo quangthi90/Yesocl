@@ -242,6 +242,8 @@ class ControllerFinanceFunction extends Controller {
 
 		$this->data['pagination'] = $pagination->render();
 
+		$this->data['filter_name'] = $filter_name;
+
 		$this->template = 'finance/function_list.tpl';
 		$this->children = array(
 			'common/header',

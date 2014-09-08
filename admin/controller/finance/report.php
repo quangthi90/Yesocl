@@ -32,7 +32,18 @@ class ControllerFinanceReport extends Controller {
 			$this->model_finance_report->addReport( $this->request->post );
 
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link('finance/report', 'token=' . $this->session->data['token'], 'sSL') );
+
+			$url = '';
+
+			if (isset($this->request->get['filter_name'])) {
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
+
+			$this->redirect( $this->url->link('finance/report', 'token=' . $this->session->data['token'] . $url, 'sSL') );
 		}
 
 		$this->data['action'] = $this->url->link( 'finance/report/insert', 'token=' . $this->session->data['token'], 'sSL' );
@@ -55,7 +66,18 @@ class ControllerFinanceReport extends Controller {
 			$this->model_finance_report->editReport( $this->request->get['report_id'], $this->request->post );
 
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link('finance/report', 'token=' . $this->session->data['token'], 'sSL') );
+
+			$url = '';
+
+			if (isset($this->request->get['filter_name'])) {
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
+
+			$this->redirect( $this->url->link('finance/report', 'token=' . $this->session->data['token'] . $url, 'sSL') );
 		}
 
 		$this->getForm();
@@ -76,13 +98,30 @@ class ControllerFinanceReport extends Controller {
 			$this->model_finance_report->deleteReports( $this->request->post );
 
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link('finance/report', 'token=' . $this->session->data['token'], 'sSL') );
+
+			$url = '';
+
+			if (isset($this->request->get['filter_name'])) {
+				$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
+
+			$this->redirect( $this->url->link('finance/report', 'token=' . $this->session->data['token'] . $url, 'sSL') );
 		}
 
 		$this->getList( );
 	}
 
 	private function getList( ){
+		if (isset($this->request->get['filter_name'])) {
+			$filter_name = $this->request->get['filter_name'];
+		} else {
+			$filter_name = null;
+		}
+
 		// catch error
 		if ( isset($this->error['warning']) ){
 			$this->data['error_warning'] = $this->error['warning'];
@@ -108,6 +147,16 @@ class ControllerFinanceReport extends Controller {
 			$page = $this->request->get['page'];
 		} else {
 			$page = 1;
+		}
+
+		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['page'])) {
+			$url .= '&page=' . $this->request->get['page'];
 		}
 
 		// breadcrumbs
@@ -139,15 +188,20 @@ class ControllerFinanceReport extends Controller {
 		// Button
 		$this->data['button_insert'] = $this->language->get('button_insert');
 		$this->data['button_delete'] = $this->language->get('button_delete');
+		$this->data['button_filter'] = $this->language->get('button_filter');
 
 		// Link
-		$this->data['insert'] = $this->url->link( 'finance/report/insert', 'token=' . $this->session->data['token'], 'sSL' );
-		$this->data['delete'] = $this->url->link( 'finance/report/delete', 'token=' . $this->session->data['token'], 'sSL' );
+		$this->data['insert'] = $this->url->link( 'finance/report/insert', 'token=' . $this->session->data['token'] . $url, 'sSL' );
+		$this->data['delete'] = $this->url->link( 'finance/report/delete', 'token=' . $this->session->data['token'] . $url, 'sSL' );
+
+		// TOKEN
+		$this->data['token'] = $this->session->data['token'];
 
 		// finance
 		$aData = array(
 			'start' => ($page - 1) * $this->limit,
-			'limit' => $this->limit
+			'limit' => $this->limit,
+			'filter_name' => $filter_name,
 		);
 
 		$lReports = $this->model_finance_report->getReports( $aData );
@@ -160,7 +214,7 @@ class ControllerFinanceReport extends Controller {
 
 			$action[] = array(
 				'text' => $this->language->get('text_edit'),
-				'href' => $this->url->link( 'finance/report/update', 'report_id=' . $oReport->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
+				'href' => $this->url->link( 'finance/report/update', 'report_id=' . $oReport->getId() . '&token=' . $this->session->data['token'] . $url, 'sSL' ),
 				'icon' => 'icon-edit',
 			);
 
@@ -177,14 +231,22 @@ class ControllerFinanceReport extends Controller {
 				);
 		}
 
+		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		$pagination = new Pagination();
 		$pagination->total = $iReportTotal;
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('finance/report', '&page={page}' . '&token=' . $this->session->data['token'], 'sSL');
+		$pagination->url = $this->url->link('finance/report', '&page={page}' . '&token=' . $this->session->data['token'] . $url, 'sSL');
 
 		$this->data['pagination'] = $pagination->render();
+
+		$this->data['filter_name'] = $filter_name;
 
 		$this->template = 'finance/report_list.tpl';
 		$this->children = array(
@@ -227,6 +289,16 @@ class ControllerFinanceReport extends Controller {
 			$this->data['error_functions'] = $this->error['error_functions'];
 		} else {
 			$this->data['error_functions'] = '';
+		}
+
+		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['page'])) {
+			$url .= '&page=' . $this->request->get['page'];
 		}
 
 		$idReport = $this->request->get['report_id'];
@@ -281,7 +353,7 @@ class ControllerFinanceReport extends Controller {
 		$this->data['entry_function_name'] = $this->language->get('entry_function_name');
 
 		// Link
-		$this->data['cancel'] = $this->url->link( 'finance/report', 'token=' . $this->session->data['token'], 'sSL' );
+		$this->data['cancel'] = $this->url->link( 'finance/report', 'token=' . $this->session->data['token'] . $url, 'sSL' );
 
 		$this->data['token'] = $this->session->data['token'];
 
@@ -450,6 +522,33 @@ class ControllerFinanceReport extends Controller {
 			}
 			$this->model_tool_excel->createExcelFile( $aMatrix, $oStockFinances->getStock()->getCode() );
 		}
+	}
+
+	public function autocomplete() {
+		$this->load->model('finance/report');
+
+		if ( isset( $this->request->get['filter_name'] ) ) {
+			$filter_name = $this->request->get['filter_name'];
+		}else {
+			$filter_name = null;
+		}
+
+		$data = array(
+			'filter_name' => $filter_name,
+			'limit'		  => 20,
+		);
+
+		$lReports = $this->model_finance_report->getReports( $data );
+
+		$json = array();
+		foreach ($lReports as $lReport) {
+			$json[] = array(
+				'name' => html_entity_decode( $lReport->getName() ),
+				'id' => $lReport->getId(),
+			);
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
 	}
 }
 ?>
