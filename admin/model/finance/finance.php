@@ -157,8 +157,28 @@ class ModelFinanceFinance extends Model {
 			$aData['sort'] = 'order';
 		}
 
+		$filter = array();
+
+		if (isset($aData['filter_deleted']) && $aData['filter_deleted']) {
+			$filter['deleted'] = true;
+		}else {
+			$filter['deleted'] = false;
+		}
+
+		if (isset($aData['filter_name'])) {
+			$filter['name'] = new MongoRegex("/" . trim($aData['filter_name']) . "/i");
+		}
+
+		if (isset($aData['filter_group_id'])) {
+			$filter['group.id'] = trim($aData['filter_group_id']);
+		}
+
+		if (isset($aData['filter_status'])) {
+			$filter['status'] = ($aData['filter_status']) ? true : false;
+		}
+
 		return $this->dm->getRepository('Document\Finance\Finance')
-			->findAll()
+		    ->findBy( $filter )
 			->skip( $aData['start'] )
 			->limit( $aData['limit'] )
 			->sort( array($aData['sort'] => $aData['order']) );
@@ -273,10 +293,27 @@ class ModelFinanceFinance extends Model {
 			$data['start'] = 0;
 		}
 
-		return $this->dm->getRepository('Document\Finance\Finance')->findBy(array(
-			'deleted' => false,
-			'name' => new MongoRegex("/" . trim($data['filter_name']) . "/i")
-		))->skip( $data['start'] )->limit( $data['limit'] )->sort( array( 'name' => 1) );
+		$filter = array();
+
+		if (isset($data['filter_deleted']) && $data['filter_deleted']) {
+			$filter['deleted'] = true;
+		}else {
+			$filter['deleted'] = false;
+		}
+
+		if (isset($data['filter_name'])) {
+			$filter['name'] = new MongoRegex("/" . trim($data['filter_name']) . "/i");
+		}
+
+		if (isset($data['filter_group_id'])) {
+			$filter['group.id'] = trim($data['filter_group_id']);
+		}
+
+		if (isset($data['filter_status'])) {
+			$filter['status'] = ($data['filter_status'] == 1) ? true : false;
+		}
+
+		return $this->dm->getRepository('Document\Finance\Finance')->findBy($filter)->skip( $data['start'] )->limit( $data['limit'] )->sort( array( 'name' => 1) );
 	}
 }
 ?>

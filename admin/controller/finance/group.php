@@ -1,9 +1,9 @@
-<?php 
+<?php
 class ControllerFinanceGroup extends Controller {
 	private $error = array( );
 	private $limit = 10;
 	private $route = 'finance/group';
- 
+
 	public function index(){
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
 			return $this->forward('error/permission');
@@ -13,7 +13,7 @@ class ControllerFinanceGroup extends Controller {
 		$this->load->model( 'finance/group' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
-		
+
 		$this->getList();
 	}
 
@@ -30,13 +30,13 @@ class ControllerFinanceGroup extends Controller {
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValiGroupForm() ){
 			$this->model_finance_group->addGroup( $this->request->post );
-			
+
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link('finance/group', 'token=' . $this->session->data['token'], 'sSL') );
 		}
 
 		$this->data['action'] = $this->url->link( 'finance/group/insert', 'token=' . $this->session->data['token'], 'sSL' );
-		
+
 		$this->getForm();
 	}
 
@@ -44,7 +44,7 @@ class ControllerFinanceGroup extends Controller {
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_edit')) ) {
 			return $this->forward('error/permission');
 		}
-		
+
 		$this->load->language( 'finance/group' );
 		$this->load->model( 'finance/group' );
 
@@ -53,19 +53,19 @@ class ControllerFinanceGroup extends Controller {
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValiGroupForm(true) ){
 			$this->model_finance_group->editGroup( $this->request->get['group_id'], $this->request->post );
-			
+
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link('finance/group', 'token=' . $this->session->data['token'], 'sSL') );
 		}
-		
+
 		$this->getForm();
 	}
- 
+
 	public function delete(){
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_delete')) ) {
 			return $this->forward('error/permission');
 		}
-		
+
 		$this->load->language( 'finance/group' );
 		$this->load->model( 'finance/group' );
 
@@ -74,7 +74,7 @@ class ControllerFinanceGroup extends Controller {
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValiGroupDelete() ){
 			$this->model_finance_group->deleteGroups( $this->request->post );
-			
+
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link('finance/group', 'token=' . $this->session->data['token'], 'sSL') );
 		}
@@ -90,20 +90,20 @@ class ControllerFinanceGroup extends Controller {
 			unset( $this->session->data['error_warning'] );
 		} elseif ( isset($this->session->data['error_warning']) ) {
 			$this->data['error_warning'] = $this->session->data['error_warning'];
-			
+
 			unset( $this->session->data['error_warning'] );
 		} else {
 			$this->data['error_warning'] = '';
 		}
-		
+
 		if ( isset($this->session->data['success']) ){
 			$this->data['success'] = $this->session->data['success'];
-		
+
 			unset( $this->session->data['success'] );
 		} else {
 			$this->data['success'] = '';
 		}
-		
+
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
 		} else {
@@ -124,7 +124,7 @@ class ControllerFinanceGroup extends Controller {
 
    		// Heading title
 		$this->data['heading_title'] = $this->language->get( 'heading_title' );
-		
+
 		// Text
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 		$this->data['text_edit'] = $this->language->get('text_edit');
@@ -132,16 +132,16 @@ class ControllerFinanceGroup extends Controller {
 		// Column
 		$this->data['column_name'] = $this->language->get('column_name');
 		$this->data['column_order'] = $this->language->get('column_order');
-		$this->data['column_status'] = $this->language->get('column_status');	
+		$this->data['column_status'] = $this->language->get('column_status');
 		$this->data['column_action'] = $this->language->get('column_action');
-		
+
 		// Confirm
 		$this->data['confirm_del'] = $this->language->get('confirm_del');
-		
+
 		// Button
 		$this->data['button_insert'] = $this->language->get('button_insert');
 		$this->data['button_delete'] = $this->language->get('button_delete');
-		
+
 		// Link
 		$this->data['insert'] = $this->url->link( 'finance/group/insert', 'token=' . $this->session->data['token'], 'sSL' );
 		$this->data['delete'] = $this->url->link( 'finance/group/delete', 'token=' . $this->session->data['token'], 'sSL' );
@@ -151,22 +151,22 @@ class ControllerFinanceGroup extends Controller {
 			'start' => ($page - 1) * $this->limit,
 			'limit' => $this->limit
 		);
-		
+
 		$lGroups = $this->model_finance_group->getGroups( $aData );
-		
+
 		$iGroupTotal = $lGroups->count();
-		
+
 		$this->data['groups'] = array();
 		if ( $lGroups ){
 			foreach ( $lGroups as $oGroup ){
 				$action = array();
-			
+
 				$action[] = array(
 					'text' => $this->language->get('text_edit'),
 					'href' => $this->url->link( 'finance/group/update', 'group_id=' . $oGroup->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
 					'icon' => 'icon-edit',
 				);
-			
+
 				$this->data['groups'][] = array(
 					'id' => $oGroup->getId(),
 					'name' => $oGroup->getName(),
@@ -176,14 +176,14 @@ class ControllerFinanceGroup extends Controller {
 				);
 			}
 		}
-		
+
 		$pagination = new Pagination();
 		$pagination->total = $iGroupTotal;
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
 		$pagination->url = $this->url->link('finance/group', '&page={page}' . '&token=' . $this->session->data['token'], 'sSL');
-			
+
 		$this->data['pagination'] = $pagination->render();
 
 		$this->template = 'finance/group_list.tpl';
@@ -191,7 +191,7 @@ class ControllerFinanceGroup extends Controller {
 			'common/header',
 			'common/footer'
 		);
-				
+
 		$this->response->setOutput( $this->render() );
 	}
 
@@ -202,15 +202,15 @@ class ControllerFinanceGroup extends Controller {
 		} else {
 			$this->data['error_warning'] = '';
 		}
-		
+
 		if ( isset($this->session->data['success']) ){
 			$this->data['success'] = $this->session->data['success'];
-		
+
 			unset( $this->session->data['success'] );
 		} else {
 			$this->data['success'] = '';
 		}
-		
+
 		if ( isset($this->error['error_name']) ) {
 			$this->data['error_name'] = $this->error['error_name'];
 		} else {
@@ -239,25 +239,25 @@ class ControllerFinanceGroup extends Controller {
 
    		// Heading title
 		$this->data['heading_title'] = $this->language->get('heading_title');
-		
-		// Text	
+
+		// Text
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_true'] = $this->language->get('text_true');
 		$this->data['text_false'] = $this->language->get('text_false');
-		
+
 		// Button
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
-		
+
 		// Entry
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_order'] = $this->language->get('entry_order');
 		$this->data['entry_status'] = $this->language->get('entry_status');
-		
+
 		// Link
 		$this->data['cancel'] = $this->url->link( 'finance/group', 'token=' . $this->session->data['token'], 'sSL' );
-		
+
 		// finance
 		if ( isset($this->request->get['group_id']) ){
 			$oGroup = $this->model_finance_group->getGroup( $idGroup );
@@ -302,7 +302,7 @@ class ControllerFinanceGroup extends Controller {
 			'common/header',
 			'common/footer'
 		);
-				
+
 		$this->response->setOutput( $this->render() );
 	}
 
@@ -318,7 +318,7 @@ class ControllerFinanceGroup extends Controller {
 		if ( $this->error){
 			return false;
 		}else {
-			return true;	
+			return true;
 		}
 	}
 
@@ -330,8 +330,35 @@ class ControllerFinanceGroup extends Controller {
 		if ( $this->error){
 			return false;
 		}else {
-			return true;	
+			return true;
 		}
+	}
+
+	public function autocomplete() {
+		$this->load->model('finance/group');
+
+		if ( isset( $this->request->get['filter_name'] ) ) {
+			$filter_name = $this->request->get['filter_name'];
+		}else {
+			$filter_name = null;
+		}
+
+		$data = array(
+			'filter_name' => $filter_name,
+			'limit'		  => 20,
+		);
+
+		$lGroups = $this->model_finance_group->getGroups( $data );
+
+		$json = array();
+		foreach ($lGroups as $lGroup) {
+			$json[] = array(
+				'name' => html_entity_decode( $lGroup->getName() ),
+				'id' => $lGroup->getId(),
+			);
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
 	}
 }
 ?>
