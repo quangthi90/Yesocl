@@ -474,7 +474,8 @@ var ConfigBlock = {
 	df_FRIEND_ACCOUNT : 'block-auto-floatleft',
 	df_SEARCH_PAGE 	: 'search-page',
 	df_NOTIFICATION_PAGE : 'notification-page',
-	df_STOCK_PAGE 	: 'stock-page'
+	df_STOCK_PAGE 	: 'stock-page',
+	df_ABOUT_PAGE 	: 'about-page'
 };
 
 function HorizontalBlock(el) {
@@ -512,7 +513,10 @@ HorizontalBlock.prototype.initializeBlock = function() {
 	}
 	else if (this.root.hasClass(ConfigBlock.df_STOCK_PAGE)) {
 		this.LayoutStockPage();
-	}		
+	}
+	else if (this.root.hasClass(ConfigBlock.df_ABOUT_PAGE)) {
+		this.LayoutAboutPage();
+	}
 };
 
 HorizontalBlock.prototype.LayoutPostHasBlock = function() {
@@ -746,6 +750,21 @@ HorizontalBlock.prototype.LayoutStockPage = function() {
 	}
 	this.blocks.css('opacity', '1');
 	this.rootContent.niceScroll();
+};
+
+HorizontalBlock.prototype.LayoutAboutPage = function() {
+	this.root.find(".about-part").height(this.root.height() - 20);
+	var frontPage = this.root.find("#front-page");
+	var contentPage = this.root.find("#content-page");
+
+	var myMarker = $("#about-marker");
+	contentPage.width(myMarker.offset().left);
+	this.root.width(frontPage.outerWidth() + contentPage.outerWidth() + 400 + 200);
+	this.root.css({ "overflow-x" : "hidden", "opacity": "1" });
+
+	setTimeout(function(){
+		$("#y-content").niceScroll();
+	}, 100);
 };
 
 function BlockFeed(block, heightAverPost, widthAverPost) {

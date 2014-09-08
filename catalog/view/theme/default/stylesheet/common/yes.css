@@ -4280,9 +4280,7 @@ a.wall-link:hover {
 
 /* ======================================== NEWS TICKER =========================================== */
 #news-ticker-container {
-  height: 58px;
-  left: 200px;
-  overflow-y: auto;
+  left: 230px;
   padding: 5px;
   position: fixed;
   top: 5px;
@@ -4306,6 +4304,8 @@ a.wall-link:hover {
   font-size: 10px;
 }
 .news-ticker-container {
+  max-height: 65px;
+  overflow-y: auto;
 }
 .news-ticker-container li.news-ticker {
   display: table;
@@ -4319,11 +4319,11 @@ a.wall-link:hover {
   padding-left: 5px;
   text-transform: capitalize;
   vertical-align: middle;
-  width: 100px;
+  width: 50px;
 }
 .news-ticker-container li.news-ticker .ticker-info {
   display: table-cell;
-  padding: 5px 5px 5px 0;
+  padding: 0px 5px 0px 0;
 }
 .news-ticker-container li.news-ticker .ticker-info a {
   color: #555555;
@@ -4337,5 +4337,69 @@ a.wall-link:hover {
     color: #009B77;
 }
 .news-ticker-container li.news-ticker:hover {
-  background-color: #FFFFFF;
+  /*background-color: #FFFFFF;*/
+}
+.news-ticker-container .mCSB_scrollTools .mCSB_draggerRail {
+  width: 6px;
+  background: #f0f0f0;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.news-ticker-container .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+  width: 6px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.news-ticker-container .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ 
+  background: #b4b4b4;
+}
+.news-ticker-container .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{
+  background: #009B77;
+}
+.news-ticker-container .mCSB_container {
+  margin-right: 20px;
+}
+
+/*ABOUT Page*/
+.about-page {
+  font-size: 15px;
+}
+.about-page a.system-link {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.about-page p {
+  line-height: 30px;
+  text-align: justify;
+}
+.about-page ul {
+  list-style-type: circle;
+  padding-left: 20px;
+}
+.about-page h3 {
+  line-height: 32px;
+}
+.about-page #front-page {
+  display: table;
+}
+#front-page .content-block  {
+  display: table-cell;
+  padding-left: 20px;
+}
+.about-page #content-page {  
+  -webkit-column-width: 400px;
+  -moz-column-width: 400px;
+  column-width: 400px;
+  -moz-column-gap: 35px;
+  -webkit-column-gap: 35px;
+  column-gap: 35px;
+  text-align: justify;
+}
+#content-page .content-block  {
+  margin-bottom: 15px;
+}
+#content-page .content-block .content-block-title {
+  color: #4A9E8B;
 }

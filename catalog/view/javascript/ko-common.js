@@ -5,30 +5,27 @@
 
 function NewsTicker(options) {
     var self = this;
-    var defaultTemplate = "<div class='ticker-header hidden'><i class='icon-random' style='font-size: 12px;'></i>&nbsp;<h6 style='margin:0;' data-bind='text: title'>Hot news</h6><span class='buttons'><a data-bind='click: playNext'><i class='icon-step-forward'></i></a></span></div><ul class='news-ticker-container' data-bind='foreach: tickers'><li class='news-ticker'><span class='ticker-time' data-bind='timeAgo: created'></span><span class='ticker-info'><a data-bind=\"link: { text: title, title: title, route: \'PostPage\', params: { post_type : type, post_slug: slug } }\"></a></span></li></ul>";
+    var defaultTemplate = "<ul class='news-ticker-container' data-bind='foreach: tickers'><li class='news-ticker'><span class='ticker-time' data-bind='dateTimeText: created, dateFormat:\"h:mm\"'></span><span class='ticker-info'><a data-bind=\"link: { text: title, title: title, route: \'PostPage\', params: { post_type : type, post_slug: slug } }\"></a></span></li></ul>";
     this.containerId = options.container || "#news-ticker-container";
     this.url = options.url;
-    this.maxShow = options.maxShow || 10;
-    this.interval = options.interval || 10*60*1000;
-    this.title = options.title || "Hot news";
-    this.isPaused = ko.observable(false);
     this.hasTitle = 1;
-
     this.tickers = ko.observableArray([]);
 
-    this.playNext = function(){
-    	doTicker("moveNext");
-    };
-
-    this.pause = function(){
-    	doTicker("pause");
-    	self.isPaused(true);
-    };
-
-    this.resume = function(){
-    	doTicker("unpause");
-    	self.isPaused(false);
-    };
+    //Test
+    /*
+    var item1 = { title: 'Test Test Test Test Test Test Test Test Test 1', slug:'test', type:'branch', created: 1402124813 };
+    var item2 = { title: 'Test Test Test Test Test Test Test Test Test  2', slug:'test', type:'branch', created: 1402124813 };
+    var item3 = { title: 'Test Test Test Test Test Test Test Test Test  3', slug:'test', type:'branch', created: 1402124813 };
+    var item4 = { title: 'Test Test Test Test Test Test Test Test Test  4', slug:'test', type:'branch', created: 1402124813 };
+    var item5 = { title: 'Test Test Test Test Test Test Test Test Test  5', slug:'test', type:'branch', created: 1402124813 };
+    var item6 = { title: 'Test Test Test Test Test Test Test Test Test  6', slug:'test', type:'branch', created: 1402124813 };
+    this.tickers.push(item1);
+    this.tickers.push(item2);
+    this.tickers.push(item3);
+    this.tickers.push(item4);
+    this.tickers.push(item5);
+    this.tickers.push(item6);
+    */
 
 	//Private menthods:
     function loadNews(){
@@ -49,27 +46,11 @@ function NewsTicker(options) {
     }
 
     function makeTicker(){
-    	$(self.containerId).find(".news-ticker-container").newsTicker({
-		    row_height: 30,
-		    max_rows: 1,
-		    speed: 600,
-		    direction: 'up',
-		    duration: 5000,
-		    autostart: 1,
-		    pauseOnHover: 1
-		});
 		$(self.containerId).find(".ticker-header").removeClass("hidden");
-    }
-
-    function doTicker(action, params) {
-    	var tickerEle = $(self.containerId).find(".news-ticker-container");
-    	if(tickerEle.length > 0){
-    		tickerEle.newsTicker(action);
-    	}
+        $(self.containerId).find('.news-ticker-container').makeCustomScroll();
     }
 
     function init(){
-
     	var container = $(self.containerId); 	
     	container.append(defaultTemplate);
     	ko.applyBindings(self, container[0]);

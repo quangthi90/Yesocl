@@ -679,14 +679,32 @@ class ControllerApiPost extends Controller {
     }
 
     public function getLastNews() {
-        $lPosts = $this->getAllPosts();
-
+        // $lPosts = $this->getAllPosts();
         // Limit & page
         if ( !empty($this->request->post['limit']) ){
             $iLimit = $this->request->post['limit'];
         }else{
             $iLimit = $this->limit;
         }
+
+        if ( !empty($this->request->get['page']) ){
+            $iPage = $this->request->get['page'];
+        }else{
+            $iPage = 1;
+        }
+
+        $filter = array(
+            'sort' => 'created',
+            'filter_created' => new DateTime(),
+            );
+
+        if ( isset( $this->request->post['hasTitle'] ) ) {
+            $filter['hasTitle'] = $this->request->post['hasTitle'];
+            $filter['sort'] = 'postCreated';
+        }
+
+        $this->load->model( 'cache/post' );
+        $lPosts = $this->model_cache_post->getPosts( $filter );
 
         if (count($lPosts) < $iLimit) {
             $bCanLoadMore = false;

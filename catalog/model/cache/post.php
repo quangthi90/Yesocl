@@ -158,14 +158,6 @@ class ModelCachePost extends Model {
 	 * @return: list array Object Posts
 	 */
 	public function getPosts( $data = array() ){
-		if ( empty($data['start']) ){
-			$data['start'] = 0;
-		}
-
-		if ( empty($data['limit']) ){
-			$data['limit'] = 20;
-		}
-
 		if ( empty($data['sort']) ){
 			return null;
 		}
@@ -193,16 +185,23 @@ class ModelCachePost extends Model {
 			$query['hasTitle'] = (boolean)$data['hasTitle'];
 		}
 
+		if ( isset($data['filter_created']) ){
+			$query['created'] = $data['filter_created'];
+		}
+
 		if (isset($query)) {
 			$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findBy( $query )
-				->skip( $data['start'] )
-				->limit( $data['limit'] )
 				->sort( array($data['sort'] => $data['order']) );
 		}else {
 			$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findAll()
-				->skip( $data['start'] )
-				->limit( $data['limit'] )
 				->sort( array($data['sort'] => $data['order']) );
+		}
+
+		if ( !empty($data['limit']) ){
+			if ( empty($data['start']) ){
+				$data['start'] = 0;
+			}
+			$cache_posts->skip( $data['start'] )->limit( (int)$data['limit'] );
 		}
 
 		$posts = array();
