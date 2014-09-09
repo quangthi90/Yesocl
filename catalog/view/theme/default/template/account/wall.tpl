@@ -1648,10 +1648,10 @@
     <!-- Global -->
     <script data-id="App.Config">
     var App = {};   var basePath = '',
-    commonPath = '../assets/',
+    commonPath = '../../catalog/view/theme/default/stylesheet/platform/',
     rootPath = '../',
     DEV = false,
-    componentsPath = '../assets/components/';
+    componentsPath = '../../catalog/view/theme/default/stylesheet/platform/components/';
     var primaryColor = '#25ad9f',
     dangerColor = '#b55151',
     successColor = '#609450',
