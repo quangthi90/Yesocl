@@ -1664,20 +1664,20 @@
     <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/plugins/core_nicescroll/jquery.nicescroll.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
     <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/plugins/core_breakpoints/breakpoints.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
     <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/plugins/core_preload/pace.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/core_preload/preload.pace.init.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
+    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/core_preload/preload.pace.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
     <script src="../../catalog/view/theme/default/stylesheet/platform/plugins/menu_sidr/jquery.sidr.js?v=v2.0.0-rc8"></script>
-    <script src="../../catalog/view/theme/default/stylesheet/platform/components/widget_twitter/twitter.init.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
+    <script src="../../catalog/view/theme/default/stylesheet/platform/components/widget_twitter/twitter.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
     <script src="../../catalog/view/theme/default/stylesheet/platform/plugins/media_holder/holder.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
     <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/plugins/media_gridalicious/jquery.gridalicious.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/media_gridalicious/gridalicious.init.js?v=v2.0.0-rc8"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/maps_google/maps-google.init.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false&callback=initGoogleMaps"></script>
+    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/media_gridalicious/gridalicious.js?v=v2.0.0-rc8"></script>
+    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/maps_google/maps-google.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false&callback=initGoogleMaps"></script>
     <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/plugins/ui_modals/bootbox.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/menus/sidebar.main.init.js?v=v2.0.0-rc8"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/menus/sidebar.collapse.init.js?v=v2.0.0-rc8"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/menus/menus.sidebar.chat.init.js?v=v2.0.0-rc8"></script>
+    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/menus/sidebar.main.js?v=v2.0.0-rc8"></script>
+    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/menus/sidebar.collapse.js?v=v2.0.0-rc8"></script>
+    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/menus/menus.sidebar.chat.js?v=v2.0.0-rc8"></script>
     <script src="../../catalog/view/theme/default/stylesheet/platform/plugins/other_mixitup/jquery.mixitup.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script src="../../catalog/view/theme/default/stylesheet/platform/plugins/other_mixitup/mixitup.init.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script src="../../catalog/view/theme/default/stylesheet/platform/components/core/core.init.js?v=v2.0.0-rc8"></script>
+    <script src="../../catalog/view/theme/default/stylesheet/platform/plugins/other_mixitup/mixitup.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
+    <script src="../../catalog/view/theme/default/stylesheet/platform/components/core/core.js?v=v2.0.0-rc8"></script>
 </body>
 </html>
