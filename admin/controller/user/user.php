@@ -66,6 +66,7 @@ class ControllerUserUser extends Controller {
 		$this->data['text_male'] = $this->language->get( 'text_male' );
 		$this->data['text_female'] = $this->language->get( 'text_female' );
 		$this->data['text_other'] = $this->language->get( 'text_other' );
+		$this->data['text_now'] = $this->language->get( 'text_now' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -106,6 +107,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_summary'] = $this->language->get( 'entry_summary' );
 
 		$this->data['entry_company'] = $this->language->get( 'entry_company' );
+		$this->data['entry_self_employed'] = $this->language->get( 'entry_self_employed' );
 		$this->data['entry_current'] = $this->language->get( 'entry_current' );
 		$this->data['entry_title'] = $this->language->get( 'entry_title' );
 		$this->data['entry_location'] = $this->language->get( 'entry_location' );
@@ -318,11 +320,12 @@ class ControllerUserUser extends Controller {
 				$location = $experience->getLocation();
 				$this->data['experiences'][$key] = array(
 					'company' => $experience->getCompany(),
-					'current' => $experience->getCurrent(),
+					'current' => ($ended) ? 0 : 1,
+					'self_employed' => $experience->getSelfEmployed(),
 					'title' => $experience->getTitle(),
 					'location' => ( $location ) ? $location->getLocation() : '',
 					'city_id' => ( $location ) ? $location->getCityId() : '',
-					'ended' => array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ),
+					'ended' => ($ended) ? array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ) : array('month' => '', 'year' => ''),
 					'started' => array( 'month' => $started->format( 'm' ), 'year' => $started->format( 'Y' ) ),
 					'description' => $experience->getDescription(),
 				);
@@ -652,6 +655,7 @@ class ControllerUserUser extends Controller {
 		$this->data['text_group'] = $this->language->get( 'text_group' );
 		$this->data['text_status'] = $this->language->get( 'text_status' );
 		$this->data['text_email'] = $this->language->get( 'text_email' );	
+		$this->data['text_username'] = $this->language->get( 'text_username' );
 		$this->data['text_action'] = $this->language->get( 'text_action' );
 		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
@@ -710,6 +714,7 @@ class ControllerUserUser extends Controller {
 				$this->data['users'][] = array(
 					'id' => $user->getId(),
 					'email' => $user->getPrimaryEmail()->getEmail(),
+					'username' => $user->getUsername(),
 					'status' => $user->getStatus() === true ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 					'group' => $user->getGroupUser()->getName(),
 					'action' => $action,
@@ -884,6 +889,7 @@ class ControllerUserUser extends Controller {
 		$this->data['text_select_image'] = $this->language->get( 'text_select_image' );
 		$this->data['text_change'] = $this->language->get( 'text_change' );
 		$this->data['text_remove'] = $this->language->get( 'text_remove' );
+		$this->data['text_now'] = $this->language->get( 'text_now' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -924,6 +930,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_summary'] = $this->language->get( 'entry_summary' );
 
 		$this->data['entry_company'] = $this->language->get( 'entry_company' );
+		$this->data['entry_self_employed'] = $this->language->get( 'entry_self_employed' );
 		$this->data['entry_current'] = $this->language->get( 'entry_current' );
 		$this->data['entry_title'] = $this->language->get( 'entry_title' );
 		$this->data['entry_location'] = $this->language->get( 'entry_location' );
@@ -1244,11 +1251,12 @@ class ControllerUserUser extends Controller {
 				$location = $experience->getLocation();
 				$this->data['experiences'][$key] = array(
 					'company' => $experience->getCompany(),
-					'current' => $experience->getCurrent(),
+					'current' => ($ended) ? 0 : 1,
+					'self_employed' => $experience->getSelfEmployed(),
 					'title' => $experience->getTitle(),
 					'location' => ( $location ) ? $location->getLocation() : '',
 					'city_id' => ( $location ) ? $location->getCityId() : '',
-					'ended' => array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ),
+					'ended' => ($ended) ? array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ) : array('month' => '', 'year' => ''),
 					'started' => array( 'month' => $started->format( 'm' ), 'year' => $started->format( 'Y' ) ),
 					'description' => $experience->getDescription(),
 					);
@@ -1703,19 +1711,21 @@ class ControllerUserUser extends Controller {
 
 		$this->load->model('user/user');
 		$user = $this->model_user_user->getUser( array('user_id' => $user_id) );
-
+		
 		if ( !$user ){
-			return false;
+			$this->response->setOutput( json_encode( array(
+				'error' => 'user have ID ' . $this->request->post['user_id'] . ' is not exist'
+			)));
+		}else{
+			$json = array(
+				'id' => $user->getId(),
+				'username' => $user->getUsername(),
+				'fullname' => $user->getFullname(),
+				'email' => $user->getPrimaryEmail()->getEmail()
+			);
+
+			$this->response->setOutput( json_encode( $json ) );
 		}
-
-		$json = array(
-			'id' => $user->getId(),
-			'username' => $user->getUsername(),
-			'fullname' => $user->getFullname(),
-			'email' => $user->getPrimaryEmail()->getEmail()
-		);
-
-		$this->response->setOutput( json_encode( $json ) );
 	}
 }
 ?>

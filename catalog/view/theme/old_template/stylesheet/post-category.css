@@ -1,0 +1,25 @@
+
+.category .block-content .post {
+	width: 300px;
+}
+
+.category .block-content .post .post_header{
+	padding: 2px 3px;
+}
+
+.category .block-content .post .post_body {
+	max-height: 200px;
+	overflow: hidden;
+}
+
+.category .block-content .post .post_header .post_user a {
+	font-size: 12px;	
+}
+
+.category .block-content .post .post_body img {
+	width: 100%;
+}
+
+.category .block-content .post .post_body a.post_img {
+	display: block;
+}

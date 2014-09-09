@@ -84,6 +84,7 @@ $(document).ready(function(){
               <li><a href="<?php echo $social_network; ?>"><?php echo $text_social_network; ?></a></li>
       			</ul>
       		</li>
+          <li><a href="<?php echo $user_list; ?>"><?php echo $text_user_list; ?></a></li>
       	</ul>
       </li>
       <!--li id="attribute"><a class="top"><?php echo $text_attributes; ?></a>
@@ -94,7 +95,40 @@ $(document).ready(function(){
           <li><a href="<?php echo $company_group; ?>"><?php echo $text_company_group; ?></a></li>
         </ul>
       </li>
-      <li id="company"><a class="top"><?php echo $text_branchs; ?></a>
+      <li id="company"><a class="top"><?php echo $text_stocks; ?></a>
+        <ul>
+          <li><a href="<?php echo $stock_market; ?>"><?php echo $text_market; ?></a></li>
+          <li><a href="<?php echo $stock; ?>"><?php echo $text_stock; ?></a></li>
+          <li><a class="parent"><?php echo $text_import; ?></a>
+            <ul>
+              <li><a href="<?php echo $stock_import; ?>"><?php echo $text_stock; ?></a></li>
+              <li><a href="<?php echo $trading_import; ?>"><?php echo $text_trading; ?></a></li>
+            </ul>
+          </li>
+          <li><a class="parent"><?php echo $text_setting; ?></a>
+            <ul>
+              <li><a href="<?php echo $stock_fund; ?>"><?php echo $text_fund; ?></a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li id="finance"><a class="top"><?php echo $text_finances; ?></a>
+        <ul>
+          <li><a class="parent"><?php echo $text_finances; ?></a>
+            <ul>
+              <li><a href="<?php echo $finance; ?>"><?php echo $text_finance; ?></a></li>
+              <li><a href="<?php echo $finance_group; ?>"><?php echo $text_fi_group; ?></a></li>
+              <li><a href="<?php echo $finance_import; ?>"><?php echo $text_import; ?></a></li>
+              <li><a href="<?php echo $finance_code; ?>"><?php echo $text_code; ?></a></li>
+              <li><a href="<?php echo $finance_function; ?>"><?php echo $text_function; ?></a></li>
+              <li><a href="<?php echo $finance_report; ?>"><?php echo $text_report; ?></a></li>
+              <li><a href="<?php echo $finance_export; ?>"><?php echo $text_export; ?></a></li>
+            </ul>
+          </li>
+          <li><a href="<?php echo $finance_date; ?>"><?php echo $text_date; ?></a></li>
+        </ul>
+      </li>
+      <li id="company"><a class="top"><?php echo $text_branches; ?></a>
         <ul>
           <li><a href="<?php echo $branch; ?>"><?php echo $text_branch; ?></a></li>
           <li><a href="<?php echo $branch_position; ?>"><?php echo $text_position; ?></a></li>

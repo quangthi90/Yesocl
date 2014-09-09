@@ -36,7 +36,7 @@
             <td><?php echo $entry_branch; ?></td>
             <td>
               <select name="branch_id" class="branch">
-                <?php foreach ( $branchs as $branch ) { ?>
+                <?php foreach ( $branches as $branch ) { ?>
                 <option <?php if ($branch['id'] == $branch_id){ ?>selected="selected"<?php } ?> value="<?php echo $branch['id'] ?>"><?php echo $branch['name'] ?></option>
                 <?php } ?>
               </select>
@@ -52,6 +52,15 @@
                 <?php } ?>
               </select>
               <input id="old-parent-id" type="hidden" value="<?php echo $parent_id; ?>" />
+            </td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_is_stock; ?></td>
+            <td>
+              <select name="isBranch" class="parent">
+                <option value="0"><?php echo $text_false; ?></option>
+                <option <?php if ($isBranch == true){ ?>selected="selected"<?php } ?> value="1"><?php echo $text_true; ?></option>
+              </select>
             </td>
           </tr>
         </table>

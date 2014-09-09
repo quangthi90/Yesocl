@@ -3,22 +3,26 @@ class ControllerAccountForgotten extends Controller {
 	private $error = array();
 
 	public function index() {
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+	      	$this->data['base'] = $this->config->get('config_ssl');
+	    } else {
+	      	$this->data['base'] = HTTP_SERVER;
+	    }
+
 		if ($this->customer->isLogged()) {
-			$this->redirect($this->url->link('account/account', '', 'SSL'));
+			$this->redirect($this->extension->path('HomePage'));
 		}
 
 		$this->language->load('account/forgotten');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 		
-		$this->load->model('account/customer');
+		$this->load->model('user/user');
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->language->load('mail/forgotten');
 			
-			$password = substr(md5(mt_rand()), 0, 10);
-			
-			$this->model_account_customer->editPassword($this->request->post['email'], $password);
+			$password = $this->model_user_user->editPassword($this->request->post['email']);
 			
 			$subject = sprintf($this->language->get('text_subject'), 'Admin');
 			
@@ -27,12 +31,12 @@ class ControllerAccountForgotten extends Controller {
 			$message .= $password;
 
 			$mail = new Mail();
-			$mail->protocol = 'smtp';
+			$mail->protocol = $this->config->get('email')['protocol'];
 			// $mail->parameter = $this->config->get('config_mail_parameter');
-			$mail->hostname = 'ssl://smtp.gmail.com';
-			$mail->username = 'bommerdesign@gmail.com';
-			$mail->password = '13081990';
-			$mail->port = '465';
+			$mail->hostname = $this->config->get('email')['hostname'];
+			$mail->username = $this->config->get('email')['username'];
+			$mail->password = $this->config->get('email')['password'];
+			$mail->port = $this->config->get('email')['port'];
 			// $mail->timeout = $this->config->get('config_smtp_timeout');				
 			$mail->setTo($this->request->post['email']);
 			$mail->setFrom('admin@yesocl.com');
@@ -43,28 +47,8 @@ class ControllerAccountForgotten extends Controller {
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->redirect($this->url->link('account/forgotten', '', 'SSL'));
+			$this->redirect($this->extension->path('LostPass'));
 		}
-
-      	$this->data['breadcrumbs'] = array();
-
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),        	
-        	'separator' => false
-      	); 
-
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_account'),
-			'href'      => $this->url->link('account/account', '', 'SSL'),     	
-        	'separator' => $this->language->get('text_separator')
-      	);
-		
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_forgotten'),
-			'href'      => $this->url->link('account/forgotten', '', 'SSL'),       	
-        	'separator' => $this->language->get('text_separator')
-      	);
 		
 		$this->data['heading_title'] = $this->language->get('heading_title');
 
@@ -100,8 +84,10 @@ class ControllerAccountForgotten extends Controller {
 	private function validate() {
 		if (!isset($this->request->post['email'])) {
 			$this->error['warning'] = $this->language->get('error_email');
-		} elseif ($this->model_account_customer->getTotalCustomersByEmail($this->request->post['email']) == 0) {
+		} elseif ( !$oUser = $this->model_user_user->getUserFull(array('email' => $this->request->post['email'])) ) {
 			$this->error['warning'] = $this->language->get('error_email');
+		} elseif ( $oUser->getIsSocial() ) {
+			$this->error['warning'] = $this->language->get('error_email_fb');
 		}
 
 		if (!$this->error) {

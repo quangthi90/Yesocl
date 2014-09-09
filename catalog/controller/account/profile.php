@@ -1,39 +1,71 @@
 <?php
+use Document\User\Meta,
+	Document\User\Meta\Location,
+	Document\User\Meta\Background;
+
 class ControllerAccountProfile extends Controller {
 	private $error = array();
 
 	public function index() {
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$this->data['base'] = $this->config->get('config_ssl');
+		} else {
+			$this->data['base'] = HTTP_SERVER;
+		}
+
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->extension->path('WelcomePage');
 
 			$this->redirect( $this->extension->path('WelcomePage') );
 		}
 
+		// text
+		$this->data['text_self_employed'] = 'Self-employed';
+
 		$this->load->model('user/user');
 		$this->load->model('data/value');
+		$this->load->model('tool/image');
 
-		$user_id = $this->customer->getId();
-		$user = $this->model_user_user->getUserFull( array('user_id' => $user_id) );
+		$oUser = $this->customer->getUser();
 
 		// Entry phone type
-		$phone_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_phone_type' ) ) );
+		$lPhoneTypes = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_phone_type' ) ) );
 		$this->data['phone_types'] = array();
-		foreach ($phone_types as $phone_type) {
+		foreach ($lPhoneTypes as $oPhoneType) {
 			$this->data['phone_types'][] = array(
-				'text' => $phone_type->getName(),
-				'code' => $phone_type->getValue(),
+				'text' => $oPhoneType->getName(),
+				'code' => $oPhoneType->getValue(),
 			);
 		}
 
+		// Check meta null
+		if ( !$oMeta = $oUser->getMeta() ){
+			$oMeta = new Meta();
+			$oMeta->setPhones( array() );
+		}
+
+		// Check location null
+		if ( !$oUserLocation = $oMeta->getLocation() ){
+			$oUserLocation = new Location();
+		}
+
+		// Check background null
+		if ( !$oBackground = $oMeta->getBackground() ){
+			$oBackground = new Background();
+			$oBackground->setEducations( array() );
+			$oBackground->setExperiences( array() );
+			$oBackground->setSkills( array() );
+		}
+
 		// phone
-		$phones_data = array();
-		foreach ($user->getMeta()->getPhones() as $phone) {
-			if ( $phone && !empty( $phone ) ) {
-				$phones_data[] = array(
-					'id' => $phone->getId(),
-					'type' => $phone->getType(),
-					'phone' => $phone->getPhone(),
-					'visible' => $phone->getVisible(),
+		$aPhones = array();
+		foreach ( $oMeta->getPhones() as $oPhone ) {
+			if ( !empty($oPhone) ) {
+				$aPhones[] = array(
+					'id' => $oPhone->getId(),
+					'type' => $oPhone->getType(),
+					'phone' => $oPhone->getPhone(),
+					'visible' => $oPhone->getVisible(),
 				);
 			}
 		}
@@ -50,94 +82,205 @@ class ControllerAccountProfile extends Controller {
 		}
 
 		// educations
-		$educations_data = array();
-		if ( $user->getMeta()->getBackground() ){
-			foreach ($user->getMeta()->getBackground()->getEducations() as $education) {
-				$educations_data[] = array(
-					'id' => $education->getId(),
-					'school' => $education->getSchool(),
-					'school_id' => $education->getSchoolId(),
-					'degree' => $education->getDegree(),
-					'degree_id' => $education->getDegreeId(),
-					'fieldofstudy' => $education->getFieldOfStudy(),
-					'fieldofstudy_id' => $education->getFieldOfStudyId(),
-					'started' => $education->getStarted(),
-					'ended' => $education->getEnded()
-				);
-			}
+		$aEducations = array();
+		foreach ( $oBackground->getEducations() as $oEducation ) {
+			$aEducations[] = array(
+				'id' => $oEducation->getId(),
+				'school' => html_entity_decode($oEducation->getSchool()),
+				'school_id' => $oEducation->getSchoolId(),
+				'degree' => html_entity_decode($oEducation->getDegree()),
+				'degree_id' => $oEducation->getDegreeId(),
+				'fieldofstudy' => html_entity_decode($oEducation->getFieldOfStudy()),
+				'fieldofstudy_id' => $oEducation->getFieldOfStudyId(),
+				'started' => $oEducation->getStarted(),
+				'ended' => $oEducation->getEnded()
+			);
 		}
 
 		// experiences
-		$experiences_data = array();
-		if ( $user->getMeta()->getBackground() ){
-			foreach ($user->getMeta()->getBackground()->getExperiences() as $experience) {
-				$experiences_data[] = array(
-					'id' => $experience->getId(),
-					'title' => $experience->getTitle(),
-					'company' => $experience->getCompany(),
-					'location' => $experience->getLocation()->getLocation(),
-					'city_id' => $experience->getLocation()->getId(),
-					'started_month' => $experience->getStarted()->format('n'),
-					'ended_month' => $experience->getEnded()->format('n'),
-					'started_year' => $experience->getStarted()->format('Y'),
-					'ended_year' => $experience->getEnded()->format('Y'),
-					'started_text' => $experience->getStarted()->format('F Y'),
-					'ended_text' => $experience->getEnded()->format('F Y')
-				);
+		$aExperiences = array();
+		foreach ( $oBackground->getExperiences() as $oExperience ) {
+			if ( !$oExperLocation = $oExperience->getLocation() ){
+				$oExperLocation = new Location();
 			}
+			
+			$aExperiences[] = array(
+				'id' => $oExperience->getId(),
+				'title' => html_entity_decode($oExperience->getTitle()),
+				'company' => html_entity_decode($oExperience->getCompany()),
+				'location' => html_entity_decode($oExperLocation->getLocation()),
+				'city_id' => $oExperLocation->getId(),
+				'started' => $oExperience->getStarted(),
+				'ended' => $oExperience->getEnded()
+			);
 		}
 
 		// skills
-		$skills_data = array();
-		if ( $user->getMeta()->getBackground() ){
-			foreach ($user->getMeta()->getBackground()->getSkills() as $skill) {
-				$skills_data[] = array(
-					'id' => $skill->getId(),
-					'skill' => $skill->getSkill()
-				);
-			}
+		$aSkills = array();
+		foreach ( $oBackground->getSkills() as $oSkill ) {
+			$aSkills[] = array(
+				'id' => $oSkill->getId(),
+				'skill' => $oSkill->getSkill()
+			);
 		}
 
 		// email
-		$emails_data = array();
-		foreach ($user->getEmails() as $key => $email) {
-			$emails_data[$key] = array(
-				'email' => $email->getEmail(),
-				'primary' => $email->getPrimary(),
+		$aEmails = array();
+		foreach ($oUser->getEmails() as $key => $oEmail) {
+			$aEmails[$key] = array(
+				'email' => $oEmail->getEmail(),
+				'primary' => $oEmail->getPrimary(),
 			);
 		}
 
 		// user data
 		$this->data['user'] = array(
-			'id' => $user->getId(),
-			'username' => $user->getUsername(),
-			'firstname' => $user->getMeta()->getFirstname(),
-			'lastname' => $user->getMeta()->getLastname(),
-			'fullname' => $user->getFullName(),
-			'emails' => $emails_data,
-			'phones' => $phones_data,
-			'sex' => $user->getMeta()->getSex(),
-			'sext' => $user->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female'),
-			'birthday' => $user->getMeta()->getBirthday() ? $user->getMeta()->getBirthday()->format('d/m/Y') : date('d/m/Y', time()),
-			'location' => $user->getMeta()->getLocation() ? $user->getMeta()->getLocation()->getLocation() : '',
-			'cityid' => $user->getMeta()->getLocation() ? $user->getMeta()->getLocation()->getCityId() : '',
-			'address' => $user->getMeta()->getAddress(),
-			'industry' => $user->getMeta()->getIndustry(),
-			'industryid' => $user->getMeta()->getIndustryId(),
-			'summary' => $user->getMeta()->getBackground() ? $user->getMeta()->getBackground()->getSummary() : '',
-			'educations' => $educations_data,
-			'experiences' => $experiences_data,
-			'skills' => $skills_data
+			'id' => $oUser->getId(),
+			'slug' => $oUser->getSlug(),
+			'avatar' => $this->model_tool_image->getAvatarUser( $oUser->getAvatar(), $oUser->getPrimaryEmail()->getEmail(), 150, 150 ),
+			'username' => $oUser->getUsername(),
+			'firstname' => $oUser->getMeta()->getFirstname(),
+			'lastname' => $oUser->getMeta()->getLastname(),
+			'fullname' => $oUser->getFullName(),
+			'emails' => $aEmails,
+			'phones' => $aPhones,
+			'sex' => $oUser->getMeta()->getSex(),
+			'sext' => $oUser->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female'),
+			'birthday' => $oMeta->getBirthday(),
+			'location' => $oUserLocation->getLocation(),
+			'cityid' => $oUserLocation->getCityId(),
+			'address' => $oUser->getMeta()->getAddress(),
+			'industry' => $oUser->getMeta()->getIndustry(),
+			'industryid' => $oUser->getMeta()->getIndustryId(),
+			'summary' => $oBackground->getSummary(),
+			'educations' => $aEducations,
+			'experiences' => $aExperiences,
+			'skills' => $aSkills
 		);
 
 		// orther const
 		$this->data['current_year'] = date('Y');
 		$this->data['before_year'] = $this->data['current_year'] - 100;
+		$this->data['fulture_year'] = $this->data['current_year'] + 10;
+
+		// set selected menu
+		$this->session->setFlash( 'menu', 'profile' );
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/profiles/profiles.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/profiles/profiles.tpl';
 		} else {
 			$this->template = 'default/template/account/profiles/profiles.tpl';
+		}
+	
+		$this->children = array(
+			'common/sidebar_control',
+			'common/footer',
+			'common/header'	
+		);
+				
+		$this->response->setOutput($this->twig_render());
+	}
+
+	public function view() {
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$this->data['base'] = $this->config->get('config_ssl');
+		} else {
+			$this->data['base'] = HTTP_SERVER;
+		}
+		
+		$this->load->model('user/user');
+		$this->load->model('tool/image');
+
+		if ( !empty($this->request->get['user_slug']) && $this->request->get['user_slug'] != $this->customer->getSlug() ){
+			$oUser = $this->model_user_user->getUserFull( array('user_slug' => $this->request->get['user_slug']) );
+		}else{
+			$oUser = $this->customer->getUser();
+		}
+
+		if ( !$oUser ){
+			return false;
+		}
+
+		$aUser = $oUser->formatToCache();
+
+		if ( !$oLocation = $oUser->getMeta()->getLocation() ){
+			$oLocation = new Location();
+		}
+
+		$aUser['avatar'] 	= $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 150, 150 );
+		$aUser['fullname'] 	= $oUser->getFullName();
+		$aUser['gender'] 	= $oUser->getMeta()->getSex() ? 'Male' : 'Female';
+		$aUser['birthday'] 	= $oUser->getMeta()->getBirthday()->format('d/m/Y');
+		$aUser['address'] 	= $oUser->getMeta()->getAddress();
+		$aUser['location']	= $oLocation->getLocation();
+		$aUser['industry']	= $oUser->getMeta()->getIndustry();
+		
+		// Emails
+		$aEmails = $oUser->getEmails();
+		foreach ( $aEmails as $oEmail ) {
+			$aUser['emails'][$oEmail->getId()] = $oEmail->getEmail();
+			if ( $oEmail->getPrimary() == true ){
+				$this->data['primary_email'] = $oEmail->getId();
+			}
+		}
+
+		// Phones
+		$aPhones = $oUser->getMeta()->getPhones();
+		foreach ( $aPhones as $oPhone ) {
+			$aUser['phones'][] = $oPhone->getPhone();
+		}
+
+		// Check background null
+		if ( !$oBackground = $oUser->getMeta()->getBackground() ){
+			$oBackground = new Background();
+			$oBackground->setEducations( array() );
+			$oBackground->setExperiences( array() );
+			$oBackground->setSkills( array() );
+		}
+
+		// Summary
+		$aUser['summary'] = $oBackground->getSummary();
+
+		// Educations
+		$lEducations = $oBackground->getEducations();
+		foreach ( $lEducations as $oEducation ) {
+			$aUser['educations'][] = array(
+				'school' 	=> $oEducation->getSchool(),
+				'degree'	=> $oEducation->getDegree(),
+				'field'		=> $oEducation->getFieldOfStudy(),
+				'started'	=> $oEducation->getStarted(),
+				'ended'		=> $oEducation->getEnded()
+			);
+		}
+
+		// Experiences
+		$lExperiences = $oBackground->getExperiences();
+		foreach ( $lExperiences as $oExperience ) {
+			if ( !$oLocation = $oExperience->getLocation() ){
+				$oLocation = new Location();
+			}
+
+			$aUser['experiences'][] = array(
+				'company'	=> $oExperience->getCompany(),
+				'location'	=> $oLocation->getLocation(),
+				'title'		=> $oExperience->getTitle(),
+				'started'	=> $oExperience->getStarted(),
+				'ended'		=> $oExperience->getEnded()
+			);
+		}
+
+		// Skills
+		$lSkills = $oBackground->getSkills();
+		foreach ( $lSkills as $oSkill ) {
+			$aUser['skills'][] = $oSkill->getSkill();
+		}
+
+		$this->data['user'] = $aUser;
+
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/profiles/profiles_view.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/account/profiles/profiles_view.tpl';
+		} else {
+			$this->template = 'default/template/account/profiles/profiles_view.tpl';
 		}
 		
 		$this->children = array(

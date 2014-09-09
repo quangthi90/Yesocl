@@ -25,20 +25,22 @@
           <thead>
             <tr>
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
+              <td><?php echo $column_logo; ?></td>
               <td><?php echo $column_branch; ?></td>
-              <td><?php echo $column_company; ?></td>
+              <td><?php echo $column_code; ?></td>
               <td><?php echo $column_status; ?></td>
               <td><?php echo $column_order; ?></td>
               <td><?php echo $column_action; ?></td>
             </tr>
           </thead>
           <tbody>
-            <?php if ( $branchs ) { ?>
-            <?php foreach ( $branchs as $branch ) { ?>
+            <?php if ( $branches ) { ?>
+            <?php foreach ( $branches as $branch ) { ?>
             <tr>
               <td><input name="id[]" type="checkbox" value="<?php echo $branch['id']; ?>"/></td>
+              <td><div class="thumbnail" style="width: 80px; height: 80px;"><img src="<?php echo $branch['logo']; ?>" /></div></td>
               <td><?php echo $branch['name']; ?></td>
-              <td><?php echo $branch['company']; ?></td>
+              <td><?php echo $branch['code']; ?></td>
               <td><?php echo $branch['status'] ? $text_enable : $text_disable; ?></td>
               <td><?php echo $branch['order']; ?></td>
               <td class="right"><?php foreach ( $branch['action'] as $action ) { ?>
@@ -47,7 +49,7 @@
             </tr>
             <?php } ?>
             <?php }?>
-            <?php if ( !$branchs ) { ?>
+            <?php if ( !$branches ) { ?>
             <tr class="center">
               <td colspan="4"><?php echo $text_no_results; ?></td>
             </tr>

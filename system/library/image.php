@@ -123,9 +123,14 @@ class Image {
         imagedestroy($watermark);
     }
     
-    public function crop($top_x, $top_y, $bottom_x, $bottom_y) {
+    public function crop($top_x, $top_y, $bottom_x, $bottom_y, $is_white_background = false) {
         $image_old = $this->image;
         $this->image = imagecreatetruecolor($bottom_x - $top_x, $bottom_y - $top_y);
+
+        if ( $is_white_background ){
+        	$color = imagecolorallocate($this->image, 255, 255, 255);
+			imagefill($this->image, 0, 0, $color);
+        }
         
         imagecopy($this->image, $image_old, 0, 0, $top_x, $top_y, $this->info['width'], $this->info['height']);
         imagedestroy($image_old);
@@ -180,6 +185,37 @@ class Image {
 		$b = hexdec($b);    
 		
 		return array($r, $g, $b);
-	}	
+	}
+
+	public function scale($width = 0, $height = 0) {
+    	if (!$this->info['width'] || !$this->info['height']) {
+			return;
+		}
+
+		// follow width
+		if ( $this->info['width'] < $this->info['height'] ){
+			$scale = $width / $this->info['width'];
+			$new_width = $this->info['width'];
+			$new_height = $height / $scale;
+
+			$top_x = 0;
+			$bottom_x = $new_width;
+			$top_y = $this->info['height']/2 - $new_height/2;
+			$bottom_y = $top_y + $new_height;
+		
+		// follow height
+		}else{
+			$scale = $height / $this->info['height'];
+			$new_height = $this->info['height'];
+			$new_width = $width / $scale;
+
+			$top_y = 0;
+			$bottom_y = $new_height;
+			$top_x = $this->info['width']/2 - $new_width/2;
+			$bottom_x = $top_x + $new_width;
+		}
+
+		$this->crop( $top_x, $top_y, $bottom_x, $bottom_y );
+    }
 }
 ?>

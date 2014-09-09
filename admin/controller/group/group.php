@@ -376,14 +376,14 @@ class ControllerGroupGroup extends Controller {
 
 		// Entry branch
 		$this->load->model( 'branch/branch' );
-		$branchs = $this->model_branch_branch->getAllBranchs();
+		$branches = $this->model_branch_branch->getAllBranches();
 
 		$index = 1;
-		foreach ( $branchs as $branch ) {
+		foreach ( $branches as $branch ) {
 			if ( $index == 1 ){
 				$branch_id = $branch->getId();
 			}
-			$this->data['branchs'][] = array(
+			$this->data['branches'][] = array(
 				'id'	=> $branch->getId(),
 				'name'	=> $branch->getName()
 			);
@@ -404,9 +404,9 @@ class ControllerGroupGroup extends Controller {
 		}elseif ( !isset($branch_id) ) {
 			$branch_id = 0;
 		}
-		$branchs = $branchs->toArray();
-		if ( isset($branchs[$branch_id]) ){
-			$categories = $branchs[$branch_id]->getCategories();
+		$branches = $branches->toArray();
+		if ( isset($branches[$branch_id]) ){
+			$categories = $branches[$branch_id]->getCategories();
 		}else{
 			$categories = array();
 		}

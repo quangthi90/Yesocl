@@ -1,102 +1,88 @@
 <?php 
-class ControllerFriendFriend extends Controller { 
+use DateTime;
+
+class ControllerFriendFriend extends Controller {
 	public function index() {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$this->data['base'] = $this->config->get('config_ssl');
 		} else {
-			$this->data['base'] = $this->config->get('config_url');
+			$this->data['base'] = HTTP_SERVER;
 		}
 		
 		$this->load->model('tool/image');
 		$this->load->model('user/user');
 		$this->load->model('friend/friend');
+		$this->load->model('friend/follower');
 
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
 		if ( $this->customer->getSlug() != $this->request->get['user_slug'] ){
-			$user = $this->model_user_user->getUserFull( $this->request->get );
+			$oCurrUser = $this->model_user_user->getUserFull( $this->request->get );
 		}else{
-			$user = $this->customer->getUser();
+			$oCurrUser = $this->customer->getUser();
 		}
 
-		if ( !$user ){
+		if ( !$oCurrUser ){
 			return false;
 		}
 
-		$this->data['link_filter_friends'] = $this->url->link( 'friend/friend/getListFriends', '', 'SSL' );
+		$oLoggedUser = $this->customer->getUser();
 
-		$this->data['data_filter_all'] = '{ "filter_request": "1" }';
-		$this->data['data_filter_recent_added'] = '{}';
-		$this->data['data_filter_male'] = '{ "filter_gender": "1" }';
-		$this->data['data_filter_female'] = '{ "filter_gender": "2" }';
+		$aCurrUser = $oCurrUser->formatToCache();
 
-		$user_temp = $user->formatToCache();
+		$aCurrUser['avatar'] = $this->model_tool_image->getAvatarUser( $aCurrUser['avatar'], $aCurrUser['email'], 180, 180 );
+		$aCurrUser['fr_status'] = $this->model_friend_friend->checkStatus( $oLoggedUser->getId(), $oCurrUser->getId() );
+		$aCurrUser['fl_status'] = $this->model_friend_follower->checkStatus( $oLoggedUser->getId(), $oCurrUser->getId() );
+		$this->data['users'] = array($aCurrUser['id'] => $aCurrUser);
 
-		if ( !empty($user_temp['avatar']) ){
-			$user_temp['avatar'] = $this->model_tool_image->resize( $user_temp['avatar'], 180, 180 );
-		}elseif ( !empty($user_temp['email']) ){
-            $user_temp['avatar'] = $this->model_tool_image->getGavatar( $user_temp['email'], 180 );
-        }else{
-        	$user_temp['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
+		$this->data['current_user_id'] = $oCurrUser->getId();
+
+		$oFriends = $this->model_friend_friend->getFriends( $oCurrUser->getId() );
+		if ( $oFriends ){
+			$lFriends = $oFriends->getFriends();
+		}else{
+			$lFriends = array();
 		}
 
-		$this->data['users'] = array( $user_temp['id'] => $user_temp );
+		$this->data['friend_ids'] = array();
+		
+		foreach ( $lFriends as $oFriend ) {
+			$oUser = $oFriend->getUser();
 
-		$this->data['current_user_id'] = $user->getId();
+			$aUser = $oUser->formatToCache();
 
-		$this->data['friends'] = $this->model_friend_friend->getListFriends( array(
-			'filter_request' => 1,
-			) 
-		);
+			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 90, 90 );
+			$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $oLoggedUser->getId(), $oUser->getId() );
+			$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $oLoggedUser->getId(), $oUser->getId() );
+			
+			$aUser['added'] = $oFriend->getCreated();
+			$this->data['users'][$aUser['id']] = $aUser;
+			$this->data['friend_ids'][$oUser->getId()] = $oUser->getId();
+		}
+		$this->data['groups'] = array();
 
-		/*$this->data['friends'] = array();
+		if ( $oFriends ){
+			$lFriendGroups = $oFriends->getFriendGroups();
+		}else{
+			$lFriendGroups = array();
+		}
 
-		foreach ( $this->user->getFriends() as $friend ) {
-			$friend = $friend->getUser();
-
-			if ( $friend->getFriendRequests() && in_array($this->customer->getId(), $friend->getFriendRequests()) ){
-				$friend_status = 2;
-			}elseif ( $this->customer->getUser()->getFriendById($friend->getId()) ){
-				$friend_status = 1;
-			}else{
-				$friend_status = 0;
-			}
-
-			if ( $friend->getMeta() ){
-				$meta = $friend->getMeta()->formatToCache();
-			}else{
-				$meta = array();
-			}
-
-			$friend = $friend->formatToCache();
-
-			$friend['meta'] = $meta;
-			$friend['fr_status'] = $friend_status;
-			$friend['numFriend'] = ( $this->model_friend_friend->getTotalMultiFriends( array( 'friendId' => $friend['id'] ) ) == 0 ) ? 'Not have multi friend' : $this->model_friend_friend->getTotalMultiFriends( array( 'friendId' => $friend['id'] ) );
-
-			if ( !array_key_exists($friend['id'], $this->data['users']) ){
-				if ( !empty($friend['avatar']) ){
-					$friend['avatar'] = $this->model_tool_image->resize( $friend['avatar'], 180, 180 );
-				}elseif ( !empty($friend['email']) ){
-		            $friend['avatar'] = $this->model_tool_image->getGavatar( $friend['email'], 180 );
-		        }else{
-		        	$friend['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
-				}
-
-				$this->data['users'][$friend['id']] = $friend;
-				$this->data['friends'][$friend['id']] = $friend;
-			}
-		}*/
-
-		$this->data['group'] = array();
-
-		foreach ( $user->getFriendGroups() as $group ) {
-			$this->data['group'][$group->getId()] = array(
-				'id' => $group->getId(),
-				'name' => $group->getName()
+		foreach ( $lFriendGroups as $oFriendGroup ) {
+			$this->data['groups'][$oFriendGroup->getId()] = array(
+				'id' => $oFriendGroup->getId(),
+				'name' => $oFriendGroup->getName()
 			);
 		}
+
+		// set selected menu
+		$this->session->setFlash( 'menu', 'friend' );
+
+		$this->data['filter_type'] = $this->config->get('friend')['filter']['type'];
+
+		$sRecentTime = new DateTime('now');
+		date_sub($sRecentTime, date_interval_create_from_date_string('7 days'));
+		$this->data['recent_time'] = $sRecentTime;
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/friend/friend.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/friend/friend.tpl';
@@ -113,36 +99,47 @@ class ControllerFriendFriend extends Controller {
 		$this->response->setOutput($this->twig_render());
 	}
 
-	public function getListFriends() {
-		$json = array();
-
-		if ( $this->customer->isLogged() ) {
-			$data = array();
-
-			if ( isset( $this->request->post['filter_name'] ) && (strlen( $this->request->post['filter_name'] ) > 0) ) {
-				$data['filter_name'] = $this->request->post['filter_name'];
-			}
-
-			if ( isset( $this->request->post['filter_gender'] ) ) {
-				$data['filter_gender'] = $this->request->post['filter_gender'];
-			}
-
-			if ( isset( $this->request->post['filter_request'] ) ) {
-				$data['filter_request'] = $this->request->post['filter_request'];
-			}
-
-			$data['limit'] = 20;
-			$data['start'] = 0;
-
-			if ( count( $data ) > 0 ) {
-				$this->load->model( 'friend/friend' );
-
-				$json['success'] = 'ok';
-				$json['friends'] = $this->model_friend_friend->getListFriends( $data );
-			} 
+	public function getAllFriends() {
+		if ( !$this->customer->isLogged() ){
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: not login',
+            )));
 		}
 
-		$this->response->setOutput( json_encode( $json ) );
+		$this->load->model('tool/image');
+		$this->load->model('friend/friend');
+
+		$oCurrUser = $this->customer->getUser();
+
+		$aFriends = array();
+
+		$oFriends = $this->model_friend_friend->getFriends( $oCurrUser->getId() );
+		if ( $oFriends ){
+			$lFriends = $oFriends->getFriends();
+		}else{
+			$lFriends = array();
+		}
+
+		foreach ( $lFriends as $oFriend ) {
+			$oUser = $oFriend->getUser();
+
+			$aUser = $oUser->formatToCache();
+
+			// Mapping to return for tag js
+			// Check again when change libs tag js
+			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+			$aUser['name'] = $aUser['username'];
+			$aUser['id'] = $aUser['slug'];
+			$aUser['type'] = 'contact';
+			$aUser['wall'] = $this->extension->path('WallPage', array('user_slug' => $aUser['slug']));
+
+			$aFriends[$aUser['slug']] = $aUser;
+		}
+
+		return $this->response->setOutput( json_encode(array(
+			'success' => 'ok',
+			'friends' => $aFriends
+		)));
 	}
 }
 ?>

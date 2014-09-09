@@ -63,7 +63,8 @@ $url = new Url(HTTP_SERVER, $config->get('config_use_ssl') ? HTTPS_SERVER : HTTP
 $registry->set('url', $url);
 		
 // Log 
-$log = new Log($config->get('config_error_filename'));
+// $log = new Log($config->get('config_error_filename'));
+$log = new Log('error.txt');
 $registry->set('log', $log);
 
 function error_handler($errno, $errstr, $errfile, $errline) {
@@ -119,17 +120,17 @@ $session = new Session();
 $registry->set('session', $session); 
 
 // Language
-$languages = array();
+// $languages = array();
 
-$query = $db->query("SELECT * FROM " . DB_PREFIX . "language"); 
+// $query = $db->query("SELECT * FROM " . DB_PREFIX . "language"); 
 
-foreach ($query->rows as $result) {
-	$languages[$result['code']] = $result;
-}
+// foreach ($query->rows as $result) {
+// 	$languages[$result['code']] = $result;
+// }
 
 // Language	
-$language = new Language($languages['en']['directory']);
-$language->load($languages['en']['filename']);	
+$language = new Language('english');
+$language->load('english');	
 $registry->set('language', $language); 		
 
 // Document

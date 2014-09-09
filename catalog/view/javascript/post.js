@@ -1,165 +1,46 @@
+// Like + Unlike a post
 (function($, document, undefined) {
-    var comment_box = $('#comment-box');
-    var comment_form = $('.comment-form');
-    var list_comment = $('#comment-box .y-box-content');
-    var page = 1;
-
-    function UserInfo(user_name, user_img, user_url, number_friend, is_friend, is_follow) {
-        this.userName = user_name;
-        this.userUrl = user_url;
-        this.userImg = user_img;
-        this.numberFriend = number_friend;
-        this.isFriend = is_friend;
-        this.isFollow = is_follow;
-    }
-    function UserListViewer(el) {
-        this.element 		= el;
-        this.viewTitle 		= el.data('view-title');
-        this.viewType 		= el.data('view-title');
-        this.postSlug		= el.data('post-slug');
-        this.postType		= el.data('post-type');
-        this.typeSlug 		= el.data('type-slug');
-        this.url	        = el.data('url');
-        this.addEvents();
-        this.users = [];
-    }
-    UserListViewer.prototype.addEvents = function() {
-        var that = this;
-        this.element.click(function(e){
-            e.preventDefault();
-            if($(this).hasClass('disabled')) {
-                return false;
-            }
-            that.showViewer();
-        });
-    }
-    UserListViewer.prototype.showViewer = function() {
-        var that = this;
-
-        var data;
-        if(that.viewType == 'like'){
-
-        }
-        else if (that.viewType == 'comment') {
-
-        }
-        else if (that.viewType == 'view') {
-
-        }
-        if(that.users.length == 0){	
-            //D? li?u test demo:
-            var promise = $.ajax({
-                type: 'POST',
-                url:  this.url,
-                dataType: 'json'
-            });
-        
-            this.triggerProgress(that.element, promise);
-            promise.then(function(data) { 
-                if(data.success == 'ok'){ 
-                    for (key in data.users) {
-                        var user = new UserInfo(data.users[key].username, data.users[key].avatar, data.users[key].href_user, 10, 0, 1);
-                        that.users.push(user);
-                    }
-                    var templateUserInfo = $('#user-info-template');
-                    $('#user-viewer-container').html('');
-                    var userViewerContainer = $('#user-viewer-container');
-                    var htmlContent = '';
-
-                    for (var i = 0; i < that.users.length; i++) {
-                        var user = that.users[i];
-                        var html = templateUserInfo.html().replace(/USER_URL/gi, user.userUrl);
-                        html = html.replace(/USER_NAME/gi, user.userName);
-                        html = html.replace(/USER_IMG/gi, user.userImg);
-                        html = html.replace(/NUMBER_OF_FRIEND/gi, user.numberFriend);
-                        var actionFriend = '<i class="icon-ok"></i>Friend';
-                        if(user.isFriend == 0) {
-                            actionFriend = '<i class="icon-plus"></i>Add as Friend';
-                        }
-                        html = html.replace(/USER_ACTIONS/gi, actionFriend);
-                        htmlContent += html;
-                    };
-                    userViewerContainer.html(htmlContent);
-                    userViewerContainer.bPopup({
-                        follow: [false, false],				
-                        speed: 300,
-                        transition: 'slideDown',
-                        modalColor : '#000',
-                        opacity: '0.5'
-                    });
-                }
-
-            });
-        }else{
-            var templateUserInfo = $('#user-info-template');
-            $('#user-viewer-container').html('');
-            var userViewerContainer = $('#user-viewer-container');
-            var htmlContent = '';
-
-            for (var i = 0; i < that.users.length; i++) {
-                var user = that.users[i];
-                var html = templateUserInfo.html();
-                html = html.replace(/USER_URL/gi, user.userUrl);
-                html = html.replace(/USER_NAME/gi, user.userName);
-                html = html.replace(/USER_IMG/gi, user.userImg);
-                html = html.replace(/NUMBER_OF_FRIEND/gi, user.numberFriend);
-                var actionFriend = '<i class="icon-ok"></i>Friend';
-                if(user.isFriend == 0) {
-                    actionFriend = '<i class="icon-plus"></i>Add as Friend';
-                }
-                html = html.replace(/USER_ACTIONS/gi, actionFriend);
-                htmlContent += html;
-            };
-            userViewerContainer.html(htmlContent);
-            userViewerContainer.bPopup({
-                follow: [false, false],				
-                speed: 300,
-                transition: 'slideDown',
-                modalColor : '#000',
-                opacity: '0.5'
-            });
-        }	
-    }
-    
-    UserListViewer.prototype.triggerProgress = function($el, promise){
-        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
-        var $old_icon = $el.find('d');
-        var f        = function() {
-            $spinner.remove();
-            $el.html($old_icon);
-        };
-        
-        $el.addClass('disabled').html($spinner);
-
-        promise.then(f, f);
-    };
-
+    'use strict';
     function LikePostBtn( $el ){
-        var that = this;
-        this.$el			= $el;
-        this.url			= $el.data('url');
-        this.isLiked 		= $el.data('post-liked');
-        this.iconLike 		= $el.find('i');
+        this.$el            = $el;
+        this.url            = $el.data('url');
+        this.isLiked        = $el.data('is-liked');
+        
+        this.$btnLike       = $el.find('.like-post');
+        this.$btnUnLike     = $el.find('.unlike-post');
+        this.$btnLiked      = $el.find('.liked-post');
 
         this.attachEvents();
     }
     LikePostBtn.prototype.attachEvents = function(){
         var that = this;
 
-        this.$el.click(function(e) {
-            if(that.$el.hasClass('disabled')) {
+        this.$btnLike.click(function(e) {
+            if(that.$btnLike.hasClass('disabled')) {
                 e.preventDefault();
 
                 return false;
             }
 
-            that.submit(that.$el);
+            that.submit(that.$btnLike);
+
+            return false;
+        });
+
+        this.$btnUnLike.click(function(e) {
+            if(that.$btnUnLike.find('a').hasClass('disabled')) {
+                e.preventDefault();
+
+                return false;
+            }
+
+            that.submit(that.$btnUnLike.find('a'));
 
             return false;
         });
     };
     LikePostBtn.prototype.submit = function($button){
-        var that = this;		
+		var that = this;
 
         var promise = $.ajax({
             type: 'POST',
@@ -169,365 +50,503 @@
 
         this.triggerProgress($button, promise);
 
-        promise.then(function(data) { 
-            if(data.success == 'ok'){ 
-                var $curr_item = that.$el.parents('.post'); 
-                $curr_item.find('.post_meta .post_like d').html( data.like_count );
-                $button.find('d').html( data.like_count );
-                $curr_item.find('.view-list-liker d').html( data.like_count );
+		promise.then(function(data) {
+			if(data.success == 'ok'){
+				// var $curr_item = that.$el.parents('.post');
+                that.$el.find('.post_meta .post_like d.number-counter').html( data.like_count );
+                that.$el.find('.post-liked-list d').html( data.like_count ).data('like-count', data.like_count);
 
-                var $likeIcon = $('<i class="icon-thumbs-up medium-icon"></i>');
-                var $unLikeIcon = $('<i class="icon-thumbs-down medium-icon"></i>');
                 //Unlike
-                if(that.isLiked == 1) {
-                    that.iconLike.replaceWith($likeIcon);
-                    that.iconLike = $likeIcon;
-                    that.isLiked = 0;
+                if(that.$el.data('is-liked') == 1) {
+                    that.$btnLiked.addClass('hidden');
+                    that.$btnUnLike.addClass('hidden');
+                    that.$btnLike.removeClass('hidden');
+                    that.$el.data('is-liked', 0);
+                    that.$btnUnLike.parents('.dropdown').removeClass('open');
                 }else { //Like
-                    that.iconLike.replaceWith($unLikeIcon);
-                    that.iconLike = $unLikeIcon;
-                    that.isLiked = 1;
+                    that.$btnLiked.removeClass('hidden');
+                    that.$btnUnLike.removeClass('hidden');
+                    that.$btnLike.addClass('hidden');
+                    that.$el.data('is-liked', 1);
                 }
-
-                that.$el.removeClass('disabled');
+                
+                that.$el.find('.post-liked-list').data('users', null);
+                that.$el.find('.post-liked-list').data('like-count', data.like_count);
             }
-
-        });		
-    };		
+        });
+    };
     LikePostBtn.prototype.triggerProgress = function($el, promise){
         var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var $old_icon = $el.find('i');
-        var f        = function() {
+        var f       = function() {
             $spinner.remove();
-            $el.html($old_icon);
+            $el.removeClass('disabled').prepend($old_icon);
         };
 
-        $el.addClass('disabled').html($spinner);
+        $old_icon.remove();
+        $el.addClass('disabled').prepend($spinner);
 
         promise.then(f, f);
     };
 
-    function LikeCommentBtn( $el ){
-        var that = this;
+    $(function(){
+        $('.post-item').each(function(){
+            new LikePostBtn($(this));
+        });
 
-        var $curr_item = $el.parents('.post');
+        $(document).bind('POST_BUTTON', function() {
+            $('.post-item').each(function(){
+                new LikePostBtn($(this));
+            });
+        });
+    });
+}(jQuery, document));
 
-        this.$el			= $el;
-        this.url			= $el.data('url');
-        this.isLiked 		= $el.data('comment-liked');
-        this.iconLike 		= $el.find('i');
-        this.attachEvents();
+// Show list users liked post
+(function($, document, undefined) {
+    'use strict';
+
+    function UserListViewer($el) {
+        this.$el        = $el;
+        this.url        = $el.data('url');
+
+        this.addEvents();
     }
-
-    LikeCommentBtn.prototype.attachEvents = function(){
+    UserListViewer.prototype.addEvents = function() {
         var that = this;
-
-        this.$el.click(function(e) {
-            if(that.$el.hasClass('disabled')) {
-                e.preventDefault();
-
+        this.$el.click(function(e){
+            e.preventDefault();
+            
+            if( $(this).hasClass('disabled') || that.$el.data('like-count') == '0' ) {
                 return false;
             }
+
+            $(this).addClass('show-liked-list');
 
             that.submit(that.$el);
 
             return false;
         });
-    };
-		
-    LikeCommentBtn.prototype.submit = function($button){
-        var that = this;
-
-        var promise = $.ajax({
-            type: 'POST',
-            url:  this.url,
-            dataType: 'json'
-        });
-
-        this.triggerProgress($button, promise);
-
-        promise.then(function(data) {
-            if(data.success == 'ok'){
-                that.$el.find('d').html( data.like_count ); 
-
-                var $likeIcon = $('<i class="icon-thumbs-up medium-icon"></i>');
-                var $unLikeIcon = $('<i class="icon-thumbs-down medium-icon"></i>');
-                //Unlike
-                if(that.isLiked == 1) {
-                    that.iconLike.replaceWith($likeIcon);
-                    that.iconLike = $likeIcon;
-                    that.isLiked = 0;
-                }else { //Like
-                    that.iconLike.replaceWith($unLikeIcon);
-                    that.iconLike = $unLikeIcon;
-                    that.isLiked = 1;
-                }
-            }
-        });
-    };
-		
-    LikeCommentBtn.prototype.triggerProgress = function($el, promise){
-        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
-        var f        = function() {
-            $spinner.remove();
-            $el.removeClass('disabled');
-        };
-
-        $el.addClass('disabled').parent().append($spinner);
-
-        promise.then(f, f);
-    };
-
-    function CommentBtn( $el ){
-        var that = this;
-
-        this.$el			= $el;
-        this.comment_count	= $el.data('comment-count');
-        this.comment_url	= $el.data('comment-url');
-        this.url			= $el.data('url');
-        this.comments = [];
-        this.attachEvents();
-    }
-    CommentBtn.prototype.attachEvents = function(){
-        var that = this;
-        this.$el.click(function(e) {
-            if(that.$el.hasClass('disabled')) {
-                e.preventDefault();
-                return false;
-            }
-            $('#comment-box').find('.y-box-header .close').trigger('click');
-            that.submit(that.$el);
-            return false;
-        });
-        //Attach close event:
-        comment_box.on('click', '.y-box-header .close', function(){
-            that.hideCommentBox(that.$el);
-        });        
-        $('#overlay').click(function() {
-            that.hideCommentBox(that.$el);
-        });
-        $(document).keyup(function(e) {
-            if (e.keyCode == 27) { 
-                that.hideCommentBox(that.$el);
-            }
-        });
-    };
-    CommentBtn.prototype.submit = function($button){
-        var that = this;
-        if (that.comments.length == 0){
+	};
+    UserListViewer.prototype.submit = function($button) {
+        var userIds = $button.data('user-ids');
+        
+        if ( userIds === undefined || userIds === null ){
             var promise = $.ajax({
                 type: 'POST',
                 url:  this.url,
                 dataType: 'json'
             });
+
             this.triggerProgress($button, promise);
-            promise.then(function(data) { 
-                if(data.success == 'ok'){
-                    $('.comment-body').html('');
 
-                    var htmlOutput = '';
-                    for (key in data.comments) {
-                        that.comments.push(data.comments[key]);
-                        htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
+            promise.then(function(data) {
+				if (data.success == 'ok'){
+					if(data.users.length === 0){
+                        return false;
                     }
-				
-                    htmlOutput += '<div id="add-more-item"></div>';
-                    comment_box.find('.comment-body').html(htmlOutput);
-                    comment_box.find('.y-box-header span').html(that.comment_count);
-                    comment_form.attr('data-url', that.comment_url);
-                    page = 1;
-                    $('.comment-body').stop().animate({
-                        scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
-                    }, 1000);
-                    new CommentForm(comment_form);
 
-                    $('.comment-item .like-comment').each(function(){
-                        new LikeCommentBtn($(this));			
-                    });
+                    var users = [],
+                        userIds = [];
 
-                    jQuery(".timeago").timeago();
-                    that.showCommentBox($button); 
-                }     
+					for (var key in data.users) {
+                        if ( window.yUsers.getItem(data.users[key].id) === undefined ){
+                            window.yUsers.setItem( data.users[key].id, data.users[key] );
+                        }
+                        users.push( data.users[key] );
+                        userIds[data.users[key].id] = data.users[key].id;
+                    }
+
+                    $button.data('user-ids', userIds);
+
+                    window.userFunction.showPopupUserList( users );
+                }
             });
         }else{
-            var $spinner = $('<i class="icon-spinner icon-spin"></i>');
-            var $old_icon = that.$el.find('i');
-            var f        = function() {
-                $spinner.remove();
-                that.$el.html($old_icon);
-            };
-
-            that.$el.addClass('disabled').html($spinner);
-            $('.comment-body').html('');
-
-            var htmlOutput = '';
-            for (key in that.comments) {
-                htmlOutput += $.tmpl( $('#item-template'), that.comments[key] ).html();
+            var users = [];
+            for ( var key in userIds ){
+                if ( window.yUsers.getItem(key) !== undefined ){
+                    users.push( window.yUsers.getItem(key) );
+                }
             }
-				
-            htmlOutput += '<div id="add-more-item"></div>';
-            comment_box.find('.comment-body').html(htmlOutput);
-            comment_box.find('.y-box-header span').html(that.comment_count);
-            comment_form.attr('data-url', that.comment_url);
-            page = 1;
-            $('.comment-body').stop().animate({
-                scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
-            }, 100);
-            new CommentForm(comment_form);
 
-            $('.comment-item .like-comment').each(function(){
-                new LikeCommentBtn($(this));			
-            });
-
-            jQuery(".timeago").timeago();
-            that.showCommentBox($button);
-            f();
+            window.userFunction.showPopupUserList( users );
         }
     };
-    CommentBtn.prototype.triggerProgress = function($el, promise)
-    {
+    UserListViewer.prototype.triggerProgress = function($el, promise){
         var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var $old_icon = $el.find('i');
-        var f        = function() {
+        var f       = function() {
             $spinner.remove();
-            $el.html($old_icon);
+            $el.removeClass('disabled').prepend($old_icon);
         };
 
-        $el.addClass('disabled').html($spinner);
+        $old_icon.remove();
+        $el.addClass('disabled').prepend($spinner);
 
         promise.then(f, f);
     };
-    CommentBtn.prototype.showCommentBox = function($button) {
-        var post = $button.parents('.post');
-        if(post.length >= 0){
-            $('.post').removeClass('post-selecting');
-            post.addClass('post-selecting');
-        }       
-        $('#overlay').show(100);        
-        list_comment.makeCustomScroll(false);
-        //Show comment box:
-        comment_box.stop().animate({ "right": "2px" }, 200);
-    }
-    CommentBtn.prototype.hideCommentBox = function($button) {
-        $('#overlay').hide();
-        $('.post').removeClass('post-selecting');
-        $button.removeClass('disabled');
-        comment_box.stop().animate({"right": "-500px" }, "slow");
-        page = 1;
-    }
 
-    function CommentForm( $el ){
+    $(function(){
+        $('.post-liked-list').each(function(){
+            new UserListViewer($(this));
+        });
+
+        $(document).bind('POST_SHOW_LIKED_BUTTON', function() {
+            $('.post-liked-list').each(function(){
+                new UserListViewer($(this));
+            });
+        });
+    });
+}(jQuery, document));
+
+// Show advance edit post
+(function($, document, undefined) {
+    'use strict';
+
+    var $advance_post_form = $('.js-advance-post');
+
+    function ShowEditPostAdvance($el) {
+        this.$el        = $el;
+        this.$btn       = $el.find('.post-edit-btn');
+        this.$image     = $el.find('.post_image img');
+
+        this.content    = $el.find('.post_text_editable').html();
+        this.title      = $el.find('.post_title > a').html();
+        this.category   = $el.data('category-id');
+        this.description = $el.data('description');
+        
+        this.addEvents();
+    }
+    ShowEditPostAdvance.prototype.addEvents = function() {
         var that = this;
-        this.$el			= $el;
-        this.$content		= $el.find('textarea');
-        this.$comment_btn	= $el.find('.btn-comment');
-        this.$comments = [];
-        this.$press_enter_cb  = $el.find('.cb-press-enter');
-        this.attachEvents();
-        if(that.$press_enter_cb.parent().hasClass('checked')){
-            that.$comment_btn.hide();
-        }
-    }
-    CommentForm.prototype.attachEvents = function(){
-        var that = this;
-        this.$comment_btn.click(function(e) {
-            if(that.$comment_btn.hasClass('disabled')) {
-                e.preventDefault();
+        this.$btn.click(function(e){
+            e.preventDefault();
 
-                return false;
+            // Update title of advance popup
+            $advance_post_form.find('.js-advance-post-title').html( sEditPost );
+
+            // Content
+            $advance_post_form.find('.js-post-content').code( that.content );
+
+            // Title
+            $advance_post_form.find('.js-post-title').val( that.title );
+
+            // Description
+            $advance_post_form.find('.js-post-description').val( that.description );
+
+            // Category
+            $advance_post_form.find('.js-post-category').val( that.category );
+            
+            // Image
+            if ( that.$image.attr('src') !== '' ){
+                $advance_post_form.find('.drop-zone-show').html('').append('<img src="' + that.$image.attr('src') + '" />');
             }
-			
-            if(that.validate() == false){
-                return false;
-            }
+            
 
-            that.url	= that.$el.attr('data-url');
+            // Mention is edit form
+            $advance_post_form.data('is-add-form', 0);
 
-            that.data = {
-                content 	: that.$content.val()
-            };
+            // Cache current post
+            $advance_post_form.data('post', that.$el);
 
-            that.submit(that.$comment_btn);
+            // Post slug
+            $advance_post_form.data('post-slug', that.$el.data('post-slug'));
 
             return false;
         });
-        
-        this.$press_enter_cb.click(function(e) {
-            if(that.$press_enter_cb.parent().hasClass('checked')){
-                that.$comment_btn.hide("slow");
-            }else{
-                that.$comment_btn.show("slow");
-            }
+    };
+
+    $(function(){
+        $('.js-post-item').each(function(){
+            new ShowEditPostAdvance($(this));
         });
-                
-        this.$content.keypress(function(e){
-            if(that.$press_enter_cb.parent().hasClass('checked') && e.which == 13){
-                if(that.validate() == false){
-                    return false;
-                }
 
-                that.url  = that.$el.attr('data-url');
+        $(document).bind('EDIT_POST', function(e, $post_item) {
+            new ShowEditPostAdvance($post_item);
+        });
 
-                that.data = {
-                    content   : that.$content.val()
-                };
+        $(document).bind('POPUP_CLOSED', function() {
+            if ( $('.js-advance-post').data('is-add-form') == 1 ){
+                $('.js-advance-post').data('form-value', {
+                    title: $('.js-advance-post').find('.js-post-title').val(),
+                    content: $('.js-advance-post').find('.js-post-content').code(),
+                    description: $('.js-advance-post').find('.js-post-description').val(),
+                    category: $('.js-advance-post').find('.js-post-category').val(),
+                    image: $('.js-advance-post').find('.img-uploaded').attr('src')
+                });
+            }
 
-                that.submit(that.$comment_btn);
+            $('.js-advance-post').find('.js-post-reset-btn').trigger('click');
+        });
+    });
+}(jQuery, document));
+
+// Submit post to add or edit
+(function($, document, undefined) {
+    'use strict';
+
+    var marginPostDefault = 15;
+    var widthPostDefault = 420;
+
+    function SubmitPost( $el ) {
+        this.rootContent        = $('#y-content');
+        this.mainContent        = $('#y-main-content');
+        this.blockContent       = this.mainContent.find('.block-content');
+        
+        this.$el                = $el;
+        this.$title             = $el.find('.js-post-title');
+        this.$category          = $el.find('.js-post-category');
+        this.$description       = $el.find('.js-post-description');
+        this.$content           = $el.find('.js-post-content');
+        this.$submitBtn         = $el.find('.js-post-submit-btn');
+        this.$showPopupBtn      = $('.js-show-popup-btn');
+        
+        this.postType           = $el.data('post-type');
+        this.userSlug           = $('.js-post-status').parents('.form-status').data('user-slug');
+        
+        this.attachEvents();
+    }
+
+    SubmitPost.prototype.attachEvents = function(){
+        var that = this;
+
+        this.$submitBtn.click(function(e) {
+            e.preventDefault();
+            
+            if(that.$submitBtn.hasClass('disabled')) {
                 return false;
+            }
+            if(that.validate() === false){
+                return false;
+            }
+
+            // content, user tagged, thumb
+            var userTags = [];
+            var stockTags = [];
+            var content, thumb;
+            if ( !that.$content.hasClass('js-post-status') ){
+                content = that.$content.code();
+                userTags = that.$content.getTags();
+                thumb = that.$el.find('.img-uploaded').attr('src');
+            
+            }else{
+                var mentions = that.$content.mentionsInput('getMentions');                
+                $.each(mentions, function(key, t){
+                    if(t.type === "contact"){
+                        userTags.push(t.id);
+                    } else if(t.type === "stock") {
+                        stockTags.push(t.id);
+                    }
+                });
+                content = that.$content.mentionsInput('getHtmlContent');
+                thumb = that.$el.find('.img-uploaded').attr('src');
+            }
+
+            that.data = {
+                title       : that.$title.val(),
+                category    : that.$category.val(),
+                description : that.$description.val(),
+                content     : content,
+                userTags    : userTags,
+                stockTags   : stockTags,
+                thumb       : thumb
+            };
+
+            that.is_add = that.$el.data('is-add-form');
+            
+            that.submit(that.$submitBtn);
+
+            return false;
+        });
+
+        this.$showPopupBtn.click(function(e){
+            e.preventDefault();
+
+            $('.js-advance-post').data('is-add-form', 1);
+
+            var form_value = $('.js-advance-post').data('form-value');
+
+            $('.js-advance-post').find('.js-advance-post-title').html( sAddPost );
+
+            if ( typeof form_value != 'undefined' ){
+                $('.js-advance-post').find('.js-post-title').val(form_value.title);
+                $('.js-advance-post').find('.js-post-content').code(form_value.content);
+                $('.js-advance-post').find('.js-post-description').val(form_value.description);
+                $('.js-advance-post').find('.js-post-category').val(form_value.category);
+                if ( form_value.image !== undefined ){
+                    var $post_image = $.tmpl( $('#uploaded-image-template'), {thumbnailUrl: form_value.image} );
+                    $('.js-advance-post').find('.drop-zone-show').hide();
+                    $('.js-advance-post').find('.img-previewer-container').append( $post_image );
+                }
             }
         });
     };
-    CommentForm.prototype.submit = function($button){
+
+    SubmitPost.prototype.submit = function($button){
         var that = this;
+
+        if ( this.is_add == 1 ){
+            this.url = window.yRouting.generate('PostAdd', {
+                post_type: that.postType,
+                user_slug: that.userSlug
+            });
+        }else{
+            this.url = window.yRouting.generate('PostEdit', {
+                post_type: that.postType,
+                post_slug: that.$el.data('post-slug')
+            });
+        }
+
         var promise = $.ajax({
             type: 'POST',
             url:  this.url,
-            data: that.data,
+            data: this.data,
             dataType: 'json'
         });
-
+        
         this.triggerProgress($button, promise);
 
         promise.then(function(data) {
             if(data.success == 'ok'){
-                that.$comments.push(data.comment);
-                if(that.$comments.length > 10){
-                    that.$comments.pop();
+                if ( that.is_add == 1 ){
+                    var htmlOutput = $.tmpl( $('#post-item-template'), data.post );
+                    var firstColumn = that.blockContent.find('.column:first-child');
+                    var newColumn = $('<div class="column">').append(htmlOutput);
+                    newColumn.width(widthPostDefault);
+                    newColumn.css({
+                        'opacity':'0',
+                        'min-width': widthPostDefault + 'px'
+                    });
+                    
+                    //Adjust size of layout:
+                    var post = newColumn.children('.post');
+                    var postBody   = post.children('.post_body');
+                    post.height(firstColumn.height() - 2*(marginPostDefault + 1));
+                    postBody.height(post.height() - 65 - 10 - 22);
+                    var postTitle  = postBody.children('.post_title');
+                    var postImg    = postBody.children('.post_image');
+                    if(postTitle.length > 0){
+                        postImg.height(postBody.height()*0.6);
+                    }else {
+                        postImg.height(postBody.height()*0.7);
+                    }
+                    var postTextRaw = postBody.children('.post_text_raw');
+                    var maxHeightText = postBody.height() - postTitle.height() - postImg.height() - 15;
+                    postTextRaw.height(Math.floor(maxHeightText/20)*20);
+                    var imgInTextRaw = postTextRaw.find('img');
+                    if(imgInTextRaw.length > 0) {
+                        imgInTextRaw.hide(10);
+                    }
+                    firstColumn.hide().after(newColumn).show(200);
+                    that.mainContent.width(that.mainContent.width() + widthPostDefault + marginPostDefault);
+                    that.rootContent.getNiceScroll().resize();
+
+                    //Attach events:
+                    setTimeout(function(){
+                        post.find('.post_text_raw').truncate({
+                            width: 'auto',
+                            token: '&hellip;',
+                            side: 'right',
+                            multiline: true
+                        });
+
+                        $('.timeago').timeago();
+
+                        post.find('.link-popup').magnificPopup({
+                            type:'inline',
+                            midClick: true,
+                            removalDelay: 300,
+                            mainClass: 'mfp-fade'
+                        });
+                        newColumn.css('opacity', '1');
+                    }, 500);
+
+                    htmlOutput.find('.post_body').magnificPopup({
+                        delegate: 'a.img-link-popup',
+                        type: 'image',
+                        closeOnContentClick: false,
+                        closeBtnInside: false,
+                        mainClass: 'mfp-with-zoom mfp-img-mobile',
+                        image: {
+                            verticalFit: true,
+                            titleSrc: function(item) {
+                                return item.el.attr('title');
+                            }
+                        }
+                    });
+
+                    //Rise events:
+                    $(document).trigger('POST_BUTTON');
+                    $(document).trigger('POST_SHOW_LIKED_BUTTON');
+                    $(document).trigger('HORIZONTAL_POST');
+                    $(document).trigger('DELETE_POST', [htmlOutput]);
+                    $(document).trigger('EDIT_POST', [htmlOutput]);
+                }else{
+                    var $current_post = that.$el.data('post');
+                    var textRaw = $current_post.find('.post_text_raw');
+                    textRaw.html( data.post.content );
+                    setTimeout(function(){
+                        textRaw.truncate({
+                            width: 'auto',
+                            token: '&hellip;',
+                            side: 'right',
+                            multiline: true
+                        });
+                    }, 500);
+                    $current_post.find('.post_text_editable').html( data.post.content );
+                    if ( data.post.title !== null ){
+                        $current_post.find('.post_title').removeClass('hidden').find('a').html( data.post.title );
+                    }
+                    if ( data.post.image !== null ){
+                        $current_post.find('.post_image').removeClass('hidden').find('a').attr('href', data.post.thumb + '?' + new Date().getTime());
+                        $current_post.find('.post_image').removeClass('hidden').find('img').attr('src', data.post.image + '?' + new Date().getTime());
+                    }
+
+                    $(document).trigger('EDIT_POST', [$current_post]);
                 }
-                htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
-                $('#add-more-item').before(htmlOutput);
-                that.$content.val('');
-                //Scroll to last post which have just been added
-                list_comment.stop().animate({ 
-                    scrollTop: $('#add-more-item').offset().top
-                }, 1000);
-
-                var comment_count = parseInt(that.$el.parent().find('.counter').html()) + 1;
-                that.$el.parent().find('.counter').html( comment_count );
-
-                var $curr_item = $('.open-comment.disabled').parents('.post');
-				
-                $('.open-comment.disabled').parent().find('d').html( comment_count );
-                $curr_item.find('.open-comment').attr('data-comment-count', comment_count).find('d').html( comment_count );
-                $curr_item.find('.post_header .post_cm d').html( comment_count );
-                $curr_item.find(".view-list-user[data-view-type='comment']").html(comment_count);
-                $('.comment-item .like-comment').each(function(){
-                    new LikeCommentBtn($(this));			
-                });
-
-                jQuery(".timeago").timeago();
+                
+                //Reset:
+                if ( that.$content.hasClass('js-post-status') ){
+                    that.$content.mentionsInput('reset');
+                    that.$content.height(40);
+                    that.$el.find('.img-previewer-container').html('');
+                }else{
+                    that.$el.find('.js-post-reset-btn').trigger('click');
+                    $('.mfp-ready').trigger('click');
+                }
             }
         });
     };
-    CommentForm.prototype.validate = function(){
-        if(this.$content.val().length == 0){
+
+    SubmitPost.prototype.validate = function(){
+        if(!String.prototype.trim) {
+          String.prototype.trim = function () {
+            return this.replace(/^\s+|\s+$/g,'');
+          };
+        }
+
+        if ( this.is_add == 1 && this.$title.val() !== undefined && this.$title.val().trim().length === 0 ){
+            this.$title.val('');
             return false;
         }
+
+        if ( this.$content.hasClass('js-post-status') && this.$content.val().trim().length === 0 ){
+            this.$content.val('');
+            return false;
+        }
+            
+        if ( this.$description.val() !== undefined && this.$description.val().trim().length === 0 ){
+            this.$description.val('');
+            return false;
+        }
+
+        return true;
     };
-    CommentForm.prototype.triggerProgress = function($el, promise)
-    {
+
+    SubmitPost.prototype.triggerProgress = function($el, promise){
         var $spinner = $('<i class="icon-spinner icon-spin"></i>');
-        var f = function() {
+        var f       = function() {
             $el.removeClass('disabled');
             $spinner.remove();
         };
@@ -538,66 +557,111 @@
     };
 
     $(function(){
-        $('.who-action .view-list-liker').each(function(){
-            new UserListViewer($(this));
-        });
-
-        $('.like-post').each(function(){
-            new LikePostBtn($(this));			
-        });
-
-        $('.open-comment').each(function(){
-            new CommentBtn($(this));
-        });
-
-        var getComments = function () {
-            list_comment.off('scroll');
-            if(list_comment.scrollTop() == 0 && (((page + 1)*10 < $('.open-comment.disabled').attr('data-comment-count')) || ((page + 1)*10 - $('.open-comment.disabled').attr('data-comment-count') <= 10)) ) {
-                page++;
-                var data = {
-                    'post_slug'	: comment_form.attr('data-post-id'),
-                    'post_type' : comment_form.attr('data-post-type'),
-                    'page'		: page
-                }
-                $.ajax({
-                    type: 'POST',
-                    url:  $('.open-comment.disabled').data('url'),
-                    data: data,
-                    dataType: 'json',
-                    progress: function () {
-                        $('.comment-body').prepend('<span class="loading"><i class="icon-spin icon-spinner"></i>Loading...</span>');
-                    },
-                    success: function (data) {
-                        if(data.success == 'ok') {
-                            var htmlOutput = '';
-                            for (key in data.comments) {
-                                htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
-                            }
-                            $('.comment-body').find('.loading').remove();
-                            $('.comment-body').prepend(htmlOutput);
-                            jQuery(".timeago").timeago();
-                        }
-                    }
-                });
-            } 
-            list_comment.on('scroll', function () {
-                getComments();
-            });
-        }
-        list_comment.on('scroll', function () {
-            getComments();
-        });
-
-        $(document).bind('POST_BUTTON', function(e) {
-            $('.like-post').each(function(){
-                new LikePostBtn($(this));			
-            });
-
-            $('.open-comment').each(function(){
-                new CommentBtn($(this));
-            });
-            
+        $('.js-post-form').each(function(){
+            new SubmitPost($(this));
         });
     });
-    
+}(jQuery, document));
+
+// Delete post
+(function($, document, undefined) {
+    'use strict';
+
+    function DeletePost($el) {
+        this.$el        = $el;
+        this.$btn       = $el.find('.post-delete-btn');
+
+        this.postType   = $el.data('post-type');
+        this.postSlug   = $el.data('post-slug');
+        this.url        = window.yRouting.generate('PostDelete', {
+            post_type: this.postType,
+            post_slug: this.postSlug
+        });
+
+        this.mainContent = $('#y-main-content');
+        this.rootContent = $('#y-content');
+
+        this.addEvents();
+    }
+    DeletePost.prototype.addEvents = function() {
+        var that = this;
+        this.$btn.click(function(e){
+            e.preventDefault();
+            
+            if( $(this).hasClass('disabled') ) {
+                return false;
+            }
+
+            bootbox.dialog({
+                title: sConfirm,
+                message: sConfirmDeletePost,
+                buttons:
+                {
+                    cancel: {
+                        label: sCancel,
+                        className: 'btn',
+                        callback: function() {
+                        }
+                    },
+                    oke: {
+                        label: 'OK',
+                        className: 'btn-primary',
+                        callback: function() {
+                            that.submit(that.$btn.find('a'));
+                        }
+                    }
+                }
+            });
+
+            return false;
+        });
+    };
+    DeletePost.prototype.submit = function($button) {
+        var that = this;
+        //Mark deleted post:
+        that.$el.addClass('deleting');
+        var promise = $.ajax({
+            type: 'POST',
+            url:  this.url,
+            dataType: 'json'
+        });
+
+        this.triggerProgress($button, promise);
+
+        promise.then(function(data) {
+            if(data.success == 'ok') {
+                var widthColumn = that.$el.parent().outerWidth();
+                that.$el.parent().css('opacity','0').slideUp(300, function(){
+                    $(this).remove();
+                    that.mainContent.width(that.mainContent.width() - widthColumn);
+                    that.rootContent.getNiceScroll().resize();
+                });
+            }else{
+                that.$el.parent().removeClass('deleting');
+            }
+        });
+    };
+    DeletePost.prototype.triggerProgress = function($el, promise){
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f       = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').prepend($old_icon);
+        };
+
+        $old_icon.remove();
+        $el.addClass('disabled').prepend($spinner);
+
+        promise.then(f, f);
+    };
+
+    $(function(){
+        $('.js-post-item').each(function(){
+            new DeletePost($(this));
+        });
+
+        $(document).bind('DELETE_POST', function(e, $post_item) {
+            new DeletePost($post_item);
+        });
+    });
 }(jQuery, document));

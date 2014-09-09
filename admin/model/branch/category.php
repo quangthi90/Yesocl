@@ -6,162 +6,178 @@ use Document\Branch\Category,
 use MongoRegex;
 
 class ModelBranchCategory extends Model {
-	public function addCategory( $data = array() ) {
+	public function addCategory( $aData = array() ) {
 		// Name is required
-		if ( !isset($data['name']) || empty($data['name']) ){
+		if ( !isset($aData['name']) || empty($aData['name']) ){
 			return false;
 		}
 
 		// Branch is requied
-		if ( !isset($data['branch_id']) || empty($data['branch_id']) ){
+		if ( !isset($aData['branch_id']) || empty($aData['branch_id']) ){
 			return false;
 		}
-		$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $data['branch_id'] );
+		$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $aData['branch_id'] );
 		if ( !$branch ){
 			return false;
 		}
 
 		$order = 0;
-		if ( isset($data['order']) && !empty($data['order']) ){
-			$order = $data['order'];
+		if ( isset($aData['order']) && !empty($aData['order']) ){
+			$order = $aData['order'];
 		}
 
 		$parent = null;
-		if ( isset($data['parent_id']) && !empty($data['parent_id']) ){
-			$parent = $this->dm->getRepository('Document\Branch\Category')->find( $data['parent_id'] );
+		if ( isset($aData['parent_id']) && !empty($aData['parent_id']) ){
+			$parent = $this->dm->getRepository('Document\Branch\Category')->find( $aData['parent_id'] );
 		}
 
 		// Slug
-		$slug = $this->url->create_slug( $data['name'] );
+		$slug = $this->url->create_slug( $aData['name'] );
 		$categories = $this->dm->getRepository( 'Document\Branch\Category' )->findBySlug( new MongoRegex("/^$slug/i") );
-		$arr_slugs = array_map(function($category){
-			return $category->getSlug();
+		$arr_slugs = array_map(function($oCategory){
+			return $oCategory->getSlug();
 		}, $categories->toArray());
 		$this->load->model( 'tool/slug' );
 		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );	
 		
-		$category = new Category();
-		$category->setName( $data['name'] );
-		$category->setSlug( $slug );
-		$category->setBranch( $branch );
-		$category->setOrder( $order );
-		$category->setParent( $parent );
+		$oCategory = new Category();
+		$oCategory->setName( $aData['name'] );
+		$oCategory->setSlug( $slug );
+		$oCategory->setBranch( $branch );
+		$oCategory->setOrder( $order );
+		$oCategory->setParent( $parent );
+		$oCategory->setIsBranch( (bool)$aData['isBranch'] );
 
-		$this->dm->persist( $category );
+		$this->dm->persist( $oCategory );
 		$this->dm->flush();
 	}
 
-	public function editCategory( $id, $data = array() ) {
+	public function editCategory( $id, $aData = array() ) {
 		// Name is require
-		if ( !isset($data['name']) || empty($data['name']) ){
+		if ( !isset($aData['name']) || empty($aData['name']) ){
 			return false;
 		}
 
 		// Branch is requied
-		if ( !isset($data['branch_id']) || empty($data['branch_id']) ){
+		if ( !isset($aData['branch_id']) || empty($aData['branch_id']) ){
 			return false;
 		}
-		$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $data['branch_id'] );
+		$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $aData['branch_id'] );
 		if ( !$branch ){
 			return false;
 		}
 		
 		// Check category
-		$category = $this->dm->getRepository('Document\Branch\Category')->find( $id );
-		if ( !$category ){
+		$oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $id );
+		if ( !$oCategory ){
 			return false;
 		}
 
 		$order = 0;
-		if ( isset($data['order']) && !empty($data['order']) ){
-			$order = $data['order'];
+		if ( isset($aData['order']) && !empty($aData['order']) ){
+			$order = $aData['order'];
 		}
 
 		$parent = null;
-		if ( isset($data['parent_id']) && !empty($data['parent_id']) ){
-			$parent = $this->dm->getRepository('Document\Branch\Category')->find( $data['parent_id'] );
+		if ( isset($aData['parent_id']) && !empty($aData['parent_id']) ){
+			$parent = $this->dm->getRepository('Document\Branch\Category')->find( $aData['parent_id'] );
 		}
 
 		// Slug
-		if ( $data['name'] != $category->getName() ){
-			$slug = $this->url->create_slug( $data['name'] );
+		if ( $aData['name'] != $oCategory->getName() ){
+			$slug = $this->url->create_slug( $aData['name'] );
 		
 			$categories = $this->dm->getRepository( 'Document\Branch\Category' )->findBySlug( new MongoRegex("/^$slug/i") );
 
-			$arr_slugs = array_map(function($category){
-				return $category->getSlug();
+			$arr_slugs = array_map(function($oCategory){
+				return $oCategory->getSlug();
 			}, $categories->toArray());
 
 			$this->load->model( 'tool/slug' );
 			$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
 			
-			$category->setSlug( $slug );
+			$oCategory->setSlug( $slug );
 		}
 
-		$category->setName( $data['name'] );
-		$category->setBranch( $branch );
-		$category->setOrder( $order );
-		$category->setParent( $parent );
+		$oCategory->setName( $aData['name'] );
+		$oCategory->setBranch( $branch );
+		$oCategory->setOrder( $order );
+		$oCategory->setParent( $parent );
+		$oCategory->setIsBranch( (bool)$aData['isBranch'] );
 
 		$this->dm->flush();
 	}
 
-	public function deleteCategory( $data = array() ) {
-		if ( isset($data['id']) ) {
-			foreach ( $data['id'] as $id ) {
-				$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $id );
-
-				$this->dm->remove( $category );
+	public function deleteCategory( $aData = array() ) {
+		if ( isset($aData['id']) ) {
+			foreach ( $aData['id'] as $id ) {
+				$oCategory = $this->dm->getRepository( 'Document\Branch\Category' )->find( $id );
+				if ( $oCategory ) $oCategory->setDeleted(true);
 			}
 		}
 		
 		$this->dm->flush();
 	}
+	/*public function deleteCategory( $aData = array() ) {
+		if ( isset($aData['id']) ) {
+			foreach ( $aData['id'] as $id ) {
+				$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $id );
+
+				$this->dm->remove( $oCategory );
+			}
+		}
+		
+		$this->dm->flush();
+	}*/
 	
-	public function getCategory( $action_id ) {
-		$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $action_id );
-		return $category;
+	public function getCategory( $category_id ) {
+		$query = array( 
+			'deleted' => false,
+			'id' => $category_id
+		);
+		return $this->dm->getRepository( 'Document\Branch\Category' )->findOneBy( $query );
 	}
 
-	public function getCategories( $data = array() ) {
-		if (!isset($data['limit']) || ((int)$data['limit'] < 0)) {
-			$data['limit'] = 10;
+	public function getCategories( $aData = array() ) {
+		if (!isset($aData['limit']) || ((int)$aData['limit'] < 0)) {
+			$aData['limit'] = 10;
 		}
-		if (!isset($data['start']) || ((int)$data['start'] < 0)) {
-			$data['start'] = 0;
+		if (!isset($aData['start']) || ((int)$aData['start'] < 0)) {
+			$aData['start'] = 0;
 		}
-		if (!isset($data['sort']) || empty($data['sort']) ){
-			$data['sort'] = 'order';
+		if (!isset($aData['sort']) || empty($aData['sort']) ){
+			$aData['sort'] = 'order';
 		}
 
-		$query = $this->dm->createQueryBuilder( 'Document\Branch\Category' )
-    		->limit( $data['limit'] )
-    		->skip( $data['start'] )
-    		->sort( $data['sort'] );
-    	
-    	return $query->getQuery()->execute();
+		$query = array(
+			'deleted' => false
+		);
+
+		return $this->dm->getRepository('Document\Branch\Category')->findBy( $query )
+					->limit( $aData['limit'] )
+		    		->skip( $aData['start'] )
+		    		->sort( $aData['sort'] );
 	}
 
-	public function getAllCategories( $data = array() ) {
-		$query = array();
-		if ( !empty($data['branch_id']) ){
-			$query['branch.id'] = $data['branch_id'];
+	public function getAllCategories( $aData = array() ) {
+		$query = array('deleted' => false);
+		if ( !empty($aData['branch_id']) ){
+			$query['branch.id'] = $aData['branch_id'];
 		}
-		if ( empty($data['sort']) ){
-			$data['sort'] = 'order';
+		if ( empty($aData['sort']) ){
+			$aData['sort'] = 'order';
 		}
 
 		return $this->dm->getRepository( 'Document\Branch\Category' )
 			->findBy($query)
-			->sort(array($data['sort'] => 1));
+			->sort(array($aData['sort'] => 1));
 	}
 	
 	public function getTotalCategories() {
-		$query = $this->dm->createQueryBuilder( 'Document\Branch\Category' );
+		$query = array('deleted' => false);
+		$categories = $this->dm->getRepository( 'Document\Branch\Category' )->findBy($query);
 
-		$categories = $query->getQuery()->execute();
-
-		return count($categories);
+		return $categories->count();
 	}
 
 	public function getCategoryByCode( $code ){

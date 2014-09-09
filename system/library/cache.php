@@ -29,6 +29,7 @@ class Cache {
 	}
 
   	public function __construct() {
+  		// Clear cache file
   		$files = $this->scanFiles( DIR_CACHE );
 		
 		if ($files) {
@@ -36,6 +37,26 @@ class Cache {
 				$time = substr(strrchr($file, '.'), 1);
 
       			if ($time < time()) {
+					if (file_exists($file)) {
+						unlink($file);
+
+						$parent = dirname($file);
+						if ( count($this->scanFiles($parent)) == 0 ){
+							unlink($parent);
+						}
+					}
+      			}
+    		}
+		}
+
+		// Clear cache image
+		$files = $this->scanFiles( DIR_IMAGE . 'data/upload/' );
+		
+		if ($files) {
+			$time_check = time() - 15 * 60;
+			foreach ($files as $file) {
+				$time = explode('.', basename($file))[0];
+      			if ($time_check > $time) {
 					if (file_exists($file)) {
 						unlink($file);
 

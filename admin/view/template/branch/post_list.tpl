@@ -36,6 +36,29 @@
             </tr>
           </thead>
           <tbody>
+            <tr class="filter">
+              <td></td>
+              <td></td>
+              <td><input type="text" name="filter_title" value="<?php echo $filter_title; ?>" /></td>
+              <td>
+                <select name="filter_category">
+                  <option value=""><?php echo $text_none; ?></option>
+                  <?php foreach( $categories as $category ){ ?>
+                  <option value="<?php echo $category['id']; ?>" <?php if ( $filter_category == $category['id'] ){ ?>selected="selected"<?php } ?>><?php echo $category['name']; ?></option>
+                  <?php } ?>
+                </select>
+              </td>
+              <td></td>
+              <td></td>
+              <td>
+                <select name="filter_status">
+                  <option value=""><?php echo $text_none; ?></option>
+                  <option value="true" <?php if ( $filter_status == 'true' ){ ?>selected="selected"<?php } ?>><?php echo $text_enabled; ?></option>
+                  <option value="false" <?php if ( $filter_status == 'false' ){ ?>selected="selected"<?php } ?>><?php echo $text_disabled; ?></option>
+                </select>
+              </td>
+              <td align="right"><a onclick="filter();" class="btn btn-primary"><?php echo $button_filter; ?></a></td>
+            </tr>
             <?php if ($posts) { ?>
             <?php foreach ($posts as $post) { ?>
             <tr>
@@ -64,4 +87,57 @@
     </div>
   </div>
 </div>
+<script type="text/javascript"><!--
+function filter() {
+  url = 'index.php?route=branch/post&branch_id=<?php echo $branch_id ?>&token=<?php echo $token; ?>';
+  
+  var filter_title = $('input[name=\'filter_title\']').attr('value');
+  
+  if (filter_title) {
+    url += '&filter_title=' + encodeURIComponent(filter_title);
+  }
+
+  var filter_category = $('[name=\'filter_category\']').attr('value');
+  
+  if (filter_category) {
+    url += '&filter_category=' + encodeURIComponent(filter_category);
+  } 
+  
+  var filter_status = $('[name=\'filter_status\']').attr('value');
+  
+  if (filter_status) {
+    url += '&filter_status=' + encodeURIComponent(filter_status);
+  } 
+
+  location = url;
+}
+//--></script>
+<script type="text/javascript"><!--
+$('input[name=\'filter_title\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: '<?php echo $autocomplete_name; ?>&filter_title=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.name,
+            value: item.id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('input[name=\'filter_type_name\']').val(ui.item.label);
+    $('input[name=\'filter_type\']').val(ui.item.value);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script>
 <?php echo $footer; ?>

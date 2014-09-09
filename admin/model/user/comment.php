@@ -100,7 +100,7 @@ class ModelUserComment extends Model {
 		return true;
 	}
 
-	public function deletePost( $post_id, $data = array() ) {
+	public function deleteComment( $post_id, $data = array() ) {
 		if ( empty($data['id']) ){
 			return false;
 		}
@@ -133,6 +133,43 @@ class ModelUserComment extends Model {
 		$this->dm->flush();
 
 		return true;
+	}
+
+	public function getComments( $idPost, $aData = array() ) {
+		if ( empty($aData['start']) ){
+			$aData['start'] = 0;
+		}
+
+		if ( empty($aData['limit']) ){
+			$aData['limit'] = 10;
+		}
+
+		$oPosts = $this->dm->createQueryBuilder('Document\User\Posts')
+			->field('posts.id')->equals($idPost)
+		    ->selectSlice('posts.comments', $aData['start'], $aData['limit'])
+		    ->getQuery()
+		    ->getSingleResult();
+
+		if ( !$oPosts ) return null;
+
+		$this->dm->clear();
+		return $oPosts->getPostById($idPost)->getComments();
+	}
+
+	public function getTotalComment( $idPost ) {
+		$oPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
+			'posts.id' => $idPost
+		));
+
+		if ( $oPosts ){
+			$oPost = $oPosts->getPostById( $idPost );
+
+			if ( $oPosts ){
+				return $oPost->getComments()->count();
+			}
+		}
+
+		return 0;
 	}
 }
 ?>

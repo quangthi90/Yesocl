@@ -89,6 +89,7 @@ $_['tab_data']                = 'Data';
 $_['tab_design']              = 'Design';
 $_['tab_discount']            = 'Discount';
 $_['tab_general']             = 'General';
+$_['tab_meta']	              = 'Meta';
 $_['tab_member']              = 'Member';
 $_['tab_branch']              = 'Branch';
 $_['tab_fraud']               = 'Fraud';

@@ -18,7 +18,7 @@
     <?php } ?></td>
   </tr>
   <tr>
-    <td><?php echo $entry_logo; ?></td>
+    <td><span class="required">*</span> <?php echo $entry_logo; ?></td>
     <td>
       <div class="logo fileupload fileupload-new" data-provides="fileupload">
         <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<?php echo $img_logo; ?>" style="width: 150px; height: 150px;" /></div>

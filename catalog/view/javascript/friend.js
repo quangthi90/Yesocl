@@ -1,93 +1,195 @@
+// Friend action button
 (function($, document, undefined) {
-	function FriendAction( $el ){
-		var that = this;
-		this.$el			= $el;
-		this.$friend_btn	= $el.find('.btn-friend');
-		this.$unfriend_btn	= $el.find('.btn-unfriend');
-		this.friend_url		= this.$friend_btn.data('url');
-		this.unfriend_url	= this.$unfriend_btn.data('url');
-		this.is_cancel		= this.$friend_btn.data('cancel')
+	'use strict';
 
+	function FriendAction( $el, removeUnFriend ){
+		this.$el				= $el;
+		this.$makeFriendBtn		= $el.find('.js-makefriend-btn');
+		this.$unFriendBtn		= $el.find('.js-unfriend-btn');
+		this.$cancelRequestBtn	= $el.find('.js-cancel-request-friend-btn');
+		this.$makeFollowBtn		= $el.find('.js-makefollow-btn');
+		this.$unFollowBtn		= $el.find('.js-unfollow-btn');
+		
+		this.userSlug			= $el.parents('.js-friend-info').data('user-slug');
+		this.userId 			= $el.parents('.js-friend-info').data('user-id');
+		this.isRemoveFriend = removeUnFriend;
+		
 		this.attachEvents();
 	}
 
 	FriendAction.prototype.attachEvents = function(){
 		var that = this;
 
-		this.$friend_btn.click(function(e) {
-			if(that.$friend_btn.hasClass('disabled')) {
+		this.$makeFriendBtn.click(function(e) {
+			if( $(this).hasClass('disabled') ) {
 				e.preventDefault();
 
 				return false;
 			}
 
-			that.submit(that.$friend_btn);
+			that.url = window.yRouting.generate('MakeFriend', {user_slug: that.userSlug});
+			that.frStatus = 1;
+
+			that.submitFriend($(this));
 
 			return false;
 		});
 
-		this.$unfriend_btn.click( function (e) {
-			if (that.$unfriend_btn.hasClass('disabled')) {
+		this.$cancelRequestBtn.click( function (e) {
+			if ( $(this).hasClass('disabled') ) {
 				e.preventDefault();
 
 				return false;
 			}
 
-			that.remove(that.$unfriend_btn);
+			that.url = window.yRouting.generate('MakeFriend', {user_slug: that.userSlug});
+			that.frStatus = 2;
+
+			that.submitFriend($(this));
+
+			return false;
+		});
+
+		this.$unFriendBtn.click( function (e) {
+			if ( $(this).hasClass('disabled') ) {
+				e.preventDefault();
+
+				return false;
+			}
+
+			that.url = window.yRouting.generate('UnFriend', {user_slug: that.userSlug});
+			that.frStatus = 3;
+
+			that.submitFriend($(this));
+
+			return false;
+		});
+
+		this.$makeFollowBtn.click( function (e) {
+			if ( $(this).hasClass('disabled') ) {
+				e.preventDefault();
+
+				return false;
+			}
+
+			that.url = window.yRouting.generate('AddFollower', {user_slug: that.userSlug});
+			that.isUnFollow = 0;
+
+			that.submitFollow($(this));
+
+			return false;
+		});
+
+		this.$unFollowBtn.click( function (e) {
+			if ( $(this).hasClass('disabled') ) {
+				e.preventDefault();
+
+				return false;
+			}
+
+			that.url = window.yRouting.generate('RemoveFollower', {user_slug: that.userSlug});
+			that.isUnFollow = 1;
+
+			that.submitFollow($(this));
 
 			return false;
 		});
 	};
 		
-	FriendAction.prototype.submit = function($button){
-		var that = this;		
+	FriendAction.prototype.submitFriend = function($button){
+		var that = this;
 
 		var promise = $.ajax({
 			type: 'POST',
-			url:  this.friend_url,
+			url:  this.url,
 			dataType: 'json'
 		});
 
 		this.triggerProgress($button, promise);
 
-		promise.then(function(data) { 
+		promise.then(function(data) {
 			if(data.success == 'ok'){
-				var $htmlOutput = '';
-				if ( that.is_cancel == 0 ){
-					$htmlOutput = $.tmpl( $('#cancel-request'), {href: that.friend_url} );
+				var $htmlOutput = '',
+					status = 1,
+					user = window.yUsers.getItem(that.userId);
+
+				if ( that.frStatus === 1 ){
+					$htmlOutput = $.tmpl( $('#cancel-request') );
+					status = 3;
+				}else if ( that.frStatus === 2 ){
+					$htmlOutput = $.tmpl( $('#send-request') );
+					status = 4;
 				}else{
-					$htmlOutput = $.tmpl( $('#send-request'), {href: that.friend_url} );
+					// Remove friend
+					if ( that.isRemoveFriend === true ){
+						that.$el.parents('.js-friend-info').remove();
+						return false;
+
+					// Change status to not relationship
+					// And show button make friend
+					}else{
+						$htmlOutput = $.tmpl( $('#send-request') );
+						status = 4;
+					}
 				}
 
+				// Update user status
+				if ( user !== undefined ){
+					user.fr_status = status;
+					window.yUsers.setItem( that.userId, user );
+				}
+				
 				that.$el.find('.friend-group').remove();
 				that.$el.prepend( $htmlOutput );
 				new FriendAction( that.$el );
 			}
 
-		});		
+		});
 	};
-		
-	FriendAction.prototype.remove = function($button){
-		var that = this;		
+
+	FriendAction.prototype.submitFollow = function($button){
+		var that = this;
 
 		var promise = $.ajax({
 			type: 'POST',
-			url:  this.unfriend_url,
-			dataType: 'json',
-			error: function (xhr, error) {
-				alert(xhr.responseText);
-			}
+			url:  this.url,
+			dataType: 'json'
 		});
 
 		this.triggerProgress($button, promise);
 
-		promise.then(function(data) { 
+		promise.then(function(data) {
 			if(data.success == 'ok'){
-				that.$el.parent().remove();
+				var $htmlOutput = '',
+					fl_status = 1,
+					user = window.yUsers.getItem(that.userId);
+
+				if ( that.isUnFollow === 0 ){
+					$htmlOutput = $.tmpl( $('#unfollow') );
+					fl_status = 2;
+				}else{
+					console.log(that.isRemoveFriend);
+					if ( that.isRemoveFriend === false ){
+						that.$el.parents('.js-friend-info').remove();
+						return false;
+					}
+					$htmlOutput = $.tmpl( $('#send-follow') );
+					fl_status = 3;
+				}
+
+				if ( user !== undefined ){
+					user.fl_status = fl_status;
+					window.yUsers.setItem(that.userId, user);
+				}
+				
+				that.$el.find('.follow-group').remove();
+				that.$el.append( $htmlOutput );
+				new FriendAction( that.$el );
 			}
-		});		
+
+		});
 	};
-		
+
 	FriendAction.prototype.triggerProgress = function($el, promise){
 		var $spinner = $('<i class="icon-spinner icon-spin"></i>');
 		var $old_icon = $el.find('i');
@@ -102,165 +204,142 @@
 		promise.then(f, f);
 	};
 
-	function FriendFilter( $element ){
-		this.$element			= $element;
-		this.$inputSearch		= $element.find('#search-input');
-		this.$btnSearch			= $element.find('.friend-search-btn');
-		this.$friendConditions		= $element.find('.friend-condition');
-
-		this.attachEvents();
-	}
-
-	FriendFilter.prototype.attachEvents = function () {
-		var that = this;
-
-		this.$inputSearch.typeahead({
-            source: function (query, process) {
-            	friendList = [];
-                map = {};      
-                		
-            	$.ajax({
-            		type: 'POST',
-            		url: that.$inputSearch.data('url'),
-            		data: { 'filter_name': query },
-            		dataType: 'json',
-            		success: function ( json ) {
-            			if ( json.success != 'ok' ) {
-            				
-            			}else {
-				            $.each(json.friends, function (i, item) {
-				            	if ( friendList.indexOf(item.id + '-' + item.name) == -1 ) {
-					                friendList.push(item.id + '-' + item.name);
-					                map[item.id + '-' + item.name] = item;
-				            	}
-				            });            
-                			process(friendList);
-            			}
-            		},
-            		error: function (xhr, error) {
-            			alert(xhr.responseText);
-            		},
-            	});
-            },
-            updater: function (item) {
-                var selectedFriend = map[item];
-                return selectedFriend.name;
-            },
-            matcher: function (item) {
-                return true;
-            },
-            sorter: function (items) {
-                return items.sort();
-            },
-            highlighter: function (item) {
-                var selectedFriend = map[item];
-                var regex = new RegExp( '(' + this.query + ')', 'gi' );
-                var boldItem = selectedFriend.name.replace( regex, "<strong>$1</strong>" );
-                var htmlContent = '<div class="friend-dropdown-info">'
-                                + '<img src="' + selectedFriend.avatar + '" alt="" />'
-                                + '<div class="friend-meta-info">'
-                                + '<span class="friend-name">' + boldItem + '</span>' 
-                                + '<span class="num-friend">' + selectedFriend.numFriend + '</span>'   
-                                + '</div>'
-                                + '</div>';
-                return htmlContent;
-            }
+	$(function(){
+        $(document).bind('FRIEND_ACTION', function(e, remove) {
+            $('.friend-actions').each(function(){
+                new FriendAction($(this), remove);
+            });
         });
+    });
+}(jQuery, document));
 
-		this.$btnSearch.click( function () {
-			if ( that.$inputSearch.val() == '' ) {
-				return false;
-			}
-
-			$.ajax({
-            	type: 'POST',
-            	url: that.$inputSearch.data('url'),
-            	data: { 'filter_name': that.$inputSearch.val() },
-            	dataType: 'json',
-            	success: function ( json ) {
-            		if ( json.success != 'ok' ) {
-            				
-            		}else {  
-            			if ( json.friends.length > 0 ) {
-	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
-	            			$friends.each(function(){
-					            new FriendAction( $(this) );
-					        });
-	            			var $htmlParent = $('#y-content .block-content');
-	            		    $('#y-content .friend-item').remove();
-	            		    $htmlParent.prepend( $friends );
-            		    }else {
-            		    	$('#y-content .friend-item').remove();
-            		    }
-            		}
-            	},
-            	error: function (xhr, error) {
-            		alert(xhr.responseText);
-            	},
-            });
-		});
-
-		this.$friendConditions.each( function () {
-			new FriendCondition( $(this) );
-		})
-	}
-
-	function FriendCondition( $element ) {
-		this.$element = $element;
-		this.$action = $element.find('a');
+// Filter friend
+(function($, document, undefined) {
+	'use strict';
+	function UserFilter( $el ){
+		this.$el = $el;
+		this.$rootContent = $('#y-content');
+		this.$mainContent = $('#y-main-content');
+		
+		this.$friendConditions	= $el.find('.filter-condition');
+		this.$inputFilter		= $el.find('#filter-input');
+		this.$userContainer = this.$mainContent.find('.user-container');
+		this.$friendList		= this.$userContainer.find('.user-item');
+		this.$isDone = true;
+		this.$typeFilter = '';
 
 		this.attachEvents();
 	}
 
-	FriendCondition.prototype.attachEvents = function () {
+	UserFilter.prototype.attachEvents = function () {
 		var that = this;
 
-		this.$action.click( function () {
-			if ( that.$element.hasClass('active') ) {
-				return false;
+		if(!String.prototype.trim) {
+		  String.prototype.trim = function () {
+		    return this.replace(/^\s+|\s+$/g,'');
+		  };
+		}
+
+		that.$inputFilter.keyup(function(){
+			that.doSearch();
+		});
+
+		that.$friendConditions.each( function () {
+			$(this).click(function(e){
+				e.preventDefault();
+
+				that.$typeFilter = $(this).data('filter');
+				if ($(this).hasClass('active') ){
+					return false;
+				}
+				that.$friendConditions.each(function(){
+					$(this).removeClass('active');
+				});
+				$(this).addClass('active');				
+				
+				that.doSearch();
+			});
+		});
+
+		that.$friendConditions.first().trigger('click');
+	};
+
+	UserFilter.prototype.doSearch = function(){
+		var that = this;
+
+		if(that.$friendList.length === 0 || that.$isDone === false )
+			return;
+
+		var userId = '', userName='', userEmail='';
+		var query = that.$inputFilter.val().toString().trim().toLowerCase();	
+		
+		if(query.length === 0) {
+			var resultFilter = that.$friendList.filter(function() {
+				return $(this).hasClass(that.$typeFilter);
+			});
+			that.showResult(resultFilter);
+			return;
+		}
+
+		that.$isDone = false;
+		var resultFilter = that.$friendList.filter(function() {
+
+			if(!$(this).hasClass(that.$typeFilter)) return false;
+
+			if($(this).data('user-id')) {
+				userId = $(this).data('user-id');
 			}else {
-				$('#friend-filter .friend-conditions .active').removeClass('active');
-				that.$element.addClass('active');
+				userId = '*';
 			}
 
-			var data = that.$element.data('filter');
+			if($(this).data('user-name')) {
+				userName = $(this).data('user-name');
+			}else {
+				userName = '*';
+			}
 
-			$.ajax({
-            	type: 'POST',
-            	url: that.$element.data('url'),
-            	data: data,
-            	dataType: 'json',
-            	success: function ( json ) {
-            		if ( json.success != 'ok' ) {
-            				
-            		}else {   
-            			if ( json.friends.length > 0 ) {
-	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
-	            			$friends.each(function(){
-					            new FriendAction( $(this) );
-					        });
-	            			var $htmlParent = $('#y-content .block-content');
-	            		    $('#y-content .friend-item').remove();
-	            		    $htmlParent.prepend( $friends );
-            		    }else {
-            		    	$('#y-content .friend-item').remove();
-            		    }
-            		}
-            	},
-            	error: function (xhr, error) {
-            		alert(xhr.responseText);
-            	},
-            });
+			if($(this).data('user-email')) {
+				userEmail = $(this).data('user-email');
+			}else {
+				userEmail = '*';
+			}
+
+			return (userId.toLowerCase().indexOf(query) > -1 ||
+					userName.toLowerCase().indexOf(query) > -1 ||
+					userEmail.toLowerCase().indexOf(query) > -1);
 		});
-	}
+
+		that.showResult(resultFilter);
+	};
+
+	UserFilter.prototype.showResult = function (result) {
+		var that = this;
+		
+		that.$friendList.fadeOut(10);
+		//Empty result
+		if(typeof result == 'undefined'){
+			that.$mainContent.width(that.$rootContent.width() - 10);
+		}else {
+			var numberRow = Math.floor(that.$mainContent.find('.feed-block').height()/(85 + 10));
+			var numberCol = Math.floor(result.length/numberRow) + 1;
+			var freeBlock = that.$mainContent.find('.free-block');
+			var blockContent = that.$mainContent.find('.feed-block');
+			if(freeBlock.length === 0){
+				that.$mainContent.width(numberCol*(320 + 15));
+			}else{
+				blockContent.width(numberCol*(320 + 15));
+				that.$mainContent.width(freeBlock.width() + 60 + numberCol*(320 + 15));
+			}
+			result.stop(true,true).fadeIn(300);
+		}
+		that.$rootContent.getNiceScroll().resize();
+		that.$rootContent.animate({scrollLeft : '0px'}, 200);
+		that.$isDone = true;
+	};
 
 	$(function(){
-        $('.friend-actions').each(function(){
-            new FriendAction( $(this) );
-        });
-
-        $('#friend-filter').each(function(){
-            new FriendFilter( $(this) );
+		$('.user-box-filter').each(function(){
+            new UserFilter( $(this) );
         });
     });
 }(jQuery, document));

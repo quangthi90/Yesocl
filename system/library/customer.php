@@ -10,10 +10,9 @@ class Customer {
 	private $slug;
 	private $facebook;
 	private $url;
-	private $friend_list;
 	private $friend_requests;
 	private $user;
-	
+
   	public function __construct($registry) {
 		$this->config = $registry->get('config');
 		$this->db = $registry->get('db');
@@ -21,13 +20,13 @@ class Customer {
 		$this->session = $registry->get('session');
 		$this->facebook = $registry->get('facebook');
 		$this->url = $registry->get('url');
-		//var_dump($this->session->data['customer_id']); exit;		
-		if (isset($this->session->data['customer_id'])) { 
+
+		if (isset($this->session->data['customer_id'])) {
 			$customer_query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
 				'status' => true,
 				'id' => $this->session->data['customer_id']
 			));
-			
+
 			if ($customer_query) {
 				$this->customer_id = $customer_query->getId();
 				$this->firstname = $customer_query->getMeta()->getFirstName();
@@ -37,63 +36,102 @@ class Customer {
 				$this->customer_group_id = $customer_query->getGroupUser()->getId();
 				$this->slug = $customer_query->getSlug();
 				$this->avatar = $customer_query->getAvatar();
-				$this->friend_list = $customer_query->getFriends();
 				$this->friend_requests = $customer_query->getFriendRequests();
 				$this->user = $customer_query;
-			
-				// $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_ip WHERE customer_id = '" . (int)$this->session->data['customer_id'] . "' AND ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "'");
-				
-				// if (!$query->num_rows) {
-				// 	$this->db->query("INSERT INTO " . DB_PREFIX . "customer_ip SET customer_id = '" . (int)$this->session->data['customer_id'] . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "', date_added = NOW()");
-				// }
 			} else {
 				$this->logout();
 			}
   		}
 	}
-		
-  	public function login($email, $password, $override = false, $remember = false) {
-		if ($override) {
-			$customer_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer where LOWER(email) = '" . $this->db->escape(strtolower($email)) . "' AND status = '1'");
-		} else {
-			$customer_query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
-				'status' => true,
-				'emails.email' => $email
-			));
-		}
-		
+
+  	public function login($email, $password, $remember = false, $is_social = false, $is_pass_encode = false, $options = array() ) {
+		$customer_query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
+			'status' => true,
+			'emails.email' => $email
+		));
+
 		if ($customer_query) {
-			$salt = $customer_query->getSalt();
-	    	$user_password = sha1($salt . sha1($salt . sha1($password)));
-	    	
-	    	if ( $user_password != $customer_query->getPassword() ){
-	    		return false;
-	    	}
+			if ( !$is_social ){
+				$salt = $customer_query->getSalt();
+
+				if ( !$is_pass_encode ){
+		    		$user_password = sha1($salt . sha1($salt . sha1($password)));
+		    	}else{
+		    		$user_password = $password;
+		    	}
+
+				$date = new DateTime();
+			    if ( $user_password != $customer_query->getPassword() ){
+			    	if ( $customer_query->getForgotCreated() < $date || $user_password != $customer_query->getForgotten() ){
+			    		return false;
+			    	}
+			    }
+
+		    	if ( isset( $options['checking_active'] ) && $options['checking_active'] ) {
+			    	if ( $customer_query->getToken() && $customer_query->getTokenTime() != null && $customer_query->getTokenTime() < $date ){
+			    		$customer_query->setDeleted(true);
+			    		$this->db->getDm()->flush();
+			    		$this->session->setFlash('warning_delete_account', 'Your account had deleted because not active! Please contact admin to get your account');
+			    		return false;
+			    	}
+		    	}
+		    }
 
 			$this->session->data['customer_id'] = $customer_query->getId();
-									
+			$this->session->data['customer_slug'] = $customer_query->getSlug();
+
 			$this->customer_id = $customer_query->getId();
 			$this->firstname = $customer_query->getMeta()->getFirstName();
 			$this->lastname = $customer_query->getMeta()->getLastName();
 			$this->email = $customer_query->getPrimaryEmail()->getEmail();
+			$this->username = $customer_query->getUsername();
 			$this->customer_group_id = $customer_query->getGroupUser()->getId();
+			$this->slug = $customer_query->getSlug();
+			$this->avatar = $customer_query->getAvatar();
+			$this->friend_requests = $customer_query->getFriendRequests();
+			$this->user = $customer_query;
 
 			// remember
 			if ($remember) {
 	        	setcookie('yid', $email, time() + 60 * 60 * 24 * 30, '/', $_SERVER['SERVER_NAME']);
-	    		setcookie('ypass', $password, time() + 60 * 60 * 24 * 30, '/', $_SERVER['SERVER_NAME']);
+	    		setcookie('ypass', $user_password, time() + 60 * 60 * 24 * 30, '/', $_SERVER['SERVER_NAME']);
 	        }
 
-			// $this->db->query("UPDATE " . DB_PREFIX . "customer SET ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
-			
 	  		return true;
     	} else {
       		return false;
     	}
   	}
-  	
-	public function logout() {		
+
+  	public function loginByToken($email) {
+		$customer_query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
+			'status' => true,
+			'emails.email' => $email
+		));
+
+		if ($customer_query) {
+			$this->session->data['customer_id'] = $customer_query->getId();
+
+			$this->customer_id = $customer_query->getId();
+			$this->firstname = $customer_query->getMeta()->getFirstName();
+			$this->lastname = $customer_query->getMeta()->getLastName();
+			$this->email = $customer_query->getPrimaryEmail()->getEmail();
+			$this->username = $customer_query->getUsername();
+			$this->customer_group_id = $customer_query->getGroupUser()->getId();
+			$this->slug = $customer_query->getSlug();
+			$this->avatar = $customer_query->getAvatar();
+			$this->friend_requests = $customer_query->getFriendRequests();
+			$this->user = $customer_query;
+
+	  		return true;
+    	} else {
+      		return false;
+    	}
+  	}
+
+	public function logout() {
 		unset($this->session->data['customer_id']);
+		unset($this->session->data['customer_slug']);
 
 		$this->customer_id = '';
 		$this->firstname = '';
@@ -102,22 +140,25 @@ class Customer {
 		$this->customer_group_id = '';
 
 		// delete cookie
-		if ( isset( $this->request->cookie['yid'] ) ) {
+		if ( !empty($this->request->cookie['yid']) ) {
 			setcookie('yid', '', time() - 3600, '/', $_SERVER['SERVER_NAME']);
 		}
-		if ( isset( $this->request->cookie['ypass'] ) ) {
+		if ( !empty($this->request->cookie['ypass']) ) {
 			setcookie('ypass', '', time() - 3600, '/', $_SERVER['SERVER_NAME']);
 		}
   	}
-  
+
   	public function isLogged() {
-    	return $this->customer_id;
+  		if ($this->customer_id) {
+  			return $this->customer_id;
+  		}elseif ( isset( $this->request->cookie['yid'] ) && isset( $this->request->cookie['ypass'] ) ) {
+  			$this->login( $this->request->cookie['yid'], $this->request->cookie['ypass'], false, false, true );
+  		}
+  		return $this->customer_id;
   	}
 
   	public function hasRemember() {
-  		if ( isset( $this->request->cookie['yid'] ) && isset( $this->request->cookie['ypass'] ) && $this->login( $this->request->cookie['yid'], $this->request->cookie['ypass'] ) ) {
-  			return true;
-  		}
+
   		return false;
   	}
 
@@ -128,15 +169,15 @@ class Customer {
   	public function getUsername(){
   		return $this->username;
   	}
-      
+
   	public function getFirstName() {
 		return $this->firstname;
   	}
-  
+
   	public function getLastName() {
 		return $this->lastname;
   	}
-  
+
   	public function getEmail() {
 		return $this->email;
   	}
@@ -146,7 +187,7 @@ class Customer {
   	}
 
   	public function getCustomerGroupId() {
-		return $this->customer_group_id;	
+		return $this->customer_group_id;
   	}
 
   	public function getSlug(){
@@ -163,47 +204,6 @@ class Customer {
 
   	public function getUser(){
   		return $this->user;
-  	}
-	
-  	public function getBalance() {
-		$query = $this->db->query("SELECT SUM(amount) AS total FROM " . DB_PREFIX . "customer_transaction WHERE customer_id = '" . (int)$this->customer_id . "'");
-	
-		return $query->row['total'];
-  	}	
-		
-  	public function getRewardPoints() {
-		$query = $this->db->query("SELECT SUM(points) AS total FROM " . DB_PREFIX . "customer_reward WHERE customer_id = '" . (int)$this->customer_id . "'");
-	
-		return $query->row['total'];	
-  	}
-
-  	public function loginNetwork( $data = array() ) {
-  		if ( !isset( $data['email'] ) ) {
-  			return false;
-  		}
-
-  		$user_config = $this->config->get('user');
-
-  		if ( isset( $data['network'] ) && $data['network'] == $user_config['network']['facebook'] ) {
-  			$customer_query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
-				'status' => true,
-				'emails.email' => $data['email'],
-			));
-
-			if ( $customer_query ) {
-	  			$this->session->data['customer_id'] = $customer_query->getId();
-										
-				$this->customer_id = $customer_query->getId();
-				$this->firstname = $customer_query->getMeta()->getFirstName();
-				$this->lastname = $customer_query->getMeta()->getLastName();
-				$this->email = $customer_query->getPrimaryEmail()->getEmail();
-				$this->customer_group_id = $customer_query->getGroupUser()->getId();
-
-				return true;
-			}
-  		}
-
-  		return false;
   	}
 }
 ?>

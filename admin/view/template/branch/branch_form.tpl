@@ -29,15 +29,30 @@
             <?php } ?></td>
           </tr>
           <tr>
-            <td><span class="required">*</span> <?php echo $entry_company; ?></td>
+            <td><?php echo $entry_code; ?></td>
+            <td><select class="input-large" name="code" >
+              <?php foreach ($codes as $_code){ ?>
+              <option value="<?php echo $_code ?>" <?php if ($code == $_code){ ?>selected="selected"<?php } ?>><?php echo $_code ?></option>
+              <?php } ?>
+            </select></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_logo; ?></td>
             <td>
-              <input class="input-xxlarge" required="required" type="text" name="company" value="<?php echo $company; ?>" />
-              <input type="hidden" name="company_id" value="<?php echo $company_id; ?>">
-            <?php if ($error_company) { ?>
-                <div class="alert alert-error">
-                  <strong>Error!</strong> <?php echo $error_company; ?>
+              <div class="logo fileupload fileupload-new" data-provides="fileupload">
+                <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<?php echo $img_logo; ?>" style="width: 150px; height: 150px;" /></div>
+                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+                <div>
+                  <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input name="logo" type="file" /></span>
+                  <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" onclick="$('.logo img').attr('src', '<?php echo $img_default; ?>');">Remove</a>
                 </div>
-            <?php } ?></td>
+              </div>
+              <?php if ( $error_logo ) { ?>
+                <div class="alert alert-error">
+                  <strong>Error!</strong> <?php echo $error_logo; ?>
+                </div>
+              <?php } ?>
+            </td>
           </tr>
           <tr>
             <td><?php echo $entry_order; ?></td>
@@ -51,33 +66,5 @@
       </form>
     </div>
   </div>
-</div>
-<script type="text/javascript"><!--
-$('input[name=\'company\']').autocomplete({
-  delay: 0,
-  source: function(request, response) {
-    $.ajax({
-      url: '<?php echo $autocomplete_company; ?>&filter_name=' +  encodeURIComponent(request.term),
-      dataType: 'json',
-      success: function(json) {   
-        response($.map(json, function(item) {
-          return {
-            label: item.name,
-            value: item.id
-          }
-        }));
-      }
-    });
-  }, 
-  select: function(event, ui) {
-    $('input[name=\'company\']').val(ui.item.label);
-    $('input[name=\'company_id\']').val(ui.item.value);
-            
-    return false;
-  },
-  focus: function(event, ui) {
-        return false;
-    }
-});
-//--></script> 
+</div> 
 <?php echo $footer; ?>

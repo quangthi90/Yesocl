@@ -8,13 +8,13 @@ class ControllerAccountRegister extends Controller {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$this->data['base'] = $this->config->get('config_ssl');
 		} else {
-			$this->data['base'] = $this->config->get('config_url');
+			$this->data['base'] = HTTP_SERVER;
 		}
 
-		$this->load->model('account/customer');
+		$this->load->model('user/user');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_account_customer->addCustomer($this->request->post);
+			$this->model_user_user->addUser($this->request->post);
 			
 			$this->customer->login($this->request->post['email'], $this->request->post['password']);
 			
@@ -65,19 +65,24 @@ class ControllerAccountRegister extends Controller {
     	}elseif ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
       		$this->error['warning'] = $this->language->get('error_email');
     	
-    	}elseif ($this->model_account_customer->getCustomerByEmail($this->request->post['email'])) {
+    	}elseif ( $oUser = $this->model_user_user->getUserFull(array(
+    		'email' => $this->request->post['email']), true
+    	)) {
+    		if ( $oUser->getDeleted() ){
+    			$this->error['warning'] = gettext('This account has beed deleted by system, please contact admin to get your account!');
+    		}
       		$this->error['warning'] = $this->language->get('error_exists');
     	}else{
-    		$this->load->library('recaptcha');
-			$captcha = new Recaptcha();
-			$resp = $captcha->recaptcha_check_answer($_SERVER["REMOTE_ADDR"], 
-				$this->request->post['recaptcha_challenge_field'],
-				$this->request->post['recaptcha_response_field']
-			);
-			//file_put_contents("D:\\a.txt", $resp->error);
-			if (!$resp->is_valid) {
-	        	$this->error['warning'] = "Security code wasn't entered correctly";
-	        }
+   //  		$this->load->library('recaptcha');
+			// $captcha = new Recaptcha();
+			// $resp = $captcha->recaptcha_check_answer($_SERVER["REMOTE_ADDR"], 
+			// 	$this->request->post['recaptcha_challenge_field'],
+			// 	$this->request->post['recaptcha_response_field']
+			// );
+			// //file_put_contents("D:\\a.txt", $resp->error);
+			// if (!$resp->is_valid) {
+	  //       	$this->error['warning'] = "Security code wasn't entered correctly";
+	  //       }
 	    }
     	if (!$this->error) {
       		return true;

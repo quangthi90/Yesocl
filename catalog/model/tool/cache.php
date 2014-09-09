@@ -49,6 +49,7 @@ class ModelToolCache extends Model {
 		
 		$path = $fd_ob_link . $object_id . '/' . $fd_category_name . '/' . $category_id . '/';
 		
+		// Delete old cache
 		if ( is_dir(DIR_CACHE . $path) ){
 			$this->load->model('tool/image');
 			$this->model_tool_image->deleteDirectoryImage(DIR_CACHE . $path);
@@ -128,7 +129,7 @@ class ModelToolCache extends Model {
 	public function getCachePost($post_id){
 		$path = $this->config->get('post')['default']['cache_link'];
 		
-		$file_name = $post['id'];
+		$file_name = $post_id;
 		
 		return $this->cache->get($file_name, $path);
 	}

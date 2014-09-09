@@ -1,15 +1,12 @@
 (function($, document, undefined) {
-	function Login( $el ){
-		var that = this;
+	'use strict';
 
+	function Login( $el ){
 		this.$el		= $el;
 		this.$email		= $el.find('input[name=\'email\']');
 		this.$password	= $el.find('input[name=\'password\']');
 
 		this.$remember	= $el.find('input[name=\'remember\']');
-
-		this.url		= $el.attr('action');
-		this.direct_url = $el.data('url');
 
 		this.$login_btn	= $el.find('.btn-login');
 
@@ -26,13 +23,13 @@
 				return false;
 			}
 			
-			if(that.validate() != false){
+			if(that.validate() !== false){
 				that.data = {
 					email		: that.$email.val(),
 					password	: that.$password.val(),
 					remember	: (that.$remember.attr('checked') == 'checked')?'1':'0'
 				};
-
+				
 				that.submit(that.$login_btn);
 
 				return false;
@@ -41,11 +38,9 @@
 	};
 
 	Login.prototype.submit = function($button){
-		var that = this;
-
 		var promise = $.ajax({
 			type: 'POST',
-			url:  this.url,
+			url:  window.yRouting.generate('AjaxLogin'),
 			data: this.data,
 			dataType: 'json'
 		});
@@ -56,18 +51,18 @@
 			if(data.success == 'ok'){
 				window.location.reload();
 			}else{
-				window.location.href = that.direct_url;
+				window.location.href = window.yRouting.generate('Login');
 			}
 		});
 	};
 
-	Login.prototype.validate = function($button){
-		if (this.$email.val() == ''){
-			return false;	
+	Login.prototype.validate = function(){
+		if (this.$email.val() === ''){
+			return false;
 		}
 
-		if (this.$password.val() == ''){
-			return false;	
+		if (this.$password.val() === ''){
+			return false;
 		}
 	};
 

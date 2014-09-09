@@ -15,7 +15,7 @@ class ModelUserUser extends Model {
 	/**
 	 * Create new User
 	 * @author: Bommer <lqthi.khtn@gmail.com>
-	 * @param: 
+	 * @param:
 	 * 	array Data{
 	 * 		string Email
 	 * 		string Password
@@ -77,17 +77,17 @@ class ModelUserUser extends Model {
 		if ( !isset($data['background']['maritalstatus']) || empty($data['background']['maritalstatus']) ){
 			$data['background']['maritalstatus'] = false;
 		}
-		
+
 		// City is required
 		if ( !isset($data['meta']['location']['location']) || empty($data['meta']['location']['location']) ){
 			return false;
 		}
-		
+
 		// Postal code is required
 		if ( !isset($data['meta']['postalcode']) || empty($data['meta']['postalcode']) ){
 			return false;
 		}
-		
+
 		// Address is required
 		if ( !isset($data['meta']['address']) || empty($data['meta']['address']) ){
 			return false;
@@ -150,7 +150,7 @@ class ModelUserUser extends Model {
 		if ( !isset($data['user']['formers']) || empty($data['user']['formers']) ){
 			$data['user']['formers'] = array();
 		}
-		
+
 		// Check email
 		// Get primary email
 		$primary_email = '';
@@ -160,7 +160,7 @@ class ModelUserUser extends Model {
 				break;
 			}
 		}
-		// Get list email 
+		// Get list email
 		$emails = array();
 		$email = new Email();
 		$email->setEmail( $primary_email );
@@ -185,13 +185,18 @@ class ModelUserUser extends Model {
 			if ( !isset( $experience_data['company'] ) || empty( $experience_data['company'] ) ) {
 				continue;
 			}
-			$ended = new \Datetime();
-			$ended->setDate( $experience_data['ended']['year'], $experience_data['ended']['month'], 1 );
+
+			$experience = new Experience();
+			if (!$experience_data['current']) {
+				$ended = new \Datetime();
+				$ended->setDate( $experience_data['ended']['year'], $experience_data['ended']['month'], 1 );
+				$experience->setEnded( $ended );
+			}else {
+				$experience->setEnded( null );
+			}
 			$started = new \Datetime();
 			$started->setDate( $experience_data['started']['year'], $experience_data['started']['month'], 1 );
-			$experience = new Experience();
 			$experience->setCompany( trim( $experience_data['company'] ) );
-			$experience->setCurrent( trim( $experience_data['current'] ) );
 			$experience->setTitle( trim( $experience_data['title'] ) );
 
 			// Create Location
@@ -200,8 +205,8 @@ class ModelUserUser extends Model {
 			$location->setCityId( trim( $experience_data['city_id'] ) );
 			$experience->setLocation( $location );
 
-			$experience->setEnded( $ended );
 			$experience->setStarted( $started );
+			$experience->setSelfEmployed( (int)$experience_data['self_employed'] );
 			$experience->setDescription( trim( $experience_data['description'] ) );
 			$experiences[] = $experience;
 		}
@@ -291,7 +296,7 @@ class ModelUserUser extends Model {
 		$location = new Location();
 		$location->setLocation( trim( $data['meta']['location']['location'] ) );
 		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
-		
+
 		// Create Meta
 		$meta = new Meta();
 		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
@@ -312,30 +317,30 @@ class ModelUserUser extends Model {
 
 		// Slug
 		$slug = $this->url->create_slug( $data['user']['username'] );
-		
-		$users = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
 
-		$arr_slugs = array_map(function($user){
-			return $user->getSlug();
-		}, $users->toArray());
+		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
+
+		$arr_slugs = array_map(function($oUser){
+			return $oUser->getSlug();
+		}, $lUsers->toArray());
 
 		$this->load->model( 'tool/slug' );
 		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
 
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
-		$user = new User();
-		$user->setSlug( $slug );
-		$user->setUsername( $data['user']['username'] );
-		$user->setEmails( $emails );
-		$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
-		$user->setGroupUser( $group );
-		$user->setMeta( $meta );
-		$user->setSalt( $salt );
-		
+		$oUser = new User();
+		$oUser->setSlug( $slug );
+		$oUser->setUsername( $data['user']['username'] );
+		$oUser->setEmails( $emails );
+		$oUser->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
+		$oUser->setGroupUser( $group );
+		$oUser->setMeta( $meta );
+		$oUser->setSalt( $salt );
+
 		// Add status
 		if ( isset($data['user']['status']) ){
-			$user->setStatus( $data['user']['status'] );
+			$oUser->setStatus( $data['user']['status'] );
 		}
 
 		// Avatar
@@ -343,20 +348,20 @@ class ModelUserUser extends Model {
 		if ( !empty($data['avatar']) && $this->model_tool_image->isValidImage($data['avatar']) ) {
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $user->getId();
+			$path = $folder_link . $oUser->getId();
 			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
-				$user->setAvatar( $data['avatar'] );
+				$oUser->setAvatar( $data['avatar'] );
 			}
 		}
-		
+
 		// Save to DB
-		$this->dm->persist( $user );
+		$this->dm->persist( $oUser );
 
 		$this->dm->flush();
 
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->setObject( $user, $this->config->get('common')['type']['user'] );
-		
+		$this->model_tool_cache->setObject( $oUser, $this->config->get('common')['type']['user'] );
+
 		return true;
 	}
 
@@ -364,7 +369,7 @@ class ModelUserUser extends Model {
 	 * Edit User
 	 * @author: Bommer <lqthi.khtn@gmail.com>
 	 * @param:
-	 * 	User ID 
+	 * 	User ID
 	 * 	array Data{
 	 * 		string Email
 	 * 		string Password
@@ -375,11 +380,11 @@ class ModelUserUser extends Model {
 	 * @return: boolean
 	 */
 	public function editUser( $id, $data = array() ) {
-		$user = $this->dm->getRepository('Document\User\User')->find( $id );
-		if ( !$user ) {
+		$oUser = $this->dm->getRepository('Document\User\User')->find( $id );
+		if ( !$oUser ) {
 			return false;
 		}
-		
+
 		// Username
 		if ( !isset($data['user']['username']) ){
 			$data['user']['username'] = '';
@@ -431,17 +436,17 @@ class ModelUserUser extends Model {
 		if ( !isset($data['background']['maritalstatus']) || empty($data['background']['maritalstatus']) ){
 			$data['background']['maritalstatus'] = false;
 		}
-		
+
 		// City is required
 		if ( !isset($data['meta']['location']['location']) || empty($data['meta']['location']['location']) ){
 			return false;
 		}
-		
+
 		// Postal code is required
 		if ( !isset($data['meta']['postalcode']) || empty($data['meta']['postalcode']) ){
 			return false;
 		}
-		
+
 		// Address is required
 		if ( !isset($data['meta']['address']) || empty($data['meta']['address']) ){
 			return false;
@@ -504,7 +509,7 @@ class ModelUserUser extends Model {
 		if ( !isset($data['user']['formers']) || empty($data['user']['formers']) ){
 			$data['user']['formers'] = array();
 		}
-		
+
 		// Check email
 		// Get primary email
 		$primary_email = '';
@@ -514,7 +519,7 @@ class ModelUserUser extends Model {
 				break;
 			}
 		}
-		// Get list email 
+		// Get list email
 		$emails = array();
 		$email = new Email();
 		$email->setEmail( $primary_email );
@@ -539,13 +544,19 @@ class ModelUserUser extends Model {
 			if ( !isset( $experience_data['company'] ) || empty( $experience_data['company'] ) ) {
 				continue;
 			}
-			$ended = new \Datetime();
-			$ended->setDate( $experience_data['ended']['year'], $experience_data['ended']['month'], 1 );
+
+			$experience = new Experience();
+			if (!$experience_data['current']) {
+				$ended = new \Datetime();
+				$ended->setDate( $experience_data['ended']['year'], $experience_data['ended']['month'], 1 );
+				$experience->setEnded( $ended );
+			}else {
+				$experience->setEnded( null );
+			}
 			$started = new \Datetime();
 			$started->setDate( $experience_data['started']['year'], $experience_data['started']['month'], 1 );
 			$experience = new Experience();
 			$experience->setCompany( trim( $experience_data['company'] ) );
-			$experience->setCurrent( trim( $experience_data['current'] ) );
 			$experience->setTitle( trim( $experience_data['title'] ) );
 
 			// Create Location
@@ -553,9 +564,9 @@ class ModelUserUser extends Model {
 			$location->setLocation( trim( $experience_data['location'] ) );
 			$location->setCityId( trim( $experience_data['city_id'] ) );
 			$experience->setLocation( $location );
-			
-			$experience->setEnded( $ended );
+
 			$experience->setStarted( $started );
+			$experience->setSelfEmployed( (int)$experience_data['self_employed'] );
 			$experience->setDescription( trim( $experience_data['description'] ) );
 			$experiences[] = $experience;
 		}
@@ -645,7 +656,7 @@ class ModelUserUser extends Model {
 		$location = new Location();
 		$location->setLocation( trim( $data['meta']['location']['location'] ) );
 		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
-		
+
 		// Create Meta
 		$meta = new Meta();
 		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
@@ -665,32 +676,32 @@ class ModelUserUser extends Model {
 		$meta->setFormers( $formers );
 
 		// Slug
-		if ( $data['user']['username'] != $user->getUsername() ){
+		if ( $data['user']['username'] != $oUser->getUsername() ){
 			$slug = $this->url->create_slug( $data['user']['username'] );
-		
-			$users = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
 
-			$arr_slugs = array_map(function($user){
-				return $user->getSlug();
-			}, $users->toArray());
+			$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
+
+			$arr_slugs = array_map(function($oUser){
+				return $oUser->getSlug();
+			}, $lUsers->toArray());
 
 			$this->load->model( 'tool/slug' );
 			$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
-			
-			$user->setSlug( $slug );
+
+			$oUser->setSlug( $slug );
 		}
-		
+
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
-		$user->setEmails( $emails );
-		$user->setUsername( $data['user']['username'] );
-		//$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
-		$user->setGroupUser( $group );
-		$user->setMeta( $meta );
-	
+		$oUser->setEmails( $emails );
+		$oUser->setUsername( $data['user']['username'] );
+		//$oUser->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
+		$oUser->setGroupUser( $group );
+		$oUser->setMeta( $meta );
+
 		// Add status
 		if ( isset($data['user']['status']) ){
-			$user->setStatus( $data['user']['status'] );
+			$oUser->setStatus( $data['user']['status'] );
 		}
 
 		// Avatar
@@ -698,25 +709,25 @@ class ModelUserUser extends Model {
 		if ( !empty($data['avatar']) && $this->model_tool_image->isValidImage($data['avatar']) ) {
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $user->getId();
+			$path = $folder_link . $oUser->getId();
 			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
-				$user->setAvatar( $data['avatar'] );
+				$oUser->setAvatar( $data['avatar'] );
 			}
 		}
 
 		// Save to DB
-		$this->dm->persist( $user );
+		$this->dm->persist( $oUser );
 		$this->dm->flush();
 
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->setObject( $user, $this->config->get('common')['type']['user'] );
-		
+		$this->model_tool_cache->setObject( $oUser, $this->config->get('common')['type']['user'] );
+
 		return true;
 	}
 
 	public function changePassword( $id, $data = array() ) {
-		$user = $this->dm->getRepository('Document\User\User')->find( $id );
-		if ( !$user ) {
+		$oUser = $this->dm->getRepository('Document\User\User')->find( $id );
+		if ( !$oUser ) {
 			return false;
 		}
 
@@ -726,18 +737,18 @@ class ModelUserUser extends Model {
 		}
 
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
-		$user->setSalt( $salt );
-		$user->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
+		$oUser->setSalt( $salt );
+		$oUser->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
 
 		// Save to DB
-		$this->dm->persist( $user );
+		$this->dm->persist( $oUser );
 		$this->dm->flush();
 
 		return true;
 	}
 
 	/**
-	 * Delete User
+	 * Update attribute deleted of User is true
 	 * @author: Bommer <lqthi.khtn@gmail.com>
 	 * @param:
 	 * 	array Data{
@@ -748,40 +759,68 @@ class ModelUserUser extends Model {
 	public function deleteUser( $data = array() ) {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
+				// User info
+				$oUser = $this->dm->getRepository( 'Document\User\User' )->find( $id );
+				if ( $oUser ){
+					$oUser->setDeleted( true );
+				}
+				$this->dm->flush();
+
+				// Delete solr
+				$query = $this->client->createUpdate();
+	            $query->removeDocument( $oUser );
+	            $this->client->execute($query);
+			}
+		}
+
+		return true;
+	}
+
+	// Delete User from database
+	// -- Not Delete -- Check again before delete
+	/*public function deleteUser( $data = array() ) {
+		if ( isset($data['id']) ) {
+			foreach ( $data['id'] as $id ) {
 				$user = $this->dm->getRepository( 'Document\User\User' )->find( $id );
+				$oPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array(
+					'user.id' => $id
+				));
 
 				if ( $user ){
 					$this->load->model('tool/image');
 					$this->load->model('tool/cache');
 					$this->model_tool_image->deleteDirectoryImage( DIR_IMAGE . $this->config->get('user')['default']['image_link'] . $user->getId() );
 					$this->model_tool_cache->deleteObject( $user->getSlug(), $this->config->get('common')['type']['user'] );
-					
+
 					$this->dm->remove($user);
+				}
+
+				if ( $oPosts ){
+					$this->dm->remove($oPosts);
 				}
 			}
 		}
 		$this->dm->flush();
 
-		return true;
-	}
-	
+		return true;oU	}*/
+
 	/**
 	 * Get One User
 	 * @author: Bommer <lqthi.khtn@gmail.com>
-	 * @param: User ID 
+	 * @param: User ID
 	 * @return: Object User
 	 */
 	public function getUser( $data = array() ) {
-		$user_repository = $this->dm->getRepository( 'Document\User\User' );
-		
+		$oUser_repository = $this->dm->getRepository( 'Document\User\User' );
+
 		if ( isset( $data['user_id']) ){
-			return $user_repository->find( $data['user_id'] );
+			return $oUser_repository->find( $data['user_id'] );
 		}
-		
+
 		if ( isset( $data['email']) ){
-			return $user_repository->findOneBy( array('emails.email' => $data['email']) );
+			return $oUser_repository->findOneBy( array('emails.email' => $data['email']) );
 		}
-		
+
 		return null;
 	}
 
@@ -800,18 +839,25 @@ class ModelUserUser extends Model {
 		if ( isset($data['group_id']) ){
 			return $this->dm->getRepository( 'Document\User\User' )->findBy( array('group.id' => $data['group_id']) );
 		}
-		
+
+		if ( isset($data['ids']) ){
+			return $this->dm->getRepository( 'Document\User\User' )->findBy( array('id' => array( '$in' => array_values($data['ids']) ) ) );
+		}
+
+		$query = array('deleted' => false);
+
 		if (!isset($data['limit']) || ((int)$data['limit'] < 0)) {
 			$data['limit'] = 10;
 		}
-		
+
 		if (!isset($data['start']) || ((int)$data['start'] < 0)) {
 			$data['start'] = 0;
 		}
 
-		return $this->dm->getRepository( 'Document\User\User' )->findAll()->limit( $data['limit'] )->skip( $data['start'] );
+		return $this->dm->getRepository( 'Document\User\User' )->findBy( $query )
+			->limit( $data['limit'] )->skip( $data['start'] )->sort( array('created' => -1) );
 	}
-	
+
 	/**
 	 * Count Total Users
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -819,10 +865,12 @@ class ModelUserUser extends Model {
 	 * @return: int Total User
 	 */
 	public function getTotalUsers() {
-		$users = $this->dm->getRepository( 'Document\User\User' )->findAll();
-		return count($users);
+		$query = array('deleted' => false);
+
+		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBy( $query );
+		return $lUsers->count();
 	}
-	
+
 	/**
 	 * Check Exist Email
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -830,18 +878,20 @@ class ModelUserUser extends Model {
 	 * @return: boolean
 	 */
 	public function isExistEmail( $curr_user_id, $email ) {
-		$users = $this->dm->getRepository( 'Document\User\User' )->findAll();
-		
-		foreach ( $users as $user ) {
-			if ( $user->getId() == $curr_user_id ){
+		$query = array('deleted' => false);
+
+		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBy( $query );
+
+		foreach ( $lUsers as $oUser ) {
+			if ( $oUser->getId() == $curr_user_id ){
 				continue;
 			}
-			
-			if ( $user->isExistEmail( $email ) ){
+
+			if ( $oUser->isExistEmail( $email ) ){
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -855,7 +905,7 @@ class ModelUserUser extends Model {
 				'mappedDocument' => 'Document\User\User',
 				)
     	);
- 
+
 		$query_data = 'solrEmail_t:*' . $data['filter'] . '* OR ';
 		$query_data .= 'solrFullname_t:*' . $data['filter'] . '* OR ';
 		$query_data .= 'username_t:*' . $data['filter'] . '* ';
@@ -875,7 +925,7 @@ class ModelUserUser extends Model {
 		$query->setQuery( $query_data );
 		$query->setRows( $data['limit'] );
 		$query->setStart( $data['start'] );
- 
+
 		return $this->client->execute( $query );
 	}
 }

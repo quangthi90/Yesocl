@@ -18,7 +18,7 @@
             dropZone: that.dropZone,
             autoUpload: true,
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-            maxFileSize: 5000000, // 5 MB
+            maxFileSize: 500000, // 5 MB
             disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
             previewThumbnail: false,
             previewMaxWidth: 430,
@@ -73,16 +73,9 @@
         }).on('fileuploaddone', function (e, data) {
             $.each(data.result.files, function (index, file) {
                 if (file.url) {
-                    var link = $('<a>')
-                        .prop('href', file.url)
-                        .addClass('img-link-popup')
-                        .magnificPopup({type:'image'});           
-                    $(data.context[index]).children('canvas').css('opacity','1').wrap(link);
-                    if(that.listImgUrl.length == 0){
-                        that.listImgUrl = file.url;
-                    }else {                    
-                        that.listImgUrl += ('*' + file.url);
-                    }
+                    var imageUploaded = $('<img>').prop('src', file.url).addClass('img-uploaded');
+                    $(data.context[index]).children('canvas').replaceWith(imageUploaded);
+                    that.listImgUrl = file.url;
                 } else if (file.error) {
                     var error = $('<div class="alert alert-error"/>').html('<strong>Error</strong> ' + file.error);
                     $(data.context[index]).append(error);

@@ -838,6 +838,7 @@
                     this.clearSuggestions(dataset.name);
                 }
                 this.trigger("suggestionsRendered");
+                this.$menu.trigger("typeahead:suggestionsRendered", [{ name: dataset.name, number: suggestions.length }]);
             },
             clearSuggestions: function(datasetName) {
                 var $datasets = datasetName ? this.$menu.find(".tt-dataset-" + datasetName) : this.$menu.find('[class^="tt-dataset-"]'), $suggestions = $datasets.find(".tt-suggestions");
@@ -1128,7 +1129,7 @@
                 }
             }
         };
-        jQuery.fn.typeahead = function(method) {
+        jQuery.fn.typeaheadCustom = function(method) {
             if (methods[method]) {
                 return methods[method].apply(this, [].slice.call(arguments, 1));
             } else {

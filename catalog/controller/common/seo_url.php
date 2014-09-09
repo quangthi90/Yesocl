@@ -10,14 +10,23 @@ class ControllerCommonSeoUrl extends Controller {
 			foreach ( $routings as $route => $routing ) {
 				$request_gets = array();
 				$parts = array_filter(explode('/', $routing));
+
 				$is_url = false;
-				if ( count($parts) == count($_parts) ){
+				if ( count($parts) >= count($_parts) ){
 					$is_url = true;
-					foreach ( $parts as $key => $part ) {
-						if ( $_parts[$key] != $part ){
+					for ( $key = 0; $key < count($parts); $key++ ){
+						$part = $parts[$key];
+						$is_url = true;
+						if ( empty($_parts[$key]) || $part != $_parts[$key] ){
 							if ( preg_match('/^{/', $part) && preg_match('/}$/', $part) ){
-								$param = substr(substr($part, 1), 0, -1);
-								$request_gets[$param] = $_parts[$key];
+								if ( (!empty($parts[$key+1]) && $parts[$key+1] == $_parts[$key]) || !$_parts[$key] ){
+									unset($parts[$key]);
+									$parts = array_values($parts);
+									$key++;
+								}else{
+									$param = substr(substr($part, 1), 0, -1);
+									$request_gets[$param] = $_parts[$key];
+								}
 							}else{
 								$is_url = false;
 								break;
@@ -30,6 +39,12 @@ class ControllerCommonSeoUrl extends Controller {
 					$this->request->get['route'] = $this->config->get('route')[$route];
 					break;
 				}
+			}
+
+			// Check login
+			if ( !$this->customer->isLogged() 
+				&& !in_array($route, $this->config->get('ignore')) ){
+				return $this->forward('welcome/home');
 			}
 			
 			if (isset($this->request->get['route'])) {

@@ -7,6 +7,8 @@ class ExtensionLoader
     private $session;
     private $load;
     private $registry;
+    private $recentTime;
+    private $request;
 
     public function __construct(Twig_Environment $twig, $registry){
         $this->registry = $registry;
@@ -14,6 +16,7 @@ class ExtensionLoader
         $this->config = $registry->get('config');
         $this->customer = $registry->get('customer');
         $this->session = $registry->get('session');
+        $this->request = $registry->get('request');
         $this->dm = $registry->get('dm');
         $this->load = $registry->get('load');
 
@@ -26,6 +29,10 @@ class ExtensionLoader
         foreach ($this->getFunctions() as $function) {
             $twig->addFunction( $function );
         }
+
+        // Default reference params
+        $this->recentTime = new DateTime();
+        date_sub( $this->recentTime, date_interval_create_from_date_string('15 days') );
     }
 
     public function getName(){
@@ -40,10 +47,19 @@ class ExtensionLoader
             new Twig_SimpleFunction('asset_js', array($this, 'assetJs')),
             new Twig_SimpleFunction('asset_img', array($this, 'assetImg')),
             new Twig_SimpleFunction('get_current_user', array($this, 'getCurrentUser')),
+            new Twig_SimpleFunction('is_logged', array($this, 'isLogged')),
             new Twig_SimpleFunction('get_flash', array($this, 'getFlash')),
+            new Twig_SimpleFunction('has_flash', array($this, 'hasFlash')),
             new Twig_SimpleFunction('get_friend_list', array($this, 'getFriendList')),
             new Twig_SimpleFunction('in_array', array($this, 'inArray')),
-            new Twig_SimpleFunction('get_request_friend', array($this, 'getRequestFriend'))
+            new Twig_SimpleFunction('get_request_friend', array($this, 'getRequestFriend')),
+            new Twig_SimpleFunction('date_format', array($this, 'dateFormat')),
+            new Twig_SimpleFunction('get_cookie', array($this, 'getCookie')),
+            new Twig_SimpleFunction('get_datetime_from_now', array($this, 'getDatetimeFromNow')),
+            new Twig_SimpleFunction('localized_date', array($this, 'localizedDate')),
+            new Twig_SimpleFunction('get_routing_list', array($this, 'getRoutingList')),
+            new Twig_SimpleFunction('get_user_data', array($this, 'getUserData')),
+            new Twig_SimpleFunction('get_fb_api_id', array($this, 'getFbApiId'))
         );
     }
 
@@ -62,6 +78,14 @@ class ExtensionLoader
                 $parts[$index] = $param;
             }
         }
+
+        if ( count($params) == 0 ){
+            foreach ( $parts as $key => $data ) {
+                if ( preg_match('/^{/', $data) && preg_match('/}$/', $data) ){
+                    array_splice($parts, $key, 1);
+                }
+            }
+        }
         
         return HTTPS_SERVER . implode('/', $parts);
     }
@@ -71,19 +95,37 @@ class ExtensionLoader
     }
 
     public function assetJs( $path ){
-        return HTTPS_SERVER . 'catalog/view/javascript/' . $path;
+        return HTTPS_SERVER . 'catalog/view/javascript/' . $path . '?' . YS_VERSION;
     }
 
     public function assetImg( $path ){
         return HTTP_IMAGE . $path;
     }
 
-    public function getCurrentUser(){
-        return $this->customer;
+    public function getCurrentUser( $width = 180, $height = 180){
+        $this->load->model('tool/image');
+
+        $oUser = $this->customer->getUser();
+        if ( !$oUser ){
+            return null;
+        }
+        $aUser = $oUser->formatToCache();
+        $aUser['avatar'] = $this->registry->get('model_tool_image')->getAvatarUser( $aUser['avatar'], $aUser['email'], $width, $height );
+        
+        return $aUser;
+    }
+
+    public function isLogged(){
+        if ( !$this->customer->isLogged() ) return 0;
+        return 1;
     }
 
     public function getFlash( $key ){
         return $this->session->getFlash( $key );
+    }
+
+    public function hasFlash( $key ){
+        return $this->session->hasFlash( $key );
     }
 
     public function getFriendList($array = false){
@@ -114,26 +156,128 @@ class ExtensionLoader
         $this->load->model('user/user');
         $this->load->model('tool/image');
 
-        $users = $this->registry->get('model_user_user')->getUsers(array(
+        $lUsers = $this->registry->get('model_user_user')->getUsers(array(
             'user_ids' => $friend_ids
         ));
 
-        $returns = array();
-
-        foreach ( $users as $user ) {
-            $user = $user->formatToCache();
-
-            if ( !empty($user['avatar']) ){
-                $user['avatar'] = $this->registry->get('model_tool_image')->resize( $user['avatar'], 180, 180 );
-            }elseif ( !empty($user['email']) ){
-                $user['avatar'] = $this->registry->get('model_tool_image')->getGavatar( $user['email'], 180 );
-            }else{
-                $user['avatar'] = $this->registry->get('model_tool_image')->resize( 'no_user_avatar.png', 180, 180 );
-            }
-
-            $returns[] = $user;
+        if ( !$lUsers ){
+            return array();
         }
 
-        return $returns;
+        $aRequestFriends = array();
+
+        foreach ( $lUsers as $user ) {
+            $user = $user->formatToCache();
+
+            $user['avatar'] = $this->registry->get('model_tool_image')->getAvatarUser( $user['avatar'], $user['email'] );
+
+            $aRequestFriends[] = $user;
+        }
+
+        return $aRequestFriends;
+    }
+
+    public function dateFormat( DateTime $datetime = null ){
+        if ( $datetime == null ){
+            $datetime = new DateTime();
+        }
+        
+        return $datetime->format( $this->registry->get('language')->get('date_format_long') );
+    }
+
+    public function getCookie( $key ){
+        return $this->request->cookie[$key];
+    }
+
+    public function getDatetimeFromNow( $value ){
+        $datetime = new DateTime();
+        date_add( $datetime, date_interval_create_from_date_string($value . ' days') );
+        return $datetime;
+    }
+
+    public function localizedDate($date, $dateFormat = 'medium', $timeFormat = 'medium', $locale = null, $timezone = null, $format = null){
+        if (!class_exists('IntlDateFormatter')) {
+            throw new RuntimeException('The intl extension is needed to use intl-based filters.');
+        }
+
+        $formatValues = array(
+            'none'   => IntlDateFormatter::NONE,
+            'short'  => IntlDateFormatter::SHORT,
+            'medium' => IntlDateFormatter::MEDIUM,
+            'long'   => IntlDateFormatter::LONG,
+            'full'   => IntlDateFormatter::FULL,
+        );
+
+        $formatter = IntlDateFormatter::create(
+            $locale,
+            $formatValues[$dateFormat],
+            $formatValues[$timeFormat],
+            $date->getTimezone()->getName(),
+            IntlDateFormatter::GREGORIAN,
+            $format
+        );
+
+        return $formatter->format($date->getTimestamp());
+    }
+
+    public function getRoutingList(){
+        return json_encode($this->config->get('routing'));
+    }
+
+    public function getUserData(){
+        $oLoggedUser = $this->customer->getUser();
+        if ( !$oLoggedUser ){
+            return json_encode( array() );
+        }
+        $this->load->model('tool/image');
+        $this->load->model('friend/friend');
+        $this->load->model('friend/follower');
+
+        // Friends
+        $lFriends = $this->registry->get('model_friend_friend')->getFriends( $oLoggedUser->getId(), true );
+        $aFriendIds = array();
+        foreach ( $lFriends as $oFriend ) 
+            $aFriendIds[] = $oFriend->getUser()->getId();
+        $aRequestIds = $oLoggedUser->getFriendRequests();
+        
+        // Followers
+        $oFollowers = $this->registry->get('model_friend_follower')->getFollowers( $oLoggedUser->getId() );
+        $aFollowedIds = array();
+        $aFollowingIds = array();
+        if ( $oFollowers ){
+            $lFolloweds = $oFollowers->getFolloweds();
+            $lFollowings = $oFollowers->getFollowings();
+            foreach ( $lFolloweds as $oFollower ) 
+                $aFollowedIds[] = $oFollower->getUser()->getId();
+            foreach ( $lFollowings as $oFollower ) 
+                $aFollowingIds[] = $oFollower->getUser()->getId();
+        }
+        
+        // Avatar
+        $sAvatar = $this->registry->get('model_tool_image')->getAvatarUser( 
+            $oLoggedUser->getAvatar(),
+            $oLoggedUser->getPrimaryEmail()->getEmail()
+        );
+        $aReturn = array(
+            'id' => $oLoggedUser->getId(),
+            'username' => $oLoggedUser->getUsername(),
+            'fullname' => $oLoggedUser->getFullname(),
+            'slug' => $oLoggedUser->getSlug(),
+            'avatar' => $sAvatar,
+            'friends' => array(
+                'friend_ids' => $aFriendIds,
+                'request_ids' => $aRequestIds
+            ),
+            'followers' => array(
+                'followed_ids' => $aFollowedIds,
+                'following_ids' => $aFollowingIds
+            )
+        );
+
+        return json_encode( $aReturn );
+    }
+
+    public function getFbApiId(){
+        return FB_API_ID;
     }
 }

@@ -1,27 +1,29 @@
 <?php
-use Document\User\Meta\Location,
+use Document\User\Meta\Background,
+	Document\User\Meta\Location,
 	Document\User\Meta\Education,
 	Document\User\Meta\Experience,
 	Document\User\Meta\Skill;
+use Datetime;
 
 class ModelUserBackground extends Model {
 
-	public function addEducation( $user_id, $data = array() ) {
+	public function addEducation( $user_id, $data = array(), $isSocial = false ) {
 		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
 
 		if ( !$user ) {
 			return false;
 		}
 
-		if ( empty($data['started']) ) {
+		if ( $isSocial == false && empty($data['started']) ) {
 			return false;
 		}
 
-		if ( empty($data['ended']) ) {
+		if ( $isSocial == false && empty($data['ended']) ) {
 			return false;
 		}
 
-		if ( empty($data['degree']) ) {
+		if ( $isSocial == false && empty($data['degree']) ) {
 			return false;
 		}
 
@@ -29,26 +31,36 @@ class ModelUserBackground extends Model {
 			return false;
 		}
 
-		if ( empty($data['fieldofstudy']) ) {
+		if ( $isSocial == false && empty($data['fieldofstudy']) ) {
 			return false;
 		}
 
 		$education = new Education();
 		$education->setStarted( (string) $data['started'] );
 		$education->setEnded( (string) $data['ended'] );
-		$education->setDegree( $data['degree'] );
+		$education->setDegree( htmlentities($data['degree']) );
 		$education->setDegreeId( $data['degree_id'] );
-		$education->setSchool( $data['school'] );
+		$education->setSchool( htmlentities($data['school']) );
 		$education->setSchoolId( $data['school_id'] );
-		$education->setFieldOfStudy( $data['fieldofstudy'] );
+		$education->setFieldOfStudy( htmlentities($data['fieldofstudy']) );
 		$education->setFieldOfStudyId( $data['fieldofstudy_id'] );
 
 		$this->dm->persist( $education );
-		$user->getMeta()->getBackground()->addEducation( $education );
 
+		if ( !$oBackground = $user->getMeta()->getBackground() ){
+			$oBackground = new Background();
+			$oBackground->addEducation( $education );
+			$user->getMeta()->setBackground( $oBackground );
+		}else{
+			$oBackground->addEducation( $education );
+		}
+
+		$user->getMeta()->setCurrentInfo();
+		
 		$this->dm->flush();
 
-		return $education->getId();	}
+		return $education->getId();
+	}
 
 	public function removeEducation( $user_id, $id ) {
 		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
@@ -64,6 +76,8 @@ class ModelUserBackground extends Model {
 		}
 
 		$user->getMeta()->getBackground()->getEducations()->removeElement( $education );
+
+		$user->getMeta()->setCurrentInfo();
 
 		$this->dm->flush();
 
@@ -98,44 +112,41 @@ class ModelUserBackground extends Model {
 		}
 
 		$education = $user->getMeta()->getBackground()->getEducationById( $id );
-
+		
 		$education->setStarted( (string) $data['started'] );
 		$education->setEnded( (string) $data['ended'] );
-		$education->setDegree( $data['degree'] );
+		$education->setDegree( htmlentities($data['degree']) );
 		$education->setDegreeId( $data['degree_id'] );
-		$education->setSchool( $data['school'] );
+		$education->setSchool( htmlentities($data['school']) );
 		$education->setSchoolId( $data['school_id'] );
-		$education->setFieldOfStudy( $data['fieldofstudy'] );
+		$education->setFieldOfStudy( htmlentities($data['fieldofstudy']) );
 		$education->setFieldOfStudyId( $data['fieldofstudy_id'] );
+
+		// Set current job for user
+		// Studient - Employee - Job Seeker
+		$user->getMeta()->setCurrentInfo();
 
 		$this->dm->flush();
 
-		return $education->getId();	}
+		return $education->getId();
+	}
 
-	public function addExperience( $user_id, $data = array() ) {
+	public function addExperience( $user_id, $data = array(), $isSocial = false ) {
 		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
 
 		if ( !$user ) {
 			return false;
 		}
 
-		if ( empty($data['started_month']) ) {
+		if ( $isSocial == false && empty($data['started_month']) ) {
 			return false;
 		}
 
-		if ( empty($data['ended_month']) ) {
+		if ( $isSocial == false && empty($data['started_year']) ) {
 			return false;
 		}
 
-		if ( empty($data['started_year']) ) {
-			return false;
-		}
-
-		if ( empty($data['ended_year']) ) {
-			return false;
-		}
-
-		if ( empty($data['title']) ) {
+		if ( $isSocial == false && empty($data['title']) ) {
 			return false;
 		}
 
@@ -143,7 +154,11 @@ class ModelUserBackground extends Model {
 			return false;
 		}
 
-		if ( empty($data['location']) ) {
+		if ( empty($data['self_employed']) ) {
+			$data['self_employed'] = 0;
+		}
+
+		if ( $isSocial == false && empty($data['location']) ) {
 			return false;
 		}
 
@@ -152,21 +167,37 @@ class ModelUserBackground extends Model {
 		$started->setDate( $data['started_year'], $data['started_month'], 1 );
 		$experience->setStarted( $started );
 
-		$ended = new \Datetime();
-		$ended->setDate( $data['ended_year'], $data['ended_month'], 1 );
+		if (!empty($data['current']) && $data['current']) {
+			$ended = null;
+		}else {
+			$ended = new \Datetime();
+			$ended->setDate( $data['ended_year'], $data['ended_month'], 1 );
+		}
 		$experience->setEnded( $ended );
 
 		$experience->setTitle( $data['title'] );
 		$experience->setCompany( $data['company'] );
+		$experience->setSelfEmployed( $data['self_employed'] );
 
 		$location = new Location();
 		$location->setLocation( trim( $data['location'] ) );
 		$experience->setLocation( $location );
 
 		$this->dm->persist( $experience );
-		$user->getMeta()->getBackground()->addExperience( $experience );
+		if ( !$oBackground = $user->getMeta()->getBackground() ){
+			$oBackground = new Background();
+			$oBackground->addExperience( $experience );
+			$user->getMeta()->setBackground( $oBackground );
+		}else{
+			$oBackground->addExperience( $experience );
+		}
 
 		$this->dm->flush();
+
+		if ( !empty($data['current']) ){
+			$user->getMeta()->setCurrentInfo();
+			$this->dm->flush();
+		}
 
 		return $experience->getId();
 	}
@@ -182,6 +213,10 @@ class ModelUserBackground extends Model {
 		
 		if ( $experience ){
 			$user->getMeta()->getBackground()->getExperiences()->removeElement( $experience );
+		}
+
+		if ( $id == $user->getMeta()->getCurrentId() ){
+			$user->getMeta()->setCurrentInfo();
 		}
 
 		$this->dm->flush();
@@ -200,15 +235,7 @@ class ModelUserBackground extends Model {
 			return false;
 		}
 
-		if ( empty($data['ended_month']) ) {
-			return false;
-		}
-
 		if ( empty($data['started_year']) ) {
-			return false;
-		}
-
-		if ( empty($data['ended_year']) ) {
 			return false;
 		}
 
@@ -220,8 +247,20 @@ class ModelUserBackground extends Model {
 			return false;
 		}
 
+		if ( empty($data['self_employed']) ) {
+			$data['self_employed'] = 0;
+		}
+
+		if ( empty($data['current']) ) {
+			$data['current'] = 0;
+		}
+
 		if ( empty($data['location']) ) {
 			return false;
+		}
+
+		if ( empty($data['ended_year']) && empty($data['ended_month']) ){
+			$user->setCurrent( 'work at ' . $data['company'] );
 		}
 
 		$experience = $user->getMeta()->getBackground()->getExperienceById( $id );
@@ -230,17 +269,26 @@ class ModelUserBackground extends Model {
 		$started->setDate( $data['started_year'], $data['started_month'], 1 );
 		$experience->setStarted( $started );
 
-		$ended = new \Datetime();
-		$ended->setDate( $data['ended_year'], $data['ended_month'], 1 );
+		if ( !empty($data['current']) ) {
+			$ended = null;
+		}else {
+			$ended = new \Datetime();
+			$ended->setDate( $data['ended_year'], $data['ended_month'], 1 );
+		}
 		$experience->setEnded( $ended );
 
 		$experience->setTitle( $data['title'] );
 		$experience->setCompany( $data['company'] );
+		$experience->setSelfEmployed( $data['self_employed'] );
 
 		$location = new Location();
 		$location->setLocation( trim( $data['location'] ) );
 		$experience->setLocation( $location );
 		$location->setCityId( $data['cityid'] );
+
+		if ( !empty($data['current']) ){
+			$user->getMeta()->setCurrentInfo();
+		}
 
 		$this->dm->flush();
 
@@ -262,7 +310,14 @@ class ModelUserBackground extends Model {
 		$skill->setSkill( $data['skill'] );
 
 		$this->dm->persist( $skill );
-		$user->getMeta()->getBackground()->addSkill( $skill );
+
+		if ( !$oBackground = $user->getMeta()->getBackground() ){
+			$oBackground = new Background();
+			$oBackground->addSkill( $skill );
+			$user->getMeta()->setBackground( $oBackground );
+		}else{
+			$oBackground->addSkill( $skill );
+		}
 
 		$this->dm->flush();
 

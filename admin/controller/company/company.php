@@ -230,23 +230,13 @@ class ControllerCompanyCompany extends Controller {
 
 			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}else {
-			$company = $this->model_company_company->getCompany( $this->request->get['company_id'] );
+			$oCompany = $this->model_company_company->getCompany( $this->request->get['company_id'] );
 
-			if ( empty( $company ) ) {
+			if ( empty( $oCompany ) ) {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
 				$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
 			}
-		}
-
-		// followers
-		$this->data['followers'] = array();
-		foreach ( $company->getFollowers() as $follower ) {
-			$this->data['followers'][] = array(
-				'id' => $follower->getId(),
-				'fullname' => $follower->getFullname(),
-				'email' => $follower->getPrimaryEmail()->getEmail(),
-				);
 		}
 
 		// id
@@ -380,9 +370,9 @@ class ControllerCompanyCompany extends Controller {
 
 			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}else {
-			$company = $this->model_company_company->getCompany( $this->request->get['company_id'] );
+			$oCompany = $this->model_company_company->getCompany( $this->request->get['company_id'] );
 
-			if ( empty( $company ) ) {
+			if ( empty( $oCompany ) ) {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
 				$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
@@ -391,7 +381,7 @@ class ControllerCompanyCompany extends Controller {
 
 		// relativies
 		$this->data['relativies'] = array();
-		foreach ( $company->getRelativeCompanies() as $relative ) {
+		foreach ( $oCompany->getRelativeCompanies() as $relative ) {
 			$this->data['relativies'][] = array(
 				'id' => $relative->getId(),
 				'name' => $relative->getName(),
@@ -504,47 +494,47 @@ class ControllerCompanyCompany extends Controller {
 
 		$this->data['companies'] = array();
 		if ( count( $companies ) ) {
-			foreach ($companies as $company) {
+			foreach ($companies as $oCompany) {
 				$action = array();
 
 				$action[] = array(
 					'text' => $this->language->get( 'text_group_member' ),
-					'href' => $this->url->link( 'company/group_member', 'company_id=' . $company->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+					'href' => $this->url->link( 'company/member_group', 'company_id=' . $oCompany->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-list',
 				);
 
-				$action[] = array(
-					'text' => $this->language->get( 'text_career' ),
-					'href' => $this->url->link( 'company/career', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId(), 'SSL' ),
-					'icon' => 'icon-list',
-					);
+				// $action[] = array(
+				// 	'text' => $this->language->get( 'text_career' ),
+				// 	'href' => $this->url->link( 'company/career', 'token=' . $this->session->data['token'] . '&company_id=' . $oCompany->getId(), 'SSL' ),
+				// 	'icon' => 'icon-list',
+				// 	);
 
-				$action[] = array(
-					'text' => $this->language->get( 'text_follower' ),
-					'href' => $this->url->link( 'company/company/follower', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId(), 'SSL' ),
-					'icon' => 'icon-list',
-					);
+				// $action[] = array(
+				// 	'text' => $this->language->get( 'text_follower' ),
+				// 	'href' => $this->url->link( 'company/company/follower', 'token=' . $this->session->data['token'] . '&company_id=' . $oCompany->getId(), 'SSL' ),
+				// 	'icon' => 'icon-list',
+				// 	);
 
-				$action[] = array(
-					'text' => $this->language->get( 'text_relative_company' ),
-					'href' => $this->url->link( 'company/company/relativeCompany', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId(), 'SSL' ),
-					'icon' => 'icon-list',
-					);
+				// $action[] = array(
+				// 	'text' => $this->language->get( 'text_relative_company' ),
+				// 	'href' => $this->url->link( 'company/company/relativeCompany', 'token=' . $this->session->data['token'] . '&company_id=' . $oCompany->getId(), 'SSL' ),
+				// 	'icon' => 'icon-list',
+				// 	);
 
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'company/company/update', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId(), 'SSL' ),
+					'href' => $this->url->link( 'company/company/update', 'token=' . $this->session->data['token'] . '&company_id=' . $oCompany->getId(), 'SSL' ),
 					'icon' => 'icon-edit',
 					);
 
 				$this->data['companies'][] = array(
-					'id' => $company->getId(),
-					'logo' => HTTP_IMAGE . $company->getLogo(),
-					'name' => $company->getName(),
-					'owner' => $company->getOwner()->getPrimaryEmail()->getEmail(),
-					'group' => $company->getGroup()->getName(),
-					'created' => $company->getCreated()->format( 'd/m/Y' ),
-					'status' => $company->getStatus(),
+					'id' => $oCompany->getId(),
+					'logo' => HTTP_IMAGE . $oCompany->getLogo(),
+					'name' => $oCompany->getName(),
+					'owner' => $oCompany->getOwner() ? $oCompany->getOwner()->getPrimaryEmail()->getEmail() : '',
+					'group' => $oCompany->getGroup() ? $oCompany->getGroup()->getName() : '',
+					'created' => $oCompany->getCreated()->format( 'd/m/Y' ),
+					'status' => $oCompany->getStatus(),
 					'action' => $action,
 					);
 			}
@@ -638,32 +628,37 @@ class ControllerCompanyCompany extends Controller {
    		);
 
    		// Heading title
-		$this->data['heading_title'] = $this->language->get( 'heading_title' );
+		$this->data['heading_title'] = $this->language->get('heading_title');
 
 		// text
-		$this->data['text_enable'] = $this->language->get( 'text_enable' );
-		$this->data['text_disable'] = $this->language->get( 'text_disable' );
+		$this->data['text_enable'] = $this->language->get('text_enable');
+		$this->data['text_disable'] = $this->language->get('text_disable');
 
 		// entry
-		$this->data['entry_name'] = $this->language->get( 'entry_name' );
-		$this->data['entry_logo'] = $this->language->get( 'entry_logo' );
-		$this->data['entry_status'] = $this->language->get( 'entry_status' );
-		$this->data['entry_group'] = $this->language->get( 'entry_group' );
-		$this->data['entry_owner'] = $this->language->get( 'entry_owner' );
-		$this->data['entry_branch'] = $this->language->get( 'entry_branch' );
-		$this->data['entry_description'] = $this->language->get( 'entry_description' );
+		$this->data['entry_name'] = $this->language->get('entry_name');
+		$this->data['entry_logo'] = $this->language->get('entry_logo');
+		$this->data['entry_status'] = $this->language->get('entry_status');
+		$this->data['entry_group'] = $this->language->get('entry_group');
+		$this->data['entry_owner'] = $this->language->get('entry_owner');
+		$this->data['entry_branch'] = $this->language->get('entry_branch');
+		$this->data['entry_description'] = $this->language->get('entry_description');
+		$this->data['entry_address'] = $this->language->get('entry_address');
+		$this->data['entry_phone'] = $this->language->get('entry_phone');
+		$this->data['entry_fax'] = $this->language->get('entry_fax');
+		$this->data['entry_website'] = $this->language->get('entry_website');
 
 		// column
-		$this->data['column_branch'] = $this->language->get( 'column_branch' );
+		$this->data['column_branch'] = $this->language->get('column_branch');
 
 		// button
-		$this->data['button_save'] = $this->language->get( 'button_save' );
-		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
-		$this->data['button_select_all_branch'] = $this->language->get( 'button_select_all_branch' );
+		$this->data['button_save'] = $this->language->get('button_save');
+		$this->data['button_cancel'] = $this->language->get('button_cancel');
+		$this->data['button_select_all_branch'] = $this->language->get('button_select_all_branch');
 
 		// Tab
-		$this->data['tab_general'] = $this->language->get( 'tab_general' );
-		$this->data['tab_branch'] = $this->language->get( 'tab_branch' );
+		$this->data['tab_general'] = $this->language->get('tab_general');
+		$this->data['tab_branch'] = $this->language->get('tab_branch');
+		$this->data['tab_meta'] = $this->language->get('tab_meta');
 
 		// link
 		$this->data['cancel'] = $this->url->link( 'company/company', 'token=' . $this->session->data['token'] . $url, 'SSL' );
@@ -674,9 +669,9 @@ class ControllerCompanyCompany extends Controller {
 
 		// company
 		if ( isset( $this->request->get['company_id'] ) ) {
-			$company = $this->model_company_company->getCompany( $this->request->get['company_id'] );
+			$oCompany = $this->model_company_company->getCompany( $this->request->get['company_id'] );
 
-			if ( empty( $company ) ) {
+			if ( empty( $oCompany ) ) {
 				$this->redirect( $this->data['cancel'] );
 			}
 		}
@@ -684,8 +679,8 @@ class ControllerCompanyCompany extends Controller {
 		// name
 		if ( isset( $this->request->post['name'] ) ) {
 			$this->data['name'] = $this->request->post['name'];
-		}elseif ( isset( $company ) ) {
-			$this->data['name'] = $company->getName();
+		}elseif ( isset( $oCompany ) ) {
+			$this->data['name'] = $oCompany->getName();
 		}else {
 			$this->data['name'] = '';
 		}
@@ -693,23 +688,23 @@ class ControllerCompanyCompany extends Controller {
 		// owner
 		if ( isset( $this->request->post['owner'] ) ) {
 			$this->data['owner'] = $this->request->post['owner'];
-		}elseif ( isset( $company ) ) {
-			$this->data['owner'] = $company->getOwner()->getUsername() . '(' . $company->getOwner()->getPrimaryEmail()->getEmail() . ')';
+		}elseif ( $oCompany && $oCompany->getOwner() ) {
+			$this->data['owner'] = $oCompany->getOwner()->getUsername() . '(' . $oCompany->getOwner()->getPrimaryEmail()->getEmail() . ')';
 		}else {
 			$this->data['owner'] = '';
 		}
 
 		if ( isset( $this->request->post['user_id'] ) ) {
 			$this->data['user_id'] = $this->request->post['user_id'];
-		}elseif ( isset( $company ) ) {
-			$this->data['user_id'] = $company->getOwner()->getId();
+		}elseif ( $oCompany && $oCompany->getOwner() ) {
+			$this->data['user_id'] = $oCompany->getOwner()->getId();
 		}else {
 			$this->data['user_id'] = '';
 		}
 
 		// logo
-		if ( isset( $company ) && trim( $company->getLogo() ) != '' ) {
-			$this->data['img_logo'] = HTTP_IMAGE . $company->getLogo();
+		if ( isset( $oCompany ) && trim( $oCompany->getLogo() ) != '' ) {
+			$this->data['img_logo'] = HTTP_IMAGE . $oCompany->getLogo();
 		}else {
 			$this->data['img_logo'] = $this->data['img_default'];
 		}
@@ -726,8 +721,8 @@ class ControllerCompanyCompany extends Controller {
 		}
 		if ( isset( $this->request->post['group'] ) ) {
 			$this->data['group'] = $this->request->post['group'];
-		}elseif ( isset( $company ) ) {
-			$this->data['group'] = $company->getGroup()->getId();
+		}elseif ( $oCompany && $oCompany->getGroup() ) {
+			$this->data['group'] = $oCompany->getGroup()->getId();
 		}else {
 			$this->data['group'] = '';
 		}
@@ -735,8 +730,8 @@ class ControllerCompanyCompany extends Controller {
 		// description
 		if ( isset( $this->request->post['description'] ) ) {
 			$this->data['description'] = $this->request->post['description'];
-		}elseif ( isset( $company ) ) {
-			$this->data['description'] = $company->getDescription();
+		}elseif ( isset( $oCompany ) ) {
+			$this->data['description'] = $oCompany->getDescription();
 		}else {
 			$this->data['description'] = '';
 		}
@@ -744,23 +739,59 @@ class ControllerCompanyCompany extends Controller {
 		// status
 		if ( isset( $this->request->post['status'] ) ) {
 			$this->data['status'] = $this->request->post['status'];
-		}elseif ( isset( $company ) ) {
-			$this->data['status'] = $company->getStatus();
+		}elseif ( isset( $oCompany ) ) {
+			$this->data['status'] = $oCompany->getStatus();
 		}else {
 			$this->data['status'] = 1;
 		}
 
+		// address
+		if ( isset( $this->request->post['address'] ) ) {
+			$this->data['address'] = $this->request->post['address'];
+		}elseif ( isset( $oCompany ) ) {
+			$this->data['address'] = $oCompany->getAddress();
+		}else {
+			$this->data['address'] = '';
+		}
+
+		// phone
+		if ( isset( $this->request->post['phone'] ) ) {
+			$this->data['phone'] = $this->request->post['phone'];
+		}elseif ( isset( $oCompany ) ) {
+			$this->data['phone'] = $oCompany->getPhone();
+		}else {
+			$this->data['phone'] = '';
+		}
+
+		// fax
+		if ( isset( $this->request->post['fax'] ) ) {
+			$this->data['fax'] = $this->request->post['fax'];
+		}elseif ( isset( $oCompany ) ) {
+			$this->data['fax'] = $oCompany->getFax();
+		}else {
+			$this->data['fax'] = '';
+		}
+
+		// website
+		if ( isset( $this->request->post['website'] ) ) {
+			$this->data['website'] = $this->request->post['website'];
+		}elseif ( isset( $oCompany ) ) {
+			$this->data['website'] = $oCompany->getWebsite();
+		}else {
+			$this->data['website'] = '';
+		}
+
 		// branch
 		$this->load->model('branch/branch');
-		$branchs = $this->model_branch_branch->getAllBranchs();
+		$branches = $this->model_branch_branch->getAllBranches();
 
-		$this->data['branchs'] = array();
-		foreach ( $branchs as $branch ) {
+		$this->data['branches'] = array();
+		foreach ( $branches as $branch ) {
 			$checked = false;
-			if ( isset($company) && $company->getBranchById($branch->getId()) ){
+			if ( isset($oCompany) && $oCompany->getBranchById($branch->getId()) ){
 				$checked = true;
 			}
-			$this->data['branchs'][] = array(
+			$this->data['branches'][] = array(
 				'id' => $branch->getId(),
 				'name' => $branch->getName(),
 				'checked' => $checked
@@ -786,9 +817,9 @@ class ControllerCompanyCompany extends Controller {
 			$this->error['error_name'] = $this->language->get( 'error_name' );
 		}/*else {
 			if ( isset( $this->request->get['company_id'] ) ) {
-				$company = $this->model_company_company->getCompany( $this->request->get['company_id'] );
-				if ( !empty( $company ) ) {
-					if ( $this->model_company_company->isExistName( $this->request->post['name'] ) && $company->getName() != strtolower( trim( $this->request->post['name'] ) ) ) {
+				$oCompany = $this->model_company_company->getCompany( $this->request->get['company_id'] );
+				if ( !empty( $oCompany ) ) {
+					if ( $this->model_company_company->isExistName( $this->request->post['name'] ) && $oCompany->getName() != strtolower( trim( $this->request->post['name'] ) ) ) {
 						$this->error['error_name'] = $this->language->get( 'error_name_exist' );
 					}
 				}
@@ -796,7 +827,8 @@ class ControllerCompanyCompany extends Controller {
 		}*/
 		
 		if ( isset( $this->request->files['logo'] ) && !empty( $this->request->files['logo'] ) && $this->request->files['logo']['size'] > 0 ) {
-			if ( !$this->model_company_company->isValidLogo( $this->request->files['logo'] ) ) {
+			$this->load->model('tool/image');
+			if ( !$this->model_tool_image->isValidImage( $this->request->files['logo'] ) ) {
 				$this->error['error_logo'] = $this->language->get( 'error_logo');
 			}
 		}
@@ -849,10 +881,10 @@ class ControllerCompanyCompany extends Controller {
 		$companies = $this->model_company_company->getCompanies( $data );
 
 		$json = array();
-		foreach ( $companies as $company ) {
+		foreach ( $companies as $oCompany ) {
 			$json[] = array(
-				'id' => $company->getId(),
-				'name' => $company->getName(),
+				'id' => $oCompany->getId(),
+				'name' => $oCompany->getName(),
 				);
 		}
 
