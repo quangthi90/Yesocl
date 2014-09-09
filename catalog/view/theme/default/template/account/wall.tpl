@@ -1648,10 +1648,10 @@
     <!-- Global -->
     <script data-id="App.Config">
     var App = {};   var basePath = '',
-    commonPath = '../../catalog/view/theme/default/stylesheet/platform/',
+    commonPath = '{{ asset_css('platform/') }}',
     rootPath = '../',
     DEV = false,
-    componentsPath = '../../catalog/view/theme/default/stylesheet/platform/components/';
+    componentsPath = '{{ asset_css('platform/components/') }}';
     var primaryColor = '#25ad9f',
     dangerColor = '#b55151',
     successColor = '#609450',
@@ -1660,24 +1660,24 @@
     inverseColor = '#45484d';
     var themerPrimaryColor = primaryColor;
     </script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/library/bootstrap/js/bootstrap.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/plugins/core_nicescroll/jquery.nicescroll.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/plugins/core_breakpoints/breakpoints.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/plugins/core_preload/pace.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/core_preload/preload.pace.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script src="../../catalog/view/theme/default/stylesheet/platform/plugins/menu_sidr/jquery.sidr.js?v=v2.0.0-rc8"></script>
-    <script src="../../catalog/view/theme/default/stylesheet/platform/components/widget_twitter/twitter.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script src="../../catalog/view/theme/default/stylesheet/platform/plugins/media_holder/holder.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/plugins/media_gridalicious/jquery.gridalicious.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/media_gridalicious/gridalicious.js?v=v2.0.0-rc8"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/maps_google/maps-google.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
+    <script src="{{ asset_css('platform/library/bootstrap/js/bootstrap.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
+    <script src="{{ asset_css('platform/plugins/core_nicescroll/jquery.nicescroll.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
+    <script src="{{ asset_css('platform/plugins/core_breakpoints/breakpoints.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
+    <script src="{{ asset_css('platform/plugins/core_preload/pace.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
+    <script src="{{ asset_css('platform/components/core_preload/preload.pace.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
+    <script src="{{ asset_css('platform/plugins/menu_sidr/jquery.sidr.js?v=v2.0.0-rc8') }}"></script>
+    <script src="{{ asset_css('platform/components/widget_twitter/twitter.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
+    <script src="{{ asset_css('platform/plugins/media_holder/holder.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
+    <script src="{{ asset_css('platform/plugins/media_gridalicious/jquery.gridalicious.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
+    <script src="{{ asset_css('platform/components/media_gridalicious/gridalicious.js?v=v2.0.0-rc8') }}"></script>
+    <script src="{{ asset_css('platform/components/maps_google/maps-google.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
     <script src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false&callback=initGoogleMaps"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/plugins/ui_modals/bootbox.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/menus/sidebar.main.js?v=v2.0.0-rc8"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/menus/sidebar.collapse.js?v=v2.0.0-rc8"></script>
-    <script type="text/javascript" src="../../catalog/view/theme/default/stylesheet/platform/components/menus/menus.sidebar.chat.js?v=v2.0.0-rc8"></script>
-    <script src="../../catalog/view/theme/default/stylesheet/platform/plugins/other_mixitup/jquery.mixitup.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script src="../../catalog/view/theme/default/stylesheet/platform/plugins/other_mixitup/mixitup.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
-    <script src="../../catalog/view/theme/default/stylesheet/platform/components/core/core.js?v=v2.0.0-rc8"></script>
+    <script src="{{ asset_css('platform/plugins/ui_modals/bootbox.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
+    <script src="{{ asset_css('platform/components/menus/sidebar.main.js?v=v2.0.0-rc8') }}"></script>
+    <script src="{{ asset_css('platform/components/menus/sidebar.collapse.js?v=v2.0.0-rc8') }}"></script>
+    <script src="{{ asset_css('platform/components/menus/menus.sidebar.chat.js?v=v2.0.0-rc8') }}"></script>
+    <script src="{{ asset_css('platform/plugins/other_mixitup/jquery.mixitup.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
+    <script src="{{ asset_css('platform/plugins/other_mixitup/mixitup.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
+    <script src="{{ asset_css('platform/components/core/core.js?v=v2.0.0-rc8') }}"></script>
 </body>
 </html>
