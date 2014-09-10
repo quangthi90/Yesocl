@@ -14,7 +14,7 @@
 		<div class="sidebar-controls">
 			<ul class="yes-menu-list left-menu disable-select">
 				{% block sidebar_control %}
-					{% set menu = get_flash('menu') %}
+					{#% set menu = get_flash('menu') %#}
 				  	<li class="menu-item what-new-item {% if menu == 'refresh' %}active{% endif %}" data-bind="with: $root.refreshOptionConfigModel">
 				  		<a href="{{ path('RefreshPage') }}">
 				  			<i class="icon-refresh"></i> <span>{% trans %}What's new{% endtrans %}</span>
