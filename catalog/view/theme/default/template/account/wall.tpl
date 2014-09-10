@@ -1,5 +1,9 @@
 {% extends '@template/default/template/account/layout.tpl' %}
-
+{% use '@template/default/template/account/widget_user.tpl' %}
+{% set currUser = get_current_user() %}
+            {% block stylesheet %}
+            {{ block('widget_user_stylesheet') }}
+            {% endblock %}
             {% block body %}
                 <div class="innerAll">
                     <div class="row">
@@ -601,20 +605,7 @@
                         </div>
                         <!-- WIDGET -->
                         <div class="col-md-4 col-lg-3">
-                        {% block widget_user %}
-                            <div class="widget">
-                                <div class="widget-body text-center">
-                                    <a href=""><img src="{{ asset_css('platform/images/people/250/22.jpg') }}" width="120" alt="" class="img-circle"></a>
-                                    <h2 class="strong margin-none">Adrian Demian</h2>
-                                    <div class="innerB">Working at MOSAICPRO</div>
-                                    <a href="" class="btn btn-primary text-center btn-block">PRO Account</a>
-                                    <div class="btn-group-vertical btn-block">
-                                        <a href="" class="btn btn-default"><i class="fa fa-cog pull-right"></i>Edit Account</a>
-                                        <a href="" class="btn btn-default"><i class="fa fa-cog pull-right"></i>Logout</a>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endblock %}
+                        {{ block('widget_user') }}
                         {% block widget_recent_news %}
                             <div class="widget">
                                 <h5 class="innerAll margin-none border-bottom bg-gray">Recent News</h5>
@@ -688,4 +679,7 @@
                         <!-- END WIDGET -->
                     </div>
                 </div>
+            {% endblock %}
+            {% block javascript %}
+            {{ block('widget_user_javascript') }}
             {% endblock %}
