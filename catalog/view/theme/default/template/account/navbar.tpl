@@ -1,6 +1,7 @@
 			{% block navbar_stylesheet %}
 			{% endblock %}
 			{% block navbar %}
+            {% if is_logged() and currUser != null %}
 	            <div class="navbar hidden-print navbar-default box main" role="navigation">
 	                <div class="user-action user-action-btn-navbar pull-right border-left">
 	                    <a href="#menu-right" class="btn btn-sm btn-navbar btn-open-right"><i class="fa fa-comments fa-2x"></i></a>
@@ -43,15 +44,15 @@
 	                    <div class="dropdown username pull-left">
 	                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	                            <span class="media margin-none">
-	                                <span class="pull-left"><img src="{{ asset_css('platform/images/people/35/16.jpg') }}" alt="user" class="img-circle"></span>
-	                                <span class="media-body">Bill <span class="caret"></span></span>
+	                                <span class="pull-left"><img src="{{ currUser.avatar }}" alt="user" class="img-circle"></span>
+	                                <span class="media-body">{{ currUser.username }} <span class="caret"></span></span>
 	                            </span>
 	                        </a>
 	                        <ul class="dropdown-menu">
 	                            <li><a href="about_1.html?lang=en" >About</a></li>
 	                            <li><a href="messages.html?lang=en">Messages</a></li>
-	                            <li><a href="timeline_3.html?lang=en">Profile</a></li>
-	                            <li><a href="login.html?lang=en">Logout</a></li>
+	                            <li><a href="{{ path('ProfilePage', {user_slug: currUser.slug}) }}">{% trans %}Profile{% endtrans %}</a></li>
+	                            <li><a href="{{ path('Logout') }}">{% trans %}Log out{% endtrans %}</a></li>
 	                        </ul>
 	                    </div>
 	                </div>
@@ -60,6 +61,7 @@
 	                    <input type="text" class="form-control" placeholder="Search a friend"/>
 	                </div>
 	            </div>
+            {% endif %}
 			{% endblock %}
 			{% block navbar_javascript %}
 			{% endblock %}
