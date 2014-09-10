@@ -1,6 +1,8 @@
 {% use '@template/default/template/account/menu.tpl' %}
 {% use '@template/default/template/account/menu_right.tpl' %}
 {% use '@template/default/template/account/navbar.tpl' %}
+{% set user_slug = get_current_user().slug %}
+{% set menu = get_flash('menu') %}
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 paceCounter paceSocial sidebar sidebar-social footer-sticky"> <![endif]-->
 <!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 paceCounter paceSocial sidebar sidebar-social footer-sticky"> <![endif]-->
