@@ -1,8 +1,4 @@
-{% use '@template/default/template/account/menu.tpl' %}
 {% use '@template/default/template/account/menu_right.tpl' %}
-{% use '@template/default/template/account/navbar.tpl' %}
-{% set user_slug = get_current_user().slug %}
-{% set menu = get_flash('menu') %}
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 paceCounter paceSocial sidebar sidebar-social footer-sticky"> <![endif]-->
 <!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 paceCounter paceSocial sidebar sidebar-social footer-sticky"> <![endif]-->
@@ -33,9 +29,7 @@
 	    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 	    <![endif]-->
-	    {{ block('menu_stylesheet') }}
 	    {{ block('menu_right_stylesheet') }}
-	    {{ block('navbar_stylesheet') }}
 		{% block stylesheet %}
 		{% endblock %}
 	    <script src="{{ asset_css('platform/library/jquery/jquery.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
@@ -49,26 +43,20 @@
 	<body class="menu-right-hidden">
 	    <!-- Main Container Fluid -->
 	    <div class="container-fluid menu-hidden">
-	    {{ block('menu') }}
+		{% if is_logged() == true %}
+			{{ include(template_from_string( sidebar_control )) }}
+		{% endif %}
 	    {{ block('menu_right') }}
 	        <!-- Content START -->
 	        <div id="content">
-	    	{{ block('navbar') }}
+	    	{{ include(template_from_string( header )) }}
 			{% block body %}
 			{% endblock %}
 	        </div>
 	        <!-- // Content END -->
 	        <div class="clearfix"></div>
 	        <!-- // Sidebar menu & content wrapper END -->
-		{% block footer %}
-	        <!-- Footer -->
-	        <div id="footer" class="hidden-print">
-	            <!--  Copyright Line -->
-	            <div class="copy">&copy; 2012 - 2014 - <a href="http://www.mosaicpro.biz">MosaicPro</a> - All Rights Reserved. <a href="http://themeforest.net/?ref=mosaicpro" target="_blank">Purchase Social Admin Template</a> - Current version: v2.0.0-rc8 / <a target="_blank" href="../assets/../../CHANGELOG.txt?v=v2.0.0-rc8">changelog</a></div>
-	            <!--  End Copyright Line -->
-	        </div>
-	        <!-- // Footer END -->
-		{% endblock %}
+		{{ include(template_from_string( footer )) }}
 	    </div>
 	    <!-- // Main Container Fluid END -->
     	<!-- Library Script -->
@@ -107,9 +95,7 @@
 	    <script src="{{ asset_css('platform/plugins/other_mixitup/mixitup.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
 	    <script src="{{ asset_css('platform/components/core/core.js?v=v2.0.0-rc8') }}"></script>
 		<!-- Common Script -->
-	    {{ block('menu_javascript') }}
 	    {{ block('menu_right_javascript') }}
-	    {{ block('navbar_javascript') }}
 		<!-- Custom Script -->
     	{% block javascript %}
 		{% endblock %}

@@ -1,87 +1,45 @@
 {% set user_slug = get_current_user().slug %}
-<div id="y-sidebar">
-	<div class="sidebar-wrapper">
-		<div class="sidebar-header">
-			<h3>
-				<span id="sidebar-close"><i class="icon-hand-left"></i></span>
-				{% trans %}Main Menu{% endtrans %}
-			</h3>
-		</div>
-		<div class="search-box">
-			<input type="text" name="ss-keyword" id="ss-keyword" placeholder="Search" />
-			<a href="#" class="btn-search"><i class="icon-search"></i></a>
-		</div>
-		<div class="sidebar-controls">
-			<ul class="yes-menu-list left-menu disable-select">
-				{% block sidebar_control %}
-					{#% set menu = get_flash('menu') %#}
-				  	<li class="menu-item what-new-item {% if menu == 'refresh' %}active{% endif %}" data-bind="with: $root.refreshOptionConfigModel">
-				  		<a href="{{ path('RefreshPage') }}">
-				  			<i class="icon-refresh"></i> <span>{% trans %}What's new{% endtrans %}</span>
-				  		</a>
-				  		<a class="toogle-submenu">
-				  			<i class="icon-chevron-up"></i>
-				  			<i class="icon-chevron-down"></i>
-			  			</a>
-					    <!-- ko if: items().length > 0 -->
-				  		<ul id="refresh-page-item" class="sub-menu hidden" data-bind="foreach: items()">
-    						<li class="menu-item sub-menu-item">
-				  			<!-- ko if: $data.isEnabled() -->
-						  		<a data-bind="click: $parent.handleClick"><i class="icon-ok"></i><span data-bind="text: $data.titleText"></span></a>
-					  		<!-- /ko -->
-					  		<!-- ko ifnot: $data.isEnabled() -->
-						  		<a data-bind="click: $parent.handleClick"><i class="icon-hand-right"></i><span data-bind="text: $data.titleText"></span></a>
-					  		<!-- /ko -->
-					  		</li>
-						</ul>
-					    <!-- /ko -->
-				  	</li>
-				  	<li class="menu-item {% if menu == 'home' %}active{% endif %}">
-				  		<a href="{{ path('HomePage') }}">
-				  			<i class="icon-home"></i> <span>{% trans %}Home feed{% endtrans %}</span>
-				  		</a>
-				  	</li>
-				  	<li class="menu-item {% if menu == 'wall' %}active{% endif %}">
-				  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}">
-				  			<i class="icon-bookmark"></i> <span>{% trans %}Wall Page{% endtrans %}</span>
-			  			</a>
-				  	</li>
-				  	<li class="menu-item {% if menu == 'profile' %}active{% endif %}">
-				  		<a href="{{ path('ProfilePage', {user_slug: user_slug}) }}">
-				  			<i class="icon-user-md"></i> <span>{% trans %}Profile{% endtrans %}</span>
-			  			</a>
-				  	</li>
-				  	<li class="menu-item {% if menu == 'friend' %}active{% endif %}">
-				  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-				  			<i class="icon-fire"></i> <span>{% trans %}Friend{% endtrans %}</span>
-			  			</a>
-				  	</li>
-				  	<li class="menu-item {% if menu == 'follow' %}active{% endif %}">
-				  		<a href="{{ path('FollowPage', {user_slug: user_slug}) }}">
-				  			<i class="icon-fire"></i> <span>{% trans %}Follower{% endtrans %}</span>
-			  			</a>
-				  	</li>
+{% set menu = get_flash('menu') %}
+	        <!-- Main Sidebar Menu -->
+	        <div id="menu" class="hidden-print hidden-xs sidebar-default sidebar-brand-primary">
+	            <div id="sidebar-social-wrapper">
+	                <div id="brandWrapper">
+	                    <a href="{{ path('HomePage') }}"><span class="text">Social Admin Template</span></a>
+	                </div>
+	                <ul class="menu list-unstyled">
+	                    <li class="hasSubmenu {% if menu == 'refresh' %}active{% endif %}">
+	                        <a href="#menu-bf3509948e337ef2a1e23f03f7e2aa66" data-toggle="collapse"><i class="icon-refresh-1"></i><span>{% trans %}What's new{% endtrans %}</span></a>
+	                        <ul class="collapse" id="menu-bf3509948e337ef2a1e23f03f7e2aa66">
+	                            <li class=""><a href="#"><i class="icon-thumbs-up"></i><span>All posts</span></a></li>
+	                            <li class=""><a href="#"><i class="icon-thumbs-up"></i><span>Branch posts</span></a></li>
+	                            <li class=""><a href="#"><i class="icon-thumbs-up"></i><span>Stock posts</span></a></li>
+	                            <li class="active"><a href="#"><i class="icon-checkmark-thick"></i><span>Friend, Friend's friend posts</span></a></li>
+	                        </ul>
+	                    </li>
+	                    <li class="{% if menu == 'home' %}active{% endif %}">
+	                        <a href="{{ path('HomePage') }}"><i class="icon-home-1"></i><span>{% trans %}Home feed{% endtrans %}</span></a>
+	                    </li>
+	                    <li class="{% if menu == 'wall' %}active{% endif %}">
+	                        <a href="{{ path('WallPage', {user_slug: user_slug}) }}"><i class="icon-bookmark"></i><span>{% trans %}Wall Page{% endtrans %}</span></a>
+	                    </li>
+	                    <li class="{% if menu == 'profile' %}active{% endif %}">
+	                        <a href="{{ path('ProfilePage', {user_slug: user_slug}) }}"><i class="icon-identification"></i><span>{% trans %}Profile{% endtrans %}</span></a>
+	                    </li>
+	                    <li class="{% if menu == 'friend' %}active{% endif %}">
+	                        <a href="{{ path('FriendPage', {user_slug: user_slug}) }}"><i class="icon-fire"></i><span>{% trans %}Friend{% endtrans %}</span></a>
+	                    </li>
+	                    <li class="{% if menu == 'follow' %}active{% endif %}">
+	                        <a href="{{ path('FollowPage', {user_slug: user_slug}) }}"><i class="icon-fire"></i><span>{% trans %}Follower{% endtrans %}</span></a>
+	                    </li>
 				  	{% if show_branch_menu == true %}
-				  	<li class="menu-item {% if menu == 'branch' %}active{% endif %}">
-				  		<a href="{{ path('BranchList') }}">
-				  			<i class="icon-fire"></i> <span>{% trans %}Branch{% endtrans %}</span>
-			  			</a>
-				  	</li>
+	                    <li class="{% if menu == 'branch' %}active{% endif %}">
+	                        <a href="{{ path('BranchList') }}"><i class="icon-fire"></i><span>{% trans %}Branch{% endtrans %}</span></a>
+	                    </li>
 				  	{% endif %}
-				  	<li class="menu-item {% if menu == 'stock' %}active{% endif %}">
-				  		<a href="{{ path('StockMarket') }}">
-				  			<i class="icon-fire"></i> <span>{% trans %}Stock{% endtrans %}</span>
-			  			</a>
-				  	</li>
-			  	{% endblock %}
-			</ul>
-		</div>
-	</div>
-	<div id="sidebar-toggle">
-		<span class="symbol">
-			<i class="icon-circle"></i><br/>
-			<i class="icon-circle"></i><br/>
-			<i class="icon-circle"></i>
-		</span>
-	</div>
-</div>
+	                    <li class="{% if menu == 'stock' %}active{% endif %}">
+	                        <a href="{{ path('StockMarket') }}"><i class="icon-fire"></i><span>{% trans %}Stock{% endtrans %}</span></a>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
+	        <!-- // Main Sidebar Menu END -->
