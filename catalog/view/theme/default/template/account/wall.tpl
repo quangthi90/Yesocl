@@ -1,8 +1,5 @@
 {% extends '@template/default/template/account/layout.tpl' %}
-{% use '@template/default/template/account/widget_user.tpl' %}
-{% set currUser = get_current_user() %}
             {% block stylesheet %}
-            {{ block('widget_user_stylesheet') }}
             {% endblock %}
             {% block body %}
                 <div class="innerAll">
@@ -605,7 +602,7 @@
                         </div>
                         <!-- WIDGET -->
                         <div class="col-md-4 col-lg-3">
-                        {{ block('widget_user') }}
+                        {{ include(template_from_string( widget_user )) }}
                         {% block widget_recent_news %}
                             <div class="widget">
                                 <h5 class="innerAll margin-none border-bottom bg-gray">Recent News</h5>
@@ -681,5 +678,4 @@
                 </div>
             {% endblock %}
             {% block javascript %}
-            {{ block('widget_user_javascript') }}
             {% endblock %}

@@ -1,5 +1,5 @@
-<?php 
-class ControllerAccountWall extends Controller { 
+<?php
+class ControllerAccountWall extends Controller {
 	private $iLimit = 20;
 
 	public function index() {
@@ -8,7 +8,7 @@ class ControllerAccountWall extends Controller {
 		} else {
 			$this->data['base'] = HTTP_SERVER;
 		}
-		
+
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
@@ -43,19 +43,20 @@ class ControllerAccountWall extends Controller {
 
 		// Title
 		$this->data['heading_title'] = gettext('Wall Page of') . ' ' . $oCurrUser->getUsername();
-		
+
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/wal.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/wall.tpl';
 		} else {
 			$this->template = 'default/template/account/wall.tpl';
 		}
-		
+
 		$this->children = array(
 			'common/sidebar_control',
 			'common/footer',
-			'common/header'
+			'widget/account/widget_user',
+			'common/header',
 		);
-										
+
 		$this->response->setOutput($this->twig_render());
 	}
 }
