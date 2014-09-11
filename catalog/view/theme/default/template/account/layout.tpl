@@ -72,6 +72,8 @@
 	    </script>
     	<!-- Library Script -->
 	    <script src="{{ asset_css('platform/library/bootstrap/js/bootstrap.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
+    	<script type="text/javascript" src="{{ asset_js('libs/knockout.js') }}"></script>
+    	<script type="text/javascript" src="{{ asset_js('libs/knockout.mapping.js') }}"></script>
 	    <script src="{{ asset_css('platform/plugins/core_nicescroll/jquery.nicescroll.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
 	    <script src="{{ asset_css('platform/plugins/core_breakpoints/breakpoints.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
 	    <script src="{{ asset_css('platform/plugins/core_preload/pace.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
