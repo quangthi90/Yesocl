@@ -48,7 +48,7 @@
             </div>
             <!-- WIDGET -->
             <div class="col-md-4 col-lg-3">
-            {{ include(template_from_string( widget_user )) }}
+            {{ include(template_from_string( user )) }}
             {% block widget_recent_news %}
                 <div class="widget">
                     <h5 class="innerAll margin-none border-bottom bg-gray">Recent News</h5>

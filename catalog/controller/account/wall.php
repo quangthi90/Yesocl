@@ -53,7 +53,7 @@ class ControllerAccountWall extends Controller {
 		$this->children = array(
 			'widget/common/left_sidebar',
 			'common/footer',
-			'widget/account/widget_user',
+			'widget/account/user',
 			'common/header',
 		);
 
