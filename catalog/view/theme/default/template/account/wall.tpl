@@ -11,7 +11,7 @@
 {% endblock %}
 {% block header %}
     {% if is_logged() == true %}
-        {{ include(template_from_string( sidebar_control )) }}
+        {{ include(template_from_string( left_sidebar )) }}
         {{ block('menu_right') }}
     {% endif %}
 {% endblock %}

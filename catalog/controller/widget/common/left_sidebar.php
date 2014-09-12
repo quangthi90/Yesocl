@@ -1,5 +1,5 @@
 <?php
-class ControllerCommonSidebarControl extends Controller {
+class ControllerWidgetCommonLeftSidebar extends Controller {
 	public function index() {
 		$oLoggedUser = $this->customer->getUser();
 
@@ -9,10 +9,10 @@ class ControllerCommonSidebarControl extends Controller {
 			$this->data['show_branch_menu'] = true;
 		}
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/sidebar_control.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/common/sidebar_control.tpl';
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/left_sidebar.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/common/left_sidebar.tpl';
 		} else {
-			$this->template = 'default/template/common/sidebar_control.tpl';
+			$this->template = 'default/template/common/left_sidebar.tpl';
 		}
 
 		$this->response->setOutput($this->twig_render());
