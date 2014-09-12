@@ -1,6 +1,10 @@
 {% extends '@template/default/template/account/layout.tpl' %}
+
 {% use '@template/default/template/post/wall_post.tpl' %}
 {% use '@template/default/template/account/menu_right.tpl' %}
+
+{% block title %}{{ heading_title }}{% endblock %}
+
 {% block stylesheet %}
     {{ block('menu_right_stylesheet') }}
     {{ block('wall_post_block_stylesheet') }}
