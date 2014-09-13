@@ -568,7 +568,7 @@
 {% block wall_post_block %}
     <div class="gridalicious-row wall-post-list" data-toggle="gridalicious" data-gridalicious-width="340" data-gridalicious-gutter="12" data-gridalicious-selector=".gridalicious-item">
         <!-- ko if: loading -->
-        <div class="innerAll inner-2x loading text-center text-medium"><i class="fa fa-fw fa-spinner fa-spin"></i> Loading</div>
+        <div class="innerAll inner-2x loading text-center text-medium"><i class="fa fa-fw fa-spinner fa-spin"></i> {% trans %}Loading{% endtrans %}</div>
         <!-- /ko -->
         <div class="loaded hide2">
             <!-- ko foreach: posts -->
@@ -592,7 +592,7 @@
                 </div>
                 <!-- Comment -->
                 <div class="bg-gray innerAll border-top border-bottom text-small ">
-                    <span>View all <a href="" class="text-primary" data-bind="text: $data.commentCount"></a></span>
+                    <span>{% trans %}View all{% endtrans %} <a class="text-primary" href="#"><span data-bind="text: $data.commentCount"></span> <span data-bind="text: $data.commentCount > 1 ? '{% trans %}Comments{% endtrans %}' : '{% trans %}Comment{% endtrans %}'"></span></a></span>
                 </div>
                 <!-- First Comment -->
                 <div class="media margin-none bg-gray">
@@ -604,7 +604,7 @@
                     </div>
                 </div>
                 <div class="input-group comment">
-                    <input type="text" class="form-control" placeholder="Your comment here...">
+                    <input type="text" class="form-control" placeholder="{% trans %}Your comment here...{% endtrans %}">
                     <div class="input-group-btn">
                         <button type="button" class="btn btn-primary" href="#"><i class="fa fa-comment"></i></button>
                     </div>
@@ -624,7 +624,7 @@
             this.target = (typeof options.target == 'undefined')?'':options.target;
             this.userSlug = (typeof options.userSlug == 'undefined')?'':options.userSlug;
             this.posts = ko.observableArray((typeof options.posts == 'undefined')?[]:options.posts);
-            this.loading = ko.observable((typeof options.loading == 'undefined')?false:options.loading);
+            this.loading = ko.observable((typeof options.loading == 'undefined')?true:options.loading);
             this.canLoadMore = ko.observable((typeof options.canLoadMore == 'undefined')?true:options.canLoadMore);
             this.urls = options.urls || [];
             this.currentPage = ko.observable(1);
@@ -634,7 +634,6 @@
                 if(that.canLoadMore()){
                     //Delay for loading news:
                     setTimeout(function(){
-                        that.loading(true);
                         _load();
                     }, 300);
                 }
@@ -643,6 +642,7 @@
                 $(window).scroll(function(event) {
                     /* Act on the event */
                     if ($(window).scrollTop() + $(window).height() == $(document).height() && that.canLoadMore() && !that.loading()) {
+                        that.loading(true);
                         _load();
                     }
                 });
@@ -669,13 +669,12 @@
                             if(data.canLoadMore !== undefined) {
                                 that.canLoadMore(data.canLoadMore);
                             }
-                            that.currentPage(that.currentPage() + 1);
                         }
-                        that.loading(false);
                     }
                 })
                 .done(function() {
-                    console.log("success");
+                    that.currentPage(that.currentPage() + 1);
+                    that.loading(false);
                 })
                 .fail(function() {
                     console.log("error");
