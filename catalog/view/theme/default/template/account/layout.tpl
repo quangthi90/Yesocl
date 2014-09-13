@@ -83,6 +83,10 @@
 	    <script src="{{ asset_css('platform/plugins/ui_modals/bootbox.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
 	    <script src="{{ asset_css('platform/plugins/other_mixitup/jquery.mixitup.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
 	    <script src="{{ asset_css('platform/plugins/other_mixitup/mixitup.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/jquery.timeago.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/momment/moment.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('ko-model.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('common-utils.js') }}"></script>
     	{% block library_javascript %}
 		{% endblock %}
     	{# Common Script #}

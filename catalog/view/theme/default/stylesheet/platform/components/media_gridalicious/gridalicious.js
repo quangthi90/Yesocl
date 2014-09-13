@@ -7,14 +7,24 @@
 			$('[data-toggle*="gridalicious"]').each(function()
 			{
 				var $that = $(this);
-				$(this).find('.loading').remove().end()
-				.find('.loaded').removeClass('hide2').end()
-				.gridalicious(
-				{
-					gutter: $that.attr('data-gridalicious-gutter') ? parseInt($that.attr('data-gridalicious-gutter')) : 13, 
+				$(this).gridalicious({
+					gutter: $that.attr('data-gridalicious-gutter') ? parseInt($that.attr('data-gridalicious-gutter')) : 13,
 					width: $that.attr('data-gridalicious-width') ? parseInt($that.attr('data-gridalicious-width')) : 200,
-					selector: $that.attr('data-gridalicious-selector') || '.widget'
+					selector: $that.attr('data-gridalicious-selector') || '.widget',
+					animate: true,
+				  	animationOptions: {
+					    speed: 200,
+					    duration: 300,
+					    },
 				});
+				// $(this).find('.loading').remove().end()
+				// .find('.loaded').removeClass('hide2').end()
+				// .gridalicious(
+				// {
+				// 	gutter: $that.attr('data-gridalicious-gutter') ? parseInt($that.attr('data-gridalicious-gutter')) : 13,
+				// 	width: $that.attr('data-gridalicious-width') ? parseInt($that.attr('data-gridalicious-width')) : 200,
+				// 	selector: $that.attr('data-gridalicious-selector') || '.widget'
+				// });
 			});
 
 		}, 200);
