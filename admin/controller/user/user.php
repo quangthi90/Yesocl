@@ -736,7 +736,7 @@ class ControllerUserUser extends Controller {
 		// Link
 		$this->data['insert'] = $this->url->link( 'user/user/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		$this->data['delete'] = $this->url->link( 'user/user/delete', 'token=' . $this->session->data['token'], 'SSL' );
-		$this->data['autocomplete_type'] = html_entity_decode( $this->url->link( 'user/user/delete', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['autocomplete_user'] = html_entity_decode( $this->url->link( 'user/user/autocomplete', 'token=' . $this->session->data['token'], 'SSL' ));
 
 		// user
 		$data = array(
