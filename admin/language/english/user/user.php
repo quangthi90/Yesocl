@@ -29,6 +29,8 @@ $_['text_view']		  				= 'View';
 $_['text_visible']		  			= 'Visible';
 $_['text_year']		  				= 'Year:';
 $_['text_select_image']		  		= 'Select image:';
+$_['text_disable']      			= 'Disable';
+$_['text_enable']      				= 'Enable';
 
 // Button
 $_['button_add_education']		  	= 'Add Education';

@@ -28,7 +28,7 @@
               <td><?php echo $text_username; ?></td>
               <td><?php echo $text_email; ?></td>
               <td><?php echo $text_group; ?></td>
-              <td><?php echo $text_status; ?></td>
+              <td style="width:50px;"><?php echo $text_status; ?></td>
               <td><?php echo $text_action; ?></td>
             </tr>
           </thead>
@@ -68,3 +68,123 @@
   </div>
 </div>
 <?php echo $footer; ?>
+<script type="text/javascript"><!--
+function filter() {
+  url = 'index.php?route=user/user';
+  
+  var filter_username = $('input[name=\'filter_username\']').attr('value');
+  
+  if (filter_username) {
+    url += '&filter_username=' + encodeURIComponent(filter_username);
+  }
+
+  var filter_email = $('input[name=\'filter_email\']').attr('value');
+  
+  if (filter_email) {
+    url += '&filter_email=' + encodeURIComponent(filter_email);
+  }
+
+  var filter_group = $('input[name=\'filter_group\']').attr('value');
+  
+  if (filter_group) {
+    url += '&filter_group=' + encodeURIComponent(filter_group);
+  }
+
+  location = url;
+}
+//--></script> 
+<script type="text/javascript"><!--
+$('#form input').keydown(function(e) {
+  if (e.keyCode == 13) {
+    filter();
+  }
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('input[name=\'filter_username\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: '<?php echo $autocomplete_user; ?>&filter_username=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.name,
+            value: item.id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('input[name=\'filter_username\']').val(ui.item.label);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('input[name=\'filter_email\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: '<?php echo $autocomplete_user; ?>&filter_email=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.code,
+            value: item.id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('input[name=\'filter_email\']').val(ui.item.label);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('input[name=\'filter_group\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: '<?php echo $autocomplete_user; ?>&filter_group=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.code,
+            value: item.id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('input[name=\'filter_group\']').val(ui.item.label);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script> 
+<script type="text/javascript"><!--//
+$('#form').on('submit', function(){
+  if ( $('input[checked=\'checked\'][hasvalues=\'1\']').length > 0 ) {
+    alert('<?php echo $text_has_values; ?>');
+  }
+});
+//--></script>

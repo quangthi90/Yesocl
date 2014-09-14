@@ -744,7 +744,7 @@ class ControllerUserUser extends Controller {
 			'filter_email' => $filter_email,
 			'filter_group' => $filter_group,
 			'sort' => $sort,
-			'order' => $order
+			'order' => $order,
 			'start' => ($page - 1) * $this->limit,
 			'limit' => $this->limit
 		);
