@@ -33,6 +33,14 @@
             </tr>
           </thead>
           <tbody>
+            <tr class="filter">
+              <td></td>
+              <td><input type="text" name="filter_username" value="<?php echo $filter_username; ?>" /></td>
+              <td><input type="text" name="filter_email" value="<?php echo $filter_email; ?>" /></td>
+              <td><input type="text" name="filter_group" value="<?php echo $filter_group; ?>" /></td>
+              <td><select name="status"><option></option><option value="1" <?php if ($filter_status) { ?>selected="selected"<?php } ?> ><?php echo $text_enable; ?></option><option value="0" <?php if (!$filter_status) { ?>selected="selected"<?php } ?> ><?php echo $text_disable; ?></option></select></td>
+              <td align="right"><a onclick="filter();" class="btn btn-primary"><?php echo $button_filter; ?></a></td>
+            </tr>
             <?php if ($users) { ?>
             <?php foreach ($users as $user) { ?>
             <tr>
