@@ -17,11 +17,17 @@ Class Messages {
 	/** @MongoDB\EmbedMany(targetDocument="Message") */
 	private $messages = array();
 
+    /** @MongoDB\Date */
+	private $created;
+
+    /** @MongoDB\Date */
+	private $updated;
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
     	$this->created = new \DateTime();
-    	$this->unRead = 0;
+    	$this->updated = new \DateTime();
     }
 
 	public function getId() {
@@ -41,22 +47,8 @@ Class Messages {
 	}
 
 	public function addMessage( Message $message ){
-		if ( $oMessage = $this->getLastMessageByUserId($message->getObject()->getId()) ){
-			$this->lastMessages->removeElement( $oMessage );
-		}
-
-		$this->lastMessages[] = $message;
 		$this->messages[] = $message;
-
-		if ( $message->getRead() == false ){
-			$iUnread = 0;
-			foreach ( $this->lastMessages as $oMessage ) {
-				if ( !$oMessage->getRead() ){
-					$iUnread++;
-				}
-			}
-			$this->user->setUnRead( $iUnread );
-		}
+    	$this->updated = new \DateTime();
 	}
 
 	public function setMessages( $messages ){
@@ -65,5 +57,21 @@ Class Messages {
 
 	public function getMessages(){
 		return $this->messages;
+	}
+
+	public function setCreated( $created ){
+		$this->created = $created;
+	}
+
+	public function getCreated(){
+		return $this->created;
+	}
+
+	public function setUpdated( $updated ){
+		$this->updated = $updated;
+	}
+
+	public function getUpdated(){
+		return $this->updated;
 	}
 }
