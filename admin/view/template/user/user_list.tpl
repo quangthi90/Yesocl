@@ -35,10 +35,13 @@
           <tbody>
             <tr class="filter">
               <td></td>
-              <td><input type="text" name="filter_username" value="<?php echo $filter_username; ?>" /></td>
-              <td><input type="text" name="filter_email" value="<?php echo $filter_email; ?>" /></td>
-              <td><input type="text" name="filter_group" value="<?php echo $filter_group; ?>" /></td>
-              <td><select name="status"><option></option><option value="1" <?php if ($filter_status) { ?>selected="selected"<?php } ?> ><?php echo $text_enable; ?></option><option value="0" <?php if (!$filter_status) { ?>selected="selected"<?php } ?> ><?php echo $text_disable; ?></option></select></td>
+              <td><input type="text" id="filter_username" name="filter_username" value="<?php echo $filter_username; ?>" /></td>
+              <td><input type="text" id="filter_email" name="filter_email" value="<?php echo $filter_email; ?>" /></td>
+              <td><input type="text" id="filter_group" name="filter_group" value="<?php echo $filter_group; ?>" /></td>
+              <td><select id="status" name="status">
+                <option value="">--None--</option>
+                <option value="1" <?php if ($filter_status==1) { ?>selected="selected"<?php } ?> ><?php echo $text_enabled; ?></option>
+                <option value="2" <?php if ($filter_status==2) { ?>selected="selected"<?php } ?> ><?php echo $text_disabled; ?></option></select></td>
               <td align="right"><a onclick="filter();" class="btn btn-primary"><?php echo $button_filter; ?></a></td>
             </tr>
             <?php if ($users) { ?>
@@ -67,17 +70,17 @@
     </div>
   </div>
 </div>
-<?php echo $footer; ?>
+
 <script type="text/javascript"><!--
 function filter() {
-  url = 'index.php?route=user/user';
+  url = 'index.php?route=user/user&token=<?php echo $token; ?>';
   
   var filter_username = $('input[name=\'filter_username\']').attr('value');
   
   if (filter_username) {
     url += '&filter_username=' + encodeURIComponent(filter_username);
   }
-
+  
   var filter_email = $('input[name=\'filter_email\']').attr('value');
   
   if (filter_email) {
@@ -91,6 +94,7 @@ function filter() {
   }
 
   location = url;
+  alert(location);
 }
 //--></script> 
 <script type="text/javascript"><!--
@@ -105,7 +109,7 @@ $('input[name=\'filter_username\']').autocomplete({
   delay: 0,
   source: function(request, response) {
     $.ajax({
-      url: '<?php echo $autocomplete_user; ?>&filter_username=' +  encodeURIComponent(request.term),
+      url: 'index.php?route=usser/user/search&token=<?php echo $token; ?>&filter_username=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {
@@ -132,7 +136,7 @@ $('input[name=\'filter_email\']').autocomplete({
   delay: 0,
   source: function(request, response) {
     $.ajax({
-      url: '<?php echo $autocomplete_user; ?>&filter_email=' +  encodeURIComponent(request.term),
+      url: 'index.php?route=usser/user/search&token=<?php echo $token; ?>&filter_email=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {
@@ -159,7 +163,7 @@ $('input[name=\'filter_group\']').autocomplete({
   delay: 0,
   source: function(request, response) {
     $.ajax({
-      url: '<?php echo $autocomplete_user; ?>&filter_group=' +  encodeURIComponent(request.term),
+      url: 'index.php?route=usser/user/search&token=<?php echo $token; ?>&filter_group=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {
@@ -188,3 +192,4 @@ $('#form').on('submit', function(){
   }
 });
 //--></script>
+<?php echo $footer; ?>
