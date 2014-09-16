@@ -63,6 +63,9 @@ Class User {
 	/** @MongoDB\String */
 	private $avatar;
 
+	/** @MongoDB\String */
+	private $cover;
+
 	/** @MongoDB\ReferenceOne(targetDocument="Posts", mappedBy="user") */
 	private $postData;
 
@@ -127,7 +130,8 @@ Class User {
 			'slug'			=> $this->getSlug(),
 			'email' 		=> $this->getPrimaryEmail()->getEmail(),
 			'current'		=> $this->getMeta()->getCurrent(),
-			'gender'		=> $this->meta->getSex()
+			'gender'		=> $this->getMeta()->getSex(),
+			'cover'			=> $this->getCover()
 		);
 
 		return $data;
@@ -140,11 +144,12 @@ Class User {
 	* @return: Object Email
 	*/
 	public function getPrimaryEmail() {
-		foreach ($this->emails as $email) {
+		foreach ($this->getEmails() as $email) {
 			if ($email->getPrimary()) {
 				return $email;
 			}
 		}
+		return null;
 	}
 
 	/**
@@ -157,7 +162,7 @@ Class User {
 	*	- false: not exist
 	*/
 	public function isExistEmail( $email ) {
-		foreach ( $this->emails as $email_data ) {
+		foreach ( $this->getEmails() as $email_data ) {
 			if ( strtolower( trim( $email ) ) == $email_data->getEmail() ) {
 				return true;
 			}
@@ -167,7 +172,7 @@ Class User {
 	}
 
 	public function getFriendBySlug( $friend_slug ){
-		foreach ( $this->friends as $friend ) {
+		foreach ( $this->getFriends() as $friend ) {
 			if ( $friend->getUser() && $friend->getUser()->getSlug() == $friend_slug){
 				return $friend;
 			}
@@ -185,7 +190,7 @@ Class User {
 	 * 		- null if not found
 	 */
 	public function getNotificationById( $notification_id ){
-		foreach ( $this->notifications as $notification ){
+		foreach ( $this->getNotifications() as $notification ){
 			if ( $notification->getId() == $notification_id ){
 				return $notification;
 			}
@@ -195,7 +200,7 @@ Class User {
 	}
 
 	public function getNotificationByData( $actor_id, $object_id, $action ){
-		foreach ( $this->notifications as $notification ){
+		foreach ( $this->getNotifications() as $notification ){
 			if ( $notification->getActor() 
 				&& $notification->getActor()->getId() == $actor_id
 				&& $notification->getObjectId() == $object_id
@@ -208,7 +213,7 @@ Class User {
 	}
 
 	public function getBranchBySlug( $branch_slug ){
-		foreach ( $this->branches as $branch ){
+		foreach ( $this->getBranches() as $branch ){
 			if ( $branch->getSlug() == $branch_slug ){
 				return $branch;
 			}
@@ -554,6 +559,14 @@ Class User {
 		catch(Exception $e){
 			throw new Exception( 'Have error when add Data for Solr PrimaryEmail!<br>See User Document <b>Function getDataSolrPrimaryEmail()</b>', 0, $e);
 		}
+	}
+
+	public function getCover(){
+		return $this->cover;
+	}
+
+	public function setCover($cover){
+		$this->cover = $cover;
 	}
 	//---------------------------------- end Solr Data Cache --------------------------
 }
