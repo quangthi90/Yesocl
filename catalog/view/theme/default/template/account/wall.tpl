@@ -24,7 +24,7 @@
                 <div class="timeline-cover">
                     <div class="cover">
                         <div class="top">
-                            <img src="{{ asset_css('platform/images/photodune-2755655-party-time-s.jpg') }}" class="img-responsive" />
+                            <img src="{{ asset_root_image('photodune-2755655-party-time-s.jpg') }}" class="img-responsive" />
                         </div>
                         <ul class="list-unstyled">
                             <li class="active"><a href="index.html?lang=en"><i class="fa fa-fw fa-clock-o"></i> <span>Timeline</span></a></li>
@@ -54,7 +54,7 @@
                     <h5 class="innerAll margin-none border-bottom bg-gray">Recent News</h5>
                     <div class="widget-body padding-none">
                         <div class="media border-bottom innerAll margin-none">
-                            <img src="{{ asset_css('platform/images/people/35/22.jpg') }}" class="pull-left media-object"/>
+                            <img src="{{ asset_root_image('people/35/22.jpg') }}" class="pull-left media-object"/>
                             <div class="media-body">
                                 <a href="" class="pull-right text-muted innerT half">
                                     <i class="fa fa-comments"></i> 4
@@ -64,42 +64,12 @@
                             </div>
                         </div>
                         <div class="media border-bottom innerAll margin-none">
-                            <img src="{{ asset_css('platform/images/people/35/22.jpg') }}" class="pull-left media-object"/>
+                            <img src="{{ asset_root_image('people/35/22.jpg') }}" class="pull-left media-object"/>
                             <div class="media-body">
                                 <a href="" class="pull-right text-muted innerT half">
                                     <i class="fa fa-comments"></i> 4
                                 </a>
                                 <h5 class="margin-none"><a href="" class="text-inverse">Timeline Cover Page</a></h5>
-                                <small>on February 2nd, 2014 </small>
-                            </div>
-                        </div>
-                        <div class="media border-bottom innerAll margin-none">
-                            <img src="{{ asset_css('platform/images/people/35/22.jpg') }}" class="pull-left media-object"/>
-                            <div class="media-body">
-                                <a href="" class="pull-right text-muted innerT half">
-                                    <i class="fa fa-comments"></i> 4
-                                </a>
-                                <h5 class="margin-none"><a href="" class="text-inverse">1000+ Sales</a></h5>
-                                <small>on February 2nd, 2014 </small>
-                            </div>
-                        </div>
-                        <div class="media border-bottom innerAll margin-none">
-                            <img src="{{ asset_css('platform/images/people/35/22.jpg') }}" class="pull-left media-object"/>
-                            <div class="media-body">
-                                <a href="" class="pull-right text-muted innerT half">
-                                    <i class="fa fa-comments"></i> 4
-                                </a>
-                                <h5 class="margin-none"><a href="" class="text-inverse">On-Page Optimization</a></h5>
-                                <small>on February 2nd, 2014 </small>
-                            </div>
-                        </div>
-                        <div class="media border-bottom innerAll margin-none">
-                            <img src="{{ asset_css('platform/images/people/35/22.jpg') }}" class="pull-left media-object"/>
-                            <div class="media-body">
-                                <a href="" class="pull-right text-muted innerT half">
-                                    <i class="fa fa-comments"></i> 4
-                                </a>
-                                <h5 class="margin-none"><a href="" class="text-inverse">14th Admin Template</a></h5>
                                 <small>on February 2nd, 2014 </small>
                             </div>
                         </div>

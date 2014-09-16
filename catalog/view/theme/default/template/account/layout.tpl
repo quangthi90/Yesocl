@@ -13,16 +13,19 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 		{# Icon #}
 		<link rel="shortcut icon" href="image/template/favicon.png">
+		
 		{# Library css
-		<!--
 		**********************************************************
 		In development, use the LESS files and the less.js compiler
 		instead of the minified CSS loaded by default.
 		**********************************************************
-		<link rel="stylesheet/less" href="{{ asset_css('platform/less/admin/module.admin.stylesheet-complete.less') }}" />
-		-->#}
-	    <!--[if lt IE 9]><link rel="stylesheet" href="{{ asset_css('platform/components/library/bootstrap/css/bootstrap.min.css') }}" /><![endif]-->
-	    <link rel="stylesheet" href="{{ asset_css('platform/css/admin/module.admin.stylesheet-complete.min.css') }}" />
+		<link rel="stylesheet/less" href="{{ asset_root_less('admin/module.admin.stylesheet-complete.less') }}" />
+		<link rel="stylesheet" href="{{ asset_root_css('admin/module.admin.stylesheet-complete.min.css') }}" />
+		#}
+
+	    <link rel="stylesheet/less" href="{{ asset_root_less('admin/module.admin.stylesheet-complete.less') }}" />
+
+	    <!--[if lt IE 9]><link rel="stylesheet" href="{{ asset_library('bootstrap/css/bootstrap.min.css') }}" /><![endif]-->
 	    {#<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->#}
 	    <!--[if lt IE 9]>
 	    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -51,56 +54,52 @@
 	    {# Global #}
 	    <script data-id="App.Config">
 		    var App = {};   var basePath = '',
-		    commonPath = '{{ asset_css('platform/') }}',
-		    rootPath = '../',
+		    commonPath = "{{ asset_root('') }}",
+		    rootPath = "../",
 		    DEV = false,
-		    componentsPath = '{{ asset_css('platform/components/') }}';
-		    var primaryColor = '#25ad9f',
-		    dangerColor = '#b55151',
-		    successColor = '#609450',
-		    infoColor = '#4a8bc2',
-		    warningColor = '#ab7a4b',
-		    inverseColor = '#45484d';
+		    componentsPath = "{{ asset_component('') }}";
+		    var primaryColor = "#25ad9f",
+		    dangerColor = "#b55151",
+		    successColor = "#609450",
+		    infoColor = "#4a8bc2",
+		    warningColor = "#ab7a4b",
+		    inverseColor = "#45484d";
 		    var themerPrimaryColor = primaryColor;
 	    </script>
+	    
     	<!-- Library Script -->
-    	<script src="{{ asset_css('platform/library/jquery/jquery.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="{{ asset_css('platform/library/jquery/jquery-migrate.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="{{ asset_css('platform/library/modernizr/modernizr.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="{{ asset_css('platform/plugins/core_less-js/less.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="{{ asset_css('platform/plugins/charts_flot/excanvas.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="{{ asset_css('platform/plugins/core_browser/ie/ie.prototype.polyfill.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
+    	<script src="{{ asset_library('jquery/jquery.min.js') }}"></script>
+	    <script src="{{ asset_library('jquery/jquery-migrate.min.js') }}"></script>
+	    <script src="{{ asset_library('modernizr/modernizr.js') }}"></script>
+	    <script src="{{ asset_plugin('core_less-js/less.min.js') }}"></script>
+	    <script src="{{ asset_plugin('core_browser/ie/ie.prototype.polyfill.js') }}"></script>
 	    <script>if (/*@cc_on!@*/false && document.documentMode === 10) { document.documentElement.className+=' ie ie10'; }</script>
-	    <script src="{{ asset_css('platform/library/bootstrap/js/bootstrap.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-    	<script type="text/javascript" src="{{ asset_js('libs/knockout.js') }}"></script>
-    	<script type="text/javascript" src="{{ asset_js('libs/knockout.mapping.js') }}"></script>
-	    <script src="{{ asset_css('platform/plugins/core_nicescroll/jquery.nicescroll.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="{{ asset_css('platform/plugins/core_breakpoints/breakpoints.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="{{ asset_css('platform/plugins/core_preload/pace.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="{{ asset_css('platform/plugins/menu_sidr/jquery.sidr.js?v=v2.0.0-rc8') }}"></script>
-	    <script src="{{ asset_css('platform/plugins/media_holder/holder.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="{{ asset_css('platform/plugins/media_gridalicious/jquery.gridalicious.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="{{ asset_css('platform/plugins/ui_modals/bootbox.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="{{ asset_css('platform/plugins/other_mixitup/jquery.mixitup.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="{{ asset_css('platform/plugins/other_mixitup/mixitup.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('libs/jquery.timeago.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('libs/momment/moment.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('ko-model.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('common-utils.js') }}"></script>
+	    <script src="{{ asset_library('bootstrap/js/bootstrap.min.js') }}"></script>
+    	<script src="{{ asset_library('knockout/knockout.js') }}"></script>
+		<script src="{{ asset_library('momment/moment.min.js') }}"></script>	
+	    <script src="{{ asset_plugin('core_nicescroll/jquery.nicescroll.min.js') }}"></script>
+	    <script src="{{ asset_plugin('core_breakpoints/breakpoints.js') }}"></script>
+	    <script src="{{ asset_plugin('core_preload/pace.min.js') }}"></script>
+	    <script src="{{ asset_plugin('menu_sidr/jquery.sidr.js') }}"></script>
+	    <script src="{{ asset_plugin('media_holder/holder.js') }}"></script>
+	    <script src="{{ asset_plugin('media_gridalicious/jquery.gridalicious.min.js') }}"></script>
+	    <script src="{{ asset_plugin('ui_modals/bootbox.min.js') }}"></script>
+	    <script src="{{ asset_plugin('other_mixitup/jquery.mixitup.min.js') }}"></script>
+	    <script src="{{ asset_plugin('other_mixitup/mixitup.js') }}"></script>	    
     	{% block library_javascript %}
 		{% endblock %}
     	{# Common Script #}
-	    <script src="{{ asset_css('platform/components/core_preload/preload.pace.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="{{ asset_css('platform/components/widget_twitter/twitter.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="{{ asset_css('platform/components/media_gridalicious/gridalicious.js?v=v2.0.0-rc8') }}"></script>
-	    <script src="{{ asset_css('platform/components/maps_google/maps-google.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-	    <script src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false&callback=initGoogleMaps"></script>
-	    <script src="{{ asset_css('platform/components/menus/sidebar.main.js?v=v2.0.0-rc8') }}"></script>
-	    <script src="{{ asset_css('platform/components/menus/sidebar.collapse.js?v=v2.0.0-rc8') }}"></script>
-	    <script src="{{ asset_css('platform/components/menus/menus.sidebar.chat.js?v=v2.0.0-rc8') }}"></script>
+	    <script src="{{ asset_component('core_preload/preload.pace.js') }}"></script>
+	    <script src="{{ asset_component('widget_twitter/twitter.js') }}"></script>
+	    <script src="{{ asset_component('media_gridalicious/gridalicious.js') }}"></script>
+	    <script src="{{ asset_component('menus/sidebar.main.js') }}"></script>
+	    <script src="{{ asset_component('menus/sidebar.collapse.js') }}"></script>
+	    <script src="{{ asset_component('menus/menus.sidebar.chat.js') }}"></script>
+	    <script src="{{ asset_root('global.js') }}"></script>
+	    <script src="{{ asset_module('common/ko-model.js') }}"></script>
     	{% block common_javascript %}
 		{% endblock %}
-	    <script src="{{ asset_css('platform/components/core/core.js?v=v2.0.0-rc8') }}"></script>
+	    <script src="{{ asset_component('core/core.js') }}"></script>
 		{# Custom Script #}
     	{% block javascript %}
 		{% endblock %}
