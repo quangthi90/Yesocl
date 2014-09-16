@@ -749,6 +749,7 @@ class ControllerUserUser extends Controller {
 			'limit' => $this->limit
 		);
 		
+		$this->load->model('user/user');
 		$users = $this->model_user_user->getUsers( $data );
 		
 		$user_total = $this->model_user_user->getTotalUsers();
@@ -860,6 +861,8 @@ class ControllerUserUser extends Controller {
 
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
+
+		$this->data['token'] = $this->session->data['token'];
 
 		$this->template = 'user/user_list.tpl';
 		$this->children = array(
