@@ -860,7 +860,7 @@ class ModelUserUser extends Model {
 		}
 
 		if ( !empty($data['filter_username']) ){
-			$query['username'] = new \MongoRegex('/i*' . trim($data['filter_username']) . '.*/i');
+			$query['username'] = new \MongoRegex('/' . trim($data['filter_username']) . '.*/i');
 		}
 
 		if ( !empty($data['filter_email']) ){
