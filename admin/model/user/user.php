@@ -844,6 +844,11 @@ class ModelUserUser extends Model {
 			return $this->dm->getRepository( 'Document\User\User' )->findBy( array('id' => array( '$in' => array_values($data['ids']) ) ) );
 		}
 
+		if ( empty($aData['sort']) ){
+			$data['order'] = 'usernamer';
+			$data['sort'] = 1;
+		}
+
 		$query = array('deleted' => false);
 
 		if (!isset($data['limit']) || ((int)$data['limit'] < 0)) {
@@ -854,8 +859,27 @@ class ModelUserUser extends Model {
 			$data['start'] = 0;
 		}
 
-		return $this->dm->getRepository( 'Document\User\User' )->findBy( $query )
-			->limit( $data['limit'] )->skip( $data['start'] )->sort( array('created' => -1) );
+		if ( !empty($aData['filter_username']) ){
+			$aQuery['username'] = new \MongoRegex('/i*' . trim($aData['filter_username']) . '.*/i');
+		}
+
+		if ( !empty($aData['filter_email']) ){
+			$aQuery['email'] = new \MongoRegex('/' . trim($aData['filter_email']) . '.*/i');
+		}
+
+		if ( !empty($aData['filter_group']) ){
+			$aQuery['group'] = new \MongoRegex('/' . trim($aData['filter_group']) . '.*/i');
+		}
+
+		if ( !empty($aData['filter_status']) ){
+			$aQuery['status'] = (boolean)$aData['filter_status'];
+		}
+
+		return $this->dm->getRepository( 'Document\User\User' )
+			->findBy( $query )
+			->limit( $data['limit'] )
+			->skip( $data['start'] )
+			->sort( array('username' => -1) );
 	}
 
 	/**
