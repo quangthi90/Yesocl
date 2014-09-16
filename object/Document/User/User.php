@@ -92,6 +92,12 @@ Class User {
 	/** @MongoDB\Boolean */
 	private $deleted;
 
+	/** @MongoDB\ReferenceMany(targetDocument="Document\Friend\Messages", mappedBy="users") */
+    private $messages = array();
+
+    /** @MongoDB\ReferenceMany(targetDocument="Document\Friend\Message", mappedBy="readers") */
+    private $message = array();
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
