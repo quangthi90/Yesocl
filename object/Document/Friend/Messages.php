@@ -11,6 +11,14 @@ Class Messages {
 	 */
 	private $id;
 
+    /** @MongoDB\ReferenceOne(targetDocument="Document\User\User") */
+    private $creator;
+
+	/**
+	 * @MongoDB\String
+	 */
+	private $name;
+
     /** @MongoDB\ReferenceMany(targetDocument="Document\User\User") */
     private $users = array();
 
@@ -34,6 +42,14 @@ Class Messages {
 		return $this->id;
 	}
 
+	public function setName( $name ){
+		$this->name = $name;
+	}
+
+	public function getName(){
+		return $this->name;
+	}
+
 	public function addUser( User $user ){
 		$this->users[] = $user;
 	}
@@ -44,6 +60,14 @@ Class Messages {
 
 	public function getUsers(){
 		return $this->users;
+	}
+
+	public function setCreator( User $user ){
+		$this->creator = $user;
+	}
+
+	public function getCreator(){
+		return $this->creator;
 	}
 
 	public function addMessage( Message $message ){
