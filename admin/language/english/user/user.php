@@ -31,6 +31,8 @@ $_['text_year']		  				= 'Year:';
 $_['text_select_image']		  		= 'Select image:';
 $_['text_disable']      			= 'Disable';
 $_['text_enable']      				= 'Enable';
+$_['text_default']      			= 'Default';
+$_['text_findAllDocumentGroup']     = 'find All Document Group';
 
 // Button
 $_['button_add_education']		  	= 'Add Education';
