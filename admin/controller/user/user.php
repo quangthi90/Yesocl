@@ -45,6 +45,8 @@ class ControllerUserUser extends Controller {
 		// Text	
 		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
+		$this->data['text_default'] = $this->language->get( 'text_default' );
+		$this->data['text_findAllDocumentGroup'] = $this->language->get( 'text_findAllDocumentGroup' );
 		$this->data['text_true'] = $this->language->get( 'text_true' );
 		$this->data['text_false'] = $this->language->get( 'text_false' );
 		$this->data['text_email'] = $this->language->get( 'text_email' );
@@ -723,6 +725,8 @@ class ControllerUserUser extends Controller {
 		$this->data['text_action'] = $this->language->get( 'text_action' );
 		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
+		$this->data['text_default'] = $this->language->get( 'text_default' );
+		$this->data['text_findAllDocumentGroup'] = $this->language->get( 'text_findAllDocumentGroup' );
 		$this->data['text_edit'] = $this->language->get( 'text_edit' );
 		
 		// Confirm

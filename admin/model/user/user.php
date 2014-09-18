@@ -920,9 +920,9 @@ class ModelUserUser extends Model {
 	}
 
 	public function searchUserByKeyword( $data = array() ) {
-		if ( !isset( $data['filter'] ) || empty( $data['filter'] ) ) {
-			return array();
-		}
+		// if ( !isset( $data['filter'] ) || empty( $data['filter'] ) ) {
+		// 	return array();
+		// }
 
 		$query = $this->client->createSelect(
     		array(
