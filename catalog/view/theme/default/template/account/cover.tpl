@@ -1,6 +1,6 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% block title %}{% trans %}Change Avatar{% endtrans %}{% endblock %}
+{% block title %}{% trans %}Change cover{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
     <link href="{{ asset_css('libs/jquery.jcrop.min.css') }}" rel="stylesheet" media="screen" />
@@ -9,21 +9,21 @@
 {% block body %}
 <div id="y-content" class="no-header-fixed">
   <div id="y-main-content">
-    <div class="y-frm" id="y-frm-avatar">
-        <!-- <div class="frm-title">{% trans %}Change avatar{% endtrans %}</div> -->
+    <div class="y-frm" id="y-frm-cover">
+        <div class="frm-title">{% trans %}Change cover{% endtrans %}</div>
         <div class="alert alert-success {% if success is not defined %}hidden{% endif %}">{{ success }}</div>
         <div class="alert alert-error {% if warning is not defined %}hidden{% endif %}">{{ warning }}</div>
         <div class="frm-content">            
-            <div class="avatar-step upload-container" id="avatar-choose-image">
+            <div class="cover-step upload-container" id="cover-choose-image">
                 <input type="hidden" name="img-url" class="img-url" value="" />
                 <div class="img-previewer-container" placeholder="Drag an photo here">
                     <p class="drop-zone-show">
                         <span>Drag an image here or </span>
                         <span class="drag-img-upload">
-                            <a href="" class="btn btn-yes btn-upload" onclick="$('#avatar-upload-img').trigger('click'); return false;">
+                            <a href="" class="btn btn-yes btn-upload" onclick="$('#cover-upload-img').trigger('click'); return false;">
                                 <span><i class="icon-upload"></i> Choose image</span>
                             </a>
-                            <input type="file" data-no-uniform="true" class="hidden img-upload" id="avatar-upload-img" name="files[]" data-url="{{ path('UploadFile') }}" />
+                            <input type="file" data-no-uniform="true" class="hidden img-upload" id="cover-upload-img" name="files[]" data-url="{{ path('UploadFile') }}" />
                         </span>
                     </p>
                 </div>
@@ -31,12 +31,12 @@
                     <div class="bar" style="width: 0%;"></div>
                 </div>                
             </div>
-            <div class="avatar-step image-cropper" id="avatar-edit-image">
+            <div class="cover-step image-cropper" id="cover-edit-image">
                 <div class="uploaded-image">
                     <img id="uploaded-image">                    
                 </div>
                 <div class="previewed-image">
-                    <label>Preview avatar</label>
+                    <label>Preview cover</label>
                     <div class="previewed-image-container">
                         <div class="none-image"></div>
                         <img id="previewed-image">
@@ -47,8 +47,8 @@
                     </div>  
                 </div>
                 <div class="image-buttons">
-                    <a href="#" class="btn btn-yes" data-has-image="false" data- id="avatar-save">Save avatar</a>
-                    <a href="#" class="btn btn-yes" id="avatar-re-choose-image">Choose another image</a>
+                    <a href="#" class="btn btn-yes" data-has-image="false" data- id="cover-save">Save cover</a>
+                    <a href="#" class="btn btn-yes" id="cover-re-choose-image">Choose another image</a>
                     <a href="#" class="btn btn-yes">Cancel</a>
                 </div>
             </div>
@@ -70,5 +70,6 @@
 <script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-image.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-validate.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/jquery.jcrop.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('avatar.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('cover.js') }}"></script> 
+<!-- avatar.js -->
 {% endblock %}

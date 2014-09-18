@@ -19,6 +19,7 @@
     -->
     <!--[if lt IE 9]><link rel="stylesheet" href="{{ asset_css('platform/components/library/bootstrap/css/bootstrap.min.css') }}" /><![endif]-->
     <link rel="stylesheet" href="{{ asset_css('platform/css/admin/module.admin.stylesheet-complete.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset_css('platform/css/admin/jquery.drag-n-crop.css') }}" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -31,6 +32,7 @@
     <script src="{{ asset_css('platform/plugins/charts_flot/excanvas.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
     <script src="{{ asset_css('platform/plugins/core_browser/ie/ie.prototype.polyfill.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
     <script>if (/*@cc_on!@*/false && document.documentMode === 10) { document.documentElement.className+=' ie ie10'; }</script>
+    
 </head>
 <body class=" menu-right-hidden">
     <!-- Main Container Fluid -->
@@ -959,10 +961,27 @@
                 <div class="row">
                     <div class="col-lg-9 col-md-8">
                         <div class="timeline-cover">
+                            <button id="btsave_cover">save</button>
+                            <button id="btdrag_cover">drag</button>
                             <div class="cover">
                                 <div class="top">
-                                    <img src="{{ asset_css('platform/images/photodune-2755655-party-time-s.jpg') }}" class="img-responsive" />
+                                    <img src="{{ asset_css('platform/images/photodune-2755655-party-time-s.jpg') }}" id="cover"/>
                                 </div>
+                                <div id="position_img"></div>
+
+                                <script type="text/javascript">
+                                    $('#btsave_cover').click(function(){
+                                        $('#cover').draggable( "disable" );
+                                        a = $('#cover').dragncrop('getPosition');
+                                        $('#position_img').text ("Position offset: "+ a.offset);
+                                    })
+
+                                    $('#btdrag_cover').click(function(){
+                                        $('#cover').dragncrop();
+                                        $('#cover').draggable();
+                                        $('#cover').draggable( "enable" );
+                                    })
+                                </script>
                                 <ul class="list-unstyled">
                                     <li class="active"><a href="index.html?lang=en"><i class="fa fa-fw fa-clock-o"></i> <span>Timeline</span></a></li>
                                     <li><a href="about_1.html?lang=en"><i class="fa fa-fw fa-user"></i> <span>About</span></a></li>
@@ -1678,6 +1697,12 @@
     <script src="{{ asset_css('platform/components/menus/menus.sidebar.chat.js?v=v2.0.0-rc8') }}"></script>
     <script src="{{ asset_css('platform/plugins/other_mixitup/jquery.mixitup.min.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
     <script src="{{ asset_css('platform/plugins/other_mixitup/mixitup.js?v=v2.0.0-rc8&sv=v0.0.1.2') }}"></script>
-    <script src="{{ asset_css('platform/components/core/core.js?v=v2.0.0-rc8') }}"></script>
+    <script src="{{ asset_js('platform/components/core/core.js?v=v2.0.0-rc8') }}"></script>
+    {# Salm edit -- check again when merge code of Mr. Thiet #}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="{{ asset_js('imagesloaded.js') }}"></script>
+    <script src="{{ asset_js('scale.fix.js')}}"></script>
+    <script src="{{ asset_js('jquery.drag-n-crop.js')}}"></script>
 </body>
 </html>

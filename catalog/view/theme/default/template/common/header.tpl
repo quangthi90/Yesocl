@@ -44,6 +44,11 @@
                   <i class="icon-camera"></i> {% trans %}Change avatar{% endtrans %}
                 </a>
               </li>
+              <li>
+                <a href="{{ path('ChangeCover') }}">
+                  <i class="icon-camera"></i> {% trans %}Change cover{% endtrans %}
+                </a>
+              </li>
               <li class="divider"></li>
               <li>
                 <a href="{{ path('Logout') }}">
