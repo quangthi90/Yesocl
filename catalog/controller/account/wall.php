@@ -3,6 +3,7 @@ class ControllerAccountWall extends Controller {
 	private $iLimit = 20;
 
 	public function index() {
+
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$this->data['base'] = $this->config->get('config_ssl');
 		} else {
@@ -44,17 +45,18 @@ class ControllerAccountWall extends Controller {
 		// Title
 		$this->data['heading_title'] = gettext('Wall Page of') . ' ' . $oCurrUser->getUsername();
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/wal.tpl')) {
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/wall.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/wall.tpl';
 		} else {
 			$this->template = 'default/template/account/wall.tpl';
 		}
 
 		$this->children = array(
-			'widget/common/left_sidebar',
-			'common/footer',
-			'widget/account/user',
-			'common/header',
+			'common/layout/leftsidebar',
+			'common/layout/rightsidebar',
+			'common/layout/navbar',
+			'common/layout/footer',
+			'widget/account/user'
 		);
 
 		$this->response->setOutput($this->twig_render());

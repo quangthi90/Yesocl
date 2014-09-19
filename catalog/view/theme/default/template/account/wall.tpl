@@ -1,22 +1,13 @@
-{% extends '@template/default/template/account/layout.tpl' %}
+{% extends '@template/default/template/common/layout/master.tpl' %}
 
 {% use '@template/default/template/post/wall_post.tpl' %}
-{% use '@template/default/template/account/menu_right.tpl' %}
 
 {% block title %}{{ heading_title }}{% endblock %}
 
 {% block stylesheet %}
-    {{ block('menu_right_stylesheet') }}
     {{ block('wall_post_block_stylesheet') }}
 {% endblock %}
-{% block header %}
-    {% if is_logged() == true %}
-        {{ include(template_from_string( left_sidebar )) }}
-        {{ block('menu_right') }}
-    {% endif %}
-{% endblock %}
 {% block body %}
-    {{ include(template_from_string( header )) }}
     <div class="innerAll">
         <div class="row">
             <div class="col-lg-9 col-md-8">
@@ -76,31 +67,15 @@
                     </div>
                 </div>
             {% endblock %}
-            {% block widget_twitter_feed %}
-                <div class="widget widget-heading-simple widget-body-white">
-                    <!-- Widget Heading -->
-                    <div class="widget-head">
-                        <h4 class="heading glyphicons glyphicons-social twitter"><i></i>Twitter feed</h4>
-                    </div>
-                    <!-- // Widget Heading END -->
-                    <div class="widget-body" data-builder-exclude="element children">
-                        <div class="jstwitter" data-gridalicious="false" data-type="slide" data-images="false"><span class="label label-default">Loading .. </span></div>
-                    </div>
-                </div>
-            {% endblock %}
             </div>
             <!-- END WIDGET -->
         </div>
     </div>
-{% endblock %}
-{% block footer %}
-    {{ include(template_from_string( footer )) }}
 {% endblock %}
 {% block library_javascript %}
 {% endblock %}
 {% block common_javascript %}
 {% endblock %}
 {% block javascript %}
-    {{ block('menu_right_javascript') }}
-    {{ block('wall_post_block_javascript') }}
+    {# block('wall_post_block_javascript') #}
 {% endblock %}
