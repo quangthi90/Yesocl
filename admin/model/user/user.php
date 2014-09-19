@@ -927,6 +927,49 @@ class ModelUserUser extends Model {
 		$query = $this->client->createSelect(
     		array(
 				'mappedDocument' => 'Document\User\User',
+			)
+    	);
+
+    	if ( !empty($data['username']) ) {
+    		$query->addFilterQuery( 
+    			array(
+				    'key' => 'fq1',
+				    'tag' => array('filter_username'),
+				    'query' => 'name_t:*' . strtoupper( trim($aData['name']) ) . '*',
+					)
+    			);
+    	}
+
+    	if ( !empty($aData['code']) ) {
+    		$query->addFilterQuery( 
+    			array(
+				    'key' => 'fq2',
+				    'tag' => array('filter_code'),
+				    'query' => 'code_t:' . strtoupper( trim($aData['code']) ) . '*',
+					)
+    			);
+    	}
+
+		if ( isset( $aData['start'] ) ) {
+			$aData['start'] = (int)$aData['start'];
+		}else {
+			$aData['start'] = 0;
+		}
+
+		if ( isset( $aData['limit'] ) ) {
+			$aData['limit'] = (int)$aData['limit'];
+		}else {
+			$aData['limit'] = 10;
+		}
+
+		$query->setRows( $aData['limit'] );
+		$query->setStart( $aData['start'] );
+ 
+		return $this->client->execute( $query );
+		/*
+		$query = $this->client->createSelect(
+    		array(
+				'mappedDocument' => 'Document\User\User',
 				)
     	);
 
@@ -950,7 +993,7 @@ class ModelUserUser extends Model {
 		$query->setRows( $data['limit'] );
 		$query->setStart( $data['start'] );
 
-		return $this->client->execute( $query );
+		return $this->client->execute( $query );*/
 	}
 }
 ?>
