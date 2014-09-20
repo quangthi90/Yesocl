@@ -15,7 +15,7 @@ class ControllerLayoutBasic extends Controller {
 			$this->template = 'default/template/layout/basic/left_sidebar.tpl';
 		}
 
-		$this->response->setOutput($this->twig_render());
+		$this->twig_render();
 	}
 
 	public function rightSideBar() {

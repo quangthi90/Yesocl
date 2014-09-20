@@ -86,5 +86,5 @@
 {% endblock %}
 
 {% block javascript %}
-	<script type="text/javascript" src="{{ asset_js('register.js') }}"></script>
+	<script type="text/javascript" src="{{ asset_js_old('register.js') }}"></script>
 {% endblock %}

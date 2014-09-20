@@ -43,16 +43,9 @@ class ExtensionLoader
     {
         return array(
             new Twig_SimpleFunction('path', array($this, 'path')),
-            new Twig_SimpleFunction('asset_css', array($this, 'assetCustomCss')),
+            new Twig_SimpleFunction('asset_css', array($this, 'assetCss')),
             new Twig_SimpleFunction('asset_js', array($this, 'assetJS')),
-            new Twig_SimpleFunction('asset_root', array($this, 'assetRoot')),
-            new Twig_SimpleFunction('asset_root_css', array($this, 'assetRootCss')),
-            new Twig_SimpleFunction('asset_root_less', array($this, 'assetRootLess')),
-            new Twig_SimpleFunction('asset_component', array($this, 'assetComponent')),
-            new Twig_SimpleFunction('asset_library', array($this, 'assetLibrary')),
-            new Twig_SimpleFunction('asset_plugin', array($this, 'assetPlugin')),
-            new Twig_SimpleFunction('asset_module', array($this, 'assetModule')),
-            new Twig_SimpleFunction('asset_root_image', array($this, 'assetRootImage')),
+            new Twig_SimpleFunction('asset_js_old', array($this, 'assetJSOld')),
             new Twig_SimpleFunction('asset_img', array($this, 'assetImg')),
             new Twig_SimpleFunction('get_current_user', array($this, 'getCurrentUser')),
             new Twig_SimpleFunction('is_logged', array($this, 'isLogged')),
@@ -98,7 +91,7 @@ class ExtensionLoader
         return HTTPS_SERVER . implode('/', $parts);
     }
 
-    public function assetCustomCss( $path ){
+    public function assetCss( $path ){
         return HTTPS_SERVER . 'catalog/view/theme/default/stylesheet/' . $path;
     }
 
@@ -106,36 +99,8 @@ class ExtensionLoader
         return HTTPS_SERVER . 'catalog/view/javascript/' . $path. '?' . YS_VERSION;
     }
 
-    public function assetRoot( $path ){
-        return HTTPS_SERVER . 'catalog/view/assets/' . $path;
-    }
-
-    public function assetComponent( $path ){
-        return HTTPS_SERVER . 'catalog/view/assets/components/' . $path;
-    }
-
-    public function assetRootCss( $path ){
-        return HTTPS_SERVER . 'catalog/view/assets/css/' . $path;
-    }
-
-    public function assetRootLess( $path ){
-        return HTTPS_SERVER . 'catalog/view/assets/less/' . $path;
-    }
-
-    public function assetLibrary( $path ){
-        return HTTPS_SERVER . 'catalog/view/assets/library/' . $path. '?' . YS_VERSION;
-    }
-
-    public function assetPlugin( $path ){
-        return HTTPS_SERVER . 'catalog/view/assets/plugins/' . $path. '?' . YS_VERSION;
-    }
-
-    public function assetModule( $path ) {
-        return HTTPS_SERVER . 'catalog/view/assets/modules/' . $path . '?' . YS_VERSION;
-    }
-
-    public function assetRootImage( $path ){
-        return HTTPS_SERVER . 'catalog/view/assets/images/' . $path;
+    public function assetJSOld( $path ){
+        return HTTPS_SERVER . 'catalog/view/javascript_bk/' . $path. '?' . YS_VERSION;
     }
 
     public function assetImg( $path ){

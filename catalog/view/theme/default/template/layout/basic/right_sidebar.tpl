@@ -12,7 +12,7 @@
                             <!-- Media item -->
                             <div class="media">
                                 <small class="author"><a href="#" title="" class="strong">Jane Doe</a></small>
-                                <div class="media-object pull-left"><img src="{{ asset_root_image('people/50/1.jpg') }}" alt="Image" class="img-circle" /></div>
+                                <div class="media-object pull-left"><img src="{{ asset_img('no_user_avatar.png') }}" alt="Image" class="img-circle" /></div>
                                 <div class="media-body">
                                     <blockquote>
                                         <small class="date"><cite>just now</cite></small>
@@ -24,7 +24,7 @@
                             <!-- Media item -->
                             <div class="media primary right">
                                 <small class="author"><a href="#" title="" class="strong">John Doe</a></small>
-                                <div class="media-object pull-right"><img src="{{ asset_root_image('people/50/2.jpg') }}" alt="Image" class="img-circle" /></div>
+                                <div class="media-object pull-right"><img src="{{ asset_img('no_user_avatar.png') }}" alt="Image" class="img-circle" /></div>
                                 <div class="media-body">
                                     <blockquote class="pull-right">
                                         <small class="date"><cite>15 seconds ago</cite></small>
@@ -36,7 +36,7 @@
                             <!-- Media item -->
                             <div class="media">
                                 <small class="author"><a href="#" title="" class="strong">Ricky</a></small>
-                                <div class="media-object pull-left"><img src="{{ asset_root_image('people/50/1.jpg') }}" alt="Image" class="img-circle" /></div>
+                                <div class="media-object pull-left"><img src="{{ asset_img('no_user_avatar.png') }}" alt="Image" class="img-circle" /></div>
                                 <div class="media-body">
                                     <blockquote>
                                         <small class="date"><cite>5 minutes ago</cite></small>
@@ -64,7 +64,7 @@
                             <li class="category border-bottom">Online</li>
                             <li>
                                 <div class="mixit-chat-1 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/1.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                                 <div class="mixit-chat-1 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/2.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                                 <div class="mixit-chat-1 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/3.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                                 <div class="mixit-chat-1 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/4.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -104,7 +104,7 @@
                                     </div>
                                 </div>
                                 <div class="mixit-chat-1 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/5.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -114,7 +114,7 @@
                                     </div>
                                 </div>
                                 <div class="mixit-chat-2 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/6.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -124,7 +124,7 @@
                                     </div>
                                 </div>
                                 <div class="mixit-chat-2 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/7.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -134,7 +134,7 @@
                                     </div>
                                 </div>
                                 <div class="mixit-chat-2 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/8.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -144,7 +144,7 @@
                                     </div>
                                 </div>
                                 <div class="mixit-chat-2 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/9.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -154,7 +154,7 @@
                                     </div>
                                 </div>
                                 <div class="mixit-chat-2 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/10.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -164,7 +164,7 @@
                                     </div>
                                 </div>
                                 <div class="mixit-chat-3 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/11.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -174,7 +174,7 @@
                                     </div>
                                 </div>
                                 <div class="mixit-chat-3 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/12.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -184,7 +184,7 @@
                                     </div>
                                 </div>
                                 <div class="mixit-chat-3 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/13.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -194,7 +194,7 @@
                                     </div>
                                 </div>
                                 <div class="mixit-chat-3 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/14.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -204,7 +204,7 @@
                                     </div>
                                 </div>
                                 <div class="mixit-chat-3 mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/15.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4
@@ -214,7 +214,7 @@
                                     </div>
                                 </div>
                                 <div class=" mix media border-bottom innerAll margin-none">
-                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_root_image('people/35/16.jpg') }}" class="img-circle" /></a>
+                                    <a href="#chat-conversation" data-toggle="tab" class="pull-left media-object"><img src="{{ asset_img('no_user_avatar.png') }}" class="img-circle" /></a>
                                     <div class="media-body">
                                         <a href="#chat-conversation" data-toggle="tab" class="pull-right text-muted innerT half">
                                             <i class="fa fa-comments"></i> 4

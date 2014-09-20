@@ -12,7 +12,7 @@
               <a href="" class="dropdown-toggle"  data-toggle="dropdown"><i class="notif-block icon-envelope-1"></i><span class="fa fa-star"></span></a>
               <ul class="dropdown-menu chat media-list">
                   <li class="media">
-                      <a class="pull-left" href="#"><img class="media-object thumb" src="{{ asset_root_image('people/100/15.jpg') }}" alt="50x50" width="50"/></a>
+                      <a class="pull-left" href="#"><img class="media-object thumb" src="{{ asset_img('no_user_avatar.png') }}" alt="50x50" width="50"/></a>
                       <div class="media-body">
                           <span class="label label-default pull-right">5 min</span>
                           <h5 class="media-heading">Adrian D.</h5>
@@ -20,7 +20,7 @@
                       </div>
                   </li>
                   <li class="media">
-                      <a class="pull-left" href="#"><img class="media-object thumb" src="{{ asset_root_image('people/100/16.jpg') }}" alt="50x50" width="50"/></a>
+                      <a class="pull-left" href="#"><img class="media-object thumb" src="{{ asset_img('no_user_avatar.png') }}"  alt="50x50" width="50"/></a>
                       <div class="media-body">
                           <span class="label label-default pull-right">2 days</span>
                           <h5 class="media-heading">Jane B.</h5>
@@ -28,7 +28,7 @@
                       </div>
                   </li>
                   <li class="media">
-                      <a class="pull-left" href="#"><img class="media-object thumb" src="{{ asset_root_image('people/100/17.jpg') }}" alt="50x50" width="50"/></a>
+                      <a class="pull-left" href="#"><img class="media-object thumb" src="{{ asset_img('no_user_avatar.png') }}" alt="50x50" width="50"/></a>
                       <div class="media-body">
                           <span class="label label-default pull-right">3 days</span>
                           <h5 class="media-heading">Andrew M.</h5>

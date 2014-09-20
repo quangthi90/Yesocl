@@ -4,11 +4,11 @@
 		<title>{% block title %}{% trans %}Welcome Page{% endtrans %}{% endblock %} | Yesocl - Social Network</title>
 		<base href="{{ base }}" />
 		<link rel="shortcut icon" href="image/template/favicon.png">
-		<link href="{{ asset_css('old/libs/bootstrap.css') }}" rel="stylesheet" media="screen" />
-		<link href="{{ asset_css('old/libs/bootstrap-responsive.min.css') }}" rel="stylesheet" media="screen" />
-		<link href="{{ asset_css('old/libs/uniform.default.css') }}" rel="stylesheet" media="screen" />
-		<link href="{{ asset_css('old/libs/fortAwesome/css/font-awesome.css') }}" rel="stylesheet" media="screen" />
-		<link href="{{ asset_css('old/welcome.css') }}" rel="stylesheet" media="screen" /> 
+		<link href="{{ asset_css('libs/bootstrap.css') }}" rel="stylesheet" media="screen" />
+		<link href="{{ asset_css('libs/bootstrap-responsive.min.css') }}" rel="stylesheet" media="screen" />
+		<link href="{{ asset_css('libs/uniform.default.css') }}" rel="stylesheet" media="screen" />
+		<link href="{{ asset_css('libs/fortAwesome/css/font-awesome.css') }}" rel="stylesheet" media="screen" />
+		<link href="{{ asset_css('welcome.css') }}" rel="stylesheet" media="screen" /> 
 		{% block stylesheet %}
 		{% endblock %}
 	</head>
@@ -22,13 +22,13 @@
 			{{ include(template_from_string( footer )) }}
 		</div>
     	<div id="overlay"></div>
-    	<script type="text/javascript" src="{{ asset_js('jquery/jquery-1.8.3.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('libs/bootstrap.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('libs/jquery.uniform.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('libs/jquery.bootbox.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('account.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('object.js') }}"></script>
+    	<script type="text/javascript" src="{{ asset_js_old('jquery/jquery-1.8.3.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js_old('libs/bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js_old('libs/jquery.uniform.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js_old('libs/jquery.bootbox.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js_old('yes.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js_old('account.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js_old('object.js') }}"></script>
     	{% block javascript %}
 		{% endblock %}
 		<!-- Defined Data for Script -->

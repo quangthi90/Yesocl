@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 paceCounter paceSocial sidebar sidebar-social footer-sticky"> <![endif]-->
-<!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 paceCounter paceSocial sidebar sidebar-social footer-sticky"> <![endif]-->
-<!--[if IE 8]>    <html class="ie lt-ie9 paceCounter paceSocial sidebar sidebar-social footer-sticky"> <![endif]-->
-<!--[if gt IE 8]> <html class="ie paceCounter paceSocial sidebar sidebar-social footer-sticky"> <![endif]-->
+<!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 sidebar sidebar-social footer-sticky"> <![endif]-->
+<!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 sidebar sidebar-social footer-sticky"> <![endif]-->
+<!--[if IE 8]>    <html class="ie lt-ie9 sidebar sidebar-social footer-sticky"> <![endif]-->
+<!--[if gt IE 8]> <html class="ie sidebar sidebar-social footer-sticky"> <![endif]-->
 <!--[if !IE]><!-->
-<html class="paceCounter paceSocial sidebar sidebar-social footer-sticky">
+<html class="sidebar sidebar-social footer-sticky">
 <!-- <![endif]-->
 <head>
     <title>{% block title %}{% trans %}Home Feed{% endtrans %}{% endblock %} | Yesocl - {% trans %}Social Network{% endtrans %}</title>
@@ -18,10 +18,7 @@
         <link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css" />
     <![endif]-->
 
-    {#  Stylesheet Complete CSS compiled
-        <link rel="stylesheet" href="{{ asset_root_less('admin/module.admin.stylesheet-complete.less') }}" />
-    #}
-    <link rel="stylesheet" href="{{ asset_root_css('admin/module.admin.stylesheet-complete.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset_css('common/core.css') }}" />
 
     {% block stylesheet %}
     {% endblock %}
@@ -33,12 +30,7 @@
     <![endif] -->    
 
     {# HEADER SCRIPTS GO HERE #}
-    <script>
-        if ( /*@cc_on!@*/ false && document.documentMode === 10)
-        {
-            document.documentElement.className += ' ie ie10';
-        }
-    </script>
+    <script> if ( /*@cc_on!@*/ false && document.documentMode === 10) { document.documentElement.className += ' ie ie10'; } </script>
 </head>
 <body class="menu-right-hidden">
     <div class="container-fluid menu-hidden">
@@ -70,11 +62,7 @@
     </div>
     <!-- REQUIRED VARIABLES SCRIPTS -->
     <script data-id="App.Config">
-        var App = {};   var basePath = '',
-        commonPath = "{{ asset_root('') }}",
-        rootPath = "../",
-        DEV = false,
-        componentsPath = "{{ asset_component('') }}";
+        var App = {}; 
         var primaryColor = "#25ad9f",
         dangerColor = "#b55151",
         successColor = "#609450",
@@ -85,36 +73,32 @@
     </script>
     <!-- FOOTER SCRIPTS -->
     <!-- Library Script -->
-    <script src="{{ asset_library('jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset_library('jquery/jquery-migrate.min.js') }}"></script>
-    <script src="{{ asset_library('modernizr/modernizr.js') }}"></script>
-    <script src="{{ asset_plugin('core_less-js/less.min.js') }}"></script>
-    <script src="{{ asset_plugin('core_browser/ie/ie.prototype.polyfill.js') }}"></script>
-    <script src="{{ asset_library('bootstrap/js/bootstrap.min.js') }}"></script>  
-    <script src="{{ asset_plugin('core_nicescroll/jquery.nicescroll.min.js') }}"></script>
-    <script src="{{ asset_plugin('core_breakpoints/breakpoints.js') }}"></script>
-    <script src="{{ asset_plugin('core_preload/pace.min.js') }}"></script>
-    <script src="{{ asset_plugin('menu_sidr/jquery.sidr.js') }}"></script>
-    <script src="{{ asset_plugin('media_holder/holder.js') }}"></script>
-    <script src="{{ asset_plugin('media_gridalicious/jquery.gridalicious.min.js') }}"></script>
-    <script src="{{ asset_plugin('ui_modals/bootbox.min.js') }}"></script>
-    <script src="{{ asset_plugin('other_mixitup/jquery.mixitup.min.js') }}"></script>
-    <script src="{{ asset_plugin('other_mixitup/mixitup.js') }}"></script>  
-    <script src="{{ asset_library('momment/moment.min.js') }}"></script>
-    <script src="{{ asset_library('knockout/knockout.js') }}"></script>
+    <script src="{{ asset_js('library/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset_js('library/jquery/jquery-migrate.min.js') }}"></script>
+    <script src="{{ asset_js('library/modernizr/modernizr.js') }}"></script>
+    <script src="{{ asset_js('library/bootstrap/js/bootstrap.min.js') }}"></script> 
+    <script src="{{ asset_js('library/momment/moment.min.js') }}"></script>
+    <script src="{{ asset_js('library/knockout/knockout.js') }}"></script>
+    {#<script src="{{ asset_js('library/core_less-js/less.min.js') }}"></script>#}
+    <script src="{{ asset_js('library/core_browser/ie/ie.prototype.polyfill.js') }}"></script>     
+    <script src="{{ asset_js('library/core_nicescroll/jquery.nicescroll.min.js') }}"></script>
+    <script src="{{ asset_js('library/core_breakpoints/breakpoints.js') }}"></script>
+    <script src="{{ asset_js('library/menu_sidr/jquery.sidr.js') }}"></script>
+    <script src="{{ asset_js('library/media_holder/holder.js') }}"></script>
+    <script src="{{ asset_js('library/media_gridalicious/jquery.gridalicious.min.js') }}"></script>
+    <script src="{{ asset_js('library/ui_modals/bootbox.min.js') }}"></script>
+    <script src="{{ asset_js('other_mixitup/jquery.mixitup.min.js') }}"></script>
+    <script src="{{ asset_js('other_mixitup/mixitup.init.js') }}"></script>
     {% block library_javascript %}
     {% endblock %}
 
-    <!-- Common Script -->
-    <script src="{{ asset_component('core/core.js') }}"></script>    
-    <script src="{{ asset_component('core_preload/preload.pace.js') }}"></script>
-    <script src="{{ asset_component('media_gridalicious/gridalicious.js') }}"></script>
-    <script src="{{ asset_component('menus/sidebar.main.js') }}"></script>
-    <script src="{{ asset_component('menus/sidebar.collapse.js') }}"></script>
-    <script src="{{ asset_component('menus/menus.sidebar.chat.js') }}"></script>
-    <script src="{{ asset_root('global.js') }}"></script>
-    <script src="{{ asset_module('common/ko-model.js') }}"></script>
-    {% block common_javascript %}    
+    <!-- Common Script -->    
+    <script src="{{ asset_js('common/core.init.js') }}"></script>
+    <script src="{{ asset_js('common/gridalicious.init.js') }}"></script>
+    <script src="{{ asset_js('common/sidebar.main.init.js') }}"></script>
+    <script src="{{ asset_js('common/sidebar.collapse.init.js') }}"></script>
+    <script src="{{ asset_js('common/menus.sidebar.chat.init.js') }}"></script>    
+    {% block common_javascript %}
     {% endblock %}
     
     {# Custom Script #}
