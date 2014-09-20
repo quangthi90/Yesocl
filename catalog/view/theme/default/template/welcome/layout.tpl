@@ -38,6 +38,7 @@
 		</script>
 		{% block datascript %}
 		{% endblock %}
+		<!-- chinh sua login -->
 		<script src="http://connect.facebook.net/en_US/all.js#appId={{ fb_app_id }}&xfbml=1"></script>
 	    <script type="text/javascript">
 	        function showMessage (titleName, messageToShow){
@@ -59,15 +60,21 @@
 	            cookie  : true, 
 	            xfbml   : true 
 	        });
+	         FB.getLoginStatus(function(response) {
+  	 		if (response.status === 'connected') {
+   				console.log(response.authResponse.accessToken);
+			   }
+			 });}
+			//callFBLogin();
 	        function callFBLogin(){
-	            FB.login(function(response) {
+	            FB.getLoginStatus(function(response) {
 	                if (response.authResponse) {
 	                    FB.api('/me', function(response) {
 	                        var promise = $.ajax({
 	                            type: 'POST',
 	                            url:  window.yRouting.generate('FaceBookConnect'),
 	                            dataType: 'json',
-	                            data: {data: response}
+	                            data: {data: response},
 	                        });
 
 	                        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
@@ -76,7 +83,6 @@
 	                            $spinner.remove();
 	                            $('.btn-fb-login').removeClass('disabled').find('a').prepend($old_icon);
 	                        };
-
 	                        $old_icon.remove();
 	                        $('.btn-fb-login').addClass('disabled').find('a').prepend($spinner);
 
@@ -93,6 +99,7 @@
 	                }else{
 	                    /*Todo: add message login facebook fail here...*/
 	                    alert("Access not authorized.");
+
 	                }
 	            },{scope: 'email,user_birthday'});
 	        }
