@@ -164,7 +164,7 @@ class ModelStockStock extends Model {
 		}
 
 		if ( !empty($aData['filter_status']) ){
-			$aQuery['status'] = (boolean)$aData['filter_status'];
+			$aQuery['status'] = $aData['filter_status'] == 'true';
 		}
 
 		$lStock = $this->dm->getRepository('Document\Stock\Stock')

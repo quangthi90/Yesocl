@@ -79,7 +79,7 @@
 
 <script type="text/javascript"><!--
 function filter() {
-  url = 'index.php?route=user/user&token=<?php echo $token; ?>';
+  url = 'index.php?route=user/user/search&token=<?php echo $token; ?>';
   
   var filter_username = $('input[name=\'filter_username\']').attr('value');
   
@@ -88,7 +88,7 @@ function filter() {
   }
   
   var filter_email = $('input[name=\'filter_email\']').attr('value');
-  
+
   if (filter_email) {
     url += '&filter_email=' + encodeURIComponent(filter_email);
   }
@@ -99,7 +99,8 @@ function filter() {
     url += '&filter_group=' + encodeURIComponent(filter_group);
   }
 
-  location = url;
+  alert(url);
+  window.location = url;
 }
 //--></script> 
 <script type="text/javascript"><!--

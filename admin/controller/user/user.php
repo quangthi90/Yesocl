@@ -1911,5 +1911,22 @@ class ControllerUserUser extends Controller {
 			$this->response->setOutput( json_encode( $json ) );
 		}
 	}
+
+	public function search(){
+		$this->load->model('user/user');
+		$results = $this->model_user_user->filterUser( $this->request->get );
+// var_dump(get_class($results));exit;
+		$users = array();
+		foreach ( $results as $result ) {
+			// print('hshaa');exit;
+			$users[$result->getUser()] = array(
+				'username' => $result->getUsername(),
+				'email' => $result->getEmail()
+			);
+			die($result->getEmail());
+		}
+
+		$this->response->setOutput( json_encode($users) );
+	}
 }
 ?>

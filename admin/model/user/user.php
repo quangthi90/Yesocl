@@ -868,11 +868,11 @@ class ModelUserUser extends Model {
 		}
 
 		if ( !empty($data['filter_group']) ){
-			$query['group'] = new \MongoRegex('/' . trim($data['filter_group']) . '.*/i');
+			$query['group.id'] = $data['filter_group'];
 		}
 
 		if ( !empty($data['filter_status']) ){
-			$query['status'] = (boolean)$data['filter_status'];
+			$query['status'] = $data['filter_status'] == 'true';
 		}
 
 		return $this->dm->getRepository( 'Document\User\User' )
@@ -920,53 +920,10 @@ class ModelUserUser extends Model {
 	}
 
 	public function searchUserByKeyword( $data = array() ) {
-		// if ( !isset( $data['filter'] ) || empty( $data['filter'] ) ) {
-		// 	return array();
-		// }
-
-		$query = $this->client->createSelect(
-    		array(
-				'mappedDocument' => 'Document\User\User',
-			)
-    	);
-
-    	if ( !empty($data['username']) ) {
-    		$query->addFilterQuery( 
-    			array(
-				    'key' => 'fq1',
-				    'tag' => array('filter_username'),
-				    'query' => 'name_t:*' . strtoupper( trim($aData['name']) ) . '*',
-					)
-    			);
-    	}
-
-    	if ( !empty($aData['code']) ) {
-    		$query->addFilterQuery( 
-    			array(
-				    'key' => 'fq2',
-				    'tag' => array('filter_code'),
-				    'query' => 'code_t:' . strtoupper( trim($aData['code']) ) . '*',
-					)
-    			);
-    	}
-
-		if ( isset( $aData['start'] ) ) {
-			$aData['start'] = (int)$aData['start'];
-		}else {
-			$aData['start'] = 0;
+		if ( !isset( $data['filter'] ) || empty( $data['filter'] ) ) {
+			return array();
 		}
-
-		if ( isset( $aData['limit'] ) ) {
-			$aData['limit'] = (int)$aData['limit'];
-		}else {
-			$aData['limit'] = 10;
-		}
-
-		$query->setRows( $aData['limit'] );
-		$query->setStart( $aData['start'] );
- 
-		return $this->client->execute( $query );
-		/*
+		
 		$query = $this->client->createSelect(
     		array(
 				'mappedDocument' => 'Document\User\User',
@@ -993,7 +950,52 @@ class ModelUserUser extends Model {
 		$query->setRows( $data['limit'] );
 		$query->setStart( $data['start'] );
 
-		return $this->client->execute( $query );*/
+		return $this->client->execute( $query );
+	}
+
+	public function filterUser(){
+		$query = $this->client->createSelect(
+    		array(
+				'mappedDocument' => 'Document\User\User',
+			)
+    	);
+
+    	if ( !empty($data['filter_username']) ) {
+    		$query->addFilterQuery( 
+    			array(
+				    'key' => 'fq1',
+				    'tag' => array('filter_username'),
+				    'query' => 'username_t:*' . strtoupper( trim($data['filter_username']) ) . '*',
+					)
+    			);
+    	}
+
+    	if ( !empty($data['filter_email']) ) {
+    		$query->addFilterQuery( 
+    			array(
+				    'key' => 'fq1',
+				    'tag' => array('filter_email'),
+				    'query' => 'solrEmail_t:*' . strtoupper( trim($data['filter_name']) ) . '*',
+					)
+    			);
+    	}
+
+		if ( isset( $data['start'] ) ) {
+			$data['start'] = (int)$data['start'];
+		}else {
+			$data['start'] = 0;
+		}
+
+		if ( isset( $data['limit'] ) ) {
+			$data['limit'] = (int)$data['limit'];
+		}else {
+			$data['limit'] = 10;
+		}
+
+		$query->setRows( $data['limit'] );
+		$query->setStart( $data['start'] );
+ 
+		return $this->client->execute( $query );
 	}
 }
 ?>
