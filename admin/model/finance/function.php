@@ -77,9 +77,19 @@ class ModelFinanceFunction extends Model {
 			$aData['start'] = 0;
 		}
 
-		return $this->dm->getRepository('Document\Finance\Formual')->findBy(array(
-				'deleted' => false,
-			))
+		$filter = array();
+
+		if (isset($aData['filter_deleted']) && $aData['filter_deleted']) {
+			$filter['deleted'] = true;
+		}else {
+			$filter['deleted'] = false;
+		}
+
+		if (isset($aData['filter_name'])) {
+			$filter['name'] = new MongoRegex("/" . trim($aData['filter_name']) . "/i");
+		}
+
+		return $this->dm->getRepository('Document\Finance\Formual')->findBy($filter)
 			->skip( $aData['start'] )
 			->limit( $aData['limit'] );
 	}
