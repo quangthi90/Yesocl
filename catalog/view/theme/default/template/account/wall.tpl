@@ -1,4 +1,4 @@
-{% extends '@template/default/template/common/layout/master.tpl' %}
+{% extends '@template/default/template/layout/basic/master.tpl' %}
 
 {% use '@template/default/template/post/wall_post.tpl' %}
 

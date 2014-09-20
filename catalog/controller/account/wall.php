@@ -26,7 +26,6 @@ class ControllerAccountWall extends Controller {
 		$this->load->model('tool/object');
 
 		$oCurrUser = $this->model_user_user->getUserFull( array('user_slug' => $sUserSlug) );
-// trigger_error('hello Bommer'); exit;
 		if ( !$oCurrUser ){
 			return false;
 		}
@@ -52,10 +51,10 @@ class ControllerAccountWall extends Controller {
 		}
 
 		$this->children = array(
-			'common/layout/leftsidebar',
-			'common/layout/rightsidebar',
-			'common/layout/navbar',
-			'common/layout/footer',
+			'layout/basic/leftsidebar',
+			'layout/basic/rightsidebar',
+			'layout/basic/navbar',
+			'layout/basic/footer',
 			'widget/account/user'
 		);
 
