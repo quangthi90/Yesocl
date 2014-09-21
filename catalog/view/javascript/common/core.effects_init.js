@@ -2,13 +2,11 @@
 if (window.location != window.parent.location)
 	top.location.href = document.location.href;
 
-(function($, window)
-{
+(function($, window) {
 	// fix for safari back button issue
 	window.onunload = function(){};
 
-	$.expr[':'].scrollable = function( elem ) 
-    {
+	$.expr[':'].scrollable = function( elem ) {
       var scrollable = false,
           props = [ '', '-x', '-y' ],
           re = /^(?:auto|scroll)$/i,
@@ -21,8 +19,7 @@ if (window.location != window.parent.location)
       return scrollable;
     };
 
-	window.beautify = function (source)
-	{
+	window.beautify = function (source) {
 		var output,
 			opts = {};
 
@@ -32,8 +29,7 @@ if (window.location != window.parent.location)
 	}
 
 	// generate a random number within a range (PHP's mt_rand JavaScript implementation)
-	window.mt_rand = function (min, max) 
-	{
+	window.mt_rand = function (min, max) {
 		var argc = arguments.length;
 		if (argc === 0) {
 			min = 0;
@@ -50,8 +46,7 @@ if (window.location != window.parent.location)
 	}
 
 	// scroll to element animation
-	function scrollTo(id)
-	{
+	function scrollTo(id) {
 		if ($(id).length)
 		{
 			var ns = $(id).closest('.hasNiceScroll');
@@ -74,8 +69,7 @@ if (window.location != window.parent.location)
 		}
 	}
 
-	window.resizeNiceScroll = function()
-	{
+	window.resizeNiceScroll = function() {
 		if (typeof $.fn.niceScroll == 'undefined')
 			return;
 
@@ -95,8 +89,7 @@ if (window.location != window.parent.location)
 	$('[data-toggle="popover"]').popover();
 	
 	// print
-	$('[data-toggle="print"]').click(function(e)
-	{
+	$('[data-toggle="print"]').click(function(e) {
 		e.preventDefault();
 		window.print();
 	});
@@ -108,25 +101,22 @@ if (window.location != window.parent.location)
 	if ($('.prettyprint').length && typeof prettyPrint != 'undefined')
 		prettyPrint();
 	
-	$('[data-toggle="scrollTo"]').on('click', function(e){
+	$('[data-toggle="scrollTo"]').on('click', function(e) {
 		e.preventDefault();
 		scrollTo($(this).attr('href'));
 	});
 
 	$('ul.collapse')
-	.on('show.bs.collapse', function(e)
-	{
+	.on('show.bs.collapse', function(e) {
 		e.stopPropagation();
 		$(this).closest('li').addClass('active');
 	})
-	.on('hidden.bs.collapse', function(e)
-	{
+	.on('hidden.bs.collapse', function(e) {
 		e.stopPropagation();
 		$(this).closest('li').removeClass('active');
 	});
 
-	window.enableContentNiceScroll = function(hide)
-	{
+	window.enableContentNiceScroll = function(hide) {
 		if ($('html').is('.ie') || Modernizr.touch)
 			return;
 
@@ -160,8 +150,7 @@ if (window.location != window.parent.location)
 		});
 	}
 
-	window.disableContentNiceScroll = function()
-	{
+	window.disableContentNiceScroll = function() {
 		if (typeof $.fn.niceScroll == 'undefined')
 			return;
 
@@ -173,8 +162,7 @@ if (window.location != window.parent.location)
 	if ($('html').is('.ie'))
 		$('html').removeClass('app');
 
-	if (typeof $.fn.niceScroll != 'undefined')
-	{
+	if (typeof $.fn.niceScroll != 'undefined') {
 		$('#menu > div')
 		.add('#menu-right > div')
 		.addClass('hasNiceScroll')
@@ -187,8 +175,7 @@ if (window.location != window.parent.location)
 		}).hide();
 	}
 
-	if (typeof coreInit == 'undefined')
-	{
+	if (typeof coreInit == 'undefined') {
 		$('body')
 		.on('mouseenter', '[data-toggle="dropdown"].dropdown-hover', function()
 		{ 
@@ -202,16 +189,15 @@ if (window.location != window.parent.location)
 
 	$('.navbar.main')
 	.add('#menu-top')
-	.on('mouseleave', function(){
+	.on('mouseleave', function() {
 		$(this).find('.dropdown.open').find('> [data-toggle="dropdown"]').click();
 	});
 
-	$('[data-height]').each(function(){
+	$('[data-height]').each(function() {
 		$(this).css({ 'height': $(this).data('height') });
 	});
 
-	if (typeof $.fn.niceScroll != 'undefined')
-	{
+	if (typeof $.fn.niceScroll != 'undefined') {
 		$('.app [data-toggle="tab"]')
 		.on('shown.bs.tab', function(e)
 		{
@@ -219,13 +205,13 @@ if (window.location != window.parent.location)
 		});
 	}
 
-	window.enableNavbarMenusHover = function(){
+	window.enableNavbarMenusHover = function() {
 		$('.navbar.main [data-toggle="dropdown"]')
 		.add('#menu-top [data-toggle="dropdown"]')
 		.addClass('dropdown-hover');
 	}
 
-	window.disableNavbarMenusHover = function(){
+	window.disableNavbarMenusHover = function() {
 		$('.navbar.main [data-toggle="dropdown"]')
 		.add('#menu-top [data-toggle="dropdown"]')
 		.removeClass('dropdown-hover');
@@ -246,8 +232,7 @@ if (window.location != window.parent.location)
 		.removeClass('open');
 	}
 
-	if (typeof $.fn.setBreakpoints !== 'undefined')
-	{
+	if (typeof $.fn.setBreakpoints !== 'undefined') {
 		$(window).setBreakpoints({
 			distinct: false,
 			breakpoints: [ 768, 992 ]
@@ -276,8 +261,7 @@ if (window.location != window.parent.location)
 
 	window.coreInit = true;
 
-	$(window).on('load', function()
-	{
+	$(window).on('load', function() {
 		window.loadTriggered = true;
 
 		if ($(window).width() < 992 && typeof $.fn.niceScroll != 'undefined')
@@ -302,7 +286,7 @@ if (window.location != window.parent.location)
 	});
 
 	// weird chrome bug, sometimes the window load event isn't triggered
-	setTimeout(function(){
+	setTimeout(function() {
 		if (!window.loadTriggered)
 			$(window).trigger('load');
 	}, 2000);

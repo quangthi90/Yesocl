@@ -93,7 +93,7 @@
     {% endblock %}
 
     <!-- Common Script -->    
-    <script src="{{ asset_js('common/core_init.js') }}"></script>
+    <script src="{{ asset_js('common/core.effects_init.js') }}"></script>
     <script src="{{ asset_js('common/gridalicious_init.js') }}"></script>
     <script src="{{ asset_js('common/sidebar.main_init.js') }}"></script>
     <script src="{{ asset_js('common/sidebar.collapse_init.js') }}"></script>
