@@ -93,11 +93,11 @@
     {% endblock %}
 
     <!-- Common Script -->    
-    <script src="{{ asset_js('common/core.init.js') }}"></script>
-    <script src="{{ asset_js('common/gridalicious.init.js') }}"></script>
-    <script src="{{ asset_js('common/sidebar.main.init.js') }}"></script>
-    <script src="{{ asset_js('common/sidebar.collapse.init.js') }}"></script>
-    <script src="{{ asset_js('common/menus.sidebar.chat.init.js') }}"></script>    
+    <script src="{{ asset_js('common/core_init.js') }}"></script>
+    <script src="{{ asset_js('common/gridalicious_init.js') }}"></script>
+    <script src="{{ asset_js('common/sidebar.main_init.js') }}"></script>
+    <script src="{{ asset_js('common/sidebar.collapse_init.js') }}"></script>
+    <script src="{{ asset_js('common/menus.sidebar.chat_init.js') }}"></script>
     {% block common_javascript %}
     {% endblock %}
     
