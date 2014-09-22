@@ -1,14 +1,19 @@
-var YesCore = YesCore || {};
+var YesGlobal = YesGlobal || {};
 
-(function($, ko, window, YesGlobal, undefined) {
+(function($, ko, window, Y, undefined) {
 
-	YesGlobal.Caches = {
+	Y.Widgets = [];
+	Y.GlobalKoModel = {};
+	Y.CurrentUser = {};
+	Y.Routing = {};
+
+	Y.Caches = {
 	    StockList: [],
 	    UsersCanTag: [],
 	    CurrentPost: null
 	};
 
-	YesGlobal.Configs = {
+	Y.Configs = {
 	    ajaxOptions : {
 	        url : "",
 	        type: "POST",
@@ -62,11 +67,11 @@ var YesCore = YesCore || {};
 	    defaultBindingElement : "y-content"
 	};
 
-	YesGlobal.Utils = {
+	Y.Utils = {
 	    ajaxCall : function(options, beforeCallback, successCallback, failCallback) {
 	        "use strict";
 
-	        var settings = $.extend( {}, YesGlobal.Configs.ajaxOptions, options);
+	        var settings = $.extend( {}, Y.Configs.ajaxOptions, options);
 
 	        //Make ajax call:
 	        $.ajax({
@@ -78,7 +83,7 @@ var YesCore = YesCore || {};
 	            async: settings.async,
 	            beforeSend: function () {
 	                if(settings.showLoading){
-	                    var ele = $(YesGlobal.Configs.loadingElement);
+	                    var ele = $(Y.Configs.loadingElement);
 	                    if(ele.hasClass("hidden")){
 	                        ele.removeClass("hidden");
 	                    }
@@ -89,7 +94,7 @@ var YesCore = YesCore || {};
 	            },
 	            success: function (data) {
 	                if(settings.showLoading){
-	                    var ele = $(YesGlobal.Configs.loadingElement);
+	                    var ele = $(Y.Configs.loadingElement);
 	                    ele.addClass("hidden");
 	                }
 	                if(successCallback !== undefined && typeof successCallback === "function"){
@@ -98,7 +103,7 @@ var YesCore = YesCore || {};
 	            },
 	            error: function (xhr, textStatus, errorThrown) {
 	                if(settings.showLoading){
-	                    var ele = $(YesGlobal.Configs.loadingElement);
+	                    var ele = $(Y.Configs.loadingElement);
 	                    ele.addClass("hidden");
 	                }
 	                if(failCallback !== undefined && typeof failCallback === "function"){
@@ -135,22 +140,22 @@ var YesCore = YesCore || {};
 	        });
 	    },
 	    initStockList: function(callback) {
-	        if(YesGlobal.Caches.StockList && YesGlobal.Caches.StockList.length > 0){
-	            callback(YesGlobal.Caches.StockList);
+	        if(Y.Caches.StockList && Y.Caches.StockList.length > 0){
+	            callback(Y.Caches.StockList);
 	        }else {
 	            var ajaxOptions = {
-	                url: window.yRouting.generate('ApiGetAllStocks'),
+	                url: Routing.generate('ApiGetAllStocks'),
 	                async: false
 	            };
 	            var successCallback = function(data){
 	                if(data.success === "ok"){
-	                    YesGlobal.Caches.StockList = data.stocks;
+	                    Y.Caches.StockList = data.stocks;
 	                    callback(data.stocks);    
 	                }else {
 	                    callback([]);
 	                }
 	            }
-	            YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	            Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	        }
 	    },
 	    initFriendList: function(callback) {
@@ -158,7 +163,7 @@ var YesCore = YesCore || {};
 	            callback(window.yListFriends);
 	        }else {
 	            var ajaxOptions = {
-	                url: window.yRouting.generate('ApiGetAllFriends'),
+	                url: Routing.generate('ApiGetAllFriends'),
 	                async: false
 	            };
 	            var successCallback = function(data){
@@ -169,20 +174,20 @@ var YesCore = YesCore || {};
 	                    callback([]);
 	                }
 	            }
-	            YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	            Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	        }
 	    },
 	    initUserListForTag: function(callback) {
-	        if(YesGlobal.Caches.UsersCanTag && YesGlobal.Caches.UsersCanTag.length > 0){
-	            callback(YesGlobal.Caches.UsersCanTag);
+	        if(Y.Caches.UsersCanTag && Y.Caches.UsersCanTag.length > 0){
+	            callback(Y.Caches.UsersCanTag);
 	        }else {
 	            var apiUrl = "";
-	            if(YesGlobal.Caches.CurrentPost == null){
-	                apiUrl = window.yRouting.generate('ApiGetAllFriends');
+	            if(Y.Caches.CurrentPost == null){
+	                apiUrl = Routing.generate('ApiGetAllFriends');
 	            }else {
-	                apiUrl = window.yRouting.generate("ApiGetCommentTags", {
-	                    post_type : YesGlobal.Caches.CurrentPost ? YesGlobal.Caches.CurrentPost.type : "",
-	                    post_slug: YesGlobal.Caches.CurrentPost ? YesGlobal.Caches.CurrentPost.slug : ""
+	                apiUrl = Routing.generate("ApiGetCommentTags", {
+	                    post_type : Y.Caches.CurrentPost ? Y.Caches.CurrentPost.type : "",
+	                    post_slug: Y.Caches.CurrentPost ? Y.Caches.CurrentPost.slug : ""
 	                });
 	            }
 	            var ajaxOptions = {
@@ -191,24 +196,24 @@ var YesCore = YesCore || {};
 	            };
 	            var successCallback = function(data) {
 	                if(data.success === "ok") {
-	                    if(YesGlobal.Caches.CurrentPost == null){
-	                        YesGlobal.Caches.UsersCanTag = data.friends;
+	                    if(Y.Caches.CurrentPost == null){
+	                        Y.Caches.UsersCanTag = data.friends;
 	                    }else {
-	                        YesGlobal.Caches.UsersCanTag = data.users;    
+	                        Y.Caches.UsersCanTag = data.users;    
 	                    }
-	                    callback(YesGlobal.Caches.UsersCanTag);                    
+	                    callback(Y.Caches.UsersCanTag);                    
 	                } else {
 	                    callback([]);
 	                }
 	            }
-	            YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	            Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	        }
 	    },
 	    getKoContext: function(eleId){
 	        if(eleId !== undefined){
 	            return ko.contextFor(document.getElementById(eleId));
 	        }
-	        return ko.contextFor(document.getElementById(YesGlobal.Configs.defaultBindingElement));
+	        return ko.contextFor(document.getElementById(Y.Configs.defaultBindingElement));
 	    },
 	    convertToTimeAgo: function(timeStamp){
 	        var dayWrapper = moment(new Date(timeStamp*1000));
@@ -231,7 +236,7 @@ var YesCore = YesCore || {};
 	    }
 	};
 
-	YesGlobal.CacheManager = function(isLocalMode){
+	Y.CacheManager = function(isLocalMode){
 	    var that = this;
 	    that.cachePointer = isLocalMode ? localStorage : sessionStorage;
 
@@ -250,284 +255,113 @@ var YesCore = YesCore || {};
 	    that.clearCache = function(){
 	        that.cachePointer.clear();
 	    };
-	}; 
+	};
 
-	/*
-		Custom KO Handlers
-	*/
-	ko.bindingHandlers.autoCompleteTag = {
-	    init: function(element, valueAccessor, allBindingsAccessor) {
-	        "use strict";
-	        $(element).select2({
-	            multiple: true,
-	            minimumInputLength: 1,
-	            query: function (query) {
-	                YesGlobal.Utils.initStockList(function(queryData) {
-	                    var data = { results : [] };
-	                    ko.utils.arrayForEach(queryData, function(t) {
-	                        if(t.code.toUpperCase().indexOf(query.term.toUpperCase()) >= 0){
-	                            data.results.push({ id: t.code, text: t.code });
-	                        }
-	                    });
-	                    query.callback(data);
-	                });                
-	            },
-	            formatResult: function(item) { return item.text },
-	            formatSelection: function(item) { return item.text },
-	            initSelection : function (element, callback) {
-	                var data = [];
-	                var value = $(element).val();
-	                if(value){
-	                    var tags = value.split(",");
-	                    ko.utils.arrayForEach(tags, function(t){
-	                        data.push({ id : t, text: t });
-	                    });
-	                }
-	                callback(data);
+	Y.HashTable = function(obj) {
+	    this.length = 0;
+	    this.items = {};
+	    for (var p in obj) {
+	        if (obj.hasOwnProperty(p)) {
+	            this.items[p] = obj[p];
+	            this.length++;
+	        }
+	    }
+	    //Add new item to hashtable
+	    this.setItem = function(key, value)
+	    {
+	        var previous = undefined;
+	        if (this.hasItem(key)) {
+	            previous = this.items[key];
+	        }
+	        else {
+	            this.length++;
+	        }
+	        this.items[key] = value;
+	        return previous;
+	    }
+	    //Get existed item by key
+	    this.getItem = function(key) {
+	        return this.hasItem(key) ? this.items[key] : undefined;
+	    }
+	    //Check whether item has key existed 
+	    this.hasItem = function(key)
+	    {
+	        return this.items.hasOwnProperty(key);
+	    }   
+	    //Remove existed item from hastable
+	    this.removeItem = function(key)
+	    {
+	        if (this.hasItem(key)) {
+	            previous = this.items[key];
+	            this.length--;
+	            delete this.items[key];
+	            return previous;
+	        }
+	        else {
+	            return undefined;
+	        }
+	    }
+	    //Return list of keys of hashtable
+	    this.keys = function()
+	    {
+	        var keys = [];
+	        for (var k in this.items) {
+	            if (this.hasItem(k)) {
+	                keys.push(k);
 	            }
-	        });
+	        }
+	        return keys;
+	    }
+	    //Return list of values of hashtable
+	    this.values = function()
+	    {
+	        var values = [];
+	        for (var k in this.items) {
+	            if (this.hasItem(k)) {
+	                values.push(this.items[k]);
+	            }
+	        }
+	        return values;
+	    }
+	    //Foreach implement
+	    this.each = function(fn) {
+	        for (var k in this.items) {
+	            if (this.hasItem(k)) {
+	                fn(k, this.items[k]);
+	            }
+	        }
+	    }
+	    //Clear hashtable
+	    this.clear = function()
+	    {
+	        this.items = {}
+	        this.length = 0;
+	    }
+	};
 
-	    },
-	    update: function(element) {
-	        "use strict";
-	        $(element).trigger("change");
+	Y.RoutingManager = function(routingData) {
+	    var that = this;
+	    this.routing = new Y.HashTable();
+	    
+	    for ( var key in routingData ){
+	        that.routing.setItem( key, routingData[key] );
 	    }
-	};
-	ko.bindingHandlers.executeOnEnter = {
-	    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-	        var allBindings = allBindingsAccessor();
-	        $(element).keypress(function (event) {
-	            var keyCode = (event.which ? event.which : event.keyCode);
-	            if (keyCode === 13) {
-	                return allBindings.executeOnEnter.call(viewModel, viewModel, valueAccessor, element);
-	            }
-	            return true;
-	        });
-	    }
-	};
-	ko.bindingHandlers.link = {
-	    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-	        var options = valueAccessor();
-	        var href = window.yRouting.generate(options.route, options.params);
-	        $(element).attr('href', href);
-	        var textValue = ko.utils.unwrapObservable(options.text);
-	        var titleValue = ko.utils.unwrapObservable(options.title);
-	        if(textValue){
-	            $(element).html(textValue);
+	    
+	    // Generate url by name & params
+	    this.generate = function(name, params, method)
+	    {
+	        if ( typeof method == 'undefined' ){
+	            method = '';
 	        }
-	        if(titleValue){
-	            $(element).attr('title', titleValue);    
+	        var url = this.routing.getItem(name);
+	        
+	        for ( var key in params ){
+	            if ( params[key] == '' ) continue;
+	            url = url.replace( '{' + key + '}', params[key] );
 	        }
-	        if(options.isNewTab){
-	            $(element).attr('target', '_blank');
-	        }
-	    },
-	    update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-	        var options = valueAccessor();
-	        var textValue = ko.utils.unwrapObservable(options.text);
-	        var titleValue = ko.utils.unwrapObservable(options.title);
-	        if(textValue){
-	            $(element).html(textValue);
-	        }
-	        if(titleValue){
-	            $(element).attr('title', titleValue);    
-	        }        
-	    }
-	}
-	ko.bindingHandlers.timeAgo = {
-	    init: function (element, valueAccessor, allBindingsAccessor) {
-	        var value = valueAccessor();
-	        var timeValue = ko.utils.unwrapObservable(value);
-	        if (timeValue) {
-	            $(element).text(YesGlobal.Utils.convertToTimeAgo(timeValue));
-	            $(element).attr('title', YesGlobal.Utils.convertDateToString(timeValue, "LLLL"));
-	        } else {
-	            $(element).text('-');
-	        }
-	    },
-	    update: function (element, valueAccessor, allBindingsAccessor) {
-	        var value = valueAccessor();
-	        var timeValue = ko.utils.unwrapObservable(value);
-	        if (timeValue) {
-	            $(element).text(YesGlobal.Utils.convertToTimeAgo(timeValue));
-	            $(element).attr('title', YesGlobal.Utils.convertDateToString(timeValue, "LLLL"));
-	        } else {
-	            $(element).text('-');
-	        }
-	    }
-	};
-	ko.bindingHandlers.dateTimeText = {
-	    init: function (element, valueAccessor, allBindingsAccessor) {
-	        var value = valueAccessor(), allBindings = allBindingsAccessor();
-	        var dateFormat = allBindings.dateFormat || "LLLL";
-	        var dateValue = ko.utils.unwrapObservable(value);
-	        if (dateValue) {
-	            $(element).text(YesGlobal.Utils.convertDateToString(dateValue, dateFormat));
-	            $(element).attr("title", YesGlobal.Utils.convertDateToString(dateValue, dateFormat));
-	        } else {
-	            $(element).text('-');
-	        }
-	    },
-	    update: function (element, valueAccessor, allBindingsAccessor) {
-	        var value = valueAccessor(), allBindings = allBindingsAccessor();
-	        var dateFormat = allBindings.dateFormat || "LLLL";
-	        var dateValue = ko.utils.unwrapObservable(value);
-	        if (dateValue) {
-	            $(element).text(YesGlobal.Utils.convertDateToString(dateValue, dateFormat));
-	        } else {
-	            $(element).text('-');
-	        }
-	    }
-	};
-	ko.bindingHandlers.seeMore = {
-	    init: function (element, valueAccessor, allBindingsAccessor) {
-	        $(element).expander({
-	            slicePoint: 100,
-	            widow: 2,
-	            expandSpeed: 100,
-	            expandText: '[...]',
-	            expandPrefix: ' ',
-	            userCollapseText: '[^^^]',
-	            userCollapsePrefix: ' ', 
-	            afterExpand: function(){
-	                $(element).find(".details").css("display", "inline");
-	            }
-	        });
-	    },
-	    update: function (element, valueAccessor, allBindingsAccessor) {
-	        $(element).expander({
-	            slicePoint: 100,
-	            widow: 2,
-	            expandSpeed: 100,
-	            expandText: '[...]',
-	            expandPrefix: ' ',
-	            userCollapseText: '[^^^]',
-	            userCollapsePrefix: ' ', 
-	            afterExpand: function(){
-	                $(element).find(".details").css("display", "inline");
-	            }
-	        });
-	    }
-	};
-	ko.bindingHandlers.mention = {
-	    init: function (element, valueAccessor, allBindingsAccessor) {
-	        var observableAttr = valueAccessor();
-	        $(element).mentionsInput({
-	            onDataRequest: function (mode,currentMentionCollection,queryObj,callback) {
-	                var query = queryObj.queryString;
-	                var firstCharacter = queryObj.firstCharacter;
-	                if(firstCharacter === "@") {
-	                    YesGlobal.Utils.initUserListForTag(function(queryData){
-	                        result = _.filter(queryData, function(item) {
-	                            if(currentMentionCollection !== null && currentMentionCollection.length > 0) {
-	                                var checkExisted = _.find(currentMentionCollection, function(tempItem){
-	                                    return (item.id === tempItem.id);
-	                                });
-	                                if(checkExisted)
-	                                    return false;
-	                            }                   
-	                            return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
-	                        });
-	                        callback.call(this, _.first(result, 5));
-	                    });
-	                    return;
-	                } 
-	                if(firstCharacter === "$") {
-	                    YesGlobal.Utils.initStockList(function(queryData){
-	                        result = _.filter(queryData, function(item) {
-	                            if(currentMentionCollection !== null && currentMentionCollection.length > 0) {
-	                                var checkExisted = _.find(currentMentionCollection, function(tempItem){
-	                                    return (item.code === tempItem.id);
-	                                });
-	                                if(checkExisted)
-	                                    return false;
-	                            }                   
-	                            return item.code.toLowerCase().indexOf(query.toLowerCase()) > -1;
-	                        });
-	                        var lastResult = _.map(_.first(result, 5), function(obj) {
-	                            return {
-	                                id : obj.code,
-	                                name: obj.code,
-	                                wall: yRouting.generate("StockPage", { stock_code : obj.code }),
-	                                type: "stock",
-	                                avatar : "image/stock_icon.png"
-	                            }
-	                        });
-	                        callback.call(this, lastResult);
-	                    });
-	                    return;
-	                }        
-	            },
-	            onMentionChanged: function(){
-	                var content = $(element).mentionsInput("getHtmlContent");
-	                observableAttr(content);
-	            },
-	            fullNameTrigger: false
-	        });
-	    },
-	    update: function (element, valueAccessor, allBindingsAccessor) {
-	        var observableAttr = valueAccessor();
-	        if(observableAttr().length === 0){
-	            $(element).mentionsInput("reset");
-	            $(element).height(35).focus();
-	        }
-	    }
-	};
-	ko.bindingHandlers.zoomImage = {
-	    init: function (element, valueAccessor, allBindingsAccessor) {
-	        var imgList = $(element).find("img");
-	        imgList.each(function(){
-	            var src = $(this).attr("src");
-	            $(this).on("click", function(){
-	                $.magnificPopup.open({
-	                  items: {
-	                    src: src
-	                  },
-	                  type: 'image'
-	                });
-	            });
-	        });
-	    },
-	    update: function (element, valueAccessor, allBindingsAccessor) {
-	        var value = ko.utils.unwrapObservable(valueAccessor());
-	        var imgList = $(element).find("img");
-	        imgList.each(function(){
-	            var src = $(this).attr("src");
-	            $(this).on("click", function(){
-	                $.magnificPopup.open({
-	                  items: {
-	                    src: src
-	                  },
-	                  type: 'image'
-	                });
-	            });
-	        });
-	    }
-	};
-	ko.bindingHandlers.zoomInitImage = {
-	    init: function (element, valueAccessor, allBindingsAccessor) {
-	        var image = ko.utils.unwrapObservable(valueAccessor());
-	        $(element).on("click", function(){
-	            $.magnificPopup.open({
-	              items: {
-	                src: image
-	              },
-	              type: 'image'
-	            });
-	        });
-	    },
-	    update: function (element, valueAccessor, allBindingsAccessor) {
-	        var image = ko.utils.unwrapObservable(valueAccessor());
-	        $(element).on("click", function(){
-	            $.magnificPopup.open({
-	              items: {
-	                src: image
-	              },
-	              type: 'image'
-	            });
-	        });
-	    }
-	};
-	//End KO custom handlers
+	        url = url.replace( new RegExp("/{[A-Za-z0-9_]+}", "g"), "" );
 
-})(jQuery, ko, window, YesCore);
+	        return $('base').attr('href') + method + url;
+	    };
+	};
+})(jQuery, ko, window, YesGlobal);

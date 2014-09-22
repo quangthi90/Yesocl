@@ -98,11 +98,26 @@
     <script src="{{ asset_js('common/sidebar.main_init.js') }}"></script>
     <script src="{{ asset_js('common/sidebar.collapse_init.js') }}"></script>
     <script src="{{ asset_js('common/menus.sidebar.chat_init.js') }}"></script>
+
+    <script src="{{ asset_js('common/core.global.js') }}"></script>
+    <script src="{{ asset_js('common/ko.common.js') }}"></script>
+    <script src="{{ asset_js('pages/common/models.js') }}"></script>
+    <script src="{{ asset_js('pages/common/widgets.js') }}"></script>    
+    <script id="Yes.Global">
+        (function(Y, undefined) {
+            var user = '{{ get_user_data()|raw }}';
+            var routing = '{{ get_routing_list()|raw }}';
+            Y.Routing = new Y.RoutingManager( JSON.parse(routing) );
+            if (user){
+                Y.CurrentUser = JSON.parse(user);
+            }
+        }(YesGlobal));
+    </script>
     {% block common_javascript %}
     {% endblock %}
     
     {# Custom Script #}
-    {% block javascript %}    
+    {% block javascript %} 
     {% endblock %}
     {# Defined Data for Script #}
     {% block datascript %}

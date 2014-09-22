@@ -167,4 +167,3 @@
 		window.QuickSearch = new QuickSearch(options);
 	});
 }(jQuery, ko, document));
-

@@ -1,6 +1,6 @@
 {% extends '@template/default/template/layout/basic/master.tpl' %}
 
-{% use '@template/default/template/post/wall_post.tpl' %}
+{% use '@template/default/template/widget/post/wall_post.tpl' %}
 
 {% block title %}{{ heading_title }}{% endblock %}
 
@@ -77,5 +77,24 @@
 {% block common_javascript %}
 {% endblock %}
 {% block javascript %}
-    {# block('wall_post_block_javascript') #}
+    { block('wall_post_block_javascript') }
+    <script type="text/javascript">
+        (function($, ko,  Y, undefined) {
+                Y.GlobalKoModel = Y.GlobalKoModel || {};
+                var currUser = JSON.parse('{{ current_user|json_encode()|raw }}');
+                var wallPostOptions = {
+                    apiUrls : {
+                        loadPost: {
+                            name: "ApiGetUserPost", 
+                            params: { user_slug : currUser.slug }
+                        }
+                    }
+                };
+                var oWallPost = new Y.Widgets.PostList(wallPostOptions, $("#wall-post-list"));
+                Y.GlobalKoModel.WallPostList = oWallPost;
+
+                //Apply Knockout
+                ko.applyBindings(Y.GlobalKoModel);
+        }(jQuery, ko, YesGlobal));
+    </script>
 {% endblock %}
