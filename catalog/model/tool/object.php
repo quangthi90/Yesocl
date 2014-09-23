@@ -234,6 +234,10 @@ class ModelToolObject extends Model
 			$aUsers[$aUser['id']] = $aUser;
 		}
 
+		$lComments = $oPost->getComments();
+		$aComments = $lComments->slice($lComments->count() - 3, 3);
+		$aPost['comments'] = $this->formatComments( $aComments, false );
+
 		$aPost['user'] = $aUsers[$aPost['user_id']];
 		$aPost['is_owner'] = true;
 
