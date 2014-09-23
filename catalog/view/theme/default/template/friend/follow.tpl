@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block body %}
-<div id="y-content">
+<!-- <div id="y-content">
     <div id="y-main-content" data-block-width="380" data-block-height="90" class="has-horizontal block-auto-floatleft">
         {% if current_user_id != get_current_user().id %}
             {% set user = users[current_user_id] %}
@@ -49,7 +49,7 @@
         {% set is_follow = true %}
         {{ block('common_user_block_user_filter') }}
     </div>
-</div>
+</div> -->
 {% endblock %}
 
 {% block javascript %}

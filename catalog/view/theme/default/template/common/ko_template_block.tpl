@@ -80,7 +80,7 @@
 				</ul>
 			</div>
 		</div>
-		<div class="y-comment-reply post post_new comment-form" data-bind="with: initComment">
+		<!-- <div class="y-comment-reply post post_new comment-form" data-bind="with: initComment">
 			<div class="txt_editor">
 				<textarea required data-bind="mention: content, executeOnEnter: $parent.addCommentByEnter, attr:{ 'readonly' : $parent.isProcessing() }" class="post_input" placeholder="comment ..." style="font-size: 12px;"></textarea>
 			</div>
@@ -96,7 +96,7 @@
                 	</label>  
                 </div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 	<div class="mfp-hide y-dlg-container" id="comment-advance-form">
 		<div class="y-dlg">

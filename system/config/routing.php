@@ -155,11 +155,6 @@ $_['routing']['ApiGetAllFriends']				= 'services/get/friend/all/';
 $_['routing']['ApiGetUserPost']					= 'services/get/user/{user_slug}/posts/{page}/';
 $_['routing']['ApiSetPrivateSetting']			= 'services/set/privateoption/';
 $_['routing']['ApiGetDisplayOption']			= 'services/get/setting/what-s-new/display/option/';
-
-//Salm
-// Cover
-$_['routing']['ChangeCover']					= 'cover/change/';
-$_['routing']['SaveCover']						= 'cover/save/';
-//End Salm
+$_['routing']['ApiPushCover']					= 'services/push/cover/';
 
 ?>

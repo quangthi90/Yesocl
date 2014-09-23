@@ -1,3 +1,4 @@
+{% use '@template/default/template/common/cover_block.tpl' %}
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 paceCounter paceSocial sidebar sidebar-social footer-sticky"> <![endif]-->
 <!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 paceCounter paceSocial sidebar sidebar-social footer-sticky"> <![endif]-->
@@ -960,36 +961,7 @@
             <div class="innerAll">
                 <div class="row">
                     <div class="col-lg-9 col-md-8">
-                        <div class="timeline-cover">
-                            <button id="btsave_cover">save</button>
-                            <button id="btdrag_cover">drag</button>
-                            <div class="cover">
-                                <div class="top">
-                                    <img src="{{ asset_css('platform/images/photodune-2755655-party-time-s.jpg') }}" id="cover"/>
-                                </div>
-                                <div id="position_img"></div>
-
-                                <script type="text/javascript">
-                                    $('#btsave_cover').click(function(){
-                                        $('#cover').draggable( "disable" );
-                                        a = $('#cover').dragncrop('getPosition');
-                                        $('#position_img').text ("Position offset: "+ a.offset);
-                                    })
-
-                                    $('#btdrag_cover').click(function(){
-                                        $('#cover').dragncrop();
-                                        $('#cover').draggable();
-                                        $('#cover').draggable( "enable" );
-                                    })
-                                </script>
-                                <ul class="list-unstyled">
-                                    <li class="active"><a href="index.html?lang=en"><i class="fa fa-fw fa-clock-o"></i> <span>Timeline</span></a></li>
-                                    <li><a href="about_1.html?lang=en"><i class="fa fa-fw fa-user"></i> <span>About</span></a></li>
-                                    <li><a href="media_1.html?lang=en"><i class="fa fa-fw icon-photo-camera"></i> <span>Photos</span> <small>(102)</small></a></li>
-                                    <li><a href="contacts_1.html?lang=en"><i class="fa fa-fw icon-group"></i><span> Friends </span><small>(19)</small></a></li>
-                                    <li><a href="messages.html?lang=en"><i class="fa fa-fw icon-envelope-fill-1"></i> <span>Messages</span> <small>(2 new)</small></a></li>
-                                </ul>
-                            </div>
+                        {{ block ('cover_block') }}
                             <div class="widget">
                                 <div class="widget-body padding-none margin-none">
                                     <div class="innerAll">

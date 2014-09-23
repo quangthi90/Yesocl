@@ -411,5 +411,36 @@ class ControllerApiUser extends Controller {
           'items' => $aWhatSNewOptions,
           )));
     }
+
+    public function changeCover() {
+        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+            $this->load->model('user/user');
+
+            $oUser = $this->customer->getUser();
+
+            if ( empty($this->request->get['user_slug']) ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'not ok',
+                    'error' => 'user slug is empty'
+                )));
+            }
+
+            $sUserSlug = $this->request->get['user_slug'];
+
+            $result = $this->model_user_user->editUser( $sUserSlug, array('request_friend' => $this->customer->getId()) );
+
+            if ( $result ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'ok',
+                    'status' => 3
+                )));
+            }
+        }
+
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok',
+            'error' => 'send request have error'
+        )));  
+    }
 }
 ?>

@@ -157,11 +157,6 @@ $_['route']['ApiGetAllFriends']				= 'api/user/getAllFriends/';
 $_['route']['ApiGetUserPost']				= 'api/user/getPosts/';
 $_['route']['ApiSetPrivateSetting']			= 'api/user/setPrivateOption/';
 $_['route']['ApiGetDisplayOption']			= 'api/user/getDisplayoption/';
-
-//Salm
-// Cover
-$_['route']['ChangeCover']					= 'account/cover';
-$_['route']['SaveCover']					= 'account/cover/save';
-//End Salm
+$_['route']['ApiPushCover']					= 'api/user/changeCover';
 
 ?>
