@@ -13,12 +13,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <link rel="shortcut icon" href="image/template/favicon.png">
-
     <!--[if lt IE 9]>
         <link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css" />
     <![endif]-->
-
     <link rel="stylesheet" href="{{ asset_css('common/core.css') }}" />
+    <link rel="stylesheet" href="{{ asset_css('common/custom.css') }}" />
 
     {% block stylesheet %}
     {% endblock %}
@@ -84,7 +83,7 @@
     <script src="{{ asset_js('library/core_nicescroll/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset_js('library/core_breakpoints/breakpoints.js') }}"></script>
     <script src="{{ asset_js('library/menu_sidr/jquery.sidr.js') }}"></script>
-    <script src="{{ asset_js('library/media_holder/holder.js') }}"></script>
+    {#<script src="{{ asset_js('library/media_holder/holder.js') }}"></script> #}
     <script src="{{ asset_js('library/media_gridalicious/jquery.gridalicious.min.js') }}"></script>
     <script src="{{ asset_js('library/ui_modals/bootbox.min.js') }}"></script>
     <script src="{{ asset_js('other_mixitup/jquery.mixitup.min.js') }}"></script>

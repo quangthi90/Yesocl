@@ -8,36 +8,46 @@
         <div class="loaded hide2">
             <!-- ko foreach: postList -->
             <!-- Widget -->
-            <div class="widget gridalicious-item not-responsive">
+            <div class="widget gridalicious-item not-responsive post-item">
                 <!-- Info -->
-                <div class="bg-primary">
+                <div class="bg-white innerT innerL post-header">
                     <div class="media">
-                        <a class="pull-left" data-bind="attr: { title: $data.user.username, href: '/yesocl/wall-page/' + $data.user.slug + '/' }"><img width="50" class="media-object" data-bind="attr: {src: $data.user.avatar, alt: $data.user.username}"></a>
-                        <div class="media-body innerTB half">
-                            <a href="#" class="pull-right innerT innerR text-white">
-                                <i class="icon-reply-all-fill fa fa-2x "></i>
-                            </a>
-                            <a class="text-white strong display-block" data-bind="attr: { title: $data.user.username, href: '/yesocl/wall-page/' + $data.user.slug + '/' }, text: $data.user.username"></a>
+                        <a class="pull-left" data-bind="link: { title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }">
+                            <img width="50" class="media-object" data-bind="attr: {src: $data.user.avatar, alt: $data.user.username}">
+                        </a>
+                        <div class="media-body innerTB half">                            
+                            <div>
+                                <a class="text-black strong" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a>
+                                <!-- ko if: !$data.isOwner -->
+                                <span><i class="icon-caret-right"></i></span>
+                                <a data-bind="attr: { href: $data.ownerHref, title : $data.ownerName }, text: $data.ownerName"></a>
+                                <!-- /ko -->
+                            </div>
                             <span data-bind="timeAgo: $data.created"></span>
                         </div>
                     </div>
                 </div>
                 <!-- Content -->
-                <div class="innerAll" data-bind="html: $data.content()">
+                <div class="innerAll post-content" data-bind="html: $data.content()">
                 </div>
                 <!-- Comment -->
-                <div class="bg-gray innerAll border-top border-bottom text-small ">
-                    <span>{% trans %}View all{% endtrans %} <a class="text-primary" href="#"><span data-bind="text: $data.commentCount"></span> <span data-bind="text: $data.commentCount > 1 ? '{% trans %}Comments{% endtrans %}' : '{% trans %}Comment{% endtrans %}'"></span></a></span>
-                </div>
-                <!-- First Comment -->
-                <div class="media margin-none bg-gray">
-                    <a href="" class="pull-left innerAll"><img src="{{ asset_img('no_user_avatar.png') }}" alt="50x50" width="50" class="media-object"></a>
-                    <div class="media-body innerTB">
-                        <a href="#" class="pull-right innerT innerR text-muted"><i class="icon-reply-all-fill fa fa-2x "></i></a>
-                        <a href="" class="strong text-inverse">Adrian Demian</a>
-                        <small class="text-muted display-block ">on Jan 15th, 2014</small>
-                            <a href="" class="text-small">mark it</a>
-                        <div>- Happy B-Day!</div>
+                <div class="innerAll border-bottom border-top text-small">
+                    <a><i class="icon-thumbs-up text-larger half innerR"></i>Like</a>
+                    <div class="pull-right">
+                        <a data-toggle="collapse" class="innerR">
+                            <i class="fa fa-bars text-larger"></i> Comments <span class="text-muted">2+</span>
+                        </a>
+                        <span class="label label-primary half innerAll">Liked (10)</span>
+                    </div>
+                </div>                
+                <div class="comment-list">
+                    <div class="media margin-none bg-gray comment-item">
+                        <a href="" class="pull-left innerAll margin-right-none"><img src="{{ asset_img('no_user_avatar.png') }}" alt="50x50" width="50px" height="50px" class="media-object avatar"></a>
+                        <div class="media-body innerTB">
+                            <a href="" class="strong text-inverse text-small">Adrian Demian</a>
+                            <small class="text-muted display-block text-small">on Jan 15th, 2014</small>
+                            <div>- Happy B-Day!</div>
+                        </div>
                     </div>
                 </div>
                 <div class="input-group comment">

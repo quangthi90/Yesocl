@@ -1,4 +1,5 @@
 YesGlobal.Models = YesGlobal.Models || {};
+
 (function($, ko, Y, undefined) {
 	Y.Models.MarketModel = function (data) {
 		'use strict';
@@ -48,7 +49,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 
 		that.likePost = function() {
 			var ajaxOptions = {
-				url : window.yRouting.generate('ApiPutPostLike', {
+				url : Y.Routing.generate('ApiPutPostLike', {
 					post_type: that.type,
 					post_slug: that.slug
 				})
@@ -206,7 +207,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 
 	Y.Models.RefreshOptionModel = function (data) {
 		var that = this;
-		that.href = window.yRouting.generate('SetDisplayRefreshPage', {option: data.option});
+		that.href = Y.Routing.generate('SetDisplayRefreshPage', {option: data.option});
 		that.title = ko.observable(data.title || '');
 		that.isEnabled = ko.observable(data.enabled || false);
 		that.value = data.option;
@@ -254,7 +255,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 
 		that.enable = function (item, callback) {
 			var ajaxOptions = {
-				url: window.yRouting.generate('ApiSetPrivateSetting', {}),
+				url: Y.Routing.generate('ApiSetPrivateSetting', {}),
 				data: { option_key: 'config_display_whatsnew', option_value: item.value },
 			};
 			var successCallback = function(data){
@@ -275,7 +276,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 
 		function _init () {
 			var ajaxOptions = {
-				url: window.yRouting.generate('ApiGetDisplayOption', {}),
+				url: Y.Routing.generate('ApiGetDisplayOption', {}),
 			};
 			var successCallback = function(data){
 				if(data.success === "ok"){

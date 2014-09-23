@@ -58,7 +58,7 @@ var YesGlobal = YesGlobal || {};
 		ko.bindingHandlers.link = {
 		    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
 		        var options = valueAccessor();
-		        var href = window.yRouting.generate(options.route, options.params);
+		        var href = Y.Routing.generate(options.route, options.params);
 		        $(element).attr('href', href);
 		        var textValue = ko.utils.unwrapObservable(options.text);
 		        var titleValue = ko.utils.unwrapObservable(options.title);
