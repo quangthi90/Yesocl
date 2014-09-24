@@ -81,12 +81,11 @@
     <script type="text/javascript">
         (function($, ko,  Y, undefined) {
                 Y.GlobalKoModel = Y.GlobalKoModel || {};
-                var currUser = JSON.parse('{{ current_user|json_encode()|raw }}');
                 var wallPostOptions = {
                     apiUrls : {
                         loadPost: {
                             name: "ApiGetUserPost", 
-                            params: { user_slug : currUser.slug }
+                            params: { user_slug : Y.CurrentUser.slug }
                         }
                     }
                 };
