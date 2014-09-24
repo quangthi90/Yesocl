@@ -39,9 +39,11 @@ class ControllerAccountMessage extends Controller {
 		}
 		
 		$this->children = array(
-			'common/sidebar_control',
-			'common/footer',
-			'common/header'
+			'layout/basic/leftsidebar',
+			'layout/basic/rightsidebar',
+			'layout/basic/navbar',
+			'layout/basic/footer',
+			'widget/account/user'
 		);
 										
 		$this->response->setOutput($this->twig_render());
