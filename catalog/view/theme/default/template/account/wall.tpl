@@ -77,7 +77,7 @@
 {% block common_javascript %}
 {% endblock %}
 {% block javascript %}
-    { block('wall_post_block_javascript') }
+    {{ block('wall_post_block_javascript') }}
     <script type="text/javascript">
         (function($, ko,  Y, undefined) {
                 Y.GlobalKoModel = Y.GlobalKoModel || {};
