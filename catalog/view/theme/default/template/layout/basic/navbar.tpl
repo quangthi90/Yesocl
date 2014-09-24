@@ -48,7 +48,7 @@
               </a>
               <ul class="dropdown-menu">
                   <li><a href="about_1.html?lang=en" >About</a></li>
-                  <li><a href="messages.html?lang=en">Messages</a></li>
+                  <li><a href="{{ path('MessagePage') }}">Messages</a></li>
                   <li><a href="{{ path('ProfilePage', {user_slug: currUser.slug}) }}">{% trans %}Profile{% endtrans %}</a></li>
                   <li><a href="{{ path('Logout') }}">{% trans %}Log out{% endtrans %}</a></li>
               </ul>
