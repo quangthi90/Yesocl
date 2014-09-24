@@ -6,8 +6,11 @@
 {% endblock %}
 {% block body %}
     <div class="innerAll">
-		<div class="widget widget-messages widget-heading-simple widget-body-white">
+		<div data-bind="with: MesageView" id="widget-messages" class="widget widget-messages widget-heading-simple widget-body-white">
             <div class="widget-body padding-none margin-none">
+                <div class="innerAll bg-gray">
+                    <h2 data-bind="text: DemoText"></h2>
+                </div>
                 <div class="row row-merge borders">
                     <div class="col-md-3 listWrapper">
                         <div class="innerAll">
@@ -22,11 +25,11 @@
                         </div>
                         <div class="bg-gray text-center strong border-top innerAll half">1490 messages <i class="fa fa-circle-arrow-down"></i></div>
                         <ul class="list-unstyled">
-                                                                            <li class="border-bottom  bg-primary">
+                            <li class="border-bottom  bg-primary">
                                 <div class="media innerAll">
                                     <div class="media-object pull-left hidden-phone">
                                         <a href="">
-                                            <img src="../assets/images/people/50/16.jpg" alt="Image" />
+                                            <img src="{{ asset_img('no_user_avatar.png') }}" height="40px" width="40px" alt="Image" />
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -35,11 +38,11 @@
                                     </div>
                                 </div>
                             </li>
-                                                    <li class="border-bottom ">
+                            <li class="border-bottom ">
                                 <div class="media innerAll">
                                     <div class="media-object pull-left hidden-phone">
                                         <a href="">
-                                            <img src="../assets/images/people/50/17.jpg" alt="Image" />
+                                            <img src="{{ asset_img('no_user_avatar.png') }}" height="40px" width="40px"  alt="Image" />
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -48,11 +51,11 @@
                                     </div>
                                 </div>
                             </li>
-                                                    <li class="border-bottom ">
+                            <li class="border-bottom ">
                                 <div class="media innerAll">
                                     <div class="media-object pull-left hidden-phone">
                                         <a href="">
-                                            <img src="../assets/images/people/50/18.jpg" alt="Image" />
+                                            <img src="{{ asset_img('no_user_avatar.png') }}" height="40px" width="40px"  alt="Image" />
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -61,11 +64,11 @@
                                     </div>
                                 </div>
                             </li>
-                                                    <li class="border-bottom ">
+                            <li class="border-bottom ">
                                 <div class="media innerAll">
                                     <div class="media-object pull-left hidden-phone">
                                         <a href="">
-                                            <img src="../assets/images/people/50/19.jpg" alt="Image" />
+                                            <img src="{{ asset_img('no_user_avatar.png') }}" height="40px" width="40px"  alt="Image" />
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -74,11 +77,11 @@
                                     </div>
                                 </div>
                             </li>
-                                                    <li class="border-bottom ">
+                            <li class="border-bottom ">
                                 <div class="media innerAll">
                                     <div class="media-object pull-left hidden-phone">
                                         <a href="">
-                                            <img src="../assets/images/people/50/20.jpg" alt="Image" />
+                                            <img src="{{ asset_img('no_user_avatar.png') }}" height="40px" width="40px"  alt="Image" />
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -87,16 +90,14 @@
                                     </div>
                                 </div>
                             </li>
-                                                </ul>
+                        </ul>
                     </div>
                     <div class="col-md-9 detailsWrapper">
-                        
-
                         <!-- User -->
                         <div class="bg-primary">
                             <div class="media">
                                 <a href="" class="pull-left">
-                                    <img src="../assets//images/people/100/13.jpg" width="65" class="media-object">
+                                    <img src="{{ asset_img('no_user_avatar.png') }}" width="65" class="media-object">
                                 </a>
                                 <div class="media-body innerTB innerR">
                                     <div class="innerT half pull-right">
@@ -105,10 +106,7 @@
                                     </a>
                                     </div>
                                     <h4 href="" class="text-white pull-left innerAll strong display-block margin-none">Joanne Smith</h4>
-                                    
-
                                 </div>
-
                             </div>
                         </div>
                         <div class="bg-gray innerAll text-center margin-none"><a href="" class="text-muted lead"><i class="icon-time-clock"></i> View Archive</a></div>
@@ -121,7 +119,7 @@
                             <!--  Message -->
                             <div class="media margin-none innerAll">
                                 <a href="" class="pull-left hidden-xs">
-                                    <img src="../assets//images/people/100/16.jpg" width="60" class="media-object">
+                                    <img src="{{ asset_img('no_user_avatar.png') }}" width="60" class="media-object">
                                 </a>
                                 <div class="media-body innerTB">
                                     <div class="row">
@@ -152,7 +150,7 @@
                             <!--  Message -->
                             <div class="media margin-none bg-gray border-top innerAll">
                                 <a href="" class="pull-left hidden-xs">
-                                    <img src="../assets//images/people/100/13.jpg" width="60" class="media-object">
+                                    <img src="{{ asset_img('no_user_avatar.png') }}" width="60" class="media-object">
                                 </a>
                                 <div class="media-body innerTB">
                                     <div class="row">
@@ -183,7 +181,7 @@
                             <!--  Message -->
                             <div class="media margin-none border-top innerAll">
                                 <a href="" class="pull-left hidden-xs">
-                                    <img src="../assets//images/people/100/16.jpg" width="60" class="media-object">
+                                    <img src="{{ asset_img('no_user_avatar.png') }}" width="60" class="media-object">
                                 </a>
                                 <div class="media-body innerTB">
                                     <div class="row">
@@ -215,7 +213,7 @@
                             <!--  Message -->
                             <div class="media margin-none bg-gray border-top innerAll">
                                 <a href="" class="pull-left hidden-xs">
-                                    <img src="../assets//images/people/100/13.jpg" width="60" class="media-object">
+                                    <img src="{{ asset_img('no_user_avatar.png') }}" width="60" class="media-object">
                                 </a>
                                 <div class="media-body innerTB">
                                     <div class="row">
@@ -246,7 +244,7 @@
                             <!--  Message -->
                             <div class="media margin-none border-top innerAll">
                                 <a href="" class="pull-left hidden-xs">
-                                    <img src="../assets//images/people/100/16.jpg" width="60" class="media-object">
+                                    <img src="{{ asset_img('no_user_avatar.png') }}" width="60" class="media-object">
                                 </a>
                                 <div class="media-body innerTB">
                                     <div class="row">
@@ -271,7 +269,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -283,6 +280,19 @@
 {% block library_javascript %}
 {% endblock %}
 {% block common_javascript %}
+    <script src="{{ asset_js('pages/account/message.js') }}"></script>
 {% endblock %}
 {% block javascript %}
+    <script type="text/javascript">
+        (function($, ko,  Y, undefined) {
+                Y.GlobalKoModel = Y.GlobalKoModel || {};
+                var mesageOptions = {
+                };
+                var mesageView = new Y.Widgets.MessageView(mesageOptions, $("#widget-messages"));
+                Y.GlobalKoModel.MesageView = mesageView;
+
+                //Apply Knockout
+                ko.applyBindings(Y.GlobalKoModel);
+        }(jQuery, ko, YesGlobal));
+    </script>
 {% endblock %}
