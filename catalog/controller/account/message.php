@@ -43,7 +43,7 @@ class ControllerAccountMessage extends Controller {
 			'layout/basic/rightsidebar',
 			'layout/basic/navbar',
 			'layout/basic/footer',
-			'widget/account/usercontrol'
+			'widget/account/user'
 		);
 										
 		$this->response->setOutput($this->twig_render());
