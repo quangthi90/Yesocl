@@ -95,7 +95,7 @@ class ControllerFriendFriend extends Controller {
 			'layout/basic/rightsidebar',
 			'layout/basic/navbar',
 			'layout/basic/footer',
-			'widget/account/user'
+			'widget/account/usercontrol'
 		);
 										
 		$this->response->setOutput($this->twig_render());
