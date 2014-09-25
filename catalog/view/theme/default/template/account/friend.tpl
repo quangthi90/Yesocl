@@ -1,5 +1,5 @@
 {% extends '@template/default/template/layout/basic/master.tpl' %}
-{% use '@template/default/template/account/wall.tpl' %}
+{% use '@template/default/template/widget/account/user_block.tpl' %}
 
 {% block title %}{{ heading_title }}{% endblock %}
 
@@ -13,7 +13,9 @@
                 {{ block('timeline_cover')}}
             </div>
             <!-- WIDGET -->
-            <div class="col-md-4 col-lg-3">            
+            <div class="col-md-4 col-lg-3">
+            {{ include(template_from_string( user )) }}
+            {{ block('widget_recent_news') }}           
             </div>
             <!-- END WIDGET -->
         </div>
