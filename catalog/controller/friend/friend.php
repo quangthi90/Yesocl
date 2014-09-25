@@ -84,16 +84,18 @@ class ControllerFriendFriend extends Controller {
 		date_sub($sRecentTime, date_interval_create_from_date_string('7 days'));
 		$this->data['recent_time'] = $sRecentTime;
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/friend/friend.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/friend/friend.tpl';
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/friend.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/account/friend.tpl';
 		} else {
-			$this->template = 'default/template/friend/friend.tpl';
+			$this->template = 'default/template/account/friend.tpl';
 		}
 		
 		$this->children = array(
-			'common/sidebar_control',
-			'common/footer',
-			'common/header'
+			'layout/basic/leftsidebar',
+			'layout/basic/rightsidebar',
+			'layout/basic/navbar',
+			'layout/basic/footer',
+			'widget/account/user'
 		);
 										
 		$this->response->setOutput($this->twig_render());

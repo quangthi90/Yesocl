@@ -1,4 +1,5 @@
 {% extends '@template/default/template/layout/basic/master.tpl' %}
+{% use '@template/default/template/account/wall.tpl' %}
 
 {% block title %}{{ heading_title }}{% endblock %}
 
@@ -8,7 +9,8 @@
     <div class="innerAll">
         <div class="row">
             <div class="col-lg-9 col-md-8"> 
-				Friend page
+				<!-- Friend page -->
+                {{ block('timeline_cover')}}
             </div>
             <!-- WIDGET -->
             <div class="col-md-4 col-lg-3">            
