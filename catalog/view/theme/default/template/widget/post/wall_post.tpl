@@ -9,6 +9,24 @@
             <!-- ko foreach: postList -->
             <!-- Widget -->
             <div class="widget gridalicious-item not-responsive post-item">
+                <!-- ko if: $data.isLiked() || $data.isEdit || $data.isDelete -->
+                <div class="dropdown post-options">
+                    <a data-toggle="dropdown" class="dropdown-toggle">
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- ko if: $data.isLiked() -->
+                        <li><a data-bind="click: likePost"><i class="icon-thumbs-down innerR"></i>{% trans %}Unlike{% endtrans %}</a></li>
+                        <!-- /ko -->
+                        <!-- ko if: $data.isEdit -->
+                        <li><a><i class="icon-compose innerR"></i>{% trans %}Edit{% endtrans %}</a></li>
+                        <!-- /ko -->
+                        <!-- ko if: $data.isDelete -->
+                        <li><a><i class="icon-delete-symbol innerR"></i>{% trans %}Delete{% endtrans %}</a></li>
+                        <!-- /ko -->
+                    </ul>
+                </div>
+                <!-- /ko -->
                 <!-- Info -->
                 <div class="bg-white innerT innerL post-header">
                     <div class="media">
@@ -32,12 +50,24 @@
                 </div>
                 <!-- Comment -->
                 <div class="innerAll border-bottom border-top text-small">
-                    <a><i class="icon-thumbs-up text-larger half innerR"></i>Like</a>
+                    <!-- ko if: !$data.isLiked() -->
+                    <a data-bind="click: likePost"><i class="icon-thumbs-up text-larger half innerR"></i></b>{% trans %}Like{% endtrans %}</a>
+                    <!-- /ko -->
+                    <!-- ko if: $data.isLiked() -->
+                    <span><i class="icon-thumbs-up-fill text-larger half innerR"></i></b>{% trans %}Liked{% endtrans %}</span>
+                    <!-- /ko -->
                     <div class="pull-right">
+                        <!-- ko if: $data.commentCount() > 3 -->
                         <a data-toggle="collapse" class="innerR">
-                            <i class="fa fa-bars text-larger"></i> Comments <span class="text-muted">2+</span>
+                            <i class="fa fa-bars text-larger"></i>{% trans %}Comments{% endtrans %} <span class="text-muted" data-bind="text: ($data.commentCount() - 3) + ' ++'"></span>
                         </a>
-                        <span class="label label-primary half innerAll">Liked (10)</span>
+                        <!-- /ko -->
+                        <!-- ko if: $data.likeCount() == 1 -->
+                        <span class="label label-primary half innerAll"><b data-bind="text: $data.likeCount()"></b> {% trans %}Like{% endtrans %}</span>
+                        <!-- /ko -->
+                        <!-- ko if: $data.likeCount() > 1 -->
+                        <span class="label label-primary half innerAll"><b data-bind="text: $data.likeCount()"></b> {% trans %}Likes{% endtrans %}</span>
+                        <!-- /ko -->
                     </div>
                 </div>                
                 <div class="comment-list">

@@ -100,7 +100,7 @@
 
     <script src="{{ asset_js('common/core.global.js') }}"></script>
     <script src="{{ asset_js('common/ko.common.js') }}"></script>
-    <script src="{{ asset_js('pages/common/models.js') }}"></script>
+    <script src="{{ asset_js('models/common-models.js') }}"></script>
     <script src="{{ asset_js('pages/common/widgets.js') }}"></script>    
     <script id="Yes.Global">
         (function(Y, undefined) {

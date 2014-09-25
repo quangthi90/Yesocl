@@ -28,6 +28,7 @@
 {% block library_javascript %}
 {% endblock %}
 {% block common_javascript %}
+<script src="{{ asset_js('models/post-models.js') }}"></script>
 {% endblock %}
 {% block javascript %}
     {{ block('wall_post_block_javascript') }}

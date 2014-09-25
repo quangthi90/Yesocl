@@ -6046,6 +6046,7 @@ div.DTCR_pointer {
   -webkit-box-shadow: none !important;
   color: #25ad9f;
   font-weight: bold;
+  border-radius: 0px !important;
 }
 .btn i.pull-right {
   margin-top: 2px;

@@ -280,6 +280,7 @@
 {% block library_javascript %}
 {% endblock %}
 {% block common_javascript %}
+    <script src="{{ asset_js('models/message-models.js') }}"></script>
     <script src="{{ asset_js('pages/account/message.js') }}"></script>
 {% endblock %}
 {% block javascript %}
