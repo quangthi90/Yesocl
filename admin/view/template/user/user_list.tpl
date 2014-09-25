@@ -15,6 +15,7 @@
     <div class="heading">
       <span><img src="view/image/user.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
       <div class="buttons">
+        <a onclick="location = '<?php echo $export; ?>'" class="btn btn-primary btn-export"><?php echo $button_export; ?> <i class="icon-circle-arrow-up"></i></a>
 	      <a onclick="location = '<?php echo $insert; ?>'" class="btn btn-success"><?php echo $button_insert; ?> <i class="icon-plus"></i></a>
 	      <a onclick="$('form').submit();" class="btn btn-danger"><?php echo $button_delete; ?> <i class="icon-trash"></i></a>
 	  </div>
@@ -198,4 +199,15 @@ $('#form').on('submit', function(){
   }
 });
 //--></script>
+
+<!--Export-->
+<script type="text/javascript">
+  $('.btn-export').on('click', function () {
+    if ( $('#from').val() > $('#to').val() ){
+      alert('from year must least than to year');
+      return false;
+    }
+    window.location.href = $(this).attr('data-href') + '&from=' + $('#from').val() + '&to=' + $('#to').val();
+  });
+</script>
 <?php echo $footer; ?>

@@ -35,6 +35,7 @@ $_['text_default']      			= 'Default';
 $_['text_findAllDocumentGroup']     = 'find All Document Group';
 
 // Button
+$_['button_export'] 				= 'Export';
 $_['button_add_education']		  	= 'Add Education';
 $_['button_add_experience']		  	= 'Add Experience';
 $_['button_add_former']		  		= 'Add Former';
@@ -44,11 +45,11 @@ $_['button_add_website']		  	= 'Add Website';
 
 // Entry
 $_['entry_address']          		= 'Address:';
-$_['entry_advice_for_contact']     = 'Advice For Contact:';
+$_['entry_advice_for_contact']     	= 'Advice For Contact:';
 $_['entry_birthday']          		= 'Birthday:';
 $_['entry_company']             	= 'Company:';
 $_['entry_confirm']             	= 'Confirm:';
-$_['entry_self_employed']             	= 'Self employed:';
+$_['entry_self_employed']           = 'Self employed:';
 $_['entry_current']             	= 'Current:';
 $_['entry_date_attended']           = 'Date Attended:';
 $_['entry_degree']             		= 'Degree:';

@@ -71,6 +71,7 @@ class ControllerUserUser extends Controller {
 		$this->data['text_now'] = $this->language->get( 'text_now' );
 		
 		// Button
+		$this->data['button_export'] = $this->language->get('button_export');
 		$this->data['button_save'] = $this->language->get( 'button_save' );
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
 		$this->data['button_add_email'] = $this->language->get( 'button_add_email' );
@@ -733,6 +734,7 @@ class ControllerUserUser extends Controller {
 		$this->data['confirm_del'] = $this->language->get( 'confirm_del' );
 		
 		// Button
+		$this->data['button_export'] = $this->language->get( 'button_export' );
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 		$this->data['button_filter'] = $this->language->get( 'button_filter' );
@@ -1923,10 +1925,39 @@ class ControllerUserUser extends Controller {
 				'username' => $result->getUsername(),
 				'email' => $result->getEmail()
 			);
-			die($result->getEmail());
+			//die($result->getEmail());
 		}
 
 		$this->response->setOutput( json_encode($users) );
+	}
+
+	public function export(){
+		if ( empty($this->request->get['start']) ){
+			$iStart = 0;
+		}else{
+			$iStart = $this->request->get['start'];
+		}
+
+		$this->load->model('user/user');
+		$this->load->model('tool/excel');
+		$results = $this->model_user_user->filterUser($this->request->get);
+
+		$users = array();
+
+		foreach ($results as $result) {
+			$users[$result->getUser()] = array(
+				'username' 		=> $result->getUsername(),
+				'emails'		=> $result->getEmails(),
+				'groupUser'		=> $result->getGroupUser(),
+				'createDate'	=> $result->getCreated(),
+				'fisrtname'		=> $result->getFirstname(),
+				'lastname'		=> $result->getLastname(),
+				'fullname'		=> $result->getSolrFullname(),
+				'birthday'		=> $result->getUsername(),
+				'sex'			=> $result->getUsername(),
+				'phones'		=> $result->getUsername()
+				)	
+		}
 	}
 }
 ?>
