@@ -226,11 +226,7 @@ class ModelToolObject extends Model
 		}
 
 		if ( empty($aUsers[$aPost['user_id']]) ){
-			$oUser = $oPost->getUser();
-			$aUser = $oUser->formatToCache();
-			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-			$aUser['fr_status'] = $this->checkFriendStatus( $this->customer->getId(), $aUser['id'] );
-			$aUser['fl_status'] = $this->checkFollowerStatus( $this->customer->getId(), $aUser['id'] );
+			$aUser = $this->formatUser( $oPost->getUser() );
 			$aUsers[$aUser['id']] = $aUser;
 		}
 
@@ -369,11 +365,7 @@ class ModelToolObject extends Model
 		if ( empty($aUsers[$aComment['user_id']]) ){
 			$this->load->model('tool/image');
 			
-			$oUser = $oComment->getUser();
-			$aUser = $oUser->formatToCache();
-			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-			$aUser['fr_status'] = $this->checkFriendStatus( $this->customer->getId(), $aUser['id'] );
-			$aUser['fl_status'] = $this->checkFollowerStatus( $this->customer->getId(), $aUser['id'] );
+			$aUser = $this->formatUser( $oComment->getUser(); );
 			$aUsers[$aUser['id']] = $aUser;
 		}
 		$aComment['user'] = $aUsers[$aComment['user_id']];
@@ -391,10 +383,29 @@ class ModelToolObject extends Model
 	public function formatMessage( $oMessage, &$aUsers = array() ) {
 		$aMessage = $oMessage->formatToCache();
 
-		// $idUser
-		if ( !empty($aUsers[$oMessage->getUser()->getId()]) ){
-			$aMessage['user'] = $a
+		$idUser = $oMessage->getUser()->getId();
+		if ( empty($aUsers[$idUser]) ){
+			$aUsers[$idUser] = $this->formatUser( $oMessage->getUser() );
 		}
+		$aMessage['user'] = $aUsers[$idUser];
+
+		return $aMessage;
+	}
+
+	/**
+	 * Format Object User to Array
+	 * 2014/09/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: object User
+	 * @return: Array Object User formated
+	 */
+	public function formatUser( $oUser ) {
+			$aUser = $oUser->formatToCache();
+			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+			$aUser['fr_status'] = $this->checkFriendStatus( $this->customer->getId(), $aUser['id'] );
+			$aUser['fl_status'] = $this->checkFollowerStatus( $this->customer->getId(), $aUser['id'] );
+
+			return $aUser;
 	}
 
 	// Generate url
