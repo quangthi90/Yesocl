@@ -12,9 +12,9 @@ class ModelToolObject extends Model
 	 */
 	public function formatPosts( $lPosts, $isReturnUser = true, $bIsMustImage = false, $with = 330, $height = 246, $options = array() ) {
 		$aPosts = array();
-		$aUsers = array();
 
-		foreach ( $lPosts as $oPost ) $aPosts[] = $this->formatPost( $oPost, $aUsers, $bIsMustImage, $with, $height, $options );
+		foreach ( $lPosts as $oPost ) 
+			$aPosts[] = $this->formatPost( $oPost, $bIsMustImage, $with, $height, $options );
 
 		if ( !$isReturnUser ){
 			return $aPosts;
@@ -22,7 +22,7 @@ class ModelToolObject extends Model
 		
 		return array(
 			'posts' => $aPosts,
-			'users' => $aUsers
+			'users' => $this->aUsers
 		);
 	}
 
@@ -33,7 +33,7 @@ class ModelToolObject extends Model
 	 * @param: object Post
 	 * @return: Array Object Post formated
 	 */
-	public function formatPost( $oPost, &$aUsers = array(), $bIsMustImage = false, $with = 330, $height = 246, $options = array() ) {
+	public function formatPost( $oPost, $bIsMustImage = false, $with = 330, $height = 246, $options = array() ) {
 		$this->load->model('tool/image');
 		$aPost = $oPost->formatToCache();
 
@@ -45,16 +45,16 @@ class ModelToolObject extends Model
 			$aPost['isLiked'] = false;
 		}
 
-		if ( empty($aUsers[$aPost['user_id']]) ){
+		if ( empty($this->aUsers[$aPost['user_id']]) ){
 			$aUser = $this->formatUser( $oPost->getUser() );
-			$aUsers[$aUser['id']] = $aUser;
+			$this->aUsers[$aUser['id']] = $aUser;
 		}
 
 		$lComments = $oPost->getComments();
 		$aComments = $lComments->slice($lComments->count() - 3, 3);
 		$aPost['comments'] = $this->formatComments( $aComments, false );
 
-		$aPost['user'] = $aUsers[$aPost['user_id']];
+		$aPost['user'] = $this->aUsers[$aPost['user_id']];
 		$aPost['is_owner'] = true;
 
 		// Check owner
@@ -159,17 +159,16 @@ class ModelToolObject extends Model
 	 */
 	public function formatComments( $lComments, $isReturnUser = true ) {
 		$aComments = array();
-		$aUsers = array();
 
 		foreach ( $lComments as $oComment ) {
-			$aComments[] = $this->formatComment( $oComment, $aUsers );
+			$aComments[] = $this->formatComment( $oComment );
 		}
 
 		if ( !$isReturnUser ) return $aComments;
 
 		return array(
 			'comments' => $aComments,
-			'users' => $aUsers
+			'users' => $this->aUsers
 		);
 	}
 
@@ -180,15 +179,15 @@ class ModelToolObject extends Model
 	 * @param: object Comment
 	 * @return: Array Object Comment formated
 	 */
-	public function formatComment( $oComment, &$aUsers = array() ) {
+	public function formatComment( $oComment ) {
 		$aComment = $oComment->formatToCache();
-		if ( empty($aUsers[$aComment['user_id']]) ){
+		if ( empty($this->aUsers[$aComment['user_id']]) ){
 			$this->load->model('tool/image');
 			
-			$aUser = $this->formatUser( $oComment->getUser(); );
-			$aUsers[$aUser['id']] = $aUser;
+			$aUser = $this->formatUser( $oComment->getUser() );
+			$this->aUsers[$aUser['id']] = $aUser;
 		}
-		$aComment['user'] = $aUsers[$aComment['user_id']];
+		$aComment['user'] = $this->aUsers[$aComment['user_id']];
 
 		return $aComment;
 	}
@@ -215,14 +214,14 @@ class ModelToolObject extends Model
 	 * @param: object Message
 	 * @return: Array Object Message formated
 	 */
-	public function formatMessage( $oMessage, &$aUsers = array() ) {
+	public function formatMessage( $oMessage ) {
 		$aMessage = $oMessage->formatToCache();
 
 		$idUser = $oMessage->getUser()->getId();
-		if ( empty($aUsers[$idUser]) ){
-			$aUsers[$idUser] = $this->formatUser( $oMessage->getUser() );
+		if ( empty($this->aUsers[$idUser]) ){
+			$this->aUsers[$idUser] = $this->formatUser( $oMessage->getUser() );
 		}
-		$aMessage['user'] = $aUsers[$idUser];
+		$aMessage['user'] = $this->aUsers[$idUser];
 
 		return $aMessage;
 	}
