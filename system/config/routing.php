@@ -155,4 +155,7 @@ $_['routing']['ApiGetAllFriends']				= 'services/get/friend/all/';
 $_['routing']['ApiGetUserPost']					= 'services/get/user/{user_slug}/posts/{page}/';
 $_['routing']['ApiSetPrivateSetting']			= 'services/set/privateoption/';
 $_['routing']['ApiGetDisplayOption']			= 'services/get/setting/what-s-new/display/option/';
+
+// Message
+$_['routing']['ApiGetUserMessage']				= 'services/get/message/user/{page}/';
 ?>

@@ -9,7 +9,7 @@
 		<div data-bind="with: MesageView" id="widget-messages" class="widget widget-messages widget-heading-simple widget-body-white">
             <div class="widget-body padding-none margin-none">
                 <div class="innerAll bg-gray">
-                    <h2 data-bind="text: DemoText"></h2>
+                    {#<h2 data-bind="text: DemoText"></h2>#}
                 </div>
                 <div class="row row-merge borders">
                     <div class="col-md-3 listWrapper">
@@ -288,6 +288,11 @@
         (function($, ko,  Y, undefined) {
                 Y.GlobalKoModel = Y.GlobalKoModel || {};
                 var mesageOptions = {
+                    apiUrls : {
+                        loadPost: {
+                            name: "ApiGetUserMessage"
+                        }
+                    }
                 };
                 var mesageView = new Y.Widgets.MessageView(mesageOptions, $("#widget-messages"));
                 Y.GlobalKoModel.MesageView = mesageView;
