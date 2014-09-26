@@ -12,10 +12,28 @@ class ModelFriendMessage extends Model {
 	 *	Int Limit
 	 * @return: array objects Message
 	 */
-	public function getLastUsersByAuthor( $idUserAuthor ){
-		$lUserMessages = $this->dm->getRepository('Document\Friend\Messages')->findBy(array(
-			'users.id' => $idUser
-		));
+	public function getLastUsersByAuthor( $idUserAuthor, $aData = array() ){
+		// Limit & start
+		if (  empty($aData['start']) ){
+			$aData['start'] = 0;
+		}
+		if ( empty($aData['limit']) ){
+			$aData['limit'] = 10;
+		}
+
+		// Sort & order
+		if ( empty($aData['sort']) ){
+			$aData['sort'] = 'updated';
+		}
+
+		if ( empty($aData['order']) ){
+			$aData['order'] = -1;
+		}
+
+		$lUserMessages = $this->dm->getRepository('Document\Friend\Messages')->findBy(array('users.id' => $idUser))
+			->skip($aData['start'])
+			->limit($aData['limit'])
+			->sort(array($aData['sort'] => $aData['order']));;
 
 		return $lUserMessages;
 	}

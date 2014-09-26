@@ -12,8 +12,8 @@ class ControllerAccountMessage extends Controller {
 
 		$this->load->model('friend/message');
 		$this->load->model('tool/image');
-		$idCurrentUser = $this->customer->getId();
-		$lMessages = $this->model_friend_message->getLastMessages( $idCurrentUser );
+		// $idCurrentUser = $this->customer->getId();
+		/*$lMessages = $this->model_friend_message->getLastMessages( $idCurrentUser );
 
 		$this->data['users'] = array();
 		$this->data['messages'] = array();
@@ -30,7 +30,7 @@ class ControllerAccountMessage extends Controller {
 			$aUser = $oUser->formatToCache();
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 100, 100 );
 			$this->data['users'][$aUser['id']] = $aUser;
-		}
+		}*/
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/message.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/message.tpl';
