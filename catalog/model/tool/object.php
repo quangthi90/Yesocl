@@ -381,6 +381,22 @@ class ModelToolObject extends Model
 		return $aComment;
 	}
 
+	/**
+	 * Format Object Message to Array
+	 * 2014/09/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: object Message
+	 * @return: Array Object Message formated
+	 */
+	public function formatMessage( $oMessage, &$aUsers = array() ) {
+		$aMessage = $oMessage->formatToCache();
+
+		// $idUser
+		if ( !empty($aUsers[$oMessage->getUser()->getId()]) ){
+			$aMessage['user'] = $a
+		}
+	}
+
 	// Generate url
 	public function path( $path, $params = array() ){
         $routing = $this->config->get('routing')[$path];

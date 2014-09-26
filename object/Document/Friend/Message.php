@@ -24,6 +24,25 @@ Class Message {
     /** @MongoDB\Date */
 	private $created;
 
+	public function formatToCache( $idUser = 0 ) {
+		return array(
+			'id' => $this->getId(),
+			'content' => $this->getContent(),
+			'created' => $this->getCreated(),
+			'is_read' => $this->checkIsRead( $idUser )
+		);
+	}
+
+	private function checkIsRead( $idUser ) {
+		$lReaders = $this->getReaders();
+		foreach ( $lReaders as $oUser ) {
+			if ( $idUser == $oUser->getId() ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {

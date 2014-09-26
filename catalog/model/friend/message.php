@@ -12,21 +12,12 @@ class ModelFriendMessage extends Model {
 	 *	Int Limit
 	 * @return: array objects Message
 	 */
-	public function getLastMessages( $idUser ){
-		$oMessages = $this->dm->getRepository('Document\Friend\Messages')->findOneBy(array(
-			'user.id' => $idUser
+	public function getLastUsersByAuthor( $idUserAuthor ){
+		$lUserMessages = $this->dm->getRepository('Document\Friend\Messages')->findBy(array(
+			'users.id' => $idUser
 		));
 
-		if ( !$oMessages ){
-			return null;
-		}
-
-		$aMessages = $oMessages->getLastMessages()->toArray();
-
-		$this->dm->flush();
-		
-		// return array_reverse($aMessages);
-		return $aMessages;
+		return $lUserMessages;
 	}
 
 	/**

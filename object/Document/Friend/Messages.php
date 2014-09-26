@@ -31,6 +31,16 @@ Class Messages {
     /** @MongoDB\Date */
 	private $updated;
 
+	public function formatToCache() {
+		return array(
+			'id' => $this->getId(),
+			'name' => $this->getName(),
+			'last_message' => $this->getMessages()->last(),
+			'updated' => $this->getUpdated(),
+			'created' => $this->getCreated()
+		);
+	}
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
