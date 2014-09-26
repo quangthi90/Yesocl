@@ -374,6 +374,21 @@ class ModelToolObject extends Model
 	}
 
 	/**
+	 * Format Object User Message to Array
+	 * 2014/09/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: object User Message
+	 * @return: Array Object User Message formated
+	 */
+	public function formatUserMessage( $oUserMessage ) {
+		$aUserMessage = $oUserMessage->formatToCache();
+		$oLastMessage = $oUserMessage->getMessages()->last();
+		$aUserMessage['last_message'] = $this->formatMessage( $oLastMessage );
+
+		return $aUserMessage;
+	}
+
+	/**
 	 * Format Object Message to Array
 	 * 2014/09/26
 	 * @author: Bommer <bommer@bommerdesign.com>
