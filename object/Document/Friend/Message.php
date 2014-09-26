@@ -5,24 +5,21 @@ use DateTimeZone;
 
 /** @MongoDB\EmbeddedDocument */
 Class Message {
-	/** 
-	 * @MongoDB\Id 
+	/**
+	 * @MongoDB\Id
 	 */
 	private $id;
 
-	/** 
+	/**
 	 * @MongoDB\String
 	 */
 	private $content;
 
 	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User") */
-    private $object;
+    private $author;
 
-    /** @MongoDB\Boolean */ // true if user is sender
-    private $isSender;
-
-    /** @MongoDB\Boolean */
-	private $read; // true if message is read
+    /** @MongoDB\ReferenceMany(targetDocument="Document\User\User") */
+    private $readers = array();
 
     /** @MongoDB\Date */
 	private $created;
@@ -45,28 +42,24 @@ Class Message {
 		return $this->content;
 	}
 
-	public function setobject( $object ){
-		$this->object = $object;
+	public function setAuthor( $user ){
+		$this->author = $user;
 	}
 
-	public function getObject(){
-		return $this->object;
+	public function getAuthor(){
+		return $this->author;
 	}
 
-	public function setIsSender( $isSender ){
-		$this->isSender = $isSender;
+	public function addReader( User $user ){
+		$this->readers[] = $user;
 	}
 
-	public function getIsSender(){
-		return $this->isSender;
+	public function setReaders( $users ){
+		$this->readers = $users;
 	}
 
-	public function setRead( $read ){
-		$this->read = $read;
-	}
-
-	public function getRead(){
-		return $this->read;
+	public function getReaders(){
+		return $this->readers;
 	}
 
 	public function setCreated( $created ){

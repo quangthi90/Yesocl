@@ -2,70 +2,77 @@
 namespace Document\Friend;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
-/** 
+/**
  * @MongoDB\Document(db="yesocl", collection="user_message")
  */
 Class Messages {
-	/** 
-	 * @MongoDB\Id 
+	/**
+	 * @MongoDB\Id
 	 */
 	private $id;
 
-	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User") */
-    private $user;
+    /** @MongoDB\ReferenceOne(targetDocument="Document\User\User") */
+    private $creator;
+
+	/**
+	 * @MongoDB\String
+	 */
+	private $name;
+
+    /** @MongoDB\ReferenceMany(targetDocument="Document\User\User") */
+    private $users = array();
 
 	/** @MongoDB\EmbedMany(targetDocument="Message") */
 	private $messages = array();
 
-	/** @MongoDB\EmbedMany(targetDocument="Message") */
-	private $lastMessages = array();
+    /** @MongoDB\Date */
+	private $created;
 
-	public function getLastMessageByUserId( $idUser ){
-		foreach ( $this->lastMessages as $oMessage ) {
-			if ( $oMessage->getObject()->getId() == $idUser ){
-				return $oMessage;
-			}
-		}
-
-		return null;
-	}
+    /** @MongoDB\Date */
+	private $updated;
 
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
     	$this->created = new \DateTime();
-    	$this->unRead = 0;
+    	$this->updated = new \DateTime();
     }
 
 	public function getId() {
 		return $this->id;
 	}
 
-	public function setUser( $user ){
-		$this->user = $user;
+	public function setName( $name ){
+		$this->name = $name;
 	}
 
-	public function getUser(){
-		return $this->user;
+	public function getName(){
+		return $this->name;
+	}
+
+	public function addUser( User $user ){
+		$this->users[] = $user;
+	}
+
+	public function setUsers( $users ){
+		$this->users = $users;
+	}
+
+	public function getUsers(){
+		return $this->users;
+	}
+
+	public function setCreator( User $user ){
+		$this->creator = $user;
+	}
+
+	public function getCreator(){
+		return $this->creator;
 	}
 
 	public function addMessage( Message $message ){
-		if ( $oMessage = $this->getLastMessageByUserId($message->getObject()->getId()) ){
-			$this->lastMessages->removeElement( $oMessage );
-		}
-
-		$this->lastMessages[] = $message;
 		$this->messages[] = $message;
-
-		if ( $message->getRead() == false ){
-			$iUnread = 0;
-			foreach ( $this->lastMessages as $oMessage ) {
-				if ( !$oMessage->getRead() ){
-					$iUnread++;
-				}
-			}
-			$this->user->setUnRead( $iUnread );
-		}
+    	$this->updated = new \DateTime();
 	}
 
 	public function setMessages( $messages ){
@@ -76,16 +83,19 @@ Class Messages {
 		return $this->messages;
 	}
 
-	public function addLastMessage( Message $lastMessage ){
-		$this->lastMessages[] = $lastMessage;
+	public function setCreated( $created ){
+		$this->created = $created;
 	}
 
-	public function setLastMessages( $lastMessages ){
-		$this->lastMessages = $lastMessages;
+	public function getCreated(){
+		return $this->created;
 	}
 
-	public function getLastMessages(){
-		$this->user->setUnRead(0);
-		return $this->lastMessages;
+	public function setUpdated( $updated ){
+		$this->updated = $updated;
+	}
+
+	public function getUpdated(){
+		return $this->updated;
 	}
 }
