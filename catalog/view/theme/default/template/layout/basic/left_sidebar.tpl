@@ -20,24 +20,24 @@
                 <a href="{{ path('HomePage') }}"><i class="icon-home-1"></i><span>{% trans %}Home feed{% endtrans %}</span></a>
             </li>
             <li class="{% if menu == 'wall' %}active{% endif %}">
-                <a href="{{ path('WallPage', {user_slug: user_slug}) }}"><i class="icon-bookmark"></i><span>{% trans %}Wall Page{% endtrans %}</span></a>
+                <a href="{{ path('WallPage', {user_slug: user_slug}) }}"><i class="icon-gate"></i><span>{% trans %}Wall Page{% endtrans %}</span></a>
             </li>
             <li class="{% if menu == 'profile' %}active{% endif %}">
-                <a href="{{ path('ProfilePage', {user_slug: user_slug}) }}"><i class="icon-identification"></i><span>{% trans %}Profile{% endtrans %}</span></a>
+                <a href="{{ path('ProfilePage', {user_slug: user_slug}) }}"><i class="icon-user-1"></i><span>{% trans %}Profile{% endtrans %}</span></a>
             </li>
             <li class="{% if menu == 'friend' %}active{% endif %}">
-                <a href="{{ path('FriendPage', {user_slug: user_slug}) }}"><i class="icon-fire"></i><span>{% trans %}Friend{% endtrans %}</span></a>
+                <a href="{{ path('FriendPage', {user_slug: user_slug}) }}"><i class="icon-group"></i><span>{% trans %}Friend{% endtrans %}</span></a>
             </li>
             <li class="{% if menu == 'follow' %}active{% endif %}">
-                <a href="{{ path('FollowPage', {user_slug: user_slug}) }}"><i class="icon-fire"></i><span>{% trans %}Follower{% endtrans %}</span></a>
+                <a href="{{ path('FollowPage', {user_slug: user_slug}) }}"><i class="icon-identification"></i><span>{% trans %}Follower{% endtrans %}</span></a>
             </li>
 	  	{% if show_branch_menu == true %}
             <li class="{% if menu == 'branch' %}active{% endif %}">
-                <a href="{{ path('BranchList') }}"><i class="icon-fire"></i><span>{% trans %}Branch{% endtrans %}</span></a>
+                <a href="{{ path('BranchList') }}"><i class="icon-molecule-2"></i><span>{% trans %}Branch{% endtrans %}</span></a>
             </li>
 	  	{% endif %}
             <li class="{% if menu == 'stock' %}active{% endif %}">
-                <a href="{{ path('StockMarket') }}"><i class="icon-fire"></i><span>{% trans %}Stock{% endtrans %}</span></a>
+                <a href="{{ path('StockMarket') }}"><i class="icon-stocks-up"></i><span>{% trans %}Stock{% endtrans %}</span></a>
             </li>
         </ul>
     </div>
