@@ -23,70 +23,18 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="bg-gray text-center strong border-top innerAll half">1490 messages <i class="fa fa-circle-arrow-down"></i></div>
-                        <ul class="list-unstyled">
+                        <div class="bg-gray text-center strong border-top innerAll half"><span data-bind="text: totalMessage"></span> {% trans %}messages{% endtrans %} <i class="fa fa-circle-arrow-down"></i></div>
+                        <ul class="list-unstyled" data-bind="foreach: $data.userMessageList">
                             <li class="border-bottom  bg-primary">
                                 <div class="media innerAll">
                                     <div class="media-object pull-left hidden-phone">
-                                        <a href="">
-                                            <img src="{{ asset_img('no_user_avatar.png') }}" height="40px" width="40px" alt="Image" />
+                                        <a href="#">
+                                            <img data-bind="attr: {src: $data.user.avatar}" height="40px" width="40px" alt="Image" />
                                         </a>
                                     </div>
                                     <div class="media-body">
-                                        <div><span class="strong">mosaicpro</span> <small class="text-italic pull-right label label-default">2 days</small></div>
-                                        <div>Latest comment line...</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="border-bottom ">
-                                <div class="media innerAll">
-                                    <div class="media-object pull-left hidden-phone">
-                                        <a href="">
-                                            <img src="{{ asset_img('no_user_avatar.png') }}" height="40px" width="40px"  alt="Image" />
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div><span class="strong">Joanne</span> <small class="text-italic pull-right label label-default">2 days</small></div>
-                                        <div>Latest comment line...</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="border-bottom ">
-                                <div class="media innerAll">
-                                    <div class="media-object pull-left hidden-phone">
-                                        <a href="">
-                                            <img src="{{ asset_img('no_user_avatar.png') }}" height="40px" width="40px"  alt="Image" />
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div><span class="strong">Adrian</span> <small class="text-italic pull-right label label-default">2 days</small></div>
-                                        <div>Latest comment line...</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="border-bottom ">
-                                <div class="media innerAll">
-                                    <div class="media-object pull-left hidden-phone">
-                                        <a href="">
-                                            <img src="{{ asset_img('no_user_avatar.png') }}" height="40px" width="40px"  alt="Image" />
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div><span class="strong">Mary</span> <small class="text-italic pull-right label label-default">2 days</small></div>
-                                        <div>Latest comment line...</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="border-bottom ">
-                                <div class="media innerAll">
-                                    <div class="media-object pull-left hidden-phone">
-                                        <a href="">
-                                            <img src="{{ asset_img('no_user_avatar.png') }}" height="40px" width="40px"  alt="Image" />
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div><span class="strong">John</span> <small class="text-italic pull-right label label-default">2 days</small></div>
-                                        <div>Latest comment line...</div>
+                                        <div><span class="strong">mosaicpro</span> <small class="text-italic pull-right label label-default" data-bind="timeAgo: $data.last_message.created"></small></div>
+                                        <div data-bind="text: $data.last_message.content"></div>
                                     </div>
                                 </div>
                             </li>
@@ -289,7 +237,7 @@
                 Y.GlobalKoModel = Y.GlobalKoModel || {};
                 var mesageOptions = {
                     apiUrls : {
-                        loadPost: {
+                        loadUserMessage: {
                             name: "ApiGetUserMessage"
                         }
                     }
