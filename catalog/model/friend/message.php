@@ -33,7 +33,7 @@ class ModelFriendMessage extends Model {
 		$lUserMessages = $this->dm->getRepository('Document\Friend\Messages')->findBy(array('users.id' => $idUser))
 			->skip($aData['start'])
 			->limit($aData['limit'])
-			->sort(array($aData['sort'] => $aData['order']));;
+			->sort(array($aData['sort'] => $aData['order']));
 
 		return $lUserMessages;
 	}

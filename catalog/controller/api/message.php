@@ -28,9 +28,10 @@ class ControllerApiMessage extends Controller {
 
 		$aUserMessages = array();
 		$bCanLoadMore = false;
+		$iTotalUserMessage = 0;
 		if ( $lUserMessages ){
-			$iUserMessageCount = $lUserMessages->count();
-			if ( ($page - 1) * $limit + $limit < $iUserMessageCount ){
+			$iTotalUserMessage = $lUserMessages->count();
+			if ( ($page - 1) * $limit + $limit < $iTotalUserMessage ){
                 $bCanLoadMore = true;
             }
 			foreach ( $lUserMessages as $oUserMessage ) {
@@ -41,6 +42,7 @@ class ControllerApiMessage extends Controller {
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
             'user_messages' => $aUserMessages,
+            'total_message' => $iTotalUserMessage,
             'canLoadMore' => $bCanLoadMore
         )));
 	}
