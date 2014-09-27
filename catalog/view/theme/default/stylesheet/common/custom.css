@@ -2,12 +2,20 @@
 a {
 	cursor: pointer !important;
 }
-.dropdown-menu li {
+
+ul.dropdown-menu.action-options {
+}
+ul.dropdown-menu.action-options li {	
 	border-bottom: none;
 }
-.dropdown-menu li a {
-	padding: 4px 15px;
+ul.dropdown-menu.action-options li a {	
+	padding: 3px 10px;
+	font-size: 12px;
 }
+ul.dropdown-menu.action-options li a i {	
+	font-size: 11px;
+}
+
 /*================================== END COMMON ===================================*/
 
 /*================================== START POST ===================================*/
@@ -26,7 +34,7 @@ a {
 	right: 0px;
 	z-index: 2;
 }
- .post-options .dropdown-toggle {
+.post-options .dropdown-toggle {
 	display: block;
 	padding: 6px 10px;
 	text-align: center;

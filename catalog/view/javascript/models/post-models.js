@@ -25,7 +25,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 			slug: data.category_slug,
 			name : data.category_name
 		} : { };
-		that.comments = [];
+		that.comments = ko.observableArray(data.comments || []);
 		that.commentCount = ko.observable(data.comment_count || 0);
 		that.currentCommentPage = ko.observable(1);
 		that.likeCount = ko.observable(data.like_count || 0);

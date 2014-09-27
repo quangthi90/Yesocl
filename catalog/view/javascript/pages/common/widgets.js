@@ -33,10 +33,10 @@
 
 		/* ============= START PRIVATE METHODS ============= */
 		function _loadPost(callback){
-			var loadOptions = self.apiUrls.loadPost;
+			var loadOptions = self.apiUrls.loadPost.params;
 			loadOptions.page = self.currentPage();
 			var ajaxOptions = {
-				url: Y.Routing.generate(loadOptions.name, loadOptions.params),
+				url: Y.Routing.generate(self.apiUrls.loadPost.name, loadOptions),
 				data : {
 					limit : 5
 				}
@@ -66,7 +66,21 @@
 			$(window).trigger('gridalicious-loaded');
 		}
 
-		_loadPost();
+		function _init(){
+            $(window).scroll(function(e) {
+            	//console.log("$(window).scrollTop() + $(window).height(): " + ($(window).scrollTop() + $(window).height()));
+            	//console.log("$(document).height(): " + $(document).height());
+                if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                    self.loadMore();
+                }
+            });
+
+            _loadPost(function(){
+            	$(window).scrollTop(0);
+            });
+		}
+
+		_init();
 
 		/* ============= END PRIVATE METHODS =============== */
 	};

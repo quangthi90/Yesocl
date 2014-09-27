@@ -71,14 +71,19 @@
                     </div>
                 </div>                
                 <div class="comment-list">
-                    <div class="media margin-none bg-gray comment-item">
-                        <a href="" class="pull-left innerAll margin-right-none"><img src="{{ asset_img('no_user_avatar.png') }}" alt="50x50" width="50px" height="50px" class="media-object avatar"></a>
+                    <!-- ko foreach: $data.comments -->
+                    <div class="media margin-none bg-gray comment-item">                        
+                        <a class="pull-left innerAll margin-right-none" data-bind="link: { title: $data.user.author, route: 'WallPage', params: { user_slug: $data.user.slug } }">
+                            <img data-bind="attr : { 'src' : $data.user.avatar, alt : $data.user.username }" width="50px" height="50px" class="media-object avatar">
+                        </a>
                         <div class="media-body innerTB">
-                            <a href="" class="strong text-inverse text-small">Adrian Demian</a>
-                            <small class="text-muted display-block text-small">on Jan 15th, 2014</small>
-                            <div>- Happy B-Day!</div>
+                            <a class="strong text-inverse text-small" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a> 
+                            <small class="text-muted display-block text-small" data-bind="timeAgo: $data.created"></small>
+                            <div class="comment-content" data-bind="html: $data.content">
+                            </div>
                         </div>
                     </div>
+                    <!-- /ko -->
                 </div>
                 <div class="input-group comment">
                     <input type="text" class="form-control" placeholder="{% trans %}Your comment here...{% endtrans %}">
