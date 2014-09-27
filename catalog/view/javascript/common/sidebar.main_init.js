@@ -1,7 +1,14 @@
-(function($)
-{
-	if (!Modernizr.touch && $('#menu').is(':visible'))
-		$('.container-fluid').removeClass('menu-hidden');
+(function($, Y) {
+	var globalSettings = Y.Constants.SettingKeys, 
+		globalTriggers = Y.Constants.Triggers;
+
+	if (!Modernizr.touch && $('#menu').is(':visible')) {
+		if(Y.Utils.getSetting(globalSettings.SHOW_LEFT_SIDEBAR) === "1"){
+			$('.container-fluid').removeClass('menu-hidden');
+		}else {
+			$('.container-fluid').addClass('menu-hidden');
+		}
+	}
 
 	if (Modernizr.touch)
 		$('#menu').removeClass('hidden-xs');
@@ -9,8 +16,7 @@
 	// handle menu toggle button action
 	window.toggleMenuHidden = function()
 	{
-		if (typeof $.fn.sidr !== 'undefined')
-		{
+		if (typeof $.fn.sidr !== 'undefined') {
 			if ($('.sidr.right').is(':visible'))
 			{
 				$.sidr('close', 'menu-right');
@@ -20,15 +26,18 @@
 
 		$('.container-fluid').toggleClass('menu-hidden');
 		$('#menu').removeClass('hidden-xs');
-
 		resizeNiceScroll();
+
+		//Trigger menu visibility changed
+		var menuVisibility = !($('.container-fluid').hasClass('menu-hidden'));
+		Y.Utils.saveSetting(globalSettings.SHOW_LEFT_SIDEBAR, menuVisibility ? "1" : "0");
 	}
 	
 	// main menu visibility toggle
 	$('.navbar.main .btn-navbar.btn-open-left, #menu .btn-navbar.btn-open-left').click(function(e)
 	{
 		e.preventDefault();
-		toggleMenuHidden();
+		toggleMenuHidden();		
 	});
 
 	$('[data-toggle="navbar-color"] a').on('click', function(e){
@@ -77,4 +86,4 @@
 		$('.navbar.main').removeClass('navbar-blue').addClass('navbar-primary');
 		$('#toggleNavbarColor a.color').removeClass('active').find('.bg-primary').addClass('active');
 	}
-})(jQuery);
+})(jQuery, YesGlobal);

@@ -9931,7 +9931,10 @@ html.csstransitions.csstransforms3d [data-toggle="gridalicious"] .widget-pintere
   right: 0 !important;
 }
 .sidebar.sidebar-social .menu-hidden #content {
-  margin: 0;
+  margin: 0;  
+}
+.sidebar.sidebar-social .menu-hidden #menu {
+  opacity: 0;
 }
 /* --- LOADING [less.menus.sidebar.social] from assets/components/menus/menus.sidebar.social.less */
 #menu {

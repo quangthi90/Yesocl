@@ -2,7 +2,10 @@
 if (window.location != window.parent.location)
 	top.location.href = document.location.href;
 
-(function($, window) {
+(function($, Y, window) {
+	var globalSettings = Y.Constants.SettingKeys, 
+		globalTriggers = Y.Constants.Triggers;
+
 	// fix for safari back button issue
 	window.onunload = function(){};
 
@@ -45,77 +48,6 @@ if (window.location != window.parent.location)
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
-	// scroll to element animation
-	function scrollTo(id) {
-		if ($(id).length)
-		{
-			var ns = $(id).closest('.hasNiceScroll');
-			if (ns.length)
-			{
-				var nso = ns.getNiceScroll();
-				if (nso.length)
-				{
-					var e = nso[0]
-						idOffset = $(id).offset().top,
-						nsOffset = ns.offset().top,
-						eOffset = e.getScrollTop(),
-						scrollDown = idOffset - nsOffset + eOffset;
-
-					nso[0].doScrollTop(scrollDown);
-				}
-			}
-			else
-				$('html,body').animate({scrollTop: $(id).offset().top},'slow');
-		}
-	}
-
-	window.resizeNiceScroll = function() {
-		if (typeof $.fn.niceScroll == 'undefined')
-			return;
-
-		setTimeout(function(){
-			$('.hasNiceScroll, #menu-right, #menu').getNiceScroll().show().resize();
-			if ($('.container-fluid').is('.menu-hidden'))
-				$('#menu-right, #menu').getNiceScroll().hide();
-		}, 100);
-	}
-	
-	$('#content .modal').not('.modal-inline').appendTo('body');
-	
-	// tooltips
-	$('body').tooltip({ selector: '[data-toggle="tooltip"]' });
-	
-	// popovers
-	$('[data-toggle="popover"]').popover();
-	
-	// print
-	$('[data-toggle="print"]').click(function(e) {
-		e.preventDefault();
-		window.print();
-	});
-	
-	// carousels
-	$('.carousel').carousel();
-	
-	// Google Code Prettify
-	if ($('.prettyprint').length && typeof prettyPrint != 'undefined')
-		prettyPrint();
-	
-	$('[data-toggle="scrollTo"]').on('click', function(e) {
-		e.preventDefault();
-		scrollTo($(this).attr('href'));
-	});
-
-	$('ul.collapse')
-	.on('show.bs.collapse', function(e) {
-		e.stopPropagation();
-		$(this).closest('li').addClass('active');
-	})
-	.on('hidden.bs.collapse', function(e) {
-		e.stopPropagation();
-		$(this).closest('li').removeClass('active');
-	});
-
 	window.enableContentNiceScroll = function(hide) {
 		if ($('html').is('.ie') || Modernizr.touch)
 			return;
@@ -157,6 +89,105 @@ if (window.location != window.parent.location)
 		$('#content .hasNiceScroll').getNiceScroll().remove();
 	}
 
+	window.enableNavbarMenusHover = function() {
+		$('.navbar.main [data-toggle="dropdown"]')
+		.add('#menu-top [data-toggle="dropdown"]')
+		.addClass('dropdown-hover');
+	}
+
+	window.disableNavbarMenusHover = function() {
+		$('.navbar.main [data-toggle="dropdown"]')
+		.add('#menu-top [data-toggle="dropdown"]')
+		.removeClass('dropdown-hover');
+	}
+
+	window.enableResponsiveNavbarSubmenus = function(){
+		$('.navbar .dropdown-submenu > a').on('click', function(e){
+			e.preventDefault();
+			e.stopPropagation();
+			$(this).parent().toggleClass('open');
+		});
+	}
+
+	window.disableResponsiveNavbarSubmenus = function(){
+		$('.navbar .dropdown-submenu > a')
+		.off('click')
+		.parent()
+		.removeClass('open');
+	}
+
+	// scroll to element animation
+	function scrollTo(id) {
+		if ($(id).length)
+		{
+			var ns = $(id).closest('.hasNiceScroll');
+			if (ns.length)
+			{
+				var nso = ns.getNiceScroll();
+				if (nso.length)
+				{
+					var e = nso[0]
+						idOffset = $(id).offset().top,
+						nsOffset = ns.offset().top,
+						eOffset = e.getScrollTop(),
+						scrollDown = idOffset - nsOffset + eOffset;
+
+					nso[0].doScrollTop(scrollDown);
+				}
+			}
+			else
+				$('html,body').animate({scrollTop: $(id).offset().top},'slow');
+		}
+	}
+
+	window.resizeNiceScroll = function() {
+		if (typeof $.fn.niceScroll == 'undefined')
+			return;
+
+		setTimeout(function(){
+			$('.hasNiceScroll, #menu-right, #menu').getNiceScroll().show().resize();
+			if ($('.container-fluid').is('.menu-hidden'))
+				$('#menu-right, #menu').getNiceScroll().hide();
+		}, 100);
+	}
+	
+	/* ================================ INIT GLOBAL EVENTS ================================ */
+	$('#content .modal').not('.modal-inline').appendTo('body');
+	
+	// tooltips
+	$('body').tooltip({ selector: '[data-toggle="tooltip"]' });
+	
+	// popovers
+	$('[data-toggle="popover"]').popover();
+	
+	// print
+	$('[data-toggle="print"]').click(function(e) {
+		e.preventDefault();
+		window.print();
+	});
+	
+	// carousels
+	$('.carousel').carousel();
+	
+	// Google Code Prettify
+	if ($('.prettyprint').length && typeof prettyPrint != 'undefined')
+		prettyPrint();
+	
+	$('[data-toggle="scrollTo"]').on('click', function(e) {
+		e.preventDefault();
+		scrollTo($(this).attr('href'));
+	});
+
+	$('ul.collapse')
+	.on('show.bs.collapse', function(e) {
+		e.stopPropagation();
+		$(this).closest('li').addClass('active');
+	})
+	.on('hidden.bs.collapse', function(e) {
+		e.stopPropagation();
+		$(this).closest('li').removeClass('active');
+	});
+
 	enableContentNiceScroll();
 
 	if ($('html').is('.ie'))
@@ -187,9 +218,7 @@ if (window.location != window.parent.location)
 		$('[data-toggle="dropdown"]').dropdown();
 	}
 
-	$('.navbar.main')
-	.add('#menu-top')
-	.on('mouseleave', function() {
+	$('.navbar.main').add('#menu-top').on('mouseleave', function() {
 		$(this).find('.dropdown.open').find('> [data-toggle="dropdown"]').click();
 	});
 
@@ -205,33 +234,6 @@ if (window.location != window.parent.location)
 		});
 	}
 
-	window.enableNavbarMenusHover = function() {
-		$('.navbar.main [data-toggle="dropdown"]')
-		.add('#menu-top [data-toggle="dropdown"]')
-		.addClass('dropdown-hover');
-	}
-
-	window.disableNavbarMenusHover = function() {
-		$('.navbar.main [data-toggle="dropdown"]')
-		.add('#menu-top [data-toggle="dropdown"]')
-		.removeClass('dropdown-hover');
-	}
-
-	window.enableResponsiveNavbarSubmenus = function(){
-		$('.navbar .dropdown-submenu > a').on('click', function(e){
-			e.preventDefault();
-			e.stopPropagation();
-			$(this).parent().toggleClass('open');
-		});
-	}
-
-	window.disableResponsiveNavbarSubmenus = function(){
-		$('.navbar .dropdown-submenu > a')
-		.off('click')
-		.parent()
-		.removeClass('open');
-	}
-
 	if (typeof $.fn.setBreakpoints !== 'undefined') {
 		$(window).setBreakpoints({
 			distinct: false,
@@ -245,7 +247,9 @@ if (window.location != window.parent.location)
 		});
 
 		$(window).bind('enterBreakpoint768',function() {
-			$('.container-fluid').removeClass('menu-hidden');
+			if(Y.Utils.getSetting(globalSettings.SHOW_LEFT_SIDEBAR) === "1") {
+				$('.container-fluid').removeClass('menu-hidden');
+			}
 			enableNavbarMenusHover();
 			disableResponsiveNavbarSubmenus();
 		});
@@ -258,9 +262,10 @@ if (window.location != window.parent.location)
 			enableContentNiceScroll(false);
 		});
 	}
-
+	/* ============================== END INIT GLOBAL EVENTS =======================  */
+		
 	window.coreInit = true;
-
+	/* ======================= HANDLE EVENTS =============================	*/
 	$(window).on('load', function() {
 		window.loadTriggered = true;
 
@@ -285,10 +290,12 @@ if (window.location != window.parent.location)
 			$('.scripts-async .container-fluid').css('visibility', 'visible');
 	});
 
+	/* ======================= END HANDLE EVENTS ========================= */
+
 	// weird chrome bug, sometimes the window load event isn't triggered
 	setTimeout(function() {
 		if (!window.loadTriggered)
 			$(window).trigger('load');
 	}, 2000);
 
-})(jQuery, window);
+})(jQuery, YesGlobal,window);

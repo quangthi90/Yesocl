@@ -14,7 +14,7 @@
                     <a data-toggle="dropdown" class="dropdown-toggle">
                         <i class="fa fa-angle-down"></i>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu action-options">
                         <!-- ko if: $data.isLiked() -->
                         <li><a data-bind="click: likePost"><i class="icon-thumbs-down innerR"></i>{% trans %}Unlike{% endtrans %}</a></li>
                         <!-- /ko -->
@@ -59,7 +59,7 @@
                     <div class="pull-right">
                         <!-- ko if: $data.commentCount() > 3 -->
                         <a data-toggle="collapse" class="innerR">
-                            <i class="fa fa-bars text-larger"></i>{% trans %}Comments{% endtrans %} <span class="text-muted" data-bind="text: ($data.commentCount() - 3) + ' ++'"></span>
+                            {% trans %}Comments{% endtrans %} <span class="text-muted" data-bind="text: ($data.commentCount() - 3) + ' ++'"></span>
                         </a>
                         <!-- /ko -->
                         <!-- ko if: $data.likeCount() == 1 -->
@@ -79,7 +79,7 @@
                         <div class="media-body innerTB">
                             <a class="strong text-inverse text-small" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a> 
                             <small class="text-muted display-block text-small" data-bind="timeAgo: $data.created"></small>
-                            <div class="comment-content" data-bind="html: $data.content">
+                            <div class="comment-content text-small" data-bind="html: $data.content">
                             </div>
                         </div>
                     </div>

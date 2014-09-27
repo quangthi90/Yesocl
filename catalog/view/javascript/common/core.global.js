@@ -2,7 +2,7 @@ var YesGlobal = YesGlobal || {};
 
 (function($, ko, window, Y, undefined) {
 
-	Y.Widgets = [];
+	Y.Widgets = {};
 	Y.GlobalKoModel = {};
 	Y.CurrentUser = {};
 	Y.Routing = {};
@@ -11,6 +11,17 @@ var YesGlobal = YesGlobal || {};
 	    StockList: [],
 	    UsersCanTag: [],
 	    CurrentPost: null
+	};
+
+	Y.Constants = {
+		Messages: [],
+		Triggers: {
+			MENU_VISIBILITY_CHANGED: "MENU_VISIBILITY_CHANGED"
+		},
+		SettingKeys : {
+			SHOW_LEFT_SIDEBAR : "SHOW_LEFT_SIDEBAR",
+			SHOW_RIGHT_SIDEBAR : "SHOW_RIGHT_SIDEBAR"
+		}
 	};
 
 	Y.Configs = {
@@ -111,6 +122,33 @@ var YesGlobal = YesGlobal || {};
 	                }
 	            }
 	        });
+	    },
+	    getLocalCache: function(){
+	    	var cacher = new Y.CacheManager(true);
+	    	if(!cacher.isSupportStorage()){
+	    		return null;
+	    	}
+	    	return cacher;
+	    },
+	    getSessionCache: function(){
+	    	var cacher = new Y.CacheManager(false);
+	    	if(!cacher.isSupportStorage()){
+	    		return null;
+	    	}
+	    	return cacher;
+	    },
+	    getSetting: function(settingKey){
+	    	var cacher = Y.Utils.getLocalCache();
+	    	if(cacher == null)
+	    		return undefined;
+	    	var value = cacher.getItem(settingKey);
+	    	return value ? value : false;
+	    },
+	    saveSetting: function(settingKey, value){
+	    	var cacher = Y.Utils.getLocalCache();
+	    	if(cacher == null)
+	    		return;
+	    	cacher.setItem(settingKey, value);
 	    },
 	    showMessage: function(data, callback) {
 	        var message = "";
@@ -214,7 +252,7 @@ var YesGlobal = YesGlobal || {};
 	            return ko.contextFor(document.getElementById(eleId));
 	        }
 	        return ko.contextFor(document.getElementById(Y.Configs.defaultBindingElement));
-	    },
+	    },	    
 	    convertToTimeAgo: function(timeStamp){
 	        var dayWrapper = moment(new Date(timeStamp*1000));
 	        var diffY = moment().diff(dayWrapper, "years");

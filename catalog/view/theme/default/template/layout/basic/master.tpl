@@ -92,13 +92,12 @@
     {% endblock %}
 
     <!-- Common Script -->    
+    <script src="{{ asset_js('common/core.global.js') }}"></script>
     <script src="{{ asset_js('common/core.effects_init.js') }}"></script>
     <script src="{{ asset_js('common/gridalicious_init.js') }}"></script>
     <script src="{{ asset_js('common/sidebar.main_init.js') }}"></script>
     <script src="{{ asset_js('common/sidebar.collapse_init.js') }}"></script>
     <script src="{{ asset_js('common/menus.sidebar.chat_init.js') }}"></script>
-
-    <script src="{{ asset_js('common/core.global.js') }}"></script>
     <script src="{{ asset_js('common/ko.common.js') }}"></script>
     <script src="{{ asset_js('models/common-models.js') }}"></script>
     <script src="{{ asset_js('pages/common/widgets.js') }}"></script>    
