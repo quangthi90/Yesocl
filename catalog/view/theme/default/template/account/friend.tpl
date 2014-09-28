@@ -8,16 +8,16 @@
 {% block body %}
     <div class="innerAll">
         <div class="row">
-            <div class="col-lg-9 col-md-8"> 
+            <div class="col-lg-9 col-md-8" id="friend-list" data-bind="with: FriendView" > 
 				<!-- Friend page -->
                 {{ block('timeline_cover')}}
+                <h1 data-bind="text: Hello"></h1>
+                <h1 data-bind="text: UserList"></h1>
                 <div class="input-group innerB">
                     <input type="text" class="form-control " placeholder="Search contacts">
                     <div class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></div>
                 </div>
-
-                <div class="row row-merge">
-                    
+                <div class="row row-merge">                    
                     <div class="block-content user-container">
                         {% if friend_ids|length > 0 %}
                             {% for friend_id in friend_ids %}
@@ -31,7 +31,6 @@
                         {% endif %}
                         {{ block('common_user_block_user_button_template') }}        
                     </div>
-
                     <div class="col-md-12 col-lg-6 bg-white border-bottom">
                         <div class="row">
                             <div class="col-sm-9">
@@ -56,12 +55,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                   
+                    </div>                   
                 </div>
-
             </div>
-
             <!-- WIDGET -->
             <div class="col-md-4 col-lg-3">
             {{ include(template_from_string( user )) }}
@@ -74,6 +70,24 @@
 {% block library_javascript %}
 {% endblock %}
 {% block common_javascript %}
+<script src="{{ asset_js('models/friend-models.js') }}"></script>
+<script src="{{ asset_js('pages/account/friend.js') }}"></script>
 {% endblock %}
 {% block javascript %}
+    <script type="text/javascript">
+        (function($, ko,  Y, undefined) {
+                Y.GlobalKoModel = Y.GlobalKoModel || {};
+                var options = { 
+                    Hello: "hello Thao",
+                    UserList: [
+                        { UserId : "1", UserName: "ABC" }
+                    ]               
+                };
+                var viewModel = new Y.Widgets.FriendView(options, $("#friend-list"));
+                Y.GlobalKoModel.FriendView = viewModel;
+
+                //Apply Knockout
+                ko.applyBindings(Y.GlobalKoModel);
+        }(jQuery, ko, YesGlobal));
+    </script>
 {% endblock %}

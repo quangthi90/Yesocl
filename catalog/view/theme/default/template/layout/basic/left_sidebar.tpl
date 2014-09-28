@@ -3,8 +3,8 @@
 {# Main Sidebar Menu #}
 <div id="menu" class="hidden-print hidden-xs sidebar-default sidebar-brand-primary">
     <div id="sidebar-social-wrapper">
-        <div id="brandWrapper">
-            <a href="{{ path('HomePage') }}"><span class="text">Social Admin Template</span></a>
+        <div id="brandWrapper" style="text-align: center;">
+            <a href="{{ path('HomePage') }}"><span class="text" style="font-size: 25px;">YESOCL</span></a>
         </div>
         <ul class="menu list-unstyled">
             <li class="hasSubmenu {% if menu == 'refresh' %}active{% endif %}">
