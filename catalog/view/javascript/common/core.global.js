@@ -16,7 +16,8 @@ var YesGlobal = YesGlobal || {};
 	Y.Constants = {
 		Messages: [],
 		Triggers: {
-			MENU_VISIBILITY_CHANGED: "MENU_VISIBILITY_CHANGED"
+			MENU_VISIBILITY_CHANGED: "MENU_VISIBILITY_CHANGED",
+			POST_LOADED: "POST_LOADED"
 		},
 		SettingKeys : {
 			SHOW_LEFT_SIDEBAR : "SHOW_LEFT_SIDEBAR",
@@ -74,7 +75,6 @@ var YesGlobal = YesGlobal || {};
 	    pagingOptions:{
 	        pageSize : 10
 	    },
-	    loadingElement : "#yes-loading-more",
 	    defaultBindingElement : "y-content"
 	};
 
@@ -94,31 +94,25 @@ var YesGlobal = YesGlobal || {};
 	            async: settings.async,
 	            beforeSend: function () {
 	                if(settings.showLoading){
-	                    var ele = $(Y.Configs.loadingElement);
-	                    if(ele.hasClass("hidden")){
-	                        ele.removeClass("hidden");
-	                    }
+	                    $("body").addClass("loading");
 	                }
 	                if(beforeCallback !== undefined && typeof beforeCallback === "function"){
 	                    beforeCallback();
 	                }
 	            },
-	            success: function (data) {
-	                if(settings.showLoading){
-	                    var ele = $(Y.Configs.loadingElement);
-	                    ele.addClass("hidden");
-	                }
+	            success: function (data) {	                
 	                if(successCallback !== undefined && typeof successCallback === "function"){
 	                    successCallback(data);
 	                }
 	            },
-	            error: function (xhr, textStatus, errorThrown) {
-	                if(settings.showLoading){
-	                    var ele = $(Y.Configs.loadingElement);
-	                    ele.addClass("hidden");
-	                }
+	            error: function (xhr, textStatus, errorThrown) {	                
 	                if(failCallback !== undefined && typeof failCallback === "function"){
 	                    failCallback(errorThrown);
+	                }
+	            }, 
+	            complete: function(){
+	            	if(settings.showLoading){
+	                    $("body").removeClass("loading");
 	                }
 	            }
 	        });

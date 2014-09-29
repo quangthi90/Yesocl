@@ -32,6 +32,11 @@
     <script> if ( /*@cc_on!@*/ false && document.documentMode === 10) { document.documentElement.className += ' ie ie10'; } </script>
 </head>
 <body class="menu-right-hidden">
+    <div id="common-loading">
+        <div class="spinner">
+            <div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div><span class="text">Processing</span>
+        </div>    
+    </div>    
     <div class="container-fluid menu-hidden">
         <!-- SIDEBAR LEFT -->
         {% block sidebarLeft %}
@@ -83,11 +88,10 @@
     <script src="{{ asset_js('library/core_nicescroll/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset_js('library/core_breakpoints/breakpoints.js') }}"></script>
     <script src="{{ asset_js('library/menu_sidr/jquery.sidr.js') }}"></script>
-    {#<script src="{{ asset_js('library/media_holder/holder.js') }}"></script> #}
     <script src="{{ asset_js('library/media_gridalicious/jquery.gridalicious.min.js') }}"></script>
     <script src="{{ asset_js('library/ui_modals/bootbox.min.js') }}"></script>
-    <script src="{{ asset_js('other_mixitup/jquery.mixitup.min.js') }}"></script>
-    <script src="{{ asset_js('other_mixitup/mixitup.init.js') }}"></script>
+    <script src="{{ asset_js('library/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset_js('library/expander/expander.min.js') }}"></script>
     {% block library_javascript %}
     {% endblock %}
 

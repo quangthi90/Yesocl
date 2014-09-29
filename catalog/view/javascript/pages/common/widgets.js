@@ -29,6 +29,9 @@
 				self.isLoadingMore(false);
 			});
 		};
+		this.afterRender = function(){
+			_handleEffects();
+		}
 		/* ============= END PUBLIC METHODS ================ */
 
 		/* ============= START PRIVATE METHODS ============= */
@@ -52,18 +55,16 @@
 					}
 				}
 				self.isLoadSuccess(true);
-				_handleEffects();
-
 				if(callback && typeof callback === "function"){
 					callback(data);
-				}
+				}				
 			}
 			//Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 		}
 
 		function _handleEffects() {
-			$(window).trigger('gridalicious-loaded');
+			$(window).trigger(Y.Constants.Triggers.POST_LOADED);
 		}
 
 		function _init(){
