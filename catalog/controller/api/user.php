@@ -179,7 +179,7 @@ class ControllerApiUser extends Controller {
         )));
 	}
 
-    public function getAllFriends() {
+    public function getAllTags() {
         $this->load->model('tool/image');
         $this->load->model('tool/object');
         $this->load->model('friend/friend');
