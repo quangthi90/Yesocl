@@ -10,6 +10,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.userslug = data.userslug || "";
 		that.avatar = data.avatar || "";
 		that.current = data.current || "";
+		
 		/* ========= END PROPERTIES ======== */
 
 		/* ========= START PUBLIC METHODS ======== */

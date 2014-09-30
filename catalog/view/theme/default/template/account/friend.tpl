@@ -50,9 +50,9 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="innerAll text-right">
-                                        <div class="btn-group-vertical btn-group-sm">
-                                            <a href="" class="btn btn-primary"><i class="fa fa-fw fa-thumbs-up"></i> Like</a>
-                                            <a href="" class="btn btn-default" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-fw fa-envelope-o"></i> Chat</a>
+                                        <div class="btn-group-vertical btn-group-sm" >
+                                            <a class="btn btn-primary" style="margin-left: -4px" id="btn_friend"><i class="fa fa-user"></i>{% trans%}&nbsp; UnFriend {% endtrans %}</a>
+                                            <a class="btn btn-default" style="margin-left: -4px" id="btn_follow"><i class="fa fa-check-square-o "></i> {% trans %} Follow {% endtrans %}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -84,11 +84,38 @@
                 var options = { 
                      apiUrls : "ApiGetAllFriends"
                 };
-                var viewModel = new Y.Widgets.FriendView(options, $("#friend-list"));
-                Y.GlobalKoModel.PageFriendView = viewModel;
-
+                var oViewModel = new Y.Widgets.FriendView(options, $("#friend-list"));
+                Y.GlobalKoModel.PageFriendView = oViewModel;
+               
                 // //Apply Knockout
                 ko.applyBindings(Y.GlobalKoModel);
         }(jQuery, ko, YesGlobal));
+
+            status_btn_friend = false;
+
+        $(document).ready(function(){
+            $("#btn_friend").click(function(){
+                 
+                status_btn_friend = (!status_btn_friend);
+                if(status_btn_friend == false) // Click to unfriend
+                {
+                    var btn_friend_options = {
+                    apiUrls: "ApiPutUnfriend"
+                    };
+                }
+                else // Click to addfriend
+                {
+                     var btn_friend_options = {
+                    apiUrls: "ApiPutAddFollower"
+                    };
+                }
+            });
+
+            $("#btn_follow").click(function(){
+                 var btn_friend_options = {
+                    apiUrls: "ApiPutRemoveFollower"
+                };
+            });
+        });
     </script>
 {% endblock %}

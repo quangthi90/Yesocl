@@ -18,7 +18,7 @@
 
 		/* ============= START PRIVATE METHODS ============= */
 
-		function loadFriend(){
+		function _loadFriend(){
 			var ajaxOptions = {
 				url: Y.Routing.generate(self.apiUrls),
 				data : {
@@ -39,7 +39,7 @@
 			//Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null)
 		}
-		loadFriend();
+		_loadFriend();
 		/* ============= END PRIVATE METHODS =============== */
 	};
 	
