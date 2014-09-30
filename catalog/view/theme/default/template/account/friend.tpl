@@ -37,14 +37,14 @@
                             <div class="row">
                                 <div class="col-sm-9">
                                     <div class="media">
-                                        <a class="pull-left margin-none" data-bind="text: $data.username, link: {route: 'WallPage', params: { user_slug: $data.userslug } }">
+                                        <a class="pull-left margin-none" data-bind="link: {route: 'WallPage', params: { user_slug: $data.userslug } }">
                                             <img class="img-clean" data-bind="attr : { 'src' : $data.avatar, alt : $data.username }">
                                         </a>
                                         <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
                                              <h4 class="media-heading"><a class="text-inverse" data-bind="text: $data.username, link: {route: 'WallPage', params: { user_slug: $data.userslug } }"></a></h4>
                                              <p>
                                                 
-                                                <i class="fa fa-fw fa-map-marker text-muted"></i> Living in Missouri, USA</p> 
+                                                <i class="fa fa-fw fa-map-marker text-muted" ></i><span data-bind="text: $data.current"></span></p> 
                                         </div>
                                     </div>
                                 </div>
