@@ -42,4 +42,22 @@ Class ControllerTestTest extends Controller {
 		}
 		$this->redirect($url);
 	}
+
+	public function createMessage() {
+		$oLoggedUser = $this->customer->getUser();
+
+		$this->load->model('friend/message');
+
+		$sUserToSlug = "user2";
+
+		$this->model_friend_message->add(
+			null,
+			$oLoggedUser->getId(),
+			array( $sUserToSlug ),
+			'test message 4'
+		);
+
+		print("add message success!");
+		exit;
+	}
 }
