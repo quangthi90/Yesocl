@@ -217,6 +217,51 @@ class ControllerApiUser extends Controller {
         )));
     }
 
+    /**
+     * 09/30/2014
+     * API return list all friends of Logged User
+     * @author: Bommer <lqthi.khtn@gmail.com>
+     * @param: null
+     * @return: list object friends via Json format
+     */
+    public function getAllFriends() {
+        $this->load->model('tool/image');
+        $this->load->model('tool/object');
+        $this->load->model('friend/friend');
+
+        $oCurrUser = $this->customer->getUser();
+
+        $aFriends = array();
+
+        $oFriends = $this->model_friend_friend->getFriends( $oCurrUser->getId() );
+        if ( $oFriends ){
+            $lFriends = $oFriends->getFriends();
+        }else{
+            $lFriends = array();
+        }
+
+        foreach ( $lFriends as $oFriend ) {
+            $oUser = $oFriend->getUser();
+
+            $aUser = $oUser->formatToCache();
+
+            // Mapping to return for tag js
+            // Check again when change libs tag js
+            $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+            $aUser['name'] = $aUser['username'];
+            $aUser['id'] = $aUser['slug'];
+            $aUser['type'] = 'contact';
+            $aUser['wall'] = $this->model_tool_object->path('WallPage', array('user_slug' => $aUser['slug']));
+
+            $aFriends[$aUser['slug']] = $aUser;
+        }
+
+        return $this->response->setOutput( json_encode(array(
+            'success' => 'ok',
+            'friends' => count($aFriends) == 0 ? array() : array_values($aFriends)
+        )));
+    }
+
     public function addFollower(){
     	$this->load->model('friend/follower');
         $this->load->model('user/user');

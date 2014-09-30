@@ -152,6 +152,7 @@ $_['route']['ApiPutUnfriend']				= 'api/user/unfriend/';
 $_['route']['ApiPutAddFollower']			= 'api/user/addFollower/';
 $_['route']['ApiPutRemoveFollower']			= 'api/user/removeFollower/';
 $_['route']['ApiGetAllTags']				= 'api/user/getAllTags/';
+$_['route']['ApiGetAllFriends']				= 'api/user/getAllFriends/';
 
 // User
 $_['route']['ApiGetUserPost']				= 'api/user/getPosts/';
