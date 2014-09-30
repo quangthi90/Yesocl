@@ -289,7 +289,12 @@ if (window.location != window.parent.location)
 		if ($('.scripts-async').length)
 			$('.scripts-async .container-fluid').css('visibility', 'visible');
 	});
+	$(window).on(globalTriggers.POST_LOADED, function(e, data){
 
+		//Handle some custom events
+
+		$(window).trigger('gridalicious-loaded');
+	})
 	/* ======================= END HANDLE EVENTS ========================= */
 
 	// weird chrome bug, sometimes the window load event isn't triggered

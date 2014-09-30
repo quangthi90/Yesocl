@@ -1,12 +1,12 @@
 {% block wall_post_block_stylesheet %}
 {% endblock %}
 {% block wall_post_block %}    
-    <div data-bind="with: WallPostList" id="wall-post-list" class="gridalicious-row wall-post-list" data-toggle="gridalicious" data-gridalicious-width="340" data-gridalicious-gutter="12" data-gridalicious-selector=".gridalicious-item">
+    <div data-bind="with: WallPostList" id="wall-post-list" class="gridalicious-row wall-post-list" data-toggle="gridalicious" data-gridalicious-width="400" data-gridalicious-gutter="12" data-gridalicious-selector=".gridalicious-item">
         <!-- ko if: !isLoadSuccess()-->
         <div class="innerAll inner-2x loading text-center text-medium"><i class="fa fa-fw fa-spinner fa-spin"></i> {% trans %}Loading{% endtrans %}</div>
         <!-- /ko -->
         <div class="loaded hide2">
-            <!-- ko foreach: postList -->
+            <!-- ko foreach: { data: postList, afterRender: afterRender } -->
             <!-- Widget -->
             <div class="widget gridalicious-item not-responsive post-item">
                 <!-- ko if: $data.isLiked() || $data.isEdit || $data.isDelete -->
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <!-- Content -->
-                <div class="innerAll post-content" data-bind="html: $data.content()">
+                <div class="innerAll post-content" data-bind="html: $data.content(), zoomImageInContent: true, seeMore: true">
                 </div>
                 <!-- Comment -->
                 <div class="innerAll border-bottom border-top text-small">

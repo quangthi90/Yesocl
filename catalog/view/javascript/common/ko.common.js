@@ -1,6 +1,47 @@
 var YesGlobal = YesGlobal || {};
 
 (function($, ko, window, Y, undefined) {	
+
+	function initZoomImageEvent(el){
+		var src = el.data("zoom-image") ? el.data("zoom-image"): el.attr("src");
+		var title = el.attr("title");
+		var alt = el.attr("alt");
+
+        el.on("click", function(){
+            $.magnificPopup.open({
+              items: {
+                src: src
+              },
+              type: 'image'
+            });
+        });
+	}
+	function loadImage(imgsrc){
+        el.on("click", function(){
+            $.magnificPopup.open({
+              items: {
+                src: imgsrc
+              },
+              type: 'image'
+            });
+        });
+	}
+
+	function initSeemore(ele) {
+		ele.expander({
+            slicePoint: 150,
+            widow: 2,
+            expandSpeed: 100,
+            expandText: '[...]',
+            expandPrefix: ' ',
+            userCollapseText: '[^^^]',
+            userCollapsePrefix: ' ', 
+            afterExpand: function(){
+                ele.find(".details").css( { "display" : "inline", "font-size" : "14px" });
+            }
+        });
+	}
+
 	/*
 	Custom KO Handlers
 	*/
@@ -131,32 +172,10 @@ var YesGlobal = YesGlobal || {};
 		};
 		ko.bindingHandlers.seeMore = {
 		    init: function (element, valueAccessor, allBindingsAccessor) {
-		        $(element).expander({
-		            slicePoint: 100,
-		            widow: 2,
-		            expandSpeed: 100,
-		            expandText: '[...]',
-		            expandPrefix: ' ',
-		            userCollapseText: '[^^^]',
-		            userCollapsePrefix: ' ', 
-		            afterExpand: function(){
-		                $(element).find(".details").css("display", "inline");
-		            }
-		        });
+		        initSeemore($(element));
 		    },
 		    update: function (element, valueAccessor, allBindingsAccessor) {
-		        $(element).expander({
-		            slicePoint: 100,
-		            widow: 2,
-		            expandSpeed: 100,
-		            expandText: '[...]',
-		            expandPrefix: ' ',
-		            userCollapseText: '[^^^]',
-		            userCollapsePrefix: ' ', 
-		            afterExpand: function(){
-		                $(element).find(".details").css("display", "inline");
-		            }
-		        });
+		        initSeemore($(element));
 		    }
 		};
 		ko.bindingHandlers.mention = {
@@ -223,59 +242,29 @@ var YesGlobal = YesGlobal || {};
 		        }
 		    }
 		};
-		ko.bindingHandlers.zoomImage = {
+		ko.bindingHandlers.zoomImageInContent = {
 		    init: function (element, valueAccessor, allBindingsAccessor) {
 		        var imgList = $(element).find("img");
 		        imgList.each(function(){
-		            var src = $(this).attr("src");
-		            $(this).on("click", function(){
-		                $.magnificPopup.open({
-		                  items: {
-		                    src: src
-		                  },
-		                  type: 'image'
-		                });
-		            });
+		            initZoomImageEvent($(this));
 		        });
 		    },
 		    update: function (element, valueAccessor, allBindingsAccessor) {
 		        var value = ko.utils.unwrapObservable(valueAccessor());
 		        var imgList = $(element).find("img");
 		        imgList.each(function(){
-		            var src = $(this).attr("src");
-		            $(this).on("click", function(){
-		                $.magnificPopup.open({
-		                  items: {
-		                    src: src
-		                  },
-		                  type: 'image'
-		                });
-		            });
+		            initZoomImageEvent($(this));
 		        });
 		    }
 		};
-		ko.bindingHandlers.zoomInitImage = {
+		ko.bindingHandlers.loadImage = {
 		    init: function (element, valueAccessor, allBindingsAccessor) {
 		        var image = ko.utils.unwrapObservable(valueAccessor());
-		        $(element).on("click", function(){
-		            $.magnificPopup.open({
-		              items: {
-		                src: image
-		              },
-		              type: 'image'
-		            });
-		        });
+		        loadImage(image);
 		    },
 		    update: function (element, valueAccessor, allBindingsAccessor) {
 		        var image = ko.utils.unwrapObservable(valueAccessor());
-		        $(element).on("click", function(){
-		            $.magnificPopup.open({
-		              items: {
-		                src: image
-		              },
-		              type: 'image'
-		            });
-		        });
+		        loadImage(image);
 		    }
 		};
 	}
