@@ -25,16 +25,16 @@
                         </div>
                         <div class="bg-gray text-center strong border-top innerAll half"><span data-bind="text: totalMessage"></span> {% trans %}messages{% endtrans %} <i class="fa fa-circle-arrow-down"></i></div>
                         <ul class="list-unstyled" data-bind="foreach: $data.userMessageList">
-                            <li class="border-bottom  bg-primary">
-                                <div class="media innerAll">
+                            <li class="border-bottom {#bg-primary#}">
+                                <div class="media innerAll" data-bind="with: $data.last_message">
                                     <div class="media-object pull-left hidden-phone">
                                         <a href="#">
                                             <img data-bind="attr: {src: $data.user.avatar}" height="40px" width="40px" alt="Image" />
                                         </a>
                                     </div>
                                     <div class="media-body">
-                                        <div><span class="strong">mosaicpro</span> <small class="text-italic pull-right label label-default" data-bind="timeAgo: $data.last_message.created"></small></div>
-                                        <div data-bind="text: $data.last_message.content"></div>
+                                        <div><span class="strong" data-bind="text: $data.user.username"></span> <small class="text-italic pull-right label label-default" data-bind="timeAgo: $data.created"></small></div>
+                                        <div data-bind="text: $data.content"></div>
                                     </div>
                                 </div>
                             </li>

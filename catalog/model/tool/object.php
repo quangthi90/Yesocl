@@ -217,9 +217,9 @@ class ModelToolObject extends Model
 	public function formatMessage( $oMessage ) {
 		$aMessage = $oMessage->formatToCache();
 
-		$idUser = $oMessage->getUser()->getId();
-		if ( empty($this->aUsers[$idUser]) ){
-			$this->aUsers[$idUser] = $this->formatUser( $oMessage->getUser() );
+		$oUser = $oMessage->getAuthor();
+		if ( empty($this->aUsers[$oUser->getId()]) ){
+			$this->aUsers[$idUser] = $this->formatUser( $oUser );
 		}
 		$aMessage['user'] = $this->aUsers[$idUser];
 
@@ -233,13 +233,15 @@ class ModelToolObject extends Model
 	 * @param: object User
 	 * @return: Array Object User formated
 	 */
-	public function formatUser( $oUser ) {
-			$aUser = $oUser->formatToCache();
-			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-			$aUser['fr_status'] = $this->checkFriendStatus( $this->customer->getId(), $aUser['id'] );
-			$aUser['fl_status'] = $this->checkFollowerStatus( $this->customer->getId(), $aUser['id'] );
+	public function formatUser( $oUser, $iwidth = 50, $iheight = 50 ) {
+		$this->load->model('tool/image');
+		
+		$aUser = $oUser->formatToCache();
+		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], $iwidth, $iheight );
+		$aUser['fr_status'] = $this->checkFriendStatus( $this->customer->getId(), $aUser['id'] );
+		$aUser['fl_status'] = $this->checkFollowerStatus( $this->customer->getId(), $aUser['id'] );
 
-			return $aUser;
+		return $aUser;
 	}
 
 	// Generate url

@@ -149,7 +149,8 @@ $_['routing']['ApiPutIgnore']					= 'services/put/friend/ignore/{user_slug}/';
 $_['routing']['ApiPutUnfriend']					= 'services/put/friend/unfriend/{user_slug}/';
 $_['routing']['ApiPutAddFollower']				= 'services/put/follower/add/{user_slug}/';
 $_['routing']['ApiPutRemoveFollower']			= 'services/put/follower/remove/{user_slug}/';
-$_['routing']['ApiGetAllFriends']				= 'services/get/friend/all/';
+$_['routing']['ApiGetAllTags']					= 'services/get/tag/all/';
+$_['routing']['ApiGetAllFriends']				= 'services/get/friend/all/{page}/';
 
 // User
 $_['routing']['ApiGetUserPost']					= 'services/get/user/{user_slug}/posts/{page}/';
