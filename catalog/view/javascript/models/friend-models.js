@@ -5,10 +5,11 @@ YesGlobal.Models = YesGlobal.Models || {};
 		var that = this;
 		
 		/* ========= START PROPERTIES ======== */
-		that.userid = data.user_id || "";
-		that.username = data.user_name || "";
-		that.userslug = data.slug || "";
+		that.userid = data.userid || "";
+		that.username = data.username || "";
+		that.userslug = data.userslug || "";
 		that.avatar = data.avatar || "";
+		that.current = data.current || "";
 		/* ========= END PROPERTIES ======== */
 
 		/* ========= START PUBLIC METHODS ======== */
