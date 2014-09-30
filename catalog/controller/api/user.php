@@ -1,6 +1,7 @@
 <?php
 class ControllerApiUser extends Controller {
     private $limit = 5;
+    private $iFriendLimit = 20;
 
 	public function makeFriend() {
 		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
@@ -221,19 +222,34 @@ class ControllerApiUser extends Controller {
      * 09/30/2014
      * API return list all friends of Logged User
      * @author: Bommer <lqthi.khtn@gmail.com>
-     * @param: null
+     * @param:
+     *  - int page: required
+     *  - int limit: can null
      * @return: list object friends via Json format
      */
     public function getAllFriends() {
-        $this->load->model('tool/image');
+        // Check param page
+        if ( empty($this->request->get['page']) ) {
+            $iPage = 1;
+        } else {
+            $iPage = $this->request->get['page'];
+        }
+
+        // Check param limit
+        if ( empty($this->request->post['limit']) ) {
+            $iLimit = $this->iFriendLimit;
+        } else {
+            $iLimit = $this->request->post['limit'];
+        }
+
         $this->load->model('tool/object');
         $this->load->model('friend/friend');
 
-        $oCurrUser = $this->customer->getUser();
+        $oLoggedUser = $this->customer->getUser();
 
         $aFriends = array();
 
-        $oFriends = $this->model_friend_friend->getFriends( $oCurrUser->getId() );
+        $oFriends = $this->model_friend_friend->getFriends( $oLoggedUser->getId() );
         if ( $oFriends ){
             $lFriends = $oFriends->getFriends();
         }else{
@@ -243,15 +259,7 @@ class ControllerApiUser extends Controller {
         foreach ( $lFriends as $oFriend ) {
             $oUser = $oFriend->getUser();
 
-            $aUser = $oUser->formatToCache();
-
-            // Mapping to return for tag js
-            // Check again when change libs tag js
-            $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-            $aUser['name'] = $aUser['username'];
-            $aUser['id'] = $aUser['slug'];
-            $aUser['type'] = 'contact';
-            $aUser['wall'] = $this->model_tool_object->path('WallPage', array('user_slug' => $aUser['slug']));
+            $aUser = $this->model_tool_object->formatUser( $oUser, 100, 100 );
 
             $aFriends[$aUser['slug']] = $aUser;
         }
