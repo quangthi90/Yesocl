@@ -199,12 +199,14 @@ class ModelToolObject extends Model
 	 * @param: object User Message
 	 * @return: Array Object User Message formated
 	 */
-	public function formatUserMessage( $oUserMessage ) {
-		$aUserMessage = $oUserMessage->formatToCache();
-		$oLastMessage = $oUserMessage->getMessages()->last();
-		$aUserMessage['last_message'] = $this->formatMessage( $oLastMessage );
+	public function formatMessages( $oRoomMessage ) {
+		$oLoggedUser = $this->customer->getUser();
 
-		return $aUserMessage;
+		$aRoomMessage = $oRoomMessage->formatToCache( $oLoggedUser );
+		$oLastMessage = $oRoomMessage->getMessages()->last();
+		$aRoomMessage['last_message'] = $this->formatMessage( $oLastMessage, $oRoomMessage->getLastUser($oLoggedUser) );
+
+		return $aRoomMessage;
 	}
 
 	/**
@@ -214,13 +216,19 @@ class ModelToolObject extends Model
 	 * @param: object Message
 	 * @return: Array Object Message formated
 	 */
-	public function formatMessage( $oMessage ) {
+	public function formatMessage( $oMessage, $oRoomUser = null ) {
 		$aMessage = $oMessage->formatToCache();
 
 		$oUser = $oMessage->getAuthor();
-		if ( empty($this->aUsers[$oUser->getId()]) ){
+		if ( $oRoomUser !== null && empty($this->aUsers[$oRoomUser->getId()]) ) {
+			$idUser = $oRoomUser->getId();
+			$this->aUsers[$idUser] = $this->formatUser( $oRoomUser );
+		
+		} elseif ( empty($this->aUsers[$oUser->getId()]) ) {
+			$idUser = $oUser->getId();
 			$this->aUsers[$idUser] = $this->formatUser( $oUser );
 		}
+		
 		$aMessage['user'] = $this->aUsers[$idUser];
 
 		return $aMessage;

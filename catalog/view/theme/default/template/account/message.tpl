@@ -33,7 +33,7 @@
                                         </a>
                                     </div>
                                     <div class="media-body">
-                                        <div><span class="strong" data-bind="text: $data.user.username"></span> <small class="text-italic pull-right label label-default" data-bind="timeAgo: $data.created"></small></div>
+                                        <div><span class="strong" data-bind="text: $parent.name"></span> <small class="text-italic pull-right label label-default" data-bind="timeAgo: $data.created"></small></div>
                                         <div data-bind="text: $data.content"></div>
                                     </div>
                                 </div>

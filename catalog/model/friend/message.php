@@ -1,5 +1,5 @@
 <?php
-use Document\Friend\Messages,
+use Document\Friend\MessageRoom,
 	Document\Friend\Message;
 
 class ModelFriendMessage extends Model {
@@ -30,7 +30,7 @@ class ModelFriendMessage extends Model {
 			$aData['order'] = -1;
 		}
 
-		$lUserMessages = $this->dm->getRepository('Document\Friend\Messages')->findBy(array('users.id' => $idUserAuthor))
+		$lUserMessages = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array('users.id' => $idUserAuthor))
 			->skip($aData['start'])
 			->limit($aData['limit'])
 			->sort(array($aData['sort'] => $aData['order']));
@@ -51,12 +51,12 @@ class ModelFriendMessage extends Model {
 	public function add( $idRoom = null, $idUserFrom, $aUserToSlugs, $sContent ){
 		$oRoom = null;
 		if ( $idRoom != null ) {
-			$oRoom = $this->dm->getRepository('Document\Friend\Messages')->find( $idRoom );
+			$oRoom = $this->dm->getRepository('Document\Friend\MessageRoom')->find( $idRoom );
 		} elseif ( count($aUserToSlugs) == 1 ) {
 			$oUserTo = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aUserToSlugs[0] );
 			if ( !$oUserTo ) return false;
 			$aUserIds = array( $idUserFrom, $oUserTo->getId() );
-			$lRooms = $this->dm->getRepository('Document\Friend\Messages')->findBy(array(
+			$lRooms = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array(
 				'users.id' => array( '$all' => $aUserIds )
 			));
 			foreach ( $lRooms as $oRoom ) {
@@ -65,12 +65,11 @@ class ModelFriendMessage extends Model {
 				}
 			}
 		}
+
+		$oUserFrom = $this->dm->getRepository('Document\User\User')->find( $idUserFrom );
 		if ( $oRoom == null ) {
-			$oRoom = new Messages();
-
-			$oUserFrom = $this->dm->getRepository('Document\User\User')->find( $idUserFrom );
+			$oRoom = new MessageRoom();
 			$oRoom->setCreator( $oUserFrom );
-
 			$oRoom->addUser( $oUserFrom );
 			foreach ( $aUserToSlugs as $sUserToSlug ) {
 				$oUserTo = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserToSlug );
@@ -85,7 +84,8 @@ class ModelFriendMessage extends Model {
 		$oMessage->setContent( $sContent );
 		$oMessage->addReader( $oUserFrom );
 		$oRoom->addMessage( $oMessage );
-
+		
+// print($oRoom->getMessages()->count()); exit;
 		$this->dm->flush();
 
 		return true;

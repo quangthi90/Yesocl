@@ -21,28 +21,28 @@ class ControllerApiMessage extends Controller {
 		$this->load->model('friend/message');
 		$this->load->model('tool/object');
 
-		$lUserMessages = $this->model_friend_message->getLastUsersByAuthor($oLoggedUser->getId(), array(
+		$lRoomMessages = $this->model_friend_message->getLastUsersByAuthor($oLoggedUser->getId(), array(
 			'limit' => $iLimit,
 			'start' => $iLimit * ($iPage - 1)
 		));
 
-		$aUserMessages = array();
+		$aRoomMessages = array();
 		$bCanLoadMore = false;
-		$iTotalUserMessage = 0;
-		if ( $lUserMessages ){
-			$iTotalUserMessage = $lUserMessages->count();
-			if ( ($page - 1) * $limit + $limit < $iTotalUserMessage ){
+		$iTotalRoomMessage = 0;
+		if ( $lRoomMessages ){
+			$iTotalRoomMessage = $lRoomMessages->count();
+			if ( ($page - 1) * $limit + $limit < $iTotalRoomMessage ){
                 $bCanLoadMore = true;
             }
-			foreach ( $lUserMessages as $oUserMessage ) {
-				$aUserMessages[] = $this->model_tool_object->formatUserMessage( $oUserMessage );
+			foreach ( $lRoomMessages as $oRoomMessage ) {
+				$aRoomMessages[] = $this->model_tool_object->formatMessages( $oRoomMessage );
 			}
 		}
 
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'user_messages' => $aUserMessages,
-            'total_message' => $iTotalUserMessage,
+            'user_messages' => $aRoomMessages,
+            'total_message' => $iTotalRoomMessage,
             'canLoadMore' => $bCanLoadMore
         )));
 	}
