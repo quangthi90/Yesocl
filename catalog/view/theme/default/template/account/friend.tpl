@@ -55,9 +55,13 @@
                                                 <ul class="dropdown-menu">
                                                     <li><a data-bind="click: unFriend">{% trans %} Unfriend {% endtrans%}</a></li>
                                                 </ul>
-                                            <a class="btn btn-default" style="margin-left: -4px" data-bind="click: addFollow, text: $data.followStatus() "><i class="fa fa-check  "></i> 
-                                            <!-- {% trans %} &nbsp; Follow {% endtrans %} -->
-
+                                            <a class="btn btn-default" style="margin-left: -4px" data-bind="click: clickFollow"><i class="fa fa-check  "></i> 
+                                            <!-- ko if: $data.followStatus() == 0 || $data.followStatus() == 2 -->
+                                            {% trans %} &nbsp; Follow {% endtrans %}
+                                            <!-- /ko -->
+                                            <!-- ko if: $data.followStatus() == 3-->
+                                            {% trans %} &nbsp; UnFollow {% endtrans %}
+                                            <!-- /ko -->
                                             </a>
                                           
                                             <!-- <a class="btn btn-default" style="margin-left: -4px" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-weixin  "></i> {% trans %} &nbsp; Chat {% endtrans %}</a> -->

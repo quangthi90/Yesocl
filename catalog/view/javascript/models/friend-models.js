@@ -43,9 +43,18 @@ YesGlobal.Models = YesGlobal.Models || {};
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 		}
 
-		that.unFollow = function(){
+		that.clickFollow = function(){
+			if(that.followStatus() == 3)
+				_addFollow();
+			else
+				_unFollow();
+		}
+
+		/* ========= END PUBLIC METHODS ======== */
+		/* ========= START PRIVATE METHODS ======== */
+		function _unFollow(){
 			var ajaxOptions = {
-            	url: Y.Routing.generate('ApiPutRemoveFollower', {user_slug: that.user_slug})
+            	url: Y.Routing.generate('ApiPutRemoveFollower', {user_slug: that.userslug})
             };
             var successCallback = function(data){
             	if(data.success == "ok")
@@ -54,9 +63,10 @@ YesGlobal.Models = YesGlobal.Models || {};
             //Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 		}
-		that.addFollow = function(){
+		
+		function _addFollow(){
 			var ajaxOptions = {
-            	url: Y.Routing.generate('ApiPutAddFollower', {user_slug: that.user_slug})
+            	url: Y.Routing.generate('ApiPutAddFollower', {user_slug: that.userslug})
             };
             var successCallback = function(data){
             	if(data.success == "ok")
@@ -65,11 +75,6 @@ YesGlobal.Models = YesGlobal.Models || {};
             //Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 		}
-		/* ========= END PUBLIC METHODS ======== */
-		/* ========= START PRIVATE METHODS ======== */
-		/**
-		
-		
 		
 		
 		/* ========= END PRIVATE METHODS ======== */
