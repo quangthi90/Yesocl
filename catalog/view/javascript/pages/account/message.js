@@ -12,18 +12,22 @@
 		self.isLoadSuccess = ko.observable(false);
 
 		self.currentPage = ko.observable(1);
-		self.userMessageList = ko.observableArray([]);
-		self.totalMessage = ko.observable(0);
+		self.roomList = ko.observableArray([]);
+		self.messageList = ko.observableArray([]);
+		self.totalRoom = ko.observable(0);
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
-		
+		self.clickRoomItem = function(item, event){
+			console.log(item.name);
+			var loadOptions = {};
+		}
 		/* ============= END PUBLIC METHODS ================ */
 
 		/* ============= START PRIVATE METHODS ============= */
-		function _loadMessage(callback){
-			var loadOptions = self.apiUrls.loadUserMessage.params || {},
-				url = self.apiUrls.loadUserMessage.name;
+		function _loadRoom(callback){
+			var loadOptions = self.apiUrls.loadRoomMessage.params || {},
+				url = self.apiUrls.loadRoomMessage.name;
 			loadOptions.page = self.currentPage();
 			var ajaxOptions = {
 				url: Y.Routing.generate(url, loadOptions),
@@ -33,10 +37,10 @@
 			};
 			var successCallback = function(data){
 				if(data.success === "ok"){
-					ko.utils.arrayForEach(data.user_messages, function(um){
-						var userMessageItem = new Y.Models.UserMessageModel(um);
-						self.userMessageList.push(userMessageItem);
-						self.totalMessage( data.total_message );
+					ko.utils.arrayForEach(data.rooms, function(r){
+						var roomItem = new Y.Models.RoomModel(r);
+						self.roomList.push(roomItem);
+						self.totalRoom( data.total_room );
 					});
 					if(data.canLoadMore !== undefined) {
 						self.canLoadMore(data.canLoadMore);
@@ -64,7 +68,7 @@
                 }
             });
 
-            _loadMessage(function(){
+            _loadRoom(function(){
             	$(window).scrollTop(0);
             });
 		}

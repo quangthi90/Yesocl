@@ -4,41 +4,6 @@ use Document\Friend\MessageRoom,
 
 class ModelFriendMessage extends Model {
 	/**
-	 * Get last 20 users have new message
-	 * @author: Bommer <lqthi.khtn@gmail.com>
-	 * @param: 
-	 * 	String User Slug
-	 * 	Int Start
-	 *	Int Limit
-	 * @return: array objects Message
-	 */
-	public function getLastUsersByAuthor( $idUserAuthor, $aData = array() ){
-		// Limit & start
-		if (  empty($aData['start']) ){
-			$aData['start'] = 0;
-		}
-		if ( empty($aData['limit']) ){
-			$aData['limit'] = 10;
-		}
-
-		// Sort & order
-		if ( empty($aData['sort']) ){
-			$aData['sort'] = 'updated';
-		}
-
-		if ( empty($aData['order']) ){
-			$aData['order'] = -1;
-		}
-
-		$lUserMessages = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array('users.id' => $idUserAuthor))
-			->skip($aData['start'])
-			->limit($aData['limit'])
-			->sort(array($aData['sort'] => $aData['order']));
-
-		return $lUserMessages;
-	}
-
-	/**
 	 * Add Message
 	 * @author: Bommer <lqthi.khtn@gmail.com>
 	 * @param: 
@@ -85,10 +50,44 @@ class ModelFriendMessage extends Model {
 		$oMessage->addReader( $oUserFrom );
 		$oRoom->addMessage( $oMessage );
 		
-// print($oRoom->getMessages()->count()); exit;
 		$this->dm->flush();
 
 		return true;
+	}
+
+	/**
+	 * Get last 20 users have new message
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 * 	String User Slug
+	 * 	Int Start
+	 *	Int Limit
+	 * @return: array objects Message
+	 */
+	public function getRooms( $idUserAuthor, $aData = array() ){
+		// Limit & start
+		if (  empty($aData['start']) ){
+			$aData['start'] = 0;
+		}
+		if ( empty($aData['limit']) ){
+			$aData['limit'] = 10;
+		}
+
+		// Sort & order
+		if ( empty($aData['sort']) ){
+			$aData['sort'] = 'updated';
+		}
+
+		if ( empty($aData['order']) ){
+			$aData['order'] = -1;
+		}
+
+		$lUserMessages = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array('users.id' => $idUserAuthor))
+			->skip($aData['start'])
+			->limit($aData['limit'])
+			->sort(array($aData['sort'] => $aData['order']));
+
+		return $lUserMessages;
 	}
 
 	/**

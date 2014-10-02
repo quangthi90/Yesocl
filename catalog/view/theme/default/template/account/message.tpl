@@ -23,10 +23,10 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="bg-gray text-center strong border-top innerAll half"><span data-bind="text: totalMessage"></span> {% trans %}messages{% endtrans %} <i class="fa fa-circle-arrow-down"></i></div>
-                        <ul class="list-unstyled" data-bind="foreach: $data.userMessageList">
+                        <div class="bg-gray text-center strong border-top innerAll half"><span data-bind="text: totalRoom"></span> {% trans %}messages{% endtrans %} <i class="fa fa-circle-arrow-down"></i></div>
+                        <ul class="list-unstyled" data-bind="foreach: $data.roomList">
                             <li class="border-bottom {#bg-primary#}">
-                                <div class="media innerAll" data-bind="with: $data.last_message">
+                                <div class="media innerAll" data-bind="with: $data.last_message, click: $parent.clickRoomItem">
                                     <div class="media-object pull-left hidden-phone">
                                         <a href="#">
                                             <img data-bind="attr: {src: $data.user.avatar}" height="40px" width="40px" alt="Image" />
@@ -237,8 +237,8 @@
                 Y.GlobalKoModel = Y.GlobalKoModel || {};
                 var mesageOptions = {
                     apiUrls : {
-                        loadUserMessage: {
-                            name: "ApiGetUserMessage"
+                        loadRoomMessage: {
+                            name: "ApiGetRooms"
                         }
                     }
                 };
