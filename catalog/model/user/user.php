@@ -215,7 +215,7 @@ class ModelUserUser extends Model {
 			));
 		}
 
-		return null;
+		return $this->dm->getRepository('Document\User\User')->findAll();
 	}
 
 	public function isExistEmail( $oEmail, $idUser = '' ) {
