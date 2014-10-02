@@ -160,5 +160,6 @@ $_['route']['ApiSetPrivateSetting']			= 'api/user/setPrivateOption/';
 $_['route']['ApiGetDisplayOption']			= 'api/user/getDisplayoption/';
 
 // Message
-$_['route']['ApiGetUserMessage']			= 'api/message/getLastUsers/';
+$_['route']['ApiGetRooms']					= 'api/message/getLastRooms/';
+$_['route']['ApiGetMessages']				= 'api/message/getLastMessages/';
 ?>

@@ -1,8 +1,60 @@
 <?php
-use Document\Friend\Messages,
+use Document\Friend\MessageRoom,
 	Document\Friend\Message;
 
 class ModelFriendMessage extends Model {
+	/**
+	 * Add Message
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 *	- Object MongoID Room -- can null
+	 * 	- Object MongoID User Send
+	 *	- Array String Slug Users Receipt
+	 * 	- String content message
+	 * @return: Boolean
+	 */
+	public function add( $idRoom = null, $idUserFrom, $aUserToSlugs, $sContent ){
+		$oRoom = null;
+		if ( $idRoom != null ) {
+			$oRoom = $this->dm->getRepository('Document\Friend\MessageRoom')->find( $idRoom );
+		} elseif ( count($aUserToSlugs) == 1 ) {
+			$oUserTo = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aUserToSlugs[0] );
+			if ( !$oUserTo ) return false;
+			$aUserIds = array( $idUserFrom, $oUserTo->getId() );
+			$lRooms = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array(
+				'users.id' => array( '$all' => $aUserIds )
+			));
+			foreach ( $lRooms as $oRoom ) {
+				if ( $oRoom->getUsers()->count() == 2 ) {
+					break;
+				}
+			}
+		}
+
+		$oUserFrom = $this->dm->getRepository('Document\User\User')->find( $idUserFrom );
+		if ( $oRoom == null ) {
+			$oRoom = new MessageRoom();
+			$oRoom->setCreator( $oUserFrom );
+			$oRoom->addUser( $oUserFrom );
+			foreach ( $aUserToSlugs as $sUserToSlug ) {
+				$oUserTo = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserToSlug );
+				$oRoom->addUser( $oUserTo );
+			}
+
+			$this->dm->persist( $oRoom );
+		}
+
+		$oMessage = new Message();
+		$oMessage->setAuthor( $oUserFrom );
+		$oMessage->setContent( $sContent );
+		$oMessage->addReader( $oUserFrom );
+		$oRoom->addMessage( $oMessage );
+		
+		$this->dm->flush();
+
+		return true;
+	}
+
 	/**
 	 * Get last 20 users have new message
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -12,7 +64,7 @@ class ModelFriendMessage extends Model {
 	 *	Int Limit
 	 * @return: array objects Message
 	 */
-	public function getLastUsersByAuthor( $idUserAuthor, $aData = array() ){
+	public function getRooms( $idUserAuthor, $aData = array() ){
 		// Limit & start
 		if (  empty($aData['start']) ){
 			$aData['start'] = 0;
@@ -30,65 +82,12 @@ class ModelFriendMessage extends Model {
 			$aData['order'] = -1;
 		}
 
-		$lUserMessages = $this->dm->getRepository('Document\Friend\Messages')->findBy(array('users.id' => $idUserAuthor))
+		$lUserMessages = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array('users.id' => $idUserAuthor))
 			->skip($aData['start'])
 			->limit($aData['limit'])
 			->sort(array($aData['sort'] => $aData['order']));
 
 		return $lUserMessages;
-	}
-
-	/**
-	 * Add Message
-	 * @author: Bommer <lqthi.khtn@gmail.com>
-	 * @param: 
-	 *	- Object MongoID Room -- can null
-	 * 	- Object MongoID User Send
-	 *	- Array String Slug Users Receipt
-	 * 	- String content message
-	 * @return: Boolean
-	 */
-	public function add( $idRoom = null, $idUserFrom, $aUserToSlugs, $sContent ){
-		$oRoom = null;
-		if ( $idRoom != null ) {
-			$oRoom = $this->dm->getRepository('Document\Friend\Messages')->find( $idRoom );
-		} elseif ( count($aUserToSlugs) == 1 ) {
-			$oUserTo = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aUserToSlugs[0] );
-			if ( !$oUserTo ) return false;
-			$aUserIds = array( $idUserFrom, $oUserTo->getId() );
-			$lRooms = $this->dm->getRepository('Document\Friend\Messages')->findBy(array(
-				'users.id' => array( '$all' => $aUserIds )
-			));
-			foreach ( $lRooms as $oRoom ) {
-				if ( $oRoom->getUsers()->count() == 2 ) {
-					break;
-				}
-			}
-		}
-		if ( $oRoom == null ) {
-			$oRoom = new Messages();
-
-			$oUserFrom = $this->dm->getRepository('Document\User\User')->find( $idUserFrom );
-			$oRoom->setCreator( $oUserFrom );
-
-			$oRoom->addUser( $oUserFrom );
-			foreach ( $aUserToSlugs as $sUserToSlug ) {
-				$oUserTo = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserToSlug );
-				$oRoom->addUser( $oUserTo );
-			}
-
-			$this->dm->persist( $oRoom );
-		}
-
-		$oMessage = new Message();
-		$oMessage->setAuthor( $oUserFrom );
-		$oMessage->setContent( $sContent );
-		$oMessage->addReader( $oUserFrom );
-		$oRoom->addMessage( $oMessage );
-
-		$this->dm->flush();
-
-		return true;
 	}
 
 	/**

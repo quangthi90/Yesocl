@@ -1,7 +1,7 @@
 YesGlobal.Models = YesGlobal.Models || {};
 
 (function($, ko, Y, undefined) {
-	Y.Models.UserMessageModel = function (data) {
+	Y.Models.RoomModel = function (data) {
 		var that = this;
 		that.id = data.id || '';
 		that.name = data.name || '';
@@ -11,37 +11,37 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.last_message = data.last_message || {};
 		that.messages = [];
 
-		that.likePost = function() {
+		that.loadMessage = function(messageItem){
+			var loadOptions = self.apiUrls.loadRoomMessage.params || {},
+				url = self.apiUrls.loadRoomMessage.name;
+			loadOptions.page = self.currentPage();
 			var ajaxOptions = {
-				url : Y.Routing.generate('ApiPutPostLike', {
-					post_type: that.type,
-					post_slug: that.slug
-				})
+				url: Y.Routing.generate(url, loadOptions),
+				data : {
+					limit : 10
+				}
 			};
 			var successCallback = function(data){
 				if(data.success === "ok"){
-					that.isLiked(!that.isLiked());
-					that.likeCount( data.like_count);
+					ko.utils.arrayForEach(data.rooms, function(r){
+						var roomItem = new Y.Models.RoomModel(r);
+						self.roomList.push(roomItem);
+						self.totalRoom( data.total_room );
+					});
+					if(data.canLoadMore !== undefined) {
+						self.canLoadMore(data.canLoadMore);
+					}
+				}
+				self.isLoadSuccess(true);
+				_handleEffects();
+
+				if(callback && typeof callback === "function"){
+					callback(data);
 				}
 			};
-			YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
-		};		
-		that.showLikers = function(){
-			var context = YesGlobal.Utils.getKoContext();
-			if(context !== null){
-				var apiUrl = yRouting.generate("ApiGetPostLiker", {
-					post_type: that.type,
-					post_slug: that.slug
-				})
-				context.$data.userBoxModel.showUserList(apiUrl, function(count){
-					if(count !== undefined){
-						that.likeCount(count);
-					}
-				});
-			}else {
-				console.log("Ko content not found !");
-			}
-		};
+			//Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		}
 		that.toJson = function(){
 			return {
 				post_type: that.type,

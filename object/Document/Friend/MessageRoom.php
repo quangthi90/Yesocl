@@ -5,7 +5,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 /**
  * @MongoDB\Document(db="yesocl", collection="user_message")
  */
-Class Messages {
+Class MessageRoom {
 	/**
 	 * @MongoDB\Id
 	 */
@@ -31,13 +31,52 @@ Class Messages {
     /** @MongoDB\Date */
 	private $updated;
 
-	public function formatToCache() {
+	public function formatToCache( $oLoggedUser ) {
 		return array(
 			'id' => $this->getId(),
-			'name' => $this->getName(),
+			'name' => $this->getRoomName( $oLoggedUser ),
 			'updated' => $this->getUpdated(),
 			'created' => $this->getCreated()
 		);
+	}
+
+	/**
+	 * 10/01/2014
+	 * Get room name
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: null
+	 * @return: string room name
+	 */
+	public function getRoomName( $oLoggedUser ) {
+		if ( $this->getName() != null ) {
+			return $this->getName();
+		}
+
+		if ( $this->getUsers()->count() == 1 ) {
+			return $this->getUsers()->first()->getUsername();
+		}
+
+		$aUsernames = array();
+		foreach ( $this->getUsers() as $oUser ) {
+			if ( $oUser->getId() == $oLoggedUser->getId() ) continue;
+			$aUsernames[] = $oUser->getUsername();
+		}
+		return implode( ', ', $aUsernames );
+	}
+
+	/**
+	 * 10/01/2014
+	 * Get last user is not logged user
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: null
+	 * @return: string room name
+	 */
+	public function getLastUser( $oLoggedUser ) {
+		foreach ( $this->getUsers() as $oUser ) {
+			if ( $oUser->getId() != $oLoggedUser->getId() ) return $oUser;
+		}
+
+		return $oUser;
 	}
 
 	/** @MongoDB\PrePersist */

@@ -158,5 +158,6 @@ $_['routing']['ApiSetPrivateSetting']			= 'services/set/privateoption/';
 $_['routing']['ApiGetDisplayOption']			= 'services/get/setting/what-s-new/display/option/';
 
 // Message
-$_['routing']['ApiGetUserMessage']				= 'services/get/message/user/{page}/';
+$_['routing']['ApiGetRooms']					= 'services/get/message/room/{page}/';
+$_['routing']['ApiGetMessages']					= 'services/get/message/{room_id}/';
 ?>
