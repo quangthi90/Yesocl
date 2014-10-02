@@ -53,7 +53,7 @@
                                         <div class="btn-group-vertical btn-group-sm dropdown" >
                                                 <a class="dropdown-toggle btn btn-primary  " style="margin-left: -4px" id="btn_option_friend" data-toggle="dropdown"><i class="fa fa-user"></i>{% trans %}&nbsp; Friend {% endtrans %} </a>
                                                 <ul class="dropdown-menu">
-                                                    <li><a data-bind="text: $data.friendStatus, click: unFriend "></a></li>
+                                                    <li><a data-bind="click: unFriend "></a>{% trans %} Unfriend {% endtrans%}</li>
                                                 </ul>
                                             <a class="btn btn-default" style="margin-left: -4px"    ><i class="fa fa-check  "></i> {% trans %} &nbsp; Follow {% endtrans %}</a>
                                             <!-- <a class="btn btn-default" style="margin-left: -4px" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-weixin  "></i> {% trans %} &nbsp; Chat {% endtrans %}</a> -->
