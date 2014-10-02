@@ -9,21 +9,59 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.userslug = data.slug || "";
 		that.avatar = data.avatar || "";
 		that.current = data.current || "";
+		/**
+		Change value friendStatus:
+		*	1: me
+		*	2: friend
+		*	3: sent request make friend
+		*	4: not relationship
+		*	-1: not found User B
+		*/
 		that.friendStatus = ko.observable(data.fr_status || 0);
+		/**
+		Change value followStatus
+		 *		1: me
+		 *		2: Following
+		 *		3: not relationship
+		 *		-1: not found User B
+		 */
 		that.followStatus = ko.observable(data.fl_status || 0);
-		// this.changeValueToString = function(){
-		// 	_ChangeValueStatus(data);
-		// 	_ChangeValueFollow(data);	
-		// }
+		
 		/* ========= END PROPERTIES ======== */
 		/* ========= START PUBLIC METHODS ======== */
 		that.unFriend = function(){
-			alert(that.userslug);
+			
 			var ajaxOptions = {
             	url: Y.Routing.generate('ApiPutUnfriend', {user_slug: that.userslug})
             };
             var successCallback = function(data){
-            	that.friendStatus = 4;
+            	if(data.success == "ok")
+            		that.friendStatus = 4;
+            }
+            //Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		}
+
+		that.unFollow = function(){
+			// alert(that.userslug);
+			var ajaxOptions = {
+            	url: Y.Routing.generate('ApiPutRemoveFollower', {user_slug: that.user_slug})
+            };
+            var successCallback = function(data){
+            	if(data.success == "ok")
+            		that.followStatus = 3;
+            }
+            //Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		}
+		that.addFollow = function(){
+			// alert(that.userslug);
+			var ajaxOptions = {
+            	url: Y.Routing.generate('ApiPutAddFollower', {user_slug: that.user_slug})
+            };
+            var successCallback = function(data){
+            	if(data.success == "ok")
+            		that.followStatus = 2;
             }
             //Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
@@ -31,36 +69,10 @@ YesGlobal.Models = YesGlobal.Models || {};
 		/* ========= END PUBLIC METHODS ======== */
 		/* ========= START PRIVATE METHODS ======== */
 		/**
-		Change value friendStatus from int to string	
-		*	1: me
-		*	2: friend
-		*	3: sent request make friend
-		*	4: not relationship
-		*	-1: not found User B
-		*/
-		function ChangeValueStatus(data)
-		{
-			if(that.friendStatus == 2)
-				that.friendStatus = "Friend";
-			else if(that.friendStatus == 3)
-				that.friendStatus = "Sent request";
-			else if(that.friendStatus == 4)
-				that.friendStatus = "Make friend";
-		}
-		/**
-		Change value followStatus from int to string
-		 *		1: me
-		 *		2: Following
-		 *		3: not relationship
-		 *		-1: not found User B
-		 */
-		function ChangeValueFollow(data)
-		{
-		 	if(that.followStatus == 2)
-		 		that.followStatus = "Following";
-		 	else if (that.followStatus == 3)
-		 		that.followStatus = "Follow";
-		}
+		
+		
+		
+		
 		/* ========= END PRIVATE METHODS ======== */
 	}
 })(jQuery, ko, YesGlobal);
