@@ -9,10 +9,14 @@
 		self.apiUrls = options.apiUrls || "";
 		self.isLoadSuccess = ko.observable(false);
 
+		self.user_slug = ko.observable || "";
+		self.currentPage = ko.observable(1);
 		self.friendList = ko.observableArray([]);
+
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
+		
 
 		/* ============= END PUBLIC METHODS ================ */
 
@@ -20,7 +24,7 @@
 
 		function _loadFriend(){
 			var ajaxOptions = {
-				url: Y.Routing.generate(self.apiUrls),
+				url: Y.Routing.generate(self.apiUrls, self.currentPage()),
 				data : {
 					limit : 5
 				}

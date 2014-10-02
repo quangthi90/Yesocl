@@ -48,11 +48,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-3" style="padding: auto">
                                     <div class="innerAll text-right">
-                                        <div class="btn-group-vertical btn-group-sm" >
-                                            <a class="btn btn-primary" style="margin-left: -4px" id="btn_friend"><i class="fa fa-user"></i>{% trans%}&nbsp; UnFriend {% endtrans %}</a>
-                                            <a class="btn btn-default" style="margin-left: -4px" id="btn_follow"><i class="fa fa-check-square-o "></i> {% trans %} Follow {% endtrans %}</a>
+                                        <div class="btn-group-vertical btn-group-sm dropdown" >
+                                                <a class="dropdown-toggle btn btn-primary  " style="margin-left: -4px" id="btn_option_friend" data-toggle="dropdown"><i class="fa fa-user"></i>{% trans %}&nbsp; Friend {% endtrans %} </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a data-bind="text: $data.friendStatus, click: unFriend "></a></li>
+                                                </ul>
+                                            <a class="btn btn-default" style="margin-left: -4px"    ><i class="fa fa-check  "></i> {% trans %} &nbsp; Follow {% endtrans %}</a>
+                                            <!-- <a class="btn btn-default" style="margin-left: -4px" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-weixin  "></i> {% trans %} &nbsp; Chat {% endtrans %}</a> -->
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +95,7 @@
                 ko.applyBindings(Y.GlobalKoModel);
         }(jQuery, ko, YesGlobal));
 
-            status_btn_friend = false;
+        status_btn_friend = false;
 
         $(document).ready(function(){
             $("#btn_friend").click(function(){
@@ -111,7 +115,7 @@
                 }
             });
 
-            $("#btn_follow").click(function(){
+            $("#btn_option_friend").hover(function(){
                  var btn_friend_options = {
                     apiUrls: "ApiPutRemoveFollower"
                 };
