@@ -50,19 +50,16 @@
                                 </div>
                                 <div class="col-sm-3" style="padding: auto">
                                     <div class="innerAll text-right">
-                                        <div class="btn-group-vertical btn-group-sm dropdown" >
-                                                <a class="dropdown-toggle btn btn-primary  " style="margin-left: -4px" id="btn_option_friend" data-toggle="dropdown"><i class="fa fa-user"></i>{% trans %}&nbsp; Friend {% endtrans %} </a>
+                                        <div class="btn-group-vertical btn-group-sm" >
+                                                <a class="dropdown-toggle btn btn-primary  " style="margin-left: -4px" id="btn_option_friend" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp;{% trans %}Friend {% endtrans %} </a>
                                                 <ul class="dropdown-menu">
-                                                    <li><a data-bind="click: unFriend "></a>{% trans %} Unfriend {% endtrans%}</li>
+                                                    <li><a data-bind="click: unFriend">{% trans %} Unfriend {% endtrans%}</a></li>
                                                 </ul>
-                                            <a class="dropdown-toggle btn btn-default" style="margin-left: -4px"    ><i class="fa fa-check  "></i> {% trans %} &nbsp; Follow {% endtrans %}</a>
-                                            <ul class="dropdown-menu">
-                                                    <!-- ko if: $data.followStatus == 2-->
-                                                    <li><a data-bind="click: unFollow "></a>{% trans %} UnFollow {% endtrans%}</li>
-                                                    <!-- ko else -->
-                                                    <li><a data-bind="click: addFollow "></a>{% trans %} UnFollow {% endtrans%}</li>
-                                                    <!-- !ko -->
-                                            </ul>
+                                            <a class="btn btn-default" style="margin-left: -4px" data-bind="click: addFollow, text: $data.followStatus() "><i class="fa fa-check  "></i> 
+                                            <!-- {% trans %} &nbsp; Follow {% endtrans %} -->
+
+                                            </a>
+                                          
                                             <!-- <a class="btn btn-default" style="margin-left: -4px" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-weixin  "></i> {% trans %} &nbsp; Chat {% endtrans %}</a> -->
                                         </div>
                                     </div>

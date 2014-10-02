@@ -9,6 +9,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.userslug = data.slug || "";
 		that.avatar = data.avatar || "";
 		that.current = data.current || "";
+
 		/**
 		Change value friendStatus:
 		*	1: me
@@ -36,32 +37,30 @@ YesGlobal.Models = YesGlobal.Models || {};
             };
             var successCallback = function(data){
             	if(data.success == "ok")
-            		that.friendStatus = 4;
+            		that.friendStatus (4);
             }
             //Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 		}
 
 		that.unFollow = function(){
-			// alert(that.userslug);
 			var ajaxOptions = {
             	url: Y.Routing.generate('ApiPutRemoveFollower', {user_slug: that.user_slug})
             };
             var successCallback = function(data){
             	if(data.success == "ok")
-            		that.followStatus = 3;
+            		that.followStatus (3);
             }
             //Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 		}
 		that.addFollow = function(){
-			// alert(that.userslug);
 			var ajaxOptions = {
             	url: Y.Routing.generate('ApiPutAddFollower', {user_slug: that.user_slug})
             };
             var successCallback = function(data){
             	if(data.success == "ok")
-            		that.followStatus = 2;
+            		that.followStatus (2);
             }
             //Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);

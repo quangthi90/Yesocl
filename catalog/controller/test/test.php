@@ -63,8 +63,6 @@ Class ControllerTestTest extends Controller {
 
 	//Make friend with all user in database
 	public function makeFriendAllUser(){
-		var_dump("arg"); exit;
-		// console.log("arg");
 		//Send request
 		$this->load->model('user/user');
 		$this->load->model('friend/friend');
@@ -74,10 +72,9 @@ Class ControllerTestTest extends Controller {
 		foreach($aUsers as $oUser)
 		{
 			$sUserSlug = $oUser->getSlug();
+			$idUser = $oUser->getId();
        		$result = $this->model_user_user->editUser( $sUserSlug, array('request_friend' => $this->customer->getId()) );
-       		alert("Sent request to" + $sUserSlug);
-       		$idUser = $oUser['id'];
-       		$this->model_friend_friend->makeFriend(	"533126bfa7c0e9442b000000", $idUserB);
+       		$this->model_friend_friend->makeFriend(	$idUser, "533126bfa7c0e9442b000000");
 		}
 	}
 }
