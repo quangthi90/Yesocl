@@ -62,47 +62,22 @@ Class ControllerTestTest extends Controller {
 	}
 
 	//Make friend with all user in database
-	public function makeFriend(){
-
+	public function makeFriendAllUser(){
+		var_dump("arg"); exit;
+		// console.log("arg");
 		//Send request
 		$this->load->model('user/user');
-
-       	$sUserSlug = $this->request->get['user_slug'];
-
-       	$result = $this->model_user_user->editUser( $sUserSlug, array('request_friend' => $this->customer->getId()) );
-
-       	if ( $result ){
-			return $this->response->setOutput(json_encode(array(
-	            'success' => 'ok'
-	        )));
-		}
-
-		//Confirm
-		$this->load->model('user/user');
 		$this->load->model('friend/friend');
-		
-       	$aUserB = $this->model_user_user->getUser( $this->request->get['user_slug'] );
 
-       	if ( !$aUserB ){
-       		return $this->response->setOutput(json_encode(array(
-	            'success' => 'not ok',
-	            'error' => 'user slug "' . $this->request->get['user_slug'] . '" is not exist'
-	        )));
-       	}
+		$aUsers = $this->model_user_user->getUsers();
 
-       	$idUserA = $this->customer->getId();
-       	$idUserB = $aUserB['id'];
-
-       	if ( $this->model_friend_friend->makeFriend($idUserA, $idUserB) ){
-       		return $this->response->setOutput(json_encode(array(
-	            'success' => 'ok',
-	            'status' => 2
-	        )));
-       	}
-
-    	return $this->response->setOutput(json_encode(array(
-            'success' => 'not ok',
-            'error' => 'confirm make friend have error'
-        )));
+		foreach($aUsers as $oUser)
+		{
+			$sUserSlug = $oUser->getSlug();
+       		$result = $this->model_user_user->editUser( $sUserSlug, array('request_friend' => $this->customer->getId()) );
+       		alert("Sent request to" + $sUserSlug);
+       		$idUser = $oUser['id'];
+       		$this->model_friend_friend->makeFriend(	"533126bfa7c0e9442b000000", $idUserB);
+		}
 	}
 }
