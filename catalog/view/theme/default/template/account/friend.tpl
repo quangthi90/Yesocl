@@ -59,8 +59,7 @@
                                             <ul class="dropdown-menu">
                                                     <!-- ko if: $data.followStatus == 2-->
                                                     <li><a data-bind="click: unFollow "></a>{% trans %} UnFollow {% endtrans%}</li>
-                                                    <!-- !ko-->
-                                                    <!-- ko if: $data.followStatus == 2 -->
+                                                    <!-- ko else -->
                                                     <li><a data-bind="click: addFollow "></a>{% trans %} UnFollow {% endtrans%}</li>
                                                     <!-- !ko -->
                                             </ul>
