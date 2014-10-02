@@ -113,7 +113,7 @@ body.loading #common-loading {
 	position: absolute;
 	top: 0px;
 	right: 0px;
-	z-index: 2;
+	z-index: 999;
 }
 .post-options .dropdown-toggle {
 	display: block;
