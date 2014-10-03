@@ -26,7 +26,7 @@
                         <div class="bg-gray text-center strong border-top innerAll half"><span data-bind="text: totalRoom"></span> {% trans %}messages{% endtrans %} <i class="fa fa-circle-arrow-down"></i></div>
                         <ul class="list-unstyled" id="js-list-message" data-bind="foreach: { data: $data.roomList, afterRender: addMoreEvents }">
                             <li class="border-bottom" data-bind="click: $parent.clickRoomItem, css: { 'bg-primary' : $data.id == $parent.activeRoomId() }">
-                                <div class="media innerAll" data-bind="with: $data.last_message">
+                                <div class="media innerAll" data-bind="with: $data.lastMessage">
                                     <div class="media-object pull-left hidden-phone">
                                         <a href="#">
                                             <img data-bind="attr: {src: $data.user.avatar}" height="40px" width="40px" alt="Image" />
@@ -42,10 +42,10 @@
                     </div>
                     <div class="col-md-9 detailsWrapper">
                         <!-- User -->
-                        <div class="bg-primary">
+                        <div class="bg-primary" data-bind="with: lastMessage">
                             <div class="media">
                                 <a href="" class="pull-left">
-                                    <img src="{{ asset_img('no_user_avatar.png') }}" width="65" class="media-object">
+                                    <img data-bind="attr: {src: $data.user.avatar}" width="65" class="media-object">
                                 </a>
                                 <div class="media-body innerTB innerR">
                                     <div class="innerT half pull-right">
@@ -53,7 +53,7 @@
                                         <i class="fa fa-pencil"></i> Write
                                     </a>
                                     </div>
-                                    <h4 href="" class="text-white pull-left innerAll strong display-block margin-none">Joanne Smith</h4>
+                                    <h4 href="" class="text-white pull-left innerAll strong display-block margin-none" data-bind="text: $data.user.username"></h4>
                                 </div>
                             </div>
                         </div>

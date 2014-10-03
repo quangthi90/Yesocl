@@ -15,6 +15,7 @@
 		self.currentPage = ko.observable(1);
 		self.roomList = ko.observableArray([]);
 		self.messageList = ko.observableArray([]);
+		self.lastMessage = ko.observable();
 		self.totalRoom = ko.observable(0);
 		self.activeRoomId = ko.observable();
 		/*  ============= END PROPERTIES ==================== */
@@ -36,6 +37,7 @@
 
 		self.clickRoomItem = function(item, event){
 			self.activeRoomId(item.id);
+			self.lastMessage( item.lastMessage );
 			if(item.canLoadMore() && !self.isLoadingMore()){
 				self.isLoadingMore(true);
 				item._loadMessage(function(data){

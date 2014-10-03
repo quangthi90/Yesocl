@@ -10,7 +10,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.user = data.user || {};
 		that.created = data.created || null;
 		that.updated = data.updated || null;
-		that.last_message = data.last_message || {};
+		that.lastMessage = data.last_message || {};
 		that.messageList = [];
 		
 		that.currentPage = ko.observable(1);

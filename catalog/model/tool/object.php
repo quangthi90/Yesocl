@@ -232,7 +232,7 @@ class ModelToolObject extends Model
 	 * @param: object Message
 	 * @return: Array Object Message formated
 	 */
-	public function formatMessage( $oMessage, $oRoomUser = null, $iwidth = 50, $iheight = 50 ) {
+	public function formatMessage( $oMessage, $oRoomUser = null, $iwidth = 65, $iheight = 65 ) {
 		$aMessage = $oMessage->formatToCache();
 
 		$oUser = $oMessage->getAuthor();
