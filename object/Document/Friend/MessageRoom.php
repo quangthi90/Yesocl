@@ -31,12 +31,19 @@ Class MessageRoom {
     /** @MongoDB\Date */
 	private $updated;
 
-	public function formatToCache( $oLoggedUser ) {
+	public function formatToCache( $oLoggedUser, $bIsTimestamp = true ) {
+		if ( $bIsTimestamp ) {
+			$created = $this->getCreated()->getTimestamp();
+			$updated = $this->getUpdated()->getTimestamp();
+		} else {
+			$created = $this->getCreated();
+			$updated = $this->getUpdated();
+		}
 		return array(
 			'id' => $this->getId(),
 			'name' => $this->getRoomName( $oLoggedUser ),
-			'updated' => $this->getUpdated(),
-			'created' => $this->getCreated()
+			'updated' => $updated,
+			'created' => $created
 		);
 	}
 

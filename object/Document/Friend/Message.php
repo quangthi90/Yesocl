@@ -24,11 +24,16 @@ Class Message {
     /** @MongoDB\Date */
 	private $created;
 
-	public function formatToCache( $idUser = 0 ) {
+	public function formatToCache( $idUser = 0, $bIsTimestamp = true ) {
+		if ( $bIsTimestamp ) {
+			$created = $this->getCreated()->getTimestamp();
+		} else {
+			$created = $this->getCreated();
+		}
 		return array(
 			'id' => $this->getId(),
 			'content' => $this->getContent(),
-			'created' => $this->getCreated(),
+			'created' => $created,
 			'is_read' => $this->checkIsRead( $idUser )
 		);
 	}

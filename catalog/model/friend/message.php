@@ -82,12 +82,25 @@ class ModelFriendMessage extends Model {
 			$aData['order'] = -1;
 		}
 
-		$lUserMessages = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array('users.id' => $idUserAuthor))
+		$lRooms = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array('users.id' => $idUserAuthor))
 			->skip($aData['start'])
 			->limit($aData['limit'])
 			->sort(array($aData['sort'] => $aData['order']));
 
-		return $lUserMessages;
+		return $lRooms;
+	}
+
+	/**
+	 * 10/02/2014
+	 * Get Room by Room ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: Object MongoID
+	 * @return: Object Room
+	 */
+	public function getRoom( $idRoom ) {
+		$oRoom = $this->dm->getRepository('Document\Friend\MessageRoom')->find( $idRoom );
+
+		return $oRoom;
 	}
 
 	/**
@@ -231,7 +244,7 @@ class ModelFriendMessage extends Model {
 	 * 	- Object MongoID Object User
 	 * @return: boolean
 	 */
-	public function deleteUserMessages( $idCurrUser, $idObjectUser ){
+	public function deleteRooms( $idCurrUser, $idObjectUser ){
 		$oMessages = $this->dm->getRepository('Document\Friend\Messages')->findOneBy(array(
 			'user.id' => $idCurrUser
 		));

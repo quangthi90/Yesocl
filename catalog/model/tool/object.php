@@ -193,13 +193,13 @@ class ModelToolObject extends Model
 	}
 
 	/**
-	 * Format Object User Message to Array
+	 * Format Object Room Message to Array
 	 * 2014/09/26
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: object User Message
-	 * @return: Array Object User Message formated
+	 * @param: object Room Message
+	 * @return: Array Object Room Message formated
 	 */
-	public function formatMessages( $oRoomMessage ) {
+	public function formatRooms( $oRoomMessage ) {
 		$oLoggedUser = $this->customer->getUser();
 
 		$aRoomMessage = $oRoomMessage->formatToCache( $oLoggedUser );
@@ -210,23 +210,39 @@ class ModelToolObject extends Model
 	}
 
 	/**
+	 * Format List Object Messages to Array
+	 * 2014/09/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: List Object Messages
+	 * @return: Array List Object Messages formated
+	 */
+	public function formatMessages( $lMessages, $iwidth = 65, $iheight = 65 ) {
+		$aMessages = array();
+		foreach ( $lMessages as $oMessage ) {
+			$aMessages[] = $this->formatMessage( $oMessage, null, $iwidth, $iheight );
+		}
+
+		return $aMessages;
+	}
+
+	/**
 	 * Format Object Message to Array
 	 * 2014/09/26
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: object Message
 	 * @return: Array Object Message formated
 	 */
-	public function formatMessage( $oMessage, $oRoomUser = null ) {
+	public function formatMessage( $oMessage, $oRoomUser = null, $iwidth = 50, $iheight = 50 ) {
 		$aMessage = $oMessage->formatToCache();
 
 		$oUser = $oMessage->getAuthor();
 		if ( $oRoomUser !== null && empty($this->aUsers[$oRoomUser->getId()]) ) {
 			$idUser = $oRoomUser->getId();
-			$this->aUsers[$idUser] = $this->formatUser( $oRoomUser );
+			$this->aUsers[$idUser] = $this->formatUser( $oRoomUser, $iwidth, $iheight );
 		
 		} elseif ( empty($this->aUsers[$oUser->getId()]) ) {
 			$idUser = $oUser->getId();
-			$this->aUsers[$idUser] = $this->formatUser( $oUser );
+			$this->aUsers[$idUser] = $this->formatUser( $oUser, $iwidth, $iheight );
 		}
 		
 		$aMessage['user'] = $this->aUsers[$idUser];
