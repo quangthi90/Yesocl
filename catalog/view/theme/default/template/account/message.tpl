@@ -42,26 +42,30 @@
                     </div>
                     <div class="col-md-9 detailsWrapper">
                         <!-- User -->
-                        <div class="bg-primary" data-bind="with: lastMessage">
-                            <div class="media">
+                        <div class="bg-primary">
+                            <div class="media" data-bind="with: lastMessage">
                                 <a href="" class="pull-left">
                                     <img data-bind="attr: {src: $data.user.avatar}" width="65" class="media-object">
                                 </a>
                                 <div class="media-body innerTB innerR">
                                     <div class="innerT half pull-right">
-                                    <a  href="#type" class=" btn btn-default bg-white btn-sm" data-toggle="collapse">
-                                        <i class="fa fa-pencil"></i> Write
-                                    </a>
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle rounded-right" data-toggle="dropdown">
+                                                Action <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li><a href="#">New Message</a></li>
+                                            </ul>
+                                        </div>
+                                        <a href="#type" class="btn btn-default bg-white btn-sm">
+                                            <i class="fa fa-pencil"></i> Write
+                                        </a>
                                     </div>
                                     <h4 class="text-white pull-left innerAll strong display-block margin-none"><a data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a></h4>
                                 </div>
                             </div>
                         </div>
                         <div class="bg-gray innerAll text-center margin-none"><a href="" class="text-muted lead"><i class="icon-time-clock"></i> View Archive</a></div>
-                        <div  id="type" class="collapse border-top">
-                            <textarea type="text" class="form-control rounded-none border-none" placeholder="Write your messages..."></textarea>
-                        </div>
-
                         <div class="widget border-top padding-none margin-none" data-bind="foreach: $data.messageList">
                             <!--  Message -->
                             <div class="media margin-none innerAll">
@@ -88,6 +92,9 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div id="type" class="border-top">
+                            <textarea type="text" class="form-control rounded-none border-none" placeholder="Write your messages..."></textarea>
                         </div>
                     </div>
                 </div>
