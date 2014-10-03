@@ -53,7 +53,7 @@
                                         <i class="fa fa-pencil"></i> Write
                                     </a>
                                     </div>
-                                    <h4 href="" class="text-white pull-left innerAll strong display-block margin-none" data-bind="text: $data.user.username"></h4>
+                                    <h4 class="text-white pull-left innerAll strong display-block margin-none"><a data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a></h4>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                                             <div class="innerT half">
                                                 <div class="media">
                                                     <div class="pull-left">
-                                                        <a href="" class="strong text-inverse" data-bind="text: $data.username"></a>
+                                                        <a class="strong text-inverse" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a>
                                                         <span class="innerR text-muted visible-xs" data-bind="timeAgo: $data.created"></span>
                                                     </div>
                                                     <div class="media-body" data-bind="text: $data.content"></div>
