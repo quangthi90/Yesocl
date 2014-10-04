@@ -183,8 +183,7 @@ class ControllerApiComment extends Controller {
                 'post_slug' => $this->request->get['post_slug'],
                 'limit' => (int)$limit,
                 'start' => (int)($limit * ($page - 1))
-            ),
-            true
+            )
         );
 
         $aComments = $this->model_tool_object->formatComments( $aComments, false );
