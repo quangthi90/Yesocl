@@ -35,7 +35,7 @@ class ControllerApiMessage extends Controller {
                 $bCanLoadMore = true;
             }
 			foreach ( $lRoomMessages as $oRoomMessage ) {
-				$aRoomMessages[] = $this->model_tool_object->formatRooms( $oRoomMessage );
+				$aRoomMessages[] = $this->model_tool_object->formatRoom( $oRoomMessage );
 			}
 		}
 
@@ -89,6 +89,57 @@ class ControllerApiMessage extends Controller {
             'messages' => $aMessages,
             'total_message' => $iTotalMessages,
             'canLoadMore' => $bCanLoadMore
+        )));
+	}
+
+	public function send(){
+		// content is required
+		if ( empty($this->request->post['content']) ){
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'content is empty'
+            )));
+		}
+		$sContent = $this->request->post['content'];
+
+		// room ID
+		if ( !empty($this->request->post['room_id']) ) {
+			$idRoom = $this->request->post['room_id'];
+		} else {
+			$idRoom = null;
+		}
+
+		// array User To Slugs
+		if ( !empty($this->request->post['user_slugs']) ) {
+			$aUserToSlugs = $this->request->post['user_slugs'];
+		} else {
+			$aUserToSlugs = array();
+		}
+
+		$this->load->model('friend/message');
+		$this->load->model('tool/object');
+
+		$oRoom = $this->model_friend_message->add( 
+			$idRoom,
+			$this->customer->getId(), 
+			$aUserToSlugs, 
+			$sContent 
+		);
+
+		if ( !$result ){
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'send message not success'
+            )));
+		}
+
+		$aRoom = $this->model_tool_object->formatRoom( $oRoom );
+		$aMessage = $this->model_tool_object->formatMessage( $oRoom->getMessages()->last() );
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'room' => $aRoom,
+            'message' => $aMessage
         )));
 	}
 }

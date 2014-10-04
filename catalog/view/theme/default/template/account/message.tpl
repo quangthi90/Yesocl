@@ -3,6 +3,7 @@
 {% block title %}{{ heading_title }}{% endblock %}
 
 {% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset_css('library/bootstrap-controls/bootstrap-select2.css') }}" />
 {% endblock %}
 {% block body %}
     <div class="innerAll">
@@ -50,15 +51,15 @@
                                 <div class="media-body innerTB innerR">
                                     <div class="innerT half pull-right">
                                         <div class="dropdown">
-                                            <button class="btn btn-default dropdown-toggle rounded-right" data-toggle="dropdown">
-                                                Action <span class="caret"></span>
+                                            <button class="btn btn-default dropdown-toggle rounded-right  btn-sm" data-toggle="dropdown">
+                                                {% trans %}Action{% endtrans %} <span class="caret"></span>
                                             </button>
                                             <ul class="dropdown-menu pull-right">
-                                                <li><a href="#">New Message</a></li>
+                                                <li><a href="#">{% trans %}Remove Message{% endtrans %}</a></li>
                                             </ul>
                                         </div>
-                                        <a href="#type" class="btn btn-default bg-white btn-sm">
-                                            <i class="fa fa-pencil"></i> Write
+                                        <a href="#type" class="btn btn-default bg-white btn-sm" data-toggle="collapse" data-bind="click: $parent.clickNewMessage">
+                                            <i class="fa fa-pencil"></i> {% trans %}New Message{% endtrans %}
                                         </a>
                                     </div>
                                     <h4 class="text-white pull-left innerAll strong display-block margin-none"><a data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a></h4>
@@ -93,8 +94,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="type" class="border-top">
-                            <textarea type="text" class="form-control rounded-none border-none" placeholder="Write your messages..."></textarea>
+                        <div>
+                            <div class="border-top">
+                                <input id="js-mess-to" type="text" class="form-control rounded-none border-none" placeholder="{% trans %}To{% endtrans %}..." data-bind="visible: isNewMessage(), value: $data.messageTo"/>
+                            </div>
+                            <div class="border-top border-bottom">
+                                <textarea id="js-mess-content" type="text" class="form-control rounded-none border-none" placeholder="{% trans %}Write your messages{% endtrans %}..." data-bind="value: $data.messageContent"></textarea>
+                            </div>
+                            <div class="pull-right">
+                                <a class="btn btn-default" data-bind="click: clickSendMessage">{% trans %}Send{% endtrans %}</a>
+                            </div>
                         </div>
                     </div>
                 </div>

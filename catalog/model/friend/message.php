@@ -13,7 +13,7 @@ class ModelFriendMessage extends Model {
 	 * 	- String content message
 	 * @return: Boolean
 	 */
-	public function add( $idRoom = null, $idUserFrom, $aUserToSlugs, $sContent ){
+	public function add( $idRoom = null, $idUserFrom, $aUserToSlugs = array(), $sContent ){
 		$oRoom = null;
 		if ( $idRoom != null ) {
 			$oRoom = $this->dm->getRepository('Document\Friend\MessageRoom')->find( $idRoom );
@@ -32,7 +32,7 @@ class ModelFriendMessage extends Model {
 		}
 
 		$oUserFrom = $this->dm->getRepository('Document\User\User')->find( $idUserFrom );
-		if ( $oRoom == null ) {
+		if ( !$oRoom ) {
 			$oRoom = new MessageRoom();
 			$oRoom->setCreator( $oUserFrom );
 			$oRoom->addUser( $oUserFrom );
@@ -49,10 +49,10 @@ class ModelFriendMessage extends Model {
 		$oMessage->setContent( $sContent );
 		$oMessage->addReader( $oUserFrom );
 		$oRoom->addMessage( $oMessage );
-		
+print($oRoom->getName()); exit;		
 		$this->dm->flush();
 
-		return true;
+		return $oRoom;
 	}
 
 	/**
