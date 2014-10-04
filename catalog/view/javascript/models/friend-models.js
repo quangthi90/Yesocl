@@ -44,9 +44,10 @@ YesGlobal.Models = YesGlobal.Models || {};
 		}
 
 		that.clickFollow = function(){
-			if(that.followStatus() == 3)
+			alert(that.followStatus());
+			if( that.followStatus() === 0 || that.followStatus() === 3)
 				_addFollow();
-			else
+			else if(that.followStatus() === 2)
 				_unFollow();
 		}
 
@@ -59,6 +60,7 @@ YesGlobal.Models = YesGlobal.Models || {};
             var successCallback = function(data){
             	if(data.success == "ok")
             		that.followStatus (3);
+            	else alert("Can't remove Follow");
             }
             //Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
@@ -71,6 +73,7 @@ YesGlobal.Models = YesGlobal.Models || {};
             var successCallback = function(data){
             	if(data.success == "ok")
             		that.followStatus (2);
+            	else alert("Can't Follow");
             }
             //Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
