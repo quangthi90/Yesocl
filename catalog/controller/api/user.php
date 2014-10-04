@@ -1,6 +1,7 @@
 <?php
 class ControllerApiUser extends Controller {
     private $limit = 5;
+    private $iFriendLimit = 20;
 
 	public function makeFriend() {
 		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
@@ -179,7 +180,7 @@ class ControllerApiUser extends Controller {
         )));
 	}
 
-    public function getAllFriends() {
+    public function getAllTags() {
         $this->load->model('tool/image');
         $this->load->model('tool/object');
         $this->load->model('friend/friend');
@@ -207,6 +208,58 @@ class ControllerApiUser extends Controller {
             $aUser['id'] = $aUser['slug'];
             $aUser['type'] = 'contact';
             $aUser['wall'] = $this->model_tool_object->path('WallPage', array('user_slug' => $aUser['slug']));
+
+            $aFriends[$aUser['slug']] = $aUser;
+        }
+
+        return $this->response->setOutput( json_encode(array(
+            'success' => 'ok',
+            'friends' => count($aFriends) == 0 ? array() : array_values($aFriends)
+        )));
+    }
+
+    /**
+     * 09/30/2014
+     * API return list all friends of Logged User
+     * @author: Bommer <lqthi.khtn@gmail.com>
+     * @param:
+     *  - int page: required
+     *  - int limit: can null
+     * @return: list object friends via Json format
+     */
+    public function getAllFriends() {
+        // Check param page
+        if ( empty($this->request->get['page']) ) {
+            $iPage = 1;
+        } else {
+            $iPage = $this->request->get['page'];
+        }
+
+        // Check param limit
+        if ( empty($this->request->post['limit']) ) {
+            $iLimit = $this->iFriendLimit;
+        } else {
+            $iLimit = $this->request->post['limit'];
+        }
+
+        $this->load->model('tool/object');
+        $this->load->model('friend/friend');
+
+        $oLoggedUser = $this->customer->getUser();
+
+        $aFriends = array();
+
+        $oFriends = $this->model_friend_friend->getFriends( $oLoggedUser->getId() );
+        if ( $oFriends ){
+            $lFriends = $oFriends->getFriends();
+        }else{
+            $lFriends = array();
+        }
+
+        foreach ( $lFriends as $oFriend ) {
+            $oUser = $oFriend->getUser();
+
+            $aUser = $this->model_tool_object->formatUser( $oUser, 100, 100 );
 
             $aFriends[$aUser['slug']] = $aUser;
         }
