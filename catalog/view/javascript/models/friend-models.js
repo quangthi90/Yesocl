@@ -30,7 +30,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		
 		/* ========= END PROPERTIES ======== */
 		/* ========= START PUBLIC METHODS ======== */
-		that.unFriend = function(){
+		that.unFriend = function(sucCallback, failCallback){
 			
 			var ajaxOptions = {
             	url: Y.Routing.generate('ApiPutUnfriend', {user_slug: that.userslug})
@@ -38,13 +38,15 @@ YesGlobal.Models = YesGlobal.Models || {};
             var successCallback = function(data){
             	if(data.success == "ok")
             		that.friendStatus (4);
+            	if(sucCallback && typeof sucCallback == "function") {
+            		sucCallback();
+            	}
             }
             //Call common ajax Call:
-			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
 		}
 
 		that.clickFollow = function(){
-			alert(that.followStatus());
 			if( that.followStatus() === 0 || that.followStatus() === 3)
 				_addFollow();
 			else if(that.followStatus() === 2)
