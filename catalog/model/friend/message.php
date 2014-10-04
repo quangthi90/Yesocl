@@ -19,14 +19,15 @@ class ModelFriendMessage extends Model {
 			$oRoom = $this->dm->getRepository('Document\Friend\MessageRoom')->find( $idRoom );
 		} elseif ( count($aUserToSlugs) == 1 ) {
 			$oUserTo = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aUserToSlugs[0] );
-			if ( !$oUserTo ) return false;
-			$aUserIds = array( $idUserFrom, $oUserTo->getId() );
-			$lRooms = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array(
-				'users.id' => array( '$all' => $aUserIds )
-			));
-			foreach ( $lRooms as $oRoom ) {
-				if ( $oRoom->getUsers()->count() == 2 ) {
-					break;
+			if ( $oUserTo ) {
+				$aUserIds = array( $idUserFrom, $oUserTo->getId() );
+				$lRooms = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array(
+					'users.id' => array( '$all' => $aUserIds )
+				));
+				foreach ( $lRooms as $oRoom ) {
+					if ( $oRoom->getUsers()->count() == 2 ) {
+						break;
+					}
 				}
 			}
 		}
@@ -49,7 +50,7 @@ class ModelFriendMessage extends Model {
 		$oMessage->setContent( $sContent );
 		$oMessage->addReader( $oUserFrom );
 		$oRoom->addMessage( $oMessage );
-print($oRoom->getName()); exit;		
+
 		$this->dm->flush();
 
 		return $oRoom;

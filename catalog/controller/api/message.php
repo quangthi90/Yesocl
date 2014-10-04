@@ -126,7 +126,7 @@ class ControllerApiMessage extends Controller {
 			$sContent 
 		);
 
-		if ( !$result ){
+		if ( !$oRoom ){
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'send message not success'

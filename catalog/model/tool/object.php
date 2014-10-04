@@ -2,6 +2,7 @@
 class ModelToolObject extends Model
 {
 	private $aUsers = array();
+	private $iLimitCommentPost = 3;
 
 	/**
 	 * Format List Object Posts to Array
@@ -51,7 +52,9 @@ class ModelToolObject extends Model
 		}
 
 		$lComments = $oPost->getComments();
-		$aComments = $lComments->slice($lComments->count() - 3, 3);
+		$aComments = $lComments->slice(0, $this->iLimitCommentPost);
+		$aComments = array_reverse($aComments);
+		
 		$aPost['comments'] = $this->formatComments( $aComments, false );
 
 		$aPost['user'] = $this->aUsers[$aPost['user_id']];

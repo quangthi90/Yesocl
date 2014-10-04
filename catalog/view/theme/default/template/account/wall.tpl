@@ -38,7 +38,7 @@
                     apiUrls : {
                         loadPost: {
                             name: "ApiGetUserPost", 
-                            params: { user_slug : Y.CurrentUser.slug }
+                            params: { user_slug : "{{ current_user.slug }}" }
                         }
                     }
                 };

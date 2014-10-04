@@ -9,17 +9,17 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.name = data.name || '';
 		that.user = data.user || {};
 		that.created = data.created || null;
-		that.updated = data.updated || null;
-		that.lastMessage = data.last_message || {};
-		that.messageList = [];
+		that.updated = ko.observable(data.updated || null);
+		that.lastMessage = ko.observable(data.last_message || {});
+		that.messageList = ko.observableArray([]);
 		
 		that.currentPage = ko.observable(1);
 		that.canLoadMore = ko.observable(data.canLoadMore || true);
 		that.totalRoom = ko.observable(0);
 		/*  ============= END PROPERTIES ==================== */
 
-		/* ============= START PRIVATE METHODS ============= */
-		that._loadMessage = function(callback){
+		/* ============= START PUBLIC METHODS ============= */
+		that.loadMessage = function(callback) {
 			var ajaxOptions = {
 				url: Y.Routing.generate("ApiGetMessages", {
 					room_id: that.id,
@@ -48,6 +48,16 @@ YesGlobal.Models = YesGlobal.Models || {};
 			//Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 		}
+
+		that.addMessage = function(roomData, lastMessage){
+			that.updated(roomData.updated);
+			that.lastMessage(roomData.last_message);
+			that.messageList.push(lastMessage);
+		}
+
+		/* ============= END PUBLIC METHODS ============= */
+
+		/* ============= START PRIVATE METHODS ============= */
 		that.toJson = function(){
 			return {
 				post_type: that.type,

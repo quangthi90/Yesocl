@@ -26,7 +26,7 @@
                         </div>
                         <div class="bg-gray text-center strong border-top innerAll half"><span data-bind="text: totalRoom"></span> {% trans %}messages{% endtrans %} <i class="fa fa-circle-arrow-down"></i></div>
                         <ul class="list-unstyled" id="js-list-message" data-bind="foreach: { data: $data.roomList, afterRender: addMoreEvents }">
-                            <li class="border-bottom" data-bind="click: $parent.clickRoomItem, css: { 'bg-primary' : $data.id == $parent.activeRoomId() }">
+                            <li class="border-bottom" data-bind="click: $parent.clickRoomItem, css: { 'bg-primary' : $data.id == ($parent.activeRoom() != null ? $parent.activeRoom().id : 0) }">
                                 <div class="media innerAll" data-bind="with: $data.lastMessage">
                                     <div class="media-object pull-left hidden-phone">
                                         <a href="#">
@@ -67,7 +67,8 @@
                             </div>
                         </div>
                         <div class="bg-gray innerAll text-center margin-none"><a href="" class="text-muted lead"><i class="icon-time-clock"></i> View Archive</a></div>
-                        <div class="widget border-top padding-none margin-none" data-bind="foreach: $data.messageList">
+                        <!-- ko if: $data.activeRoom() != null -->
+                        <div class="widget border-top padding-none margin-none" data-bind="foreach: $data.activeRoom().messageList">
                             <!--  Message -->
                             <div class="media margin-none innerAll">
                                 <a href="" class="pull-left hidden-xs">
@@ -94,6 +95,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- /ko -->
                         <div>
                             <div class="border-top">
                                 <input id="js-mess-to" type="text" class="form-control rounded-none border-none" placeholder="{% trans %}To{% endtrans %}..." data-bind="visible: isNewMessage(), value: $data.messageTo"/>
