@@ -89,11 +89,11 @@ $_['routing']['SaveAvatar']						= 'avatar/save/';
 
 // Message
 $_['routing']['MessagePage']					= 'message/page/';
-$_['routing']['MessageSend']					= 'message/send/';
-$_['routing']['MessageGetList']					= 'message/get-list/{user_slug}/';
-$_['routing']['MessageGetLast']					= 'message/get-last/';
-$_['routing']['MessageDeleteAll']				= 'message/delete/all/{user_slug}/';
-$_['routing']['MessageDeleteOne']				= 'message/delete/one/{message_id}/';
+// $_['routing']['MessageSend']					= 'message/send/';
+// $_['routing']['MessageGetList']					= 'message/get-list/{user_slug}/';
+// $_['routing']['MessageGetLast']					= 'message/get-last/';
+// $_['routing']['MessageDeleteAll']				= 'message/delete/all/{user_slug}/';
+// $_['routing']['MessageDeleteOne']				= 'message/delete/one/{message_id}/';
 
 // Stock
 $_['routing']['StockMarketNone']				= 'stock/market/';
@@ -150,7 +150,7 @@ $_['routing']['ApiPutUnfriend']					= 'services/put/friend/unfriend/{user_slug}/
 $_['routing']['ApiPutAddFollower']				= 'services/put/follower/add/{user_slug}/';
 $_['routing']['ApiPutRemoveFollower']			= 'services/put/follower/remove/{user_slug}/';
 $_['routing']['ApiGetAllTags']					= 'services/get/tag/all/';
-$_['routing']['ApiGetAllFriends']				= 'services/get/friend/all/{page}/';
+$_['routing']['ApiGetFriends']					= 'services/get/friend/{page}/';
 
 // User
 $_['routing']['ApiGetUserPost']					= 'services/get/user/{user_slug}/posts/{page}/';
@@ -160,4 +160,5 @@ $_['routing']['ApiGetDisplayOption']			= 'services/get/setting/what-s-new/displa
 // Message
 $_['routing']['ApiGetRooms']					= 'services/get/message/room/{page}/';
 $_['routing']['ApiGetMessages']					= 'services/get/message/{room_id}/page/{page}';
+$_['routing']['ApiPostMessage']					= 'services/post/message/send/';
 ?>

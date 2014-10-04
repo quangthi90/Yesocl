@@ -199,12 +199,12 @@ class ModelToolObject extends Model
 	 * @param: object Room Message
 	 * @return: Array Object Room Message formated
 	 */
-	public function formatRooms( $oRoomMessage ) {
+	public function formatRoom( $oRoomMessage, $iwidth = 65, $iheight = 65 ) {
 		$oLoggedUser = $this->customer->getUser();
 
-		$aRoomMessage = $oRoomMessage->formatToCache( $oLoggedUser );
+		$aRoomMessage = $oRoomMessage->formatToCache( $oLoggedUser, $iwidth, $iheight );
 		$oLastMessage = $oRoomMessage->getMessages()->last();
-		$aRoomMessage['last_message'] = $this->formatMessage( $oLastMessage, $oRoomMessage->getLastUser($oLoggedUser) );
+		$aRoomMessage['last_message'] = $this->formatMessage( $oLastMessage, $oRoomMessage->getLastUser($oLoggedUser), $iwidth, $iheight );
 
 		return $aRoomMessage;
 	}
@@ -216,7 +216,7 @@ class ModelToolObject extends Model
 	 * @param: List Object Messages
 	 * @return: Array List Object Messages formated
 	 */
-	public function formatMessages( $lMessages, $iwidth = 65, $iheight = 65 ) {
+	public function formatMessages( $lMessages, $iwidth = 60, $iheight = 60 ) {
 		$aMessages = array();
 		foreach ( $lMessages as $oMessage ) {
 			$aMessages[] = $this->formatMessage( $oMessage, null, $iwidth, $iheight );
@@ -232,16 +232,16 @@ class ModelToolObject extends Model
 	 * @param: object Message
 	 * @return: Array Object Message formated
 	 */
-	public function formatMessage( $oMessage, $oRoomUser = null, $iwidth = 65, $iheight = 65 ) {
+	public function formatMessage( $oMessage, $oRoomUser = null, $iwidth = 60, $iheight = 60 ) {
 		$aMessage = $oMessage->formatToCache();
 
 		$oUser = $oMessage->getAuthor();
+		$idUser = $oUser->getId();
 		if ( $oRoomUser !== null && empty($this->aUsers[$oRoomUser->getId()]) ) {
 			$idUser = $oRoomUser->getId();
 			$this->aUsers[$idUser] = $this->formatUser( $oRoomUser, $iwidth, $iheight );
 		
-		} elseif ( empty($this->aUsers[$oUser->getId()]) ) {
-			$idUser = $oUser->getId();
+		} elseif ( empty($this->aUsers[$idUser]) ) {
 			$this->aUsers[$idUser] = $this->formatUser( $oUser, $iwidth, $iheight );
 		}
 		

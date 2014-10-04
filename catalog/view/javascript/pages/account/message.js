@@ -11,6 +11,7 @@
 
 		self.isLoadSuccess = ko.observable(false);
 		self.isLoadingMore = ko.observable(false);
+		self.isNewMessage = ko.observable(false);
 
 		self.currentPage = ko.observable(1);
 		self.roomList = ko.observableArray([]);
@@ -18,6 +19,9 @@
 		self.lastMessage = ko.observable();
 		self.totalRoom = ko.observable(0);
 		self.activeRoomId = ko.observable();
+
+		self.messageTo = ko.observable("");
+		self.messageContent = ko.observable("");
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
@@ -52,6 +56,50 @@
 			});
 
 			self.isLoadSuccess(true);
+		}
+
+		self.clickNewMessage = function(){
+			self.isNewMessage(!self.isNewMessage());
+			self.messageList([]);
+			if ( self.activeRoomId() != 0 )
+				self.activeRoomId(0);
+			else
+				_selectFirstRoom();
+		}
+
+		self.clickSendMessage = function(){
+			if ( !self.messageContent() ) return;
+			
+			if ( !self.messageTo() ){
+				var ajaxOptions = {
+					url: Y.Routing.generate("ApiPostMessage"),
+					data : {
+						room_id : self.activeRoomId(),
+						content: self.messageContent()
+					}
+				};
+				var successCallback = function(data){
+					if(data.success === "ok"){
+						ko.utils.arrayForEach(data.rooms, function(r){
+							var roomItem = new Y.Models.RoomModel(r);
+							self.roomList.push(roomItem);
+						});
+						self.totalRoom( data.total_room );
+						if(data.canLoadMore !== undefined) {
+							self.canLoadMore(data.canLoadMore);
+						}
+					}
+					self.isLoadSuccess(true);
+
+					if(callback && typeof callback === "function"){
+						callback(data);
+					}
+				};
+				//Call common ajax Call:
+				Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+			}else{
+				console.log('hehe');
+			}
 		}
 		/* ============= END PUBLIC METHODS ================ */
 

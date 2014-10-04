@@ -16,7 +16,11 @@
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
-		
+		self.unFriend = function(selectingFriend) {
+			selectingFriend.unFriend(function(){
+				self.friendList.remove(selectingFriend);
+			});
+		}
 
 		/* ============= END PUBLIC METHODS ================ */
 

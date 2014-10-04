@@ -91,11 +91,11 @@ $_['route']['SaveAvatar']					= 'account/avatar/save';
 
 // Message
 $_['route']['MessagePage']					= 'account/message';
-$_['route']['MessageSend']					= 'account/message/send/';
-$_['route']['MessageGetList']				= 'account/message/getMessageListByUser/';
-$_['route']['MessageGetLast']				= 'account/message/getLastMessages/';
-$_['route']['MessageDeleteAll']				= 'account/message/deleteUserMessages/';
-$_['route']['MessageDeleteOne']				= 'account/message/deleteMessage/';
+// $_['route']['MessageSend']					= 'account/message/send/';
+// $_['route']['MessageGetList']				= 'account/message/getMessageListByUser/';
+// $_['route']['MessageGetLast']				= 'account/message/getLastMessages/';
+// $_['route']['MessageDeleteAll']				= 'account/message/deleteUserMessages/';
+// $_['route']['MessageDeleteOne']				= 'account/message/deleteMessage/';
 
 // Stock
 $_['route']['StockMarket']					= 'stock/market/';
@@ -152,7 +152,7 @@ $_['route']['ApiPutUnfriend']				= 'api/user/unfriend/';
 $_['route']['ApiPutAddFollower']			= 'api/user/addFollower/';
 $_['route']['ApiPutRemoveFollower']			= 'api/user/removeFollower/';
 $_['route']['ApiGetAllTags']				= 'api/user/getAllTags/';
-$_['route']['ApiGetAllFriends']				= 'api/user/getAllFriends/';
+$_['route']['ApiGetFriends']				= 'api/user/getFriends/';
 
 // User
 $_['route']['ApiGetUserPost']				= 'api/user/getPosts/';
@@ -162,4 +162,5 @@ $_['route']['ApiGetDisplayOption']			= 'api/user/getDisplayoption/';
 // Message
 $_['route']['ApiGetRooms']					= 'api/message/getLastRooms/';
 $_['route']['ApiGetMessages']				= 'api/message/getLastMessages/';
+$_['route']['ApiPostMessage']				= 'api/message/send/';
 ?>
