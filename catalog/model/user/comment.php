@@ -228,7 +228,7 @@ class ModelUserComment extends Model {
 
 		$oComment = $oPost->getCommentById( $idComment );
 		
-		if ( $oComment->getUser()->getId() != $author_id ){
+		if ( $oComment->getUser()->getId() != $author_id && $oPost->getUser()->getId() != $author_id ){
 			return false;
 		}
 
