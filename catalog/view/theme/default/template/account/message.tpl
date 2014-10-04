@@ -24,9 +24,9 @@
                             </form>
                         </div>
                         <div class="bg-gray text-center strong border-top innerAll half"><span data-bind="text: totalRoom"></span> {% trans %}messages{% endtrans %} <i class="fa fa-circle-arrow-down"></i></div>
-                        <ul class="list-unstyled" data-bind="foreach: $data.roomList">
-                            <li class="border-bottom {#bg-primary#}">
-                                <div class="media innerAll" data-bind="with: $data.last_message, click: $parent.clickRoomItem">
+                        <ul class="list-unstyled" id="js-list-message" data-bind="foreach: { data: $data.roomList, afterRender: addMoreEvents }">
+                            <li class="border-bottom" data-bind="click: $parent.clickRoomItem, css: { 'bg-primary' : $data.id == $parent.activeRoomId() }">
+                                <div class="media innerAll" data-bind="with: $data.lastMessage">
                                     <div class="media-object pull-left hidden-phone">
                                         <a href="#">
                                             <img data-bind="attr: {src: $data.user.avatar}" height="40px" width="40px" alt="Image" />
@@ -43,31 +43,34 @@
                     <div class="col-md-9 detailsWrapper">
                         <!-- User -->
                         <div class="bg-primary">
-                            <div class="media">
+                            <div class="media" data-bind="with: lastMessage">
                                 <a href="" class="pull-left">
-                                    <img src="{{ asset_img('no_user_avatar.png') }}" width="65" class="media-object">
+                                    <img data-bind="attr: {src: $data.user.avatar}" width="65" class="media-object">
                                 </a>
                                 <div class="media-body innerTB innerR">
                                     <div class="innerT half pull-right">
-                                    <a  href="#type" class=" btn btn-default bg-white btn-sm" data-toggle="collapse">
-                                        <i class="fa fa-pencil"></i> Write
-                                    </a>
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle rounded-right" data-toggle="dropdown">
+                                                Action <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li><a href="#">New Message</a></li>
+                                            </ul>
+                                        </div>
+                                        <a href="#type" class="btn btn-default bg-white btn-sm">
+                                            <i class="fa fa-pencil"></i> Write
+                                        </a>
                                     </div>
-                                    <h4 href="" class="text-white pull-left innerAll strong display-block margin-none">Joanne Smith</h4>
+                                    <h4 class="text-white pull-left innerAll strong display-block margin-none"><a data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a></h4>
                                 </div>
                             </div>
                         </div>
                         <div class="bg-gray innerAll text-center margin-none"><a href="" class="text-muted lead"><i class="icon-time-clock"></i> View Archive</a></div>
-                        <div  id="type" class="collapse border-top">
-                            <textarea type="text" class="form-control rounded-none border-none" placeholder="Write your messages..."></textarea>
-                        </div>
-
-                        <div class="widget border-top padding-none margin-none">
-                        
+                        <div class="widget border-top padding-none margin-none" data-bind="foreach: $data.messageList">
                             <!--  Message -->
                             <div class="media margin-none innerAll">
                                 <a href="" class="pull-left hidden-xs">
-                                    <img src="{{ asset_img('no_user_avatar.png') }}" width="60" class="media-object">
+                                    <img data-bind="attr: {src: $data.user.avatar}" width="60" class="media-object">
                                 </a>
                                 <div class="media-body innerTB">
                                     <div class="row">
@@ -75,149 +78,23 @@
                                             <div class="innerT half">
                                                 <div class="media">
                                                     <div class="pull-left">
-                                                        <a href="" class="strong text-inverse ">Mr. Awesome</a>
-                                                        <span class="innerR text-muted visible-xs">Jan 15th, 2014 </span>
+                                                        <a class="strong text-inverse" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a>
+                                                        <span class="innerR text-muted visible-xs" data-bind="timeAgo: $data.created"></span>
                                                     </div>
-                                                    <div class="media-body">
-                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                    </div>
+                                                    <div class="media-body" data-bind="text: $data.content"></div>
                                                 </div>
                                             </div>  
                                         </div>
                                         <div class="col-sm-6 hidden-xs">
                                             <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
-                                            <span class="pull-right innerR innerT text-right  text-muted">
-                                            Jan 15th, 2014 
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <!--  Message -->
-                            <div class="media margin-none bg-gray border-top innerAll">
-                                <a href="" class="pull-left hidden-xs">
-                                    <img src="{{ asset_img('no_user_avatar.png') }}" width="60" class="media-object">
-                                </a>
-                                <div class="media-body innerTB">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="innerT half">
-                                                <div class="media">
-                                                    <div class="pull-left">
-                                                        <a href="" class="strong text-inverse ">Joanne Smith</a>
-                                                        <span class="innerR text-muted visible-xs">Jan 15th, 2014 </span>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, in.
-                                                    </div>
-                                                </div>
-                                            </div>  
-                                        </div>
-                                        <div class="col-sm-6 hidden-xs">
-                                            <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
-                                            <span class="pull-right innerR innerT text-right  text-muted">
-                                            Jan 15th, 2014 
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <!--  Message -->
-                            <div class="media margin-none border-top innerAll">
-                                <a href="" class="pull-left hidden-xs">
-                                    <img src="{{ asset_img('no_user_avatar.png') }}" width="60" class="media-object">
-                                </a>
-                                <div class="media-body innerTB">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="innerT half">
-                                                <div class="media">
-                                                    <div class="pull-left">
-                                                        <a href="" class="strong text-inverse ">Mr. Awesome</a>
-                                                        <span class="innerR text-muted visible-xs">Jan 15th, 2014 </span>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        Hello World!
-                                                    </div>
-                                                </div>
-                                            </div>  
-                                        </div>
-                                        <div class="col-sm-6 hidden-xs">
-                                            <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
-                                            <span class="pull-right innerR innerT text-right  text-muted">
-                                            Jan 15th, 2014 
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            
-
-                            <!--  Message -->
-                            <div class="media margin-none bg-gray border-top innerAll">
-                                <a href="" class="pull-left hidden-xs">
-                                    <img src="{{ asset_img('no_user_avatar.png') }}" width="60" class="media-object">
-                                </a>
-                                <div class="media-body innerTB">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="innerT half">
-                                                <div class="media">
-                                                    <div class="pull-left">
-                                                        <a href="" class="strong text-inverse ">Joanne Smith</a>
-                                                        <span class="innerR text-muted visible-xs">Jan 15th, 2014 </span>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, in.
-                                                    </div>
-                                                </div>
-                                            </div>  
-                                        </div>
-                                        <div class="col-sm-6 hidden-xs">
-                                            <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
-                                            <span class="pull-right innerR innerT text-right  text-muted">
-                                            Jan 15th, 2014 
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <!--  Message -->
-                            <div class="media margin-none border-top innerAll">
-                                <a href="" class="pull-left hidden-xs">
-                                    <img src="{{ asset_img('no_user_avatar.png') }}" width="60" class="media-object">
-                                </a>
-                                <div class="media-body innerTB">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="innerT half">
-                                                <div class="media">
-                                                    <div class="pull-left">
-                                                        <a href="" class="strong text-inverse ">Joanne Smith</a>
-                                                        <span class="innerR text-muted visible-xs">Jan 15th, 2014 </span>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        Hello World!
-                                                    </div>
-                                                </div>
-                                            </div>  
-                                        </div>
-                                        <div class="col-sm-6 hidden-xs">
-                                            <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
-                                            <span class="pull-right innerR innerT text-right  text-muted">
-                                            Jan 15th, 2014 
-                                            </span>
+                                            <span class="pull-right innerR innerT text-right  text-muted" data-bind="timeAgo: $data.created"></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div id="type" class="border-top">
+                            <textarea type="text" class="form-control rounded-none border-none" placeholder="Write your messages..."></textarea>
                         </div>
                     </div>
                 </div>

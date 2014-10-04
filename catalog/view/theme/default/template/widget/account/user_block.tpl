@@ -1,6 +1,6 @@
 {% block timeline_cover %}
     <div class="timeline-cover">
-        <div class="cover">
+        <div class="cover image">
             <div class="top">
                 <img src="{{ asset_img('cover_demo.jpg') }}" class="img-responsive" />
             </div>
@@ -12,16 +12,27 @@
                 <li><a href="messages.html?lang=en"><i class="fa fa-fw icon-envelope-fill-1"></i> <span>Messages</span> <small>(2 new)</small></a></li>
             </ul>
         </div>
-        <div class="widget">
-            <div class="widget-body padding-none margin-none">
-                <div class="innerAll">
-                    <i class="fa fa-quote-left text-muted pull-left fa-fw"></i>
-                    <p class="lead margin-none">What a fun Partyyy</p>
+        {% set currUser = get_current_user() %}
+        {% if is_logged() and currUser != null %}
+            <div class="widget cover image">    
+                <div class="widget-body padding-none margin-none">
+                    <div class="photo">
+                        <img src="{{ currUser.avatar }}" width="120" alt="" class="img-circle">
+                    </div>
+                    <div class="innerAll border-right pull-left">
+                        <h3 class="margin-none">{{ currUser.username }}</h3>
+                        <span>{{ currUser.current }}</span>
+                    </div>
+                    <div class="innerAll pull-left">
+                        <p class="lead margin-none "> <i class="fa fa-quote-left text-muted fa-fw"></i> What a fun Partyyy</p>
+                    </div>
                 </div>
+                <div class="clearfix"></div>
             </div>
-        </div>
+        {% endif %}
     </div>
 {% endblock %}
+
 
 {% block widget_recent_news %}
     <div class="widget">

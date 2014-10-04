@@ -35,7 +35,7 @@ class ControllerApiMessage extends Controller {
                 $bCanLoadMore = true;
             }
 			foreach ( $lRoomMessages as $oRoomMessage ) {
-				$aRoomMessages[] = $this->model_tool_object->formatMessages( $oRoomMessage );
+				$aRoomMessages[] = $this->model_tool_object->formatRooms( $oRoomMessage );
 			}
 		}
 
@@ -48,7 +48,12 @@ class ControllerApiMessage extends Controller {
 	}
 
 	public function getLastMessages() {
-		$oLoggedUser = $this->customer->getUser();
+		// Room ID is required
+		if ( !empty($this->request->get['room_id']) ) {
+			$idRoom = $this->request->get['room_id'];
+		} else {
+			return false;
+		}
 
 		// Limit & page
         if ( !empty($this->request->post['limit']) ){
@@ -66,28 +71,23 @@ class ControllerApiMessage extends Controller {
 		$this->load->model('friend/message');
 		$this->load->model('tool/object');
 
-		$lRoomMessages = $this->model_friend_message->getLastUsersByAuthor($oLoggedUser->getId(), array(
-			'limit' => $iLimit,
-			'start' => $iLimit * ($iPage - 1)
-		));
+		$oRoom = $this->model_friend_message->getRoom( $idRoom );
 
-		$aRoomMessages = array();
+		$aMessages = array();
 		$bCanLoadMore = false;
-		$iTotalRoomMessage = 0;
-		if ( $lRoomMessages ){
-			$iTotalRoomMessage = $lRoomMessages->count();
-			if ( ($page - 1) * $limit + $limit < $iTotalRoomMessage ){
-                $bCanLoadMore = true;
-            }
-			foreach ( $lRoomMessages as $oRoomMessage ) {
-				$aRoomMessages[] = $this->model_tool_object->formatMessages( $oRoomMessage );
-			}
+		$iTotalMessages = 0;
+
+		if ( $oRoom ) {
+			$lMessages = $oRoom->getMessages();
+			$aResultMessages = $lMessages->slice( ($iPage - 1) * $iLimit, $iLimit );
+			$iTotalMessages = $lMessages->count();
+			$aMessages = $this->model_tool_object->formatMessages( $aResultMessages );
 		}
 
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'rooms' => $aRoomMessages,
-            'total_room' => $iTotalRoomMessage,
+            'messages' => $aMessages,
+            'total_message' => $iTotalMessages,
             'canLoadMore' => $bCanLoadMore
         )));
 	}

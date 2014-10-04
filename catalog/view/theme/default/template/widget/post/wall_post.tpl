@@ -2,10 +2,7 @@
 {% endblock %}
 {% block wall_post_block %}    
     <div data-bind="with: WallPostList" id="wall-post-list" class="gridalicious-row wall-post-list" data-toggle="gridalicious" data-gridalicious-width="400" data-gridalicious-gutter="12" data-gridalicious-selector=".gridalicious-item">
-        <!-- ko if: !isLoadSuccess()-->
-        <div class="innerAll inner-2x loading text-center text-medium"><i class="fa fa-fw fa-spinner fa-spin"></i> {% trans %}Loading{% endtrans %}</div>
-        <!-- /ko -->
-        <div class="loaded hide2">
+        <div class="post-list-container">
             <!-- ko foreach: { data: postList, afterRender: afterRender } -->
             <!-- Widget -->
             <div class="widget gridalicious-item not-responsive post-item">
@@ -51,10 +48,10 @@
                 <!-- Comment -->
                 <div class="innerAll border-bottom border-top text-small">
                     <!-- ko if: !$data.isLiked() -->
-                    <a data-bind="click: likePost"><i class="icon-thumbs-up text-larger half innerR"></i></b>{% trans %}Like{% endtrans %}</a>
+                    <a data-bind="click: likePost"><i class="icon-thumbs-up text-larger half innerR"></i>{% trans %}Like{% endtrans %}</a>
                     <!-- /ko -->
                     <!-- ko if: $data.isLiked() -->
-                    <span><i class="icon-thumbs-up-fill text-larger half innerR"></i></b>{% trans %}Liked{% endtrans %}</span>
+                    <span><i class="icon-thumbs-up-fill text-larger half innerR"></i>{% trans %}Liked{% endtrans %}</span>
                     <!-- /ko -->
                     <div class="pull-right">
                         <!-- ko if: $data.commentCount() > 3 -->

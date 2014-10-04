@@ -18,7 +18,6 @@
             </div>
             <!-- WIDGET -->
             <div class="col-md-4 col-lg-3">
-            {{ include(template_from_string( user )) }}
             {{ block('widget_recent_news') }}
             </div>
             <!-- END WIDGET -->

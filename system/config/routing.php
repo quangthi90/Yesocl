@@ -159,5 +159,5 @@ $_['routing']['ApiGetDisplayOption']			= 'services/get/setting/what-s-new/displa
 
 // Message
 $_['routing']['ApiGetRooms']					= 'services/get/message/room/{page}/';
-$_['routing']['ApiGetMessages']					= 'services/get/message/{room_id}/';
+$_['routing']['ApiGetMessages']					= 'services/get/message/{room_id}/page/{page}';
 ?>

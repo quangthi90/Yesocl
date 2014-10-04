@@ -3,37 +3,43 @@ YesGlobal.Models = YesGlobal.Models || {};
 (function($, ko, Y, undefined) {
 	Y.Models.RoomModel = function (data) {
 		var that = this;
+
+		/* ============= START PROPERTIES ================== */
 		that.id = data.id || '';
 		that.name = data.name || '';
 		that.user = data.user || {};
 		that.created = data.created || null;
 		that.updated = data.updated || null;
-		that.last_message = data.last_message || {};
-		that.messages = [];
+		that.lastMessage = data.last_message || {};
+		that.messageList = [];
+		
+		that.currentPage = ko.observable(1);
+		that.canLoadMore = ko.observable(data.canLoadMore || true);
+		that.totalRoom = ko.observable(0);
+		/*  ============= END PROPERTIES ==================== */
 
-		that.loadMessage = function(messageItem){
-			var loadOptions = self.apiUrls.loadRoomMessage.params || {},
-				url = self.apiUrls.loadRoomMessage.name;
-			loadOptions.page = self.currentPage();
+		/* ============= START PRIVATE METHODS ============= */
+		that._loadMessage = function(callback){
 			var ajaxOptions = {
-				url: Y.Routing.generate(url, loadOptions),
+				url: Y.Routing.generate("ApiGetMessages", {
+					room_id: that.id,
+					page: that.currentPage()
+				}),
 				data : {
 					limit : 10
-				}
+				},
+				async : false
 			};
 			var successCallback = function(data){
 				if(data.success === "ok"){
-					ko.utils.arrayForEach(data.rooms, function(r){
-						var roomItem = new Y.Models.RoomModel(r);
-						self.roomList.push(roomItem);
-						self.totalRoom( data.total_room );
+					ko.utils.arrayForEach(data.messages, function(m){
+						var messageItem = new Y.Models.MessageModel(m);
+						that.messageList.push(messageItem);
 					});
 					if(data.canLoadMore !== undefined) {
-						self.canLoadMore(data.canLoadMore);
+						that.canLoadMore(data.canLoadMore);
 					}
 				}
-				self.isLoadSuccess(true);
-				_handleEffects();
 
 				if(callback && typeof callback === "function"){
 					callback(data);
@@ -56,14 +62,23 @@ YesGlobal.Models = YesGlobal.Models || {};
 				updated : ko.utils.unwrapObservable(that.updated),
 			};
 		};
+		/* ============= END PRIVATE METHODS =============== */
 	}
 })(jQuery, ko, YesGlobal);
 
 (function($, ko, Y, undefined) {
 	Y.Models.MessageModel = function (data) {
 		var that = this;
-		//Attribute
 		
-		//Methods
+		/* ============= START PROPERTIES ================== */
+		that.id = data.id || '';
+		that.content = data.content || '';
+		that.user = data.user || {};
+		that.created = data.created || null;
+		that.is_read = data.is_read || true;
+		/*  ============= END PROPERTIES ==================== */
+
+		/* ============= START PRIVATE METHODS ============= */
+		/* ============= END PRIVATE METHODS =============== */
 	}
 })(jQuery, ko, YesGlobal);
