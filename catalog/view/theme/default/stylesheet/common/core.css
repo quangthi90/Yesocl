@@ -367,6 +367,11 @@
 .height-auto {
   height: auto !important;
 }
+.wraptext {
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
 div.row,
 ul.row {
   margin: 0 -5px;

@@ -1,5 +1,5 @@
 (function($) {
-	$(window).on('gridalicious-loaded', function(){
+	$(window).on('gridalicious-loaded1', function(){
 		$('[data-toggle*="gridalicious"]').each(function() {
 			var $that = $(this);
 			var gutter = $that.attr('data-gridalicious-gutter') ? parseInt($that.attr('data-gridalicious-gutter')) : 13;

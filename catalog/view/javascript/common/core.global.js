@@ -14,7 +14,9 @@ var YesGlobal = YesGlobal || {};
 	};
 
 	Y.Constants = {
-		Messages: [],
+		Messages: {
+			COMMON_CONFIRM : "Are you sure you want to do this selection ?"
+		},
 		Triggers: {
 			MENU_VISIBILITY_CHANGED: "MENU_VISIBILITY_CHANGED",
 			POST_LOADED: "POST_LOADED"
@@ -144,20 +146,15 @@ var YesGlobal = YesGlobal || {};
 	    		return;
 	    	cacher.setItem(settingKey, value);
 	    },
-	    showMessage: function(data, callback) {
-	        var message = "";
-	        if(typeof data === "string") {
-	            message = data;
-	        }else if(typeof data === "object"){
-	            message = data.join("\n");
-	        }
-
+	    showInfoMessage: function(message, callback) {
 	        if(message.length === 0){
 	            return;
 	        }
 	        bootbox.dialog({
 	            message: message,
-	            title: "Information",
+	            title: "Info",
+	            className: "y-modal",
+	            backdrop: true,
 	            buttons: {
 	                main: {
 	                    label: "Close",
@@ -168,6 +165,46 @@ var YesGlobal = YesGlobal || {};
 	                        }
 	                    }
 	                }
+	            },
+	            onEscape: function(){
+	            	if(callback && typeof callback === "function"){
+                        callback();
+                    }
+	            }
+	        });
+	    },
+	    showConfirmMessage: function(message, okCallback, cancelCalback) {
+	        if(message.length === 0){
+	            return;
+	        }
+	        bootbox.dialog({
+	            message: message,
+	            title: "Confirm",
+	            backdrop: true,
+	            buttons: {
+	                ok: {
+	                    label: "OK",
+	                    className: "btn-primary",
+	                    callback: function() {
+	                        if(okCallback && typeof okCallback === "function"){
+	                            okCallback();
+	                        }
+	                    }
+	                },
+	                cancel: {
+	                    label: "Cancel",
+	                    className: "btn-default",
+	                    callback: function() {
+	                        if(cancelCalback && typeof cancelCalback === "function"){
+	                            cancelCalback();
+	                        }
+	                    }
+	                }
+	            },
+	            onEscape: function(){
+	            	if(cancelCalback && typeof cancelCalback === "function"){
+                        cancelCalback();
+                    }
 	            }
 	        });
 	    },
@@ -246,7 +283,7 @@ var YesGlobal = YesGlobal || {};
 	            return ko.contextFor(document.getElementById(eleId));
 	        }
 	        return ko.contextFor(document.getElementById(Y.Configs.defaultBindingElement));
-	    },	    
+	    },
 	    convertToTimeAgo: function(timeStamp){
 	        var dayWrapper = moment(new Date(timeStamp*1000));
 	        var diffY = moment().diff(dayWrapper, "years");

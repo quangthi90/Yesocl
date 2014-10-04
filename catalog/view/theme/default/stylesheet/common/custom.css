@@ -93,6 +93,13 @@ body.loading #common-loading {
 .post-item {
 	position: relative;	
 }
+.post-item.adding {
+	background-color: #A8F4D9;
+	opacity: 0.7;
+}
+.post-item.deleting {
+	background-color: #FFC5C5;
+}
 .post-item .post-header {	
 }
 .post-item .post-content {	

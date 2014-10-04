@@ -56,11 +56,11 @@
                                                     <li><a data-bind="click: unFriend">{% trans %} Unfriend {% endtrans%}</a></li>
                                                 </ul>
                                             <a class="btn btn-default" style="margin-left: -4px" data-bind="click: clickFollow"><i class="fa fa-check  "></i> 
-                                            <!-- ko if: $data.followStatus() == 0 || $data.followStatus() == 2 -->
-                                            {% trans %} &nbsp; Follow {% endtrans %}
+                                            <!-- ko if: $data.followStatus() == 0 || $data.followStatus() == 3 -->
+                                            &nbsp; &nbsp; {% trans %} Follow {% endtrans %} &nbsp; 
                                             <!-- /ko -->
-                                            <!-- ko if: $data.followStatus() == 3-->
-                                            {% trans %} &nbsp; UnFollow {% endtrans %}
+                                            <!-- ko if: $data.followStatus() == 2-->
+                                            {% trans %} UnFollow {% endtrans %}
                                             <!-- /ko -->
                                             </a>
                                           

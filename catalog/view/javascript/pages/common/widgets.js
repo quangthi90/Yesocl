@@ -10,6 +10,7 @@
 		self.canLoadMore = ko.observable(options.canLoadMore || false);
 		self.canPostNew = ko.observable(options.canPostNew || false);
 		self.apiUrls = options.apiUrls || {};
+		self.needEffect = false;
 
 		self.isLoadSuccess = ko.observable(false);
 		self.isLoadingMore = ko.observable(false);
@@ -20,7 +21,7 @@
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
-		this.loadMore = function(){
+		self.loadMore = function(){
 			if(!self.canLoadMore() || self.isLoadingMore()) return;
 
 			self.isLoadingMore(true);
@@ -28,10 +29,42 @@
 			_loadPost(function(data){
 				self.isLoadingMore(false);
 			});
-		};
-		this.afterRender = function(){
+		};		
+		self.deletePost = function(post){
+			Y.Utils.showConfirmMessage(Y.Constants.Messages.COMMON_CONFIRM, function(){
+				_deletePost(post, function(){
+					//Callback after delete post
+				});
+			}, function(){
+				//Close or cancel event
+			});
+		}
+		self.editPost = function(post){
+		}
+		self.loadMoreComment = function(){
+			
+		}
+		self.afterRender = function(param1, param2){
 			_handleEffects();
 		}
+		self.doDeleteEffect = function(element) {
+			if (element.nodeType === 1) {
+				if(self.needEffect){
+					$(element).addClass("deleting");
+					$(element).fadeOut(1000, function(){
+						$(this).remove();
+					});
+				}else {
+					$(element).remove();
+				}
+			}
+		};
+		self.doAddEffect = function(element) {
+			if(element.nodeType === 1 && self.needEffect) {
+				$(element).addClass("adding");
+			}
+		};
+
 		/* ============= END PUBLIC METHODS ================ */
 
 		/* ============= START PRIVATE METHODS ============= */
@@ -63,21 +96,43 @@
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 		}
 
+		function _deletePost(post, callback) {
+			var ajaxOptions = {
+				url: Y.Routing.generate("ApiDeletePost", {
+					post_type: post.type,
+					post_slug : post.slug
+				})
+			};
+			var successCallback = function(data){
+				if(data.success === "ok"){
+					self.postList.remove(post);
+				}
+				if(callback && typeof callback === "function"){
+					callback(data);
+				}
+			}
+			//Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		}
+
 		function _handleEffects() {
-			$(window).trigger(Y.Constants.Triggers.POST_LOADED);
+			if(ele && ele.length > 0){
+				setTimeout(function(){
+					ele.find(".post-item.adding").removeClass("adding");
+				}, 2000);				
+			}
 		}
 
 		function _init(){
             $(window).scroll(function(e) {
-            	//console.log("$(window).scrollTop() + $(window).height(): " + ($(window).scrollTop() + $(window).height()));
-            	//console.log("$(document).height(): " + $(document).height());
-                if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+            	if ($(window).scrollTop() + $(window).height() == $(document).height()) {
                     self.loadMore();
                 }
             });
 
             _loadPost(function(){
             	$(window).scrollTop(0);
+            	self.needEffect = true;
             });
 		}
 
