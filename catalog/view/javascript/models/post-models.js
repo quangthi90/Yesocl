@@ -136,7 +136,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.canLoadMore = ko.observable(data.commentList && data.commentList.length == 3);
 
 		var commentList = ko.utils.arrayMap(data.commentList, function(p) {
-			return new Y.Models.CommentModel(p);			
+			return new Y.Models.CommentModel(p);		
 		});
 		if(commentList) {
 			that.commentList(commentList);
@@ -201,7 +201,11 @@ YesGlobal.Models = YesGlobal.Models || {};
 				}
 			};
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
-		}; 
+		};
+
+		that.add = function() {
+
+		};
 	};
 
 })(jQuery, ko, YesGlobal);

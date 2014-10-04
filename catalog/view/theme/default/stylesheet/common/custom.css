@@ -108,10 +108,18 @@ body.loading #common-loading {
 	max-width: 100%;
 	height: auto;
 	text-align: center;
-	display: block;	
+	display: block;
 	cursor: zoom-in;
 }
 
+.post-item .comment-list > .comment-item {
+	position: relative;
+	overflow: visible;
+}
+.post-item .comment-list > .comment-item .comment-content img {
+	max-width: 65%;
+	cursor: zoom-in;
+}
 .post-item .comment-list > .comment-item img.avatar {	
 	max-width: 35px;
 	max-height: 35px;
@@ -121,6 +129,10 @@ body.loading #common-loading {
 	top: 0px;
 	right: 0px;
 	z-index: 999;
+}
+.post-item .post-options .action-options {
+	left: auto;
+	right: 0px;
 }
 .post-options .dropdown-toggle {
 	display: block;
