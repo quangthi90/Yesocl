@@ -227,7 +227,7 @@ class ControllerApiUser extends Controller {
      *  - int limit: can null
      * @return: list object friends via Json format
      */
-    public function getAllFriends() {
+    public function getFriends() {
         // Check param page
         if ( empty($this->request->get['page']) ) {
             $iPage = 1;
