@@ -216,7 +216,7 @@ class ModelToolObject extends Model
 	 * @param: List Object Messages
 	 * @return: Array List Object Messages formated
 	 */
-	public function formatMessages( $lMessages, $iwidth = 65, $iheight = 65 ) {
+	public function formatMessages( $lMessages, $iwidth = 60, $iheight = 60 ) {
 		$aMessages = array();
 		foreach ( $lMessages as $oMessage ) {
 			$aMessages[] = $this->formatMessage( $oMessage, null, $iwidth, $iheight );
@@ -232,7 +232,7 @@ class ModelToolObject extends Model
 	 * @param: object Message
 	 * @return: Array Object Message formated
 	 */
-	public function formatMessage( $oMessage, $oRoomUser = null, $iwidth = 65, $iheight = 65 ) {
+	public function formatMessage( $oMessage, $oRoomUser = null, $iwidth = 60, $iheight = 60 ) {
 		$aMessage = $oMessage->formatToCache();
 
 		$oUser = $oMessage->getAuthor();
