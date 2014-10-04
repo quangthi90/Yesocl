@@ -135,32 +135,29 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.currentPage = ko.observable(1);
 		that.canLoadMore = ko.observable(data.commentList && data.commentList.length == 3);
 
-		ko.utils.arrayForEach(data.commentList, function(p) {
-			var newCommentItem = new Y.Models.CommentModel(p);
-			that.commentList.push(newCommentItem);
+		var commentList = ko.utils.arrayMap(data.commentList, function(p) {
+			return new Y.Models.CommentModel(p);			
 		});
+		if(commentList) {
+			that.commentList(commentList);
+		}
 
-		that.like = function(item, sucCallback, failCallback) {
+		that.like = function(item) {
 			var ajaxOptions = {
 				url : Y.Routing.generate("ApiPutCommentLike", {
-					post_type: that.postType,
-					comment_id : that.id
+					post_type: that.postData.type,
+					comment_id : item.id
 				})
 			};
 			var successCallback = function(data){
 				if(data.success === "ok") {
-					that.isLiked(!that.isLiked());
-					that.likeCount(data.like_count);
-					if(sucCallback && typeof sucCallback == "function") {
-						sucCallback();
-					}
+					item.isLiked(!item.isLiked());
+					item.likeCount(data.like_count);
 				}else {
-					if(failCallback && typeof failCallback == "function") {
-						failCallback();
-					}
+					//Message
 				}
 			};
-			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 		};
 
 		that.loadMore = function(sucCallback, failCallback) {
@@ -185,11 +182,11 @@ YesGlobal.Models = YesGlobal.Models || {};
 							});
 							if(existing === null || existing === undefined) {
 								var newCommentItem = new Y.Models.CommentModel(p);
-								that.commentList.push(newCommentItem);
+								that.commentList.unshift(newCommentItem);
 							}
 						} else {
 							var newCommentItem = new Y.Models.CommentModel(p);
-							that.commentList.push(newCommentItem);
+							that.commentList.unshift(newCommentItem);
 						}					
 					});
 					if(sucCallback && typeof sucCallback == "function") {
@@ -204,7 +201,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 				}
 			};
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
-		};
+		}; 
 	};
 
 })(jQuery, ko, YesGlobal);
