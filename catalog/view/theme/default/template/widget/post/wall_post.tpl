@@ -54,7 +54,7 @@
                     <span><i class="icon-thumbs-up-fill text-larger half innerR"></i>{% trans %}Liked{% endtrans %}</span>
                     <!-- /ko -->
                     <div class="pull-right">
-                        <!-- ko if: $data.commentCount() > 3 -->
+                        <!-- ko if: $data.commentCount() > 3 && $data.comment().canLoadMore() -->
                         <a data-bind="click: loadComment" class="innerR">
                             {% trans %}Comments{% endtrans %} <span class="text-muted" data-bind="text: ($data.commentCount() - 3) + ' ++'"></span>
                         </a>
@@ -101,11 +101,11 @@
                                     <!-- ko if: $data.isLiked() -->
                                     <li><a data-bind="click: $parent.like"><i class="icon-thumbs-down innerR"></i>{% trans %}Unlike{% endtrans %}</a></li>
                                     <!-- /ko -->
-                                    <!-- ko if: $data.isEdit -->
-                                    <li><a><i class="icon-compose innerR"></i>{% trans %}Edit{% endtrans %}</a></li>
+                                    <!-- ko if: $data.canEdit -->
+                                    <li><a  data-bind="click: $parent.edit"><i class="icon-compose innerR"></i>{% trans %}Edit{% endtrans %}</a></li>
                                     <!-- /ko -->
-                                    <!-- ko if: $data.isDelete -->
-                                    <li><a><i class="icon-delete-symbol innerR"></i>{% trans %}Delete{% endtrans %}</a></li>
+                                    <!-- ko if: $data.canDelete -->
+                                    <li><a data-bind="click: $parent.delete"><i class="icon-delete-symbol innerR"></i>{% trans %}Delete{% endtrans %}</a></li>
                                     <!-- /ko -->
                                 </ul>
                             </div>

@@ -203,9 +203,46 @@ YesGlobal.Models = YesGlobal.Models || {};
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
 		};
 
-		that.add = function() {
-
+		that.add = function(newItem) {
+			var newComment = new Y.Models.CommentModel(newItem);
+			that.commentList.push(newComment);
 		};
+
+		that.delete = function(item) {
+			Y.Utils.showConfirmMessage(Y.Constants.Messages.COMMON_CONFIRM, function(){
+				_deleteComment(item, function(){
+					//Callback after delete post
+				});
+			});
+		};
+
+		that.edit = function(item) {
+			Y.Utils.showInfoMessage("Not yet done !", function(){
+			});
+		};
+
+		//START PRIVATE METHODS
+		function _deleteComment(item, callback) {
+			var ajaxOptions = {
+				url : Y.Routing.generate("ApiDeleteComment", {
+					post_type: that.postData.type,
+					comment_id : item.id
+				})
+			};
+			var successCallback = function(data){
+				if(data.success === "ok"){
+					self.commentList.remove(item);
+				} else {
+					Y.Utils.showInfoMessage(data.error);
+				}
+				if(callback && typeof callback === "function"){
+					callback(data);
+				}
+			}
+			//Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		}
+		//END PRIVATE METHODS
 	};
 
 })(jQuery, ko, YesGlobal);
