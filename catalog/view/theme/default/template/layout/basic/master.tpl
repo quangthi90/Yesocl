@@ -88,7 +88,6 @@
     <script src="{{ asset_js('library/core_nicescroll/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset_js('library/core_breakpoints/breakpoints.js') }}"></script>
     <script src="{{ asset_js('library/menu_sidr/jquery.sidr.js') }}"></script>
-    <script src="{{ asset_js('library/media_gridalicious/jquery.gridalicious.min.js') }}"></script>
     <script src="{{ asset_js('library/ui_modals/bootbox.min.js') }}"></script>
     <script src="{{ asset_js('library/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset_js('library/expander/expander.min.js') }}"></script>
@@ -98,7 +97,6 @@
     <!-- Common Script -->    
     <script src="{{ asset_js('common/core.global.js') }}"></script>
     <script src="{{ asset_js('common/core.effects_init.js') }}"></script>
-    <script src="{{ asset_js('common/gridalicious_init.js') }}"></script>
     <script src="{{ asset_js('common/sidebar.main_init.js') }}"></script>
     <script src="{{ asset_js('common/sidebar.collapse_init.js') }}"></script>
     <script src="{{ asset_js('common/menus.sidebar.chat_init.js') }}"></script>
