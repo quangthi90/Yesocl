@@ -1240,7 +1240,7 @@ function CommentBoxViewModel(params){
 					self.postData.commentCount(data.comment_count);
 					self.currentTotalComment(data.comment_count);
 				}
-				if(callback && typeof callback === "function"){
+				if(callback && typeof callback === "function") {
 					callback();
 				}
 			}else {

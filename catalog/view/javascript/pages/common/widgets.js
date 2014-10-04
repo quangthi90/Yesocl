@@ -42,7 +42,7 @@
 		self.editPost = function(post){
 		}
 		self.loadMoreComment = function(){
-			
+			alert("alo ...");
 		}
 		self.afterRender = function(param1, param2){
 			_handleEffects();
@@ -80,6 +80,15 @@
 			var successCallback = function(data){
 				if(data.success === "ok"){
 					ko.utils.arrayForEach(data.posts, function(p){
+						var postComment = new Y.Models.CommentListModel({
+							commentList: p.comments,
+							postData: {
+								id: p.id,
+								slug : p.slug,
+								type: p.type
+							}
+						});
+						p.comment = postComment;
 						var postItem = new Y.Models.PostModel(p);
 						self.postList.push(postItem);
 					});
@@ -94,6 +103,9 @@
 			}
 			//Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		}
+
+		function _loadMoreComment(callback) {			
 		}
 
 		function _deletePost(post, callback) {
