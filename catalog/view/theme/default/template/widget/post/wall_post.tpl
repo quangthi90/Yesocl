@@ -55,7 +55,7 @@
                     <!-- /ko -->
                     <div class="pull-right">
                         <!-- ko if: $data.commentCount() > 3 && $data.comment().canLoadMore() -->
-                        <a data-bind="click: loadComment" class="innerR">
+                        <a data-bind="click: $data.comment().loadComment" class="innerR">
                             {% trans %}Comments{% endtrans %} <span class="text-muted" data-bind="text: ($data.commentCount() - 3) + ' ++'"></span>
                         </a>
                         <!-- /ko -->

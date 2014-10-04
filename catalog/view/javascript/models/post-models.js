@@ -52,14 +52,6 @@ YesGlobal.Models = YesGlobal.Models || {};
 			YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 		};
 
-		that.loadComment = function(){
-			that.comment().loadMore(function(data) {
-				that.commentCount(data.comment_count);
-			}, function() {
-				//Messsage
-			});
-		};
-
 		that.showLikers = function(){
 			var context = YesGlobal.Utils.getKoContext();
 			if(context !== null){
@@ -76,6 +68,10 @@ YesGlobal.Models = YesGlobal.Models || {};
 				console.log("Ko content not found !");
 			}
 		};
+
+		that.comment().totalComments.subscribe(function(value){
+			that.commentCount(value);
+		});
 
 		that.toJson = function(){
 			return {
@@ -132,15 +128,10 @@ YesGlobal.Models = YesGlobal.Models || {};
 		var that = this;
 		that.commentList = ko.observableArray([]);
 		that.postData = data.postData || {};
+		that.newComment = ko.observable();
+		that.totalComments = ko.observable(data.totalComments || 0);
 		that.currentPage = ko.observable(1);
 		that.canLoadMore = ko.observable(data.commentList && data.commentList.length == 3);
-
-		var commentList = ko.utils.arrayMap(data.commentList, function(p) {
-			return new Y.Models.CommentModel(p);		
-		});
-		if(commentList) {
-			that.commentList(commentList);
-		}
 
 		that.like = function(item) {
 			var ajaxOptions = {
@@ -160,7 +151,32 @@ YesGlobal.Models = YesGlobal.Models || {};
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 		};
 
-		that.loadMore = function(sucCallback, failCallback) {
+		that.loadComment = function(){
+			_loadMore(function(data) {
+				//Callback after load more
+			});
+		};
+
+		that.add = function(newItem) {
+			var newComment = new Y.Models.CommentModel(newItem);
+			that.commentList.push(newComment);
+		};
+
+		that.delete = function(item) {
+			Y.Utils.showConfirmMessage(Y.Constants.Messages.COMMON_CONFIRM, function(){
+				_deleteComment(item, function(){
+					//Callback after delete post
+				});
+			});
+		};
+
+		that.edit = function(item) {
+			Y.Utils.showInfoMessage("Not yet done !", function(){
+			});
+		};
+
+		//START PRIVATE METHODS
+		function _loadMore(sucCallback, failCallback) {
 			if(!that.canLoadMore()) return;
 
 			var ajaxOptions = {
@@ -193,6 +209,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 						sucCallback(data);
 					}
 					that.currentPage(that.currentPage() + 1);
+					that.totalComments(data.comment_count);
 					that.canLoadMore(data.comments.length > 0 && data.comment_count > that.commentList().length);
 				} else {
 					if(failCallback && typeof failCallback == "function") {
@@ -203,25 +220,6 @@ YesGlobal.Models = YesGlobal.Models || {};
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
 		};
 
-		that.add = function(newItem) {
-			var newComment = new Y.Models.CommentModel(newItem);
-			that.commentList.push(newComment);
-		};
-
-		that.delete = function(item) {
-			Y.Utils.showConfirmMessage(Y.Constants.Messages.COMMON_CONFIRM, function(){
-				_deleteComment(item, function(){
-					//Callback after delete post
-				});
-			});
-		};
-
-		that.edit = function(item) {
-			Y.Utils.showInfoMessage("Not yet done !", function(){
-			});
-		};
-
-		//START PRIVATE METHODS
 		function _deleteComment(item, callback) {
 			var ajaxOptions = {
 				url : Y.Routing.generate("ApiDeleteComment", {
@@ -231,7 +229,8 @@ YesGlobal.Models = YesGlobal.Models || {};
 			};
 			var successCallback = function(data){
 				if(data.success === "ok"){
-					self.commentList.remove(item);
+					that.commentList.remove(item);
+					that.totalComments(data.comment_count);
 				} else {
 					Y.Utils.showInfoMessage(data.error);
 				}
@@ -242,6 +241,20 @@ YesGlobal.Models = YesGlobal.Models || {};
 			//Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 		}
+
+		function _init() {
+			//inits
+			var commentList = ko.utils.arrayMap(data.commentList, function(p) {
+				return new Y.Models.CommentModel(p);		
+			});
+			if(commentList) {
+				that.commentList(commentList);
+			}
+
+			that.newComment(new Y.Models.CommentModel({				
+			}));
+		}
+		_init();
 		//END PRIVATE METHODS
 	};
 

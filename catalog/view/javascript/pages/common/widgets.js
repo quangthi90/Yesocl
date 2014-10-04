@@ -82,6 +82,7 @@
 					ko.utils.arrayForEach(data.posts, function(p){
 						var postComment = new Y.Models.CommentListModel({
 							commentList: p.comments,
+							totalComments: p.comment_count,
 							postData: {
 								id: p.id,
 								slug : p.slug,
