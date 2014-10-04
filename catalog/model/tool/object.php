@@ -52,8 +52,20 @@ class ModelToolObject extends Model
 		}
 
 		$lComments = $oPost->getComments();
-		$aComments = $lComments->slice(0, $this->iLimitCommentPost);
-		$aComments = array_reverse($aComments);
+		$lComments = $lComments->slice(0, $this->iLimitCommentPost);
+		$aComments = array();
+
+		$idLoggedUser = $this->customer->getId();
+		foreach ( $lComments as $oComment ) {
+			if ( $idLoggedUser == $oComment->getUser()->getId() ) {
+				$oComment->setCanDelete( true );
+				$oComment->setCanEdit( true );
+			}elseif ( $idLoggedUser == $oPost->getUser()->getId() || $this->customer->getSlug() == $oPost->getOwnerSlug() ) {
+				$oComment->setCanDelete( true );
+			}
+
+			$aComments[] = $oComment;
+		}
 		
 		$aPost['comments'] = $this->formatComments( $aComments, false );
 
