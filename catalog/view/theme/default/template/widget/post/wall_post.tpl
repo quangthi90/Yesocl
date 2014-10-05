@@ -4,7 +4,6 @@
     <div data-bind="with: WallPostList" id="wall-post-list" class="wall-post-list">
         <div class="post-list-container">
             <!-- ko foreach: { data: postList, beforeRemove: doDeleteEffect, afterAdd: doAddEffect, afterRender: afterRender } -->
-            <!-- Widget -->
             <div class="widget post-item">
                 <!-- ko if: $data.isLiked() || $data.isEdit || $data.isDelete -->
                 <div class="dropdown post-options">
@@ -45,8 +44,7 @@
                 <!-- Content -->
                 <div class="innerAll post-content" data-bind="html: $data.content(), zoomImageInContent: true, seeMore: true">
                 </div>
-                <!-- Comment -->
-                <div class="innerAll border-bottom border-top bg-gray text-small">
+                <div class="innerAll border-bottom border-top bg-white text-small">
                     <!-- ko if: !$data.isLiked() -->
                     <a data-bind="click: likePost"><i class="icon-thumbs-up text-larger half innerR"></i>{% trans %}Like{% endtrans %}</a>
                     <!-- /ko -->
@@ -76,7 +74,7 @@
                 <div data-bind="with: $data.comment">
                     <div class="comment-list">
                     <!-- ko foreach: commentList -->
-                        <div class="media margin-none bg-white border-bottom comment-item">
+                        <div class="media margin-none bg-gray border-bottom comment-item">
                             <a class="pull-left innerAll margin-right-none" data-bind="link: { title: $data.user.author, route: 'WallPage', params: { user_slug: $data.user.slug } }">
                                 <img data-bind="attr : { 'src' : $data.user.avatar, alt : $data.user.username }" width="50px" height="50px" class="media-object avatar">
                             </a>
@@ -113,15 +111,11 @@
                         </div>
                     <!-- /ko -->
                     </div>
-                    <div class="input-group comment">
-                        <input type="text" class="form-control" placeholder="{% trans %}Your comment here...{% endtrans %}">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-primary"><i class="fa fa-comment"></i></button>
-                        </div>
+                    <div class="comment" data-bind="with: $data.newComment">
+                        <input data-bind="value: content, css: { 'disabled' : $parent.isProcessing }, executeOnEnter: $parent.add" type="text" class="form-control" placeholder="{% trans %}Your comment here...{% endtrans %}">
                     </div>
                 </div>
             </div>
-            <!-- //End Widget -->
             <!-- /ko -->
         </div>
     </div>

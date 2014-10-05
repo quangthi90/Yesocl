@@ -112,6 +112,11 @@ body.loading #common-loading {
 	cursor: zoom-in;
 }
 
+.post-item .comment .comment-input {
+	max-width: 100%;
+	min-width: 100%;	
+	height: 40px;
+}
 .post-item .comment-list > .comment-item {
 	position: relative;
 	overflow: visible;

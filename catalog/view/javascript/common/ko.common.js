@@ -37,7 +37,7 @@ var YesGlobal = YesGlobal || {};
             userCollapseText: '[^^^]',
             userCollapsePrefix: ' ', 
             afterExpand: function(){
-                ele.find(".details").css( { "display" : "inline", "font-size" : "14px" });
+                ele.find(".readmore-details").css( { "display" : "inline" });
             }
         });
 	}
@@ -90,7 +90,8 @@ var YesGlobal = YesGlobal || {};
 		        $(element).keypress(function (event) {
 		            var keyCode = (event.which ? event.which : event.keyCode);
 		            if (keyCode === 13) {
-		                return allBindings.executeOnEnter.call(viewModel, viewModel, valueAccessor, element);
+		            	var value = $(element).val().trim();
+		                return allBindings.executeOnEnter.call(viewModel, viewModel, value);
 		            }
 		            return true;
 		        });

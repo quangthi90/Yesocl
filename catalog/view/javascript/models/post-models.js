@@ -83,7 +83,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.fullyToJSON = function(){
 			return {
 				id : ko.utils.unwrapObservable(that.id),
-				title : ko.utils.unwrapObservable(that.id),
+				title : ko.utils.unwrapObservable(that.title),
 				content : ko.utils.unwrapObservable(that.content),
 				thumb : ko.utils.unwrapObservable(that.thumb),
 				image : ko.utils.unwrapObservable(that.image),
@@ -115,13 +115,22 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.id = data.id || '';
 		that.created = data.created || '';
 		that.user = data.user || {};
-		that.isOwner = false;
 		that.canDelete = data.can_delete || false;
 		that.canEdit = data.can_edit || false;
 		that.content = ko.observable(data.content || '');
 		that.isLiked = ko.observable(data.like_count || false);
 		that.likeCount = ko.observable(data.like_count || 0);
 		that.isInit = ko.observable(true);
+
+		that.reset = function() {
+			that.id = "";
+			that.created = "";
+			that.canDelete = false;
+			that.canEdit = false;
+			that.content("");
+			that.isLiked(false);
+			that.likeCount(0);
+		};
 	};
 
 	Y.Models.CommentListModel = function (data){
@@ -132,6 +141,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.totalComments = ko.observable(data.totalComments || 0);
 		that.currentPage = ko.observable(1);
 		that.canLoadMore = ko.observable(data.commentList && data.commentList.length == 3);
+		that.isProcessing = ko.observable(false);
 
 		that.like = function(item) {
 			var ajaxOptions = {
@@ -157,9 +167,14 @@ YesGlobal.Models = YesGlobal.Models || {};
 			});
 		};
 
-		that.add = function(newItem) {
-			var newComment = new Y.Models.CommentModel(newItem);
-			that.commentList.push(newComment);
+		that.add = function(newItem, content) {
+			if(content && content.trim().length > 0 && !that.isProcessing()) {
+				_addComment({
+					content : content,
+					userTags: [],
+					stockTags: []
+				}, function(data) {});
+			}		
 		};
 
 		that.delete = function(item) {
@@ -220,6 +235,40 @@ YesGlobal.Models = YesGlobal.Models || {};
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
 		};
 
+		function _addComment(commentData, sucCallback, failCallback) {
+			var ajaxOptions = {
+				url : Y.Routing.generate("ApiPostComment", {
+					post_type: that.postData.type,
+					post_slug: that.postData.slug
+				}),
+				data: commentData
+			};
+			var successCallback = function(data){
+				if(data.success === "ok") {
+					that.newComment().reset();
+					var newComment = new Y.Models.CommentModel(data.comment);
+					that.commentList.push(newComment);
+					if(data.comment_count >= 0){
+						that.totalComments(data.comment_count);
+					}
+					if(sucCallback && typeof sucCallback == "function") {
+						sucCallback(data);
+					}
+				}else{
+					//Show message
+					if(failCallback && typeof failCallback == "function") {
+						failCallback();
+					}
+				}
+				that.isProcessing(false);
+			};
+			Y.Utils.ajaxCall(ajaxOptions, function() { 
+				that.isProcessing(true); 
+			}, successCallback, function() {
+				that.isProcessing(false) ; 
+			});
+		}
+
 		function _deleteComment(item, callback) {
 			var ajaxOptions = {
 				url : Y.Routing.generate("ApiDeleteComment", {
@@ -251,8 +300,12 @@ YesGlobal.Models = YesGlobal.Models || {};
 				that.commentList(commentList);
 			}
 
-			that.newComment(new Y.Models.CommentModel({				
-			}));
+			var newItem = new Y.Models.CommentModel({
+				can_delete : true,
+				can_edit : true,
+				user : Y.CurrentUser
+			});
+			that.newComment(newItem);
 		}
 		_init();
 		//END PRIVATE METHODS

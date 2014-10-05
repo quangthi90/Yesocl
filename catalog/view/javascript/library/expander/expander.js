@@ -29,7 +29,7 @@
 
       // class names for summary element and detail element
       summaryClass: 'summary',
-      detailClass: 'details',
+      detailClass: 'readmore-details',
 
       // class names for <span> around "read-more" link and "read-less" link
       moreClass: 'read-more',

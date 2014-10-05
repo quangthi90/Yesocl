@@ -147,7 +147,7 @@ var YesGlobal = YesGlobal || {};
 	    	cacher.setItem(settingKey, value);
 	    },
 	    showInfoMessage: function(message, callback) {
-	        if(message.length === 0){
+	        if(message === undefined || message === null || message.length === 0){
 	            return;
 	        }
 	        bootbox.dialog({
@@ -174,7 +174,7 @@ var YesGlobal = YesGlobal || {};
 	        });
 	    },
 	    showConfirmMessage: function(message, okCallback, cancelCalback) {
-	        if(message.length === 0){
+	        if(message === undefined || message === null || message.length === 0){
 	            return;
 	        }
 	        bootbox.dialog({

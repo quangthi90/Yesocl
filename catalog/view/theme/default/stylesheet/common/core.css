@@ -11369,6 +11369,7 @@ textarea {
   border-color: #efefef;
   box-shadow: none;
   height: auto;
+  border-radius: 0px;
 }
 .form-control.clean {
   border: none;
