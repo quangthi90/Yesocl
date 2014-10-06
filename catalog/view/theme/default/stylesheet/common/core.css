@@ -6630,8 +6630,7 @@ div.DTCR_pointer {
   z-index: 10001;
 }
 .modal .modal-content {
-  border-color: #fff;
-  border-width: 5px;
+  border: none;
   background: #ffffff;
   -webkit-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
@@ -6649,9 +6648,9 @@ div.DTCR_pointer {
   background-image: linear-gradient(to bottom, #fdfdfd, #f4f4f4);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffdfdfd', endColorstr='#fff4f4f4', GradientType=0);
-  -webkit-border-radius: 5px 5px 0 0;
-  -moz-border-radius: 5px 5px 0 0;
-  border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 0px 0px 0 0;
+  -moz-border-radius: 0px 0px 0 0;
+  border-radius: 0px 0px 0 0;
 }
 .modal .modal-header .modal-title {
   font-size: 14px;
