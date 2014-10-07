@@ -284,6 +284,14 @@ var YesGlobal = YesGlobal || {};
 	        }
 	        return ko.contextFor(document.getElementById(Y.Configs.defaultBindingElement));
 	    },
+	    getWidgetModel: function(widgetName) {
+	    	for(var key in Y.GlobalKoModel) {
+	    		var model = Y.GlobalKoModel[key];
+	    		if(model.uniqueName && model.uniqueName === widgetName)
+	    			return model;
+	    	}
+	    	return null;
+	    },
 	    convertToTimeAgo: function(timeStamp){
 	        var dayWrapper = moment(new Date(timeStamp*1000));
 	        var diffY = moment().diff(dayWrapper, "years");

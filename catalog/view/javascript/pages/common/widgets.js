@@ -29,7 +29,23 @@
 			_loadPost(function(data){
 				self.isLoadingMore(false);
 			});
-		};		
+		};	
+		self.addPost = function(post) {
+			if(post) {
+				var postComment = new Y.Models.CommentListModel({
+					commentList: [],
+					totalComments: 0,
+					postData: {
+						id: post.id,
+						slug : post.slug,
+						type: post.type
+					}
+				});
+				post.comment = postComment;
+				var newPost = new Y.Models.PostModel(post);
+				self.postList.unshift(newPost);
+			}			
+		};
 		self.deletePost = function(post){
 			Y.Utils.showConfirmMessage(Y.Constants.Messages.COMMON_CONFIRM, function(){
 				_deletePost(post, function(){
@@ -38,15 +54,12 @@
 			}, function(){
 				//Close or cancel event
 			});
-		}
+		};
 		self.editPost = function(post){
-		}
-		self.loadMoreComment = function(){
-			alert("alo ...");
-		}
+		};
 		self.afterRender = function(param1, param2){
 			_handleEffects();
-		}
+		};
 		self.doDeleteEffect = function(element) {
 			if (element.nodeType === 1) {
 				if(self.needEffect){
@@ -153,5 +166,83 @@
 
 		/* ============= END PRIVATE METHODS =============== */
 	};
+
+	Y.Widgets.PostNew = function(options, ele) {
+		var self = this;
+		
+		/* ============= START PROPERTIES ================== */
+		self.newPost = ko.observable(new Y.Models.PostModel({}));
+		self.apiUrl = options.apiUrl || {};
+		self.targetPostList = options.targetPostList || "";
+		self.isPosting = ko.observable(false);
+		self.uniqueName = "YES_POST_NEW";
+		/*  ============= END PROPERTIES ==================== */
+
+		/* ============= START PUBLIC METHODS ============== */
+		self.canPost = ko.computed(function(){
+			return (!self.isPosting() && self.newPost().content().trim().length != 0);
+		}, this);
+
+		self.addPost = function() {			
+			var postData = _returnPostData();
+			if(self.isPosting() || postData.content.length === 0) {
+				return;
+			}
+			_addPost(postData, function(data){
+				var postListWidget = Y.Utils.getWidgetModel(self.targetPostList);
+				if(postListWidget != null) {					
+					postListWidget.addPost(data);
+				}
+			}, function(errorInfo) {
+				//Show message fail
+			});
+		}
+		/* ============= END PUBLIC METHODS ================ */
+
+		/* ============= START PRIVATE METHODS ============== */
+		function _addPost(post, sucCallback, failCallback) {
+			var ajaxOptions = {
+				url: Y.Routing.generate(self.apiUrl.name, self.apiUrl.params),
+				data: post
+			};
+			var successCallback = function(data){
+				if(data.success === "ok" && data.post !== null){
+					_reset();
+					if(sucCallback && typeof sucCallback === "function") {
+						sucCallback(data.post);
+					}					
+				} else {
+					if (failCallback && typeof failCallback == "function") {
+						failCallback(data.error);
+					};
+				}
+				self.isPosting(false);
+			};
+
+			//Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, 
+				function() { self.isPosting(true); }, successCallback, 
+				function() { self.isPosting(false); });
+		}
+
+		function _returnPostData(){
+			var content = ko.utils.unwrapObservable(self.newPost().content);
+			var title = ko.utils.unwrapObservable(self.newPost().title);
+			return {
+				isAdvance : false,
+				thumb: "",
+				title : title ? title.trim(): "",
+				content: content ? content.trim(): "",
+				userTags: [],
+				stockTags: []
+			};
+		}
+
+		function _reset(){
+			self.newPost().title("");
+			self.newPost().content("");
+		}
+		/* ============= END PRIVATE METHODS ================ */
+	}
 
 }(jQuery, ko, window, YesGlobal));
