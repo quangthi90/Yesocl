@@ -247,26 +247,36 @@ class ControllerApiUser extends Controller {
 
         $oLoggedUser = $this->customer->getUser();
 
-        $aFriends = array();
-
         $oFriends = $this->model_friend_friend->getFriends( $oLoggedUser->getId() );
+
+        $iTotalFriend = 0;
+        $aFriends = array();
+        $bCanLoadMore = false;
+        
         if ( $oFriends ){
-            $lFriends = $oFriends->getFriends();
+            $iTotalFriend = $oFriends->getFriends()->count();
+            $lFriends = $oFriends->getFriends()->slice($iPage - 1, $iLimit);
         }else{
-            $lFriends = array();
+            $lFriends = null;
         }
 
-        foreach ( $lFriends as $oFriend ) {
-            $oUser = $oFriend->getUser();
+        if ( !$lFriends ) {
+            if ( $iTotalFriend > $iPage * $iLimit ) {
+                $bCanLoadMore = true;
+            }
+            foreach ( $lFriends as $oFriend ) {
+                $oUser = $oFriend->getUser();
 
-            $aUser = $this->model_tool_object->formatUser( $oUser, 100, 100 );
+                $aUser = $this->model_tool_object->formatUser( $oUser, 100, 100 );
 
-            $aFriends[$aUser['slug']] = $aUser;
+                $aFriends[$aUser['slug']] = $aUser;
+            }
         }
 
         return $this->response->setOutput( json_encode(array(
             'success' => 'ok',
-            'friends' => count($aFriends) == 0 ? array() : array_values($aFriends)
+            'friends' => count($aFriends) == 0 ? array() : array_values($aFriends),
+            'canLoadMore' => $bCanLoadMore
         )));
     }
 
@@ -393,7 +403,7 @@ class ControllerApiUser extends Controller {
             $this->load->model('tool/object');
             $aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
 
-            if ( ($page - 1) * $limit + $limit < $iPostCount ){
+            if ( $page * $limit < $iPostCount ){
                 $bCanLoadMore = true;
             }
         }
