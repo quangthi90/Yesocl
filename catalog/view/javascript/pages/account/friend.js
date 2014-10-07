@@ -32,7 +32,12 @@
 			}
 		};
 
-		
+		self.unFollow = function(selectingFriend){
+			selectingFriend.unFollow(function(){
+				
+			});
+
+		}
 		/* ============= END PUBLIC METHODS ================ */
 
 		/* ============= START PRIVATE METHODS ============= */

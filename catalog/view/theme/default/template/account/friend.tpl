@@ -47,15 +47,20 @@
                                     <div class="text-right" style="margin-top: 9px;">
                                         <div class="option_friend_follow btn-group-vertical btn-group-sm pull-left ">
                                             <div class="dropdown"  style="width: 100%">
-                                                <a class="dropdown-toggle btn btn-primary btn-sm option_friend_follow" id="btn_option_friend" data-toggle="dropdown" style="width: 100%"><i class="fa fa-user"></i><span></span>&nbsp; {% trans %} Friend {% endtrans %}</a>
+                                                <a class="dropdown-toggle btn btn-primary btn-sm option_friend_follow" id="btn_option_friend" data-toggle="dropdown" style="width: 100%">
+                                                <i class="fa fa-check"></i> &nbsp; 
+                                               {% trans %} Friend {% endtrans %}</a>
                                                 <ul class="dropdown-menu">
                                                     <li class="pull-left "><a data-bind="click: $parent.unFriend">{% trans %} Unfriend {% endtrans%}</a></li>
                                                 </ul>
                                             </div>
-                                            <a class="btn btn-default option_friend_follow" data-bind="click: clickFollow"><i class="fa fa-check  "></i><!-- ko if: $data.followStatus() == 0 || $data.followStatus() == 3 -->
+                                            <a class="btn btn-default option_friend_follow" data-bind="click: clickFollow">
+                                            <!-- ko if: $data.followStatus() == 0 || $data.followStatus() == 3 -->
+                                            <i class="fa fa-check  "></i>&nbsp; 
                                            {% trans %} Follow {% endtrans %} 
                                             <!-- /ko -->
                                             <!-- ko if: $data.followStatus() == 2-->
+                                            <i class="fa fa-rss  "></i>&nbsp; 
                                             {% trans %} UnFollow {% endtrans %}
                                             <!-- /ko -->
                                             </a>
