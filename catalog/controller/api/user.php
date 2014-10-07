@@ -260,7 +260,7 @@ class ControllerApiUser extends Controller {
             $lFriends = null;
         }
 
-        if ( !$lFriends ) {
+        if ( $lFriends ) {
             if ( $iTotalFriend > $iPage * $iLimit ) {
                 $bCanLoadMore = true;
             }
