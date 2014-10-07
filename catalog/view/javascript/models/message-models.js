@@ -52,7 +52,9 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.addMessage = function(roomData, lastMessage){
 			that.updated(roomData.updated);
 			that.lastMessage(roomData.last_message);
-			that.messageList.push(lastMessage);
+			if ( lastMessage !== null ){
+				that.messageList.push(lastMessage);
+			}
 		}
 
 		/* ============= END PUBLIC METHODS ============= */

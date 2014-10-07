@@ -27,15 +27,15 @@
                         <div class="bg-gray text-center strong border-top innerAll half"><span data-bind="text: totalRoom"></span> {% trans %}messages{% endtrans %} <i class="fa fa-circle-arrow-down"></i></div>
                         <ul class="list-unstyled" id="js-list-message" data-bind="foreach: { data: $data.roomList, afterRender: addMoreEvents }">
                             <li class="border-bottom" data-bind="click: $parent.clickRoomItem, css: { 'bg-primary' : $data.id == ($parent.activeRoom() != null ? $parent.activeRoom().id : 0) }">
-                                <div class="media innerAll" data-bind="with: $data.lastMessage">
+                                <div class="media innerAll">
                                     <div class="media-object pull-left hidden-phone">
                                         <a href="#">
                                             <img data-bind="attr: {src: $data.user.avatar}" height="40px" width="40px" alt="Image" />
                                         </a>
                                     </div>
                                     <div class="media-body">
-                                        <div><span class="strong" data-bind="text: $parent.name"></span> <small class="text-italic pull-right label label-default" data-bind="timeAgo: $data.created"></small></div>
-                                        <div data-bind="text: $data.content"></div>
+                                        <div><span class="strong" data-bind="text: $data.name"></span> <small class="text-italic pull-right label label-default" data-bind="timeAgo: $data.lastMessage().created"></small></div>
+                                        <div data-bind="text: $data.lastMessage().content"></div>
                                     </div>
                                 </div>
                             </li>
@@ -44,7 +44,7 @@
                     <div class="col-md-9 detailsWrapper">
                         <!-- User -->
                         <div class="bg-primary">
-                            <div class="media" data-bind="with: lastMessage">
+                            <div class="media" data-bind="with: $data.activeRoom()">
                                 <a href="" class="pull-left">
                                     <img data-bind="attr: {src: $data.user.avatar}" width="65" class="media-object">
                                 </a>
@@ -62,7 +62,7 @@
                                             <i class="fa fa-pencil"></i> {% trans %}New Message{% endtrans %}
                                         </a>
                                     </div>
-                                    <h4 class="text-white pull-left innerAll strong display-block margin-none"><a data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a></h4>
+                                    <h4 class="text-white pull-left innerAll strong display-block margin-none" data-bind="text: $data.name"></h4>
                                 </div>
                             </div>
                         </div>

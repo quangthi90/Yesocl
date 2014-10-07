@@ -35,7 +35,7 @@ class ControllerApiMessage extends Controller {
                 $bCanLoadMore = true;
             }
 			foreach ( $lRoomMessages as $oRoomMessage ) {
-				$aRoomMessages[] = $this->model_tool_object->formatRoom( $oRoomMessage );
+				$aRoomMessages[] = $this->model_tool_object->formatRoom( $oRoomMessage, 65, 65 );
 			}
 		}
 

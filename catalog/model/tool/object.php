@@ -214,12 +214,13 @@ class ModelToolObject extends Model
 	 * @param: object Room Message
 	 * @return: Array Object Room Message formated
 	 */
-	public function formatRoom( $oRoomMessage, $iwidth = 65, $iheight = 65 ) {
+	public function formatRoom( $oRoomMessage, $iWidth = 65, $iHeight = 65 ) {
 		$oLoggedUser = $this->customer->getUser();
 
-		$aRoomMessage = $oRoomMessage->formatToCache( $oLoggedUser, $iwidth, $iheight );
+		$aRoomMessage = $oRoomMessage->formatToCache( $oLoggedUser, $iWidth, $iHeight );
 		$oLastMessage = $oRoomMessage->getMessages()->last();
-		$aRoomMessage['last_message'] = $this->formatMessage( $oLastMessage, $oRoomMessage->getLastUser($oLoggedUser), $iwidth, $iheight );
+		$aRoomMessage['last_message'] = $this->formatMessage( $oLastMessage, $iWidth, $iHeight );
+		$aRoomMessage['user'] = $this->formatUser( $oRoomMessage->getLastUser($oLoggedUser), $iWidth, $iHeight );
 
 		return $aRoomMessage;
 	}
@@ -231,10 +232,10 @@ class ModelToolObject extends Model
 	 * @param: List Object Messages
 	 * @return: Array List Object Messages formated
 	 */
-	public function formatMessages( $lMessages, $iwidth = 60, $iheight = 60 ) {
+	public function formatMessages( $lMessages, $iWidth = 60, $iHeight = 60 ) {
 		$aMessages = array();
 		foreach ( $lMessages as $oMessage ) {
-			$aMessages[] = $this->formatMessage( $oMessage, null, $iwidth, $iheight );
+			$aMessages[] = $this->formatMessage( $oMessage, $iWidth, $iHeight );
 		}
 
 		return $aMessages;
@@ -247,17 +248,17 @@ class ModelToolObject extends Model
 	 * @param: object Message
 	 * @return: Array Object Message formated
 	 */
-	public function formatMessage( $oMessage, $oRoomUser = null, $iwidth = 60, $iheight = 60 ) {
+	public function formatMessage( $oMessage, $iWidth = 60, $iHeight = 60 ) {
 		$aMessage = $oMessage->formatToCache();
 
 		$oUser = $oMessage->getAuthor();
 		$idUser = $oUser->getId();
 		if ( $oRoomUser !== null && empty($this->aUsers[$oRoomUser->getId()]) ) {
 			$idUser = $oRoomUser->getId();
-			$this->aUsers[$idUser] = $this->formatUser( $oRoomUser, $iwidth, $iheight );
+			$this->aUsers[$idUser] = $this->formatUser( $oRoomUser, $iWidth, $iHeight );
 		
 		} elseif ( empty($this->aUsers[$idUser]) ) {
-			$this->aUsers[$idUser] = $this->formatUser( $oUser, $iwidth, $iheight );
+			$this->aUsers[$idUser] = $this->formatUser( $oUser, $iWidth, $iHeight );
 		}
 		
 		$aMessage['user'] = $this->aUsers[$idUser];
@@ -272,11 +273,11 @@ class ModelToolObject extends Model
 	 * @param: object User
 	 * @return: Array Object User formated
 	 */
-	public function formatUser( $oUser, $iwidth = 50, $iheight = 50 ) {
+	public function formatUser( $oUser, $iWidth = 50, $iHeight = 50 ) {
 		$this->load->model('tool/image');
 		
 		$aUser = $oUser->formatToCache();
-		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], $iwidth, $iheight );
+		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], $iWidth, $iHeight );
 		$aUser['fr_status'] = $this->checkFriendStatus( $this->customer->getId(), $aUser['id'] );
 		$aUser['fl_status'] = $this->checkFollowerStatus( $this->customer->getId(), $aUser['id'] );
 

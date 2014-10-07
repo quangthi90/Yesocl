@@ -15,7 +15,6 @@
 
 		self.currentPage = ko.observable(1);
 		self.roomList = ko.observableArray([]);
-		self.lastMessage = ko.observable();
 		self.totalRoom = ko.observable(0);
 		self.activeRoom = ko.observable();
 
@@ -40,7 +39,6 @@
 
 		self.clickRoomItem = function(item, event){			
 			self.activeRoom(item);
-			self.lastMessage( item.lastMessage );
 			if(item.canLoadMore() && !self.isLoadingMore()){
 				self.isLoadingMore(true);
 				item.loadMessage(function(data){
@@ -63,13 +61,34 @@
 			if ( !self.messageContent() ) return;
 			
 			// send message to old user
-			if ( !self.messageTo() ){
-				_sendMessageToOldRoom(self.activeRoom().id, self.messageContent(), callback);
+			if ( self.messageTo() ){
+				var userSlugs = self.messageTo().split(', ');
+				var room = null;
+				if ( userSlugs.length == 1 ){
+					ko.utils.arrayForEach(self.roomList(), function(r){
+						if ( r.user.slug == userSlugs[0] ) {
+							room = r;
+						}
+					});
+					
+				}
+				if ( room !== null ){
+					self.activeRoom(room);
+					_sendMessageToOldRoom(room.id, self.messageContent(), function(data){
+						_selectFirstRoom();
+						self.isNewMessage(!self.isNewMessage());
+						self.messageTo("");
+					});
+				}else{
+					_sendMessageToNewRoom(userSlugs, self.messageContent(), function(data){
+						self.isNewMessage(!self.isNewMessage());
+						self.messageTo("");
+					});
+				}
 
 			// send message to new user
 			}else{
-				var userSlugs = !self.messageTo().split(', ');
-				_sendMessageToNewRoom(userSlugs, self.messageContent(), callback);				
+				_sendMessageToOldRoom(self.activeRoom().id, self.messageContent(), callback);
 			}
 		}
 		/* ============= END PUBLIC METHODS ================ */
@@ -120,7 +139,11 @@
 			};
 			var successCallback = function(data){
 				if(data.success === "ok"){
-					self.activeRoom().addMessage(data.room, data.message);
+					if ( self.activeRoom().messageList().length > 0 ){
+						self.activeRoom().addMessage(data.room, data.message);
+					}else{
+						self.activeRoom().addMessage(data.room, null);
+					}
 					self.roomList.sort(function(r1, r2){
 						return r1.updated() == r2.updated() ? 0 : (r1.updated() < r2.updated() ? 1 : -1)
 					});
