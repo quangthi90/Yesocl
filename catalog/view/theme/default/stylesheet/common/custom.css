@@ -111,11 +111,13 @@ body.loading #common-loading {
 	display: block;
 	cursor: zoom-in;
 }
-
-.post-item .comment .comment-input {
+.post-item .comment .text-input {
 	max-width: 100%;
 	min-width: 100%;	
-	height: 40px;
+	min-height: 30px;
+	max-height: 200px;
+	height: 35px;
+	font-size: 12px;
 }
 .post-item .comment-list > .comment-item {
 	position: relative;
@@ -148,8 +150,10 @@ body.loading #common-loading {
 .post-item .post-options .dropdown-toggle i {
 	color: #BBB;
 }
-.post-item:hover .post-options .dropdown-toggle i {
+.post-item:hover > .post-options .dropdown-toggle i {
 	color: #25ad9f;
 }
-
+.post-item .comment-item:hover > .post-options .dropdown-toggle i {
+	color: #25ad9f;
+}
 /*================================== END POST =====================================*/

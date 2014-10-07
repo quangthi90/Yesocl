@@ -44,7 +44,7 @@
                 <!-- Content -->
                 <div class="innerAll post-content" data-bind="html: $data.content(), zoomImageInContent: true, seeMore: true">
                 </div>
-                <div class="innerAll border-bottom border-top bg-white text-small">
+                <div class="innerAll border-bottom border-top bg-gray text-small">
                     <!-- ko if: !$data.isLiked() -->
                     <a data-bind="click: likePost"><i class="icon-thumbs-up text-larger half innerR"></i>{% trans %}Like{% endtrans %}</a>
                     <!-- /ko -->
@@ -70,11 +70,12 @@
                         <span class="label label-primary half innerAll"><b data-bind="text: $data.likeCount()"></b> {% trans %}Likes{% endtrans %}</span>
                         <!-- /ko -->
                     </div>
-                </div>      
+                </div>
+                <!-- Comment --> 
                 <div data-bind="with: $data.comment">
                     <div class="comment-list">
                     <!-- ko foreach: commentList -->
-                        <div class="media margin-none bg-gray border-bottom comment-item">
+                        <div class="media margin-none bg-white border-bottom comment-item">
                             <a class="pull-left innerAll margin-right-none" data-bind="link: { title: $data.user.author, route: 'WallPage', params: { user_slug: $data.user.slug } }">
                                 <img data-bind="attr : { 'src' : $data.user.avatar, alt : $data.user.username }" width="50px" height="50px" class="media-object avatar">
                             </a>
@@ -112,7 +113,8 @@
                     <!-- /ko -->
                     </div>
                     <div class="comment" data-bind="with: $data.newComment">
-                        <input data-bind="value: content, css: { 'disabled' : $parent.isProcessing }, executeOnEnter: $parent.add" type="text" class="form-control" placeholder="{% trans %}Your comment here...{% endtrans %}">
+                        <textarea class="form-control text-input" data-bind="value: content, css: { 'disabled' : $parent.isProcessing }, executeOnEnter: $parent.add" type="text" placeholder="{% trans %}Your comment here...{% endtrans %}">
+                        </textarea>
                     </div>
                 </div>
             </div>

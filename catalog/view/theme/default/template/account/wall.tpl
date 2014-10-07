@@ -13,7 +13,7 @@
     <div class="innerAll">
         <div class="row">
             <div class="col-lg-9 col-md-8">
-            {{ block('timeline_cover') }}
+            {{ block('user_cover') }}
             {{ block('wall_post_block') }}
             </div>
             <!-- WIDGET -->

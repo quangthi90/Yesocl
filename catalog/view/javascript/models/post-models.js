@@ -117,7 +117,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.user = data.user || {};
 		that.canDelete = data.can_delete || false;
 		that.canEdit = data.can_edit || false;
-		that.content = ko.observable(data.content || '');
+		that.content = ko.observable(data.content || 'Demo');
 		that.isLiked = ko.observable(data.like_count || false);
 		that.likeCount = ko.observable(data.like_count || 0);
 		that.isInit = ko.observable(true);
@@ -167,13 +167,16 @@ YesGlobal.Models = YesGlobal.Models || {};
 			});
 		};
 
-		that.add = function(newItem, content) {
+		that.add = function(newItem, ele) {
+			var content = $(ele).val();
 			if(content && content.trim().length > 0 && !that.isProcessing()) {
 				_addComment({
 					content : content,
 					userTags: [],
 					stockTags: []
-				}, function(data) {});
+				}, function(data) {
+					$(ele).val("");
+				});
 			}		
 		};
 

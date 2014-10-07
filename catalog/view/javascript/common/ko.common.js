@@ -87,11 +87,11 @@ var YesGlobal = YesGlobal || {};
 		ko.bindingHandlers.executeOnEnter = {
 		    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
 		        var allBindings = allBindingsAccessor();
-		        $(element).keypress(function (event) {
-		            var keyCode = (event.which ? event.which : event.keyCode);
+		        $(element).keypress(function (e) {
+		            var keyCode = (e.which ? e.which : e.keyCode);
 		            if (keyCode === 13) {
-		            	var value = $(element).val().trim();
-		                return allBindings.executeOnEnter.call(viewModel, viewModel, value);
+		            	e.preventDefault();
+		                return allBindings.executeOnEnter.call(viewModel, viewModel, element);
 		            }
 		            return true;
 		        });
