@@ -67,7 +67,9 @@
                             </div>
                         </div>
                     <!-- /ko -->
+                    <!-- <button type="button" class=" pull-right btn btn-info" data-bind="click: $data.loadMore">Load More</button> -->
                     </div>
+
                 </div>
             </div>
             <!-- WIDGET -->

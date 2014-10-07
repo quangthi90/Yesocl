@@ -26,21 +26,22 @@
 		};
 
 		self.loadMore = function(){
-			if(self.canLoadMore){
-				self.currentPage(sefl.currentPage() + 1);
+			if(self.canLoadMore()){
+				self.currentPage(self.currentPage() + 1);
 				_loadFriend();
 			}
 		};
 
+		
 		/* ============= END PUBLIC METHODS ================ */
 
 		/* ============= START PRIVATE METHODS ============= */
 
 		function _loadFriend(){
 			var ajaxOptions = {
-			url: Y.Routing.generate(self.apiUrls, self.currentPage()),
+			url: Y.Routing.generate(self.apiUrls, {page: self.currentPage()}),
 			data : {
-				limit : 5
+				limit : 10
 			}};
 
 			var successCallback = function(data){
@@ -51,8 +52,6 @@
 						self.friendList.push(friendItem);
 					});
 				}
-				else 
-					alert(data.success + "Load Friend hok dc rui");
 				self.isLoadSuccess(true);
 			};
 			
@@ -60,7 +59,20 @@
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 			
 		};
-		_loadFriend();
+
+		function _init(){
+            $(window).scroll(function(e) {
+            	if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                    self.loadMore();
+                }
+            });
+
+            _loadFriend(function(){
+            	$(window).scrollTop(0);
+            });
+		};
+
+		_init();
 		/* ============= END PRIVATE METHODS =============== */
 	}
 	
