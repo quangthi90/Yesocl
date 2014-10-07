@@ -13,6 +13,9 @@
 		self.currentPage = ko.observable(1);
 		self.friendList = ko.observableArray([]);
 
+		self.canLoadMore = ko.observable(options.canLoadMore || false);
+
+
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
@@ -27,10 +30,11 @@
 		/* ============= START PRIVATE METHODS ============= */
 
 		function _loadFriend(){
-			var ajaxOptions = {
+			if(self.canLoadMore() == true){
+				var ajaxOptions = {
 				url: Y.Routing.generate(self.apiUrls, self.currentPage()),
 				data : {
-					limit : 5
+					limit : 2
 				}
 			};
 			var successCallback = function(data){
@@ -38,14 +42,15 @@
 					ko.utils.arrayForEach(data.friends, function(p){
 						var friendItem = new Y.Models.FriendModel(p);
 						self.friendList.push(friendItem);
-						console.log(p);
 					});
+					self.currentPage(sefl.currentPage() + 1);
 				}
 				self.isLoadSuccess(true);
 			}
 			
 			//Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null)
+			}
 		}
 		_loadFriend();
 		/* ============= END PRIVATE METHODS =============== */

@@ -89,7 +89,7 @@
         (function($, ko, Y, undefined) {
                 Y.GlobalKoModel = Y.GlobalKoModel || {};
                 var options = { 
-                     apiUrls : "ApiGetAllFriends"
+                     apiUrls : "ApiGetFriends"
                 };
                 var oViewModel = new Y.Widgets.FriendView(options, $("#friend-list"));
                 Y.GlobalKoModel.PageFriendView = oViewModel;
@@ -97,32 +97,5 @@
                 // //Apply Knockout
                 ko.applyBindings(Y.GlobalKoModel);
         }(jQuery, ko, YesGlobal));
-
-        status_btn_friend = false;
-
-        $(document).ready(function(){
-            $("#btn_friend").click(function(){
-                 
-                status_btn_friend = (!status_btn_friend);
-                if(status_btn_friend == false) // Click to unfriend
-                {
-                    var btn_friend_options = {
-                    apiUrls: "ApiPutUnfriend"
-                    };
-                }
-                else // Click to addfriend
-                {
-                     var btn_friend_options = {
-                    apiUrls: "ApiPutAddFollower"
-                    };
-                }
-            });
-
-            $("#btn_option_friend").hover(function(){
-                 var btn_friend_options = {
-                    apiUrls: "ApiPutRemoveFollower"
-                };
-            });
-        });
     </script>
 {% endblock %}
