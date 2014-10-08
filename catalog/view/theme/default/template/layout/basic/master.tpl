@@ -91,6 +91,7 @@
     <script src="{{ asset_js('library/ui_modals/bootbox.min.js') }}"></script>
     <script src="{{ asset_js('library/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset_js('library/expander/expander.min.js') }}"></script>
+    <script src="{{ asset_js('library/autosize/jquery.autosize.min.js') }}"></script>
     {% block library_javascript %}
     {% endblock %}
 

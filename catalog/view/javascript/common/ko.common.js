@@ -179,6 +179,14 @@ var YesGlobal = YesGlobal || {};
 		        initSeemore($(element));
 		    }
 		};
+		ko.bindingHandlers.autoSize = {
+		    init: function (element, valueAccessor, allBindingsAccessor) {
+		        $(element).autosize();
+		        $(element).on(Y.Constants.Triggers.INPUT_CONTENT_CHANGED, function() {
+		        	$(element).trigger("autosize.resize");
+		        });
+		    }
+		};
 		ko.bindingHandlers.mention = {
 		    init: function (element, valueAccessor, allBindingsAccessor) {
 		        var observableAttr = valueAccessor();

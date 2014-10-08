@@ -241,6 +241,7 @@
 		function _reset(){
 			self.newPost().title("");
 			self.newPost().content("");
+			ele.find(".new-post-content").trigger(Y.Constants.Triggers.INPUT_CONTENT_CHANGED);
 		}
 		/* ============= END PRIVATE METHODS ================ */
 	}

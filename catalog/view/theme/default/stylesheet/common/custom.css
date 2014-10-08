@@ -15,6 +15,11 @@ a {
 textarea {
 	min-height: 35px;	
 }
+textarea.animated {
+	-webkit-transition: height 0.2s;
+	-moz-transition: height 0.2s;
+	transition: height 0.2s;
+}
 textarea.no-resize {
 	resize: none;
 	min-width: 100%;

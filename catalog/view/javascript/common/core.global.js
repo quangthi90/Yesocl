@@ -18,8 +18,9 @@ var YesGlobal = YesGlobal || {};
 			COMMON_CONFIRM : "Are you sure you want to do this selection ?"
 		},
 		Triggers: {
-			MENU_VISIBILITY_CHANGED: "MENU_VISIBILITY_CHANGED",
-			POST_LOADED: "POST_LOADED"
+			MENU_VISIBILITY_CHANGED : "MENU_VISIBILITY_CHANGED",
+			INPUT_CONTENT_CHANGED : "INPUT_CONTENT_CHANGED",
+			POST_LOADED : "POST_LOADED"
 		},
 		SettingKeys : {
 			SHOW_LEFT_SIDEBAR : "SHOW_LEFT_SIDEBAR",

@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <!-- Content -->
-                <div class="innerAll post-content" data-bind="html: $data.content(), zoomImageInContent: true, seeMore: true">
+                <div class="innerAll post-content" data-bind="html: $data.content, zoomImageInContent: true, seeMore: true">
                 </div>
                 <div class="innerAll border-bottom border-top bg-gray text-small">
                     <!-- ko if: !$data.isLiked() -->
