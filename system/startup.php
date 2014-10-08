@@ -96,6 +96,7 @@ require_once(DIR_SYSTEM . 'library/language.php');
 require_once(DIR_SYSTEM . 'library/log.php');
 require_once(DIR_SYSTEM . 'library/mail.php');
 require_once(DIR_SYSTEM . 'library/pagination.php');
+require_once(DIR_SYSTEM . 'library/pusher.php');
 require_once(DIR_SYSTEM . 'library/request.php');
 require_once(DIR_SYSTEM . 'library/response.php');
 require_once(DIR_SYSTEM . 'library/session.php');
