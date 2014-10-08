@@ -29,9 +29,9 @@ define('FB_API_ID', '588076974594904');
 define('FB_API_SECRET', '40b7350fd7c011a9dab59d9f22722679');
 
 // Pusher
-define('APP_KEY', '22dc8822a1badda84d02');
-define('APP_SECRET', 'f27ab33b3ec6453e693d');
-define('APP_ID', '88643');
+define('PUSHER_APP_KEY', '22dc8822a1badda84d02');
+define('PUSHER_APP_SECRET', 'f27ab33b3ec6453e693d');
+define('PUSHER_APP_ID', '88643');
 
 // DB
 define('DB_DRIVER', 'mysql');
