@@ -3,6 +3,29 @@ a {
 	cursor: pointer !important;
 }
 
+.btn.btn-nobg {
+	background-color: #FFF;
+	color: #444;
+}
+.btn.btn-nobg:hover {
+	background-color: #25ad9f;
+	color: #FFF;
+}
+
+textarea {
+	min-height: 35px;	
+}
+textarea.no-resize {
+	resize: none;
+	min-width: 100%;
+	max-width: 100%;
+}
+textarea.resize-ver {
+	resize: vertical;
+	min-width: 100%;
+	max-width: 100%;
+}
+
 ul.dropdown-menu.action-options {
 }
 ul.dropdown-menu.action-options li {	
