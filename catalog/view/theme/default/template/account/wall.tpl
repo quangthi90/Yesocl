@@ -8,6 +8,7 @@
 
 {% block stylesheet %}
     {{ block('wall_post_block_stylesheet') }}
+    <link rel="stylesheet" href="{{ asset_css('library/dropzone/dropzone.css') }}" />
 {% endblock %}
 {% block body %}
     <div class="innerAll">
@@ -26,6 +27,7 @@
     </div>
 {% endblock %}
 {% block library_javascript %}
+<script src="{{ asset_js('library/dropzone/dropzone.min.js') }}"></script>
 {% endblock %}
 {% block common_javascript %}
 <script src="{{ asset_js('models/post-models.js') }}"></script>

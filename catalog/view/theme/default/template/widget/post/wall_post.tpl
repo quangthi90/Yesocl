@@ -113,8 +113,7 @@
                     <!-- /ko -->
                     </div>
                     <div class="comment" data-bind="with: $data.newComment">
-                        <textarea class="form-control text-input" data-bind="value: content, css: { 'disabled' : $parent.isProcessing }, executeOnEnter: $parent.add" type="text" placeholder="{% trans %}Your comment here...{% endtrans %}">
-                        </textarea>
+                        <textarea rows="1" class="form-control text-input resize-ver animated" data-bind="value: content, valueUpdate: 'afterkeydown', autoSize: content, css: { 'disabled' : $parent.isProcessing }, executeOnEnter: $parent.add" type="text" placeholder="{% trans %}Your comment here...{% endtrans %}"></textarea>
                     </div>
                 </div>
             </div>

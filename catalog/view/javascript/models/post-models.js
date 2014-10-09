@@ -169,15 +169,16 @@ YesGlobal.Models = YesGlobal.Models || {};
 			});
 		};
 
-		that.add = function(newItem, ele) {
-			var content = $(ele).val();
+		that.add = function(model, ele) {
+			var content = that.newComment().content();
 			if(content && content.trim().length > 0 && !that.isProcessing()) {
 				_addComment({
 					content : content,
 					userTags: [],
 					stockTags: []
 				}, function(data) {
-					$(ele).val("");
+					that.newComment().reset();
+					$(ele).trigger(Y.Constants.Triggers.INPUT_CONTENT_CHANGED);
 				});
 			}		
 		};
