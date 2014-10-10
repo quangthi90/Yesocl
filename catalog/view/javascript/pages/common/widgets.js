@@ -180,8 +180,8 @@
 		self.uploadOptions = {
             url: Y.Routing.generate("UploadFile"),
             maxFilesize: 5,
-            parallelUploads: 5,
-            uploadMultiple: false,
+            parallelUploads: 3,
+            uploadMultiple: true,
             addRemoveLinks: true,
             //previewsContainer: "#dropzone-container",
             maxFiles: 5,

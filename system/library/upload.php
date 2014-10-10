@@ -725,23 +725,14 @@ class Upload {
         }
         return $this->generate_response($response, $print_response);
     }
-    public function post($print_response = true, $name = null) {
+    public function post($print_response = true) {
         if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
             return $this->delete($print_response);
         }
         $upload = isset($_FILES[$this->options['param_name']]) ?
             $_FILES[$this->options['param_name']] : null;
         // Parse the Content-Disposition header, if available:
-        if ( $name == null ){
-	        $file_name = $this->get_server_var('HTTP_CONTENT_DISPOSITION') ?
-	            rawurldecode(preg_replace(
-	                '/(^[^"]+")|("$)/',
-	                '',
-	                $this->get_server_var('HTTP_CONTENT_DISPOSITION')
-	            )) : null;
-	    }else{
-	    	$file_name = $name;
-	    }
+        
         // Parse the Content-Range header, which has the following form:
         // Content-Range: bytes 0-524287/2000000
         $content_range = $this->get_server_var('HTTP_CONTENT_RANGE') ?
@@ -755,7 +746,7 @@ class Upload {
             foreach ($upload['tmp_name'] as $index => $value) {
                 $files[] = $this->handle_file_upload(
                     $upload['tmp_name'][$index],
-                    $file_name ? $file_name : $upload['name'][$index],
+                    time().".".uniqid().$this->getExtension($upload['name'][$index]),
                     $size ? $size : $upload['size'][$index],
                     $upload['type'][$index],
                     $upload['error'][$index],
@@ -768,8 +759,7 @@ class Upload {
             // $_FILES is a one-dimensional array:
             $files[] = $this->handle_file_upload(
                 isset($upload['tmp_name']) ? $upload['tmp_name'] : null,
-                $file_name ? $file_name : (isset($upload['name']) ?
-                        $upload['name'] : null),
+                time().".".uniqid().$this->getExtension($upload['name']),
                 $size ? $size : (isset($upload['size']) ?
                         $upload['size'] : $this->get_server_var('CONTENT_LENGTH')),
                 isset($upload['type']) ?
@@ -784,6 +774,9 @@ class Upload {
             array($this->options['param_name'] => $files),
             $print_response
         );
+    }
+    private function getExtension($filename) {
+        return "." . array_pop(explode(".", $filename));
     }
     public function delete($print_response = true) {
         $file_names = $this->get_file_names_params();

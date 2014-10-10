@@ -99,7 +99,7 @@ class ModelToolImage extends Model {
 		}
 	}
 
-    public function upload( $path, $name, $param_name ) {
+    public function upload( $path, $param_name ) {
         //Option for upload:
     	$options = array(
             'script_url' => HTTP_SERVER,
@@ -150,8 +150,8 @@ class ModelToolImage extends Model {
             // Image resolution restrictions:
             'max_width' => null,
             'max_height' => null,
-            'min_width' => 150,
-            'min_height' => 150,
+            'min_width' => null,
+            'min_height' => null,
             // Set the following option to false to enable resumable uploads:
             'discard_aborted_uploads' => true,
             // Set to false to disable rotating images based on EXIF meta data:
@@ -204,7 +204,7 @@ class ModelToolImage extends Model {
             case 'PATCH':
             case 'PUT':
             case 'POST':
-                $upload->post( true, $name );
+                $upload->post( true );
                 break;
             case 'DELETE':
                 $upload->delete();

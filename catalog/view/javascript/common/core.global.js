@@ -457,9 +457,10 @@ var YesGlobal = YesGlobal || {};
 				throw 'Dropzone is not loaded !';
 			}
 			var valueAssigner = valueAccessor(), allBindings = allBindingsAccessor(); 
-			
+			var uploadOptions = allBindings.uploadOptions;
+			uploadOptions.paramName = "files";
 			Dropzone.autoDiscover = false;
-			self.DropzoneInstance = $(element).dropzone(allBindings.uploadOptions);
+			self.DropzoneInstance = $(element).dropzone(uploadOptions);
 		};
 		/* ============= END PUBLIC METHODS ================ */
 
