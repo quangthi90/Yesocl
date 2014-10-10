@@ -442,4 +442,28 @@ var YesGlobal = YesGlobal || {};
 	        return $('base').attr('href') + method + url;
 	    };
 	};
+
+	Y.Uploader = function() {
+		var self = this;
+
+		/* ============= START PROPERTIES ================== */
+		self.DropzoneInstance = null;
+		self.uploadOptions = null;
+		/* ============= END PROPERTIES ==================== */
+
+		/* ============= START PUBLIC METHODS ============== */
+		self.init = function(element, valueAccessor, allBindingsAccessor) {
+			if(Dropzone === undefined){
+				throw 'Dropzone is not loaded !';
+			}
+			var valueAssigner = valueAccessor(), allBindings = allBindingsAccessor(); 
+			
+			Dropzone.autoDiscover = false;
+			self.DropzoneInstance = $(element).dropzone(allBindings.uploadOptions);
+		};
+		/* ============= END PUBLIC METHODS ================ */
+
+		/* ============= START PRIVATE METHODS ============= */
+		/* ============= END PRIVATE METHODS =============== */
+	}
 })(jQuery, ko, window, YesGlobal);

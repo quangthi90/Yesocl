@@ -176,6 +176,20 @@
 		self.targetPostList = options.targetPostList || "";
 		self.isPosting = ko.observable(false);
 		self.uniqueName = "YES_POST_NEW";
+
+		self.uploadOptions = {
+            url: Y.Routing.generate("UploadFile"),
+            maxFilesize: 5,
+            parallelUploads: 5,
+            uploadMultiple: false,
+            addRemoveLinks: true,
+            //previewsContainer: "#dropzone-container",
+            maxFiles: 5,
+            thumbnailWidth: 220,
+            thumbnailHeight: 165,
+            acceptedFiles: "image/*"
+        };
+
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
@@ -183,7 +197,7 @@
 			return (!self.isPosting() && self.newPost().content().trim().length != 0);
 		}, this);
 
-		self.addPost = function() {			
+		self.addPost = function() {
 			var postData = _returnPostData();
 			if(self.isPosting() || postData.content.length === 0) {
 				return;
@@ -244,6 +258,6 @@
 			ele.find(".new-post-content").trigger(Y.Constants.Triggers.INPUT_CONTENT_CHANGED);
 		}
 		/* ============= END PRIVATE METHODS ================ */
-	}
+	};
 
 }(jQuery, ko, window, YesGlobal));

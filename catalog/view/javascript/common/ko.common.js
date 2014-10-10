@@ -276,6 +276,7 @@ var YesGlobal = YesGlobal || {};
 		        loadImage(image);
 		    }
 		};
+		ko.bindingHandlers.uploader = new Y.Uploader();
 	}
 	
 	initBindingHanler();

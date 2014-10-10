@@ -9,19 +9,16 @@
             <div class="btn-toolbar" role="toolbar">
                 <div class="btn-group btn-group-sm">
                     <a class="btn btn-nobg"><i class="fa fa-picture-o"></i> Image</a>
-                    <a class="btn btn-nobg"><i class="fa fa-link"></i> Link</a>                                      
+                    <a class="btn btn-nobg"><i class="fa fa-link"></i> Link</a>
                 </div>
                 <div class="btn-group btn-group-sm pull-right">
                     <a class="btn btn-primary" data-bind="click: addPost, css: { 'disabled' : !canPost() }">Share</a>
                 </div>
             </div>
         </div>
+        <div class="dropzone" data-bind="uploader: true, uploadOptions: uploadOptions" style="margin-bottom: 20px;">     
+        </div>
     </div>
-    {#
-    <form action="{{ path('UploadFile') }}" class="dropzone hidden" id="my-awesome-dropzone">
-        <input type="file" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" />
-    </form>  
-    #}  
 {% endblock 
 %}
 {% block new_post_javascript %}

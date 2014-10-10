@@ -53,7 +53,8 @@
                         name: "ApiPostPost", 
                         params: { slug : "{{ current_user.slug }}", post_type: '{{ post_type }}' }
                     },
-                    targetPostList: oWallPost.uniqueName
+                    targetPostList: oWallPost.uniqueName,
+                    uploader: $("#dropzone-wall")
                 };
                 var newPost = new Y.Widgets.PostNew(newPostOptions, $("#new-post-widget"));
                 Y.GlobalKoModel.NewPost = newPost;
