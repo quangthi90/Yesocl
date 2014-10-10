@@ -123,21 +123,21 @@ class ControllerApiPost extends Controller {
             $this->load->model('tool/image');
             $this->load->model('tool/object');
 
-            $sImageLink = null;
+            /*$sImageLink = null;
             $sExtension = null;
             if ( !empty($this->request->post['thumb']) ){
                 $aParts = explode('/', $this->request->post['thumb'] );
                 $sFilename = $aParts[count($aParts) - 1];
                 $sImageLink = DIR_IMAGE . $this->config->get('common')['image']['upload_cache'] . $sFilename;
                 $sExtension = explode('.', $sFilename)[1];
-            }
+            }*/
 
             $aData = array(
                 'content'       => $this->request->post['content'],
                 'title'         => $this->request->post['title'],
                 'author_id'     => $this->customer->getId(),
-                'image_link'    => $sImageLink,
-                'extension'     => $sExtension,
+                // 'image_link'    => $sImageLink,
+                // 'extension'     => $sExtension,
                 'stockTags'     => empty($this->request->post['stockTags']) ? array() : $this->request->post['stockTags'],
                 'userTags'      => empty($this->request->post['userTags']) ? array() : $this->request->post['userTags']
             );

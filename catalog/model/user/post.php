@@ -152,7 +152,7 @@ class ModelUserPost extends Model {
 			return false;
 		}
 
-		if ( !empty($aData['image_link']) && !empty($aData['extension']) && is_file($aData['image_link']) ){
+		/*if ( !empty($aData['image_link']) && !empty($aData['extension']) && is_file($aData['image_link']) ){
 			$sFolderLink = $this->config->get('user')['default']['image_link'];
 			$sFolderName = $this->config->get('post')['default']['image_folder'];
 			$sAvatarName = $this->config->get('post')['default']['avatar_name'];
@@ -165,7 +165,7 @@ class ModelUserPost extends Model {
 			}
 		}elseif ( empty($aData['image_link']) && empty($aData['extension']) ) {
 			$oPost->setThumb( null );
-		}
+		}*/
 
 		if ( !empty($aData['content']) ){
 			// $oPost->setContent( htmlentities($aData['content']) );
