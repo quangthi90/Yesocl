@@ -37,6 +37,9 @@ Abstract Class Post {
 	/** @MongoDB\String */
 	private $thumb;
 
+	/** @MongoDB\Collection */
+    private $images;
+
 	/** @MongoDB\Boolean */
 	private $deleted;
 
@@ -159,6 +162,18 @@ Abstract Class Post {
 
 	public function getThumb(){
 		return $this->thumb;
+	}
+
+	public function getImages(){
+		return $this->images;
+	}
+
+	public function addImage( $image ){
+		$this->images[] = (string)$image;
+	}
+
+	public function setImages( $images ){
+		$this->images = $images;
 	}
 
 	public function setDeleted( $deleted ){

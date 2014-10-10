@@ -77,16 +77,20 @@ class ModelUserPost extends Model {
 		$this->dm->flush();
 
 		// Add Image
-		if ( !empty($aData['image_link']) && !empty($aData['extension']) && is_file($aData['image_link']) ){
-			$sFolderLink = $this->config->get('user')['default']['image_link'];
-			$sFolderName = $this->config->get('post')['default']['image_folder'];
-			$sAvatarName = $this->config->get('post')['default']['avatar_name'];
-			$path = $sFolderLink . $oAuthor->getId() . '/' . $sFolderName . '/' . $oPost->getId() . '/' . $sAvatarName . '.' . $aData['extension'];
-			$dest = DIR_IMAGE . $path;
-
+		if ( !empty($aData['thumbs']) && is_array($aData['thumbs']) ){
 			$this->load->model('tool/image');
-			if ( $this->model_tool_image->moveFile($aData['image_link'], $dest) ){
-				$oPost->setThumb( $path );
+			foreach ($aData['thumbs'] as $index => $aThumbInfo ) {
+				$sFolderLink = $this->config->get('user')['default']['image_link'];
+				$sFolderName = $this->config->get('post')['default']['image_folder'];
+				$sAvatarName = $this->config->get('post')['default']['avatar_name'];
+				$sPath = $sFolderLink . $oAuthor->getId() . '/' . $sFolderName . '/' . $oPost->getId() . '/' . $sAvatarName . '.' . $aData['extension'];
+				$sDest = DIR_IMAGE . $sPath;
+				if ( $this->model_tool_image->moveFile($aThumbInfo['image_link'], $sDest) ){
+					if ( $index == 0 )
+						$oPost->setThumb( $sPath );
+					else
+						$oPost->addImages( $sPath );
+				}
 			}
 
 			$this->dm->flush();

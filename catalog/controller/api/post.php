@@ -23,21 +23,23 @@ class ControllerApiPost extends Controller {
             $this->load->model($sModel);
             $this->load->model('tool/image');
 
-            $sImageLink = null;
-            $sExtension = null;
-            if ( !empty($this->request->post['thumb']) ){
-                $aParts = explode('/', $this->request->post['thumb'] );
-                $sFilename = $aParts[count($aParts) - 1];
-                $sImageLink = DIR_IMAGE . $this->config->get('common')['image']['upload_cache'] . $sFilename;
-                $sExtension = explode('.', $sFilename)[1];
+            $aThumbs = array();
+            if ( !empty($this->request->post['thumbs']) ){
+                foreach ( $this->request->post['thumbs'] as $sThumb ) {
+                    $aParts = explode('/', $sThumb );
+                    $sFilename = $aParts[count($aParts) - 1];
+                    $aThumbs[] = array(
+                        "image_link" => DIR_IMAGE . $this->config->get('common')['image']['upload_cache'] . $sFilename,
+                        "extension" => explode('.', $sFilename)[1]
+                    );
+                }
             }
 
             $aData = array(
                 'content'       => $this->request->post['content'],
                 'title'         => $this->request->post['title'],
                 'author_id'     => $this->customer->getId(),
-                'image_link'    => $sImageLink,
-                'extension'     => $sExtension,
+                'thumbs'        => $aThumbs,
                 'stockTags'     => empty($this->request->post['stockTags']) ? array() : $this->request->post['stockTags'],
                 'userTags'      => empty($this->request->post['userTags']) ? array() : $this->request->post['userTags']
             );
