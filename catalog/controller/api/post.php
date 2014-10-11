@@ -30,7 +30,7 @@ class ControllerApiPost extends Controller {
                     $sFilename = $aParts[count($aParts) - 1];
                     $aThumbs[] = array(
                         "image_link" => DIR_IMAGE . $this->config->get('common')['image']['upload_cache'] . $sFilename,
-                        "extension" => explode('.', $sFilename)[1]
+                        "extension" => array_pop(explode('.', $sFilename))
                     );
                 }
             }

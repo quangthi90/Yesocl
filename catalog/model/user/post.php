@@ -83,7 +83,7 @@ class ModelUserPost extends Model {
 				$sFolderLink = $this->config->get('user')['default']['image_link'];
 				$sFolderName = $this->config->get('post')['default']['image_folder'];
 				$sAvatarName = $this->config->get('post')['default']['avatar_name'];
-				$sPath = $sFolderLink . $oAuthor->getId() . '/' . $sFolderName . '/' . $oPost->getId() . '/' . $sAvatarName . '.' . $aData['extension'];
+				$sPath = $sFolderLink . $oAuthor->getId() . '/' . $sFolderName . '/' . $oPost->getId() . '/' . $sAvatarName . '.' . $aThumbInfo['extension'];
 				$sDest = DIR_IMAGE . $sPath;
 				if ( $this->model_tool_image->moveFile($aThumbInfo['image_link'], $sDest) ){
 					if ( $index == 0 )
