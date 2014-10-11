@@ -162,6 +162,11 @@ class ModelToolObject extends Model
                 break;
         }
 
+        $aPost['images'] = array();
+        foreach ( $oPost->getImages() as $sImageLink ) {
+        	$aPost['images'][] = $this->model_tool_image->resize( $sImageLink, $with, $height );
+        }
+
 		return $aPost;
 	}
 
