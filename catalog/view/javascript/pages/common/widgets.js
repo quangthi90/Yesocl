@@ -176,26 +176,57 @@
 		self.targetPostList = options.targetPostList || "";
 		self.isPosting = ko.observable(false);
 		self.uniqueName = "YES_POST_NEW";
+		self.images = ko.observableArray([]);
+		self.isUploading = ko.observable(false);
+		self.toggleImage = ko.observable(false);
 
 		self.uploadOptions = {
-            url: Y.Routing.generate("UploadFile"),
-            maxFilesize: 5,
-            parallelUploads: 3,
-            uploadMultiple: true,
-            addRemoveLinks: true,
-            //previewsContainer: "#dropzone-container",
-            maxFiles: 5,
-            thumbnailWidth: 220,
-            thumbnailHeight: 165,
-            acceptedFiles: "image/*"
+			options: {
+				url: Y.Routing.generate("UploadFile"),
+	            maxFilesize: 5,
+	            parallelUploads: 2,
+	            uploadMultiple: false,
+	            addRemoveLinks: true,
+	            //previewsContainer: "#dropzone-container",
+	            maxFiles: 10,
+	            thumbnailWidth: 100,
+	            thumbnailHeight: 100,
+	            acceptedFiles: "image/*"
+			},
+			callbacks: {
+				processing: function(){
+					self.isUploading(true);
+				},
+				completedAll: function() {
+					self.isUploading(false);
+				}
+			}
         };
 
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
 		self.canPost = ko.computed(function(){
-			return (!self.isPosting() && self.newPost().content().trim().length != 0);
+			return (!self.isPosting() && self.newPost().content().trim().length != 0 && !self.isUploading());
 		}, this);
+
+		self.activeImageUploading = ko.computed(function(){
+			if(self.isUploading() || self.toggleImage())
+				return true;
+			return false;
+		});
+
+		self.toggleUploadingImage = function(){
+			if(self.images().length > 0) {
+				Y.Utils.showConfirmMessage(Y.Constants.Messages.DELETE_UPLOAD_FILE_CONFIRM, function(){
+					self.toggleImage(!self.toggleImage());
+				}, function(){
+					//Close or cancel event
+				});
+			}else {
+				self.toggleImage(!self.toggleImage());
+			}
+		};
 
 		self.addPost = function() {
 			var postData = _returnPostData();
@@ -210,7 +241,8 @@
 			}, function(errorInfo) {
 				//Show message fail
 			});
-		}
+		};
+
 		/* ============= END PUBLIC METHODS ================ */
 
 		/* ============= START PRIVATE METHODS ============== */
@@ -242,9 +274,12 @@
 		function _returnPostData(){
 			var content = ko.utils.unwrapObservable(self.newPost().content);
 			var title = ko.utils.unwrapObservable(self.newPost().title);
+			var postImgs = ko.utils.arrayMap(self.images(), function(file){
+				return file.url;
+			});
 			return {
 				isAdvance : false,
-				thumb: "",
+				thumbs: postImgs,
 				title : title ? title.trim(): "",
 				content: content ? content.trim(): "",
 				userTags: [],
@@ -255,6 +290,7 @@
 		function _reset(){
 			self.newPost().title("");
 			self.newPost().content("");
+			self.images([]);
 			ele.find(".new-post-content").trigger(Y.Constants.Triggers.INPUT_CONTENT_CHANGED);
 		}
 		/* ============= END PRIVATE METHODS ================ */

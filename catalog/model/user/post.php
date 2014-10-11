@@ -89,7 +89,7 @@ class ModelUserPost extends Model {
 					if ( $index == 0 )
 						$oPost->setThumb( $sPath );
 					else
-						$oPost->addImages( $sPath );
+						$oPost->addImage( $sPath );
 				}
 			}
 

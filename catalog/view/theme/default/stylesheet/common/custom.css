@@ -7,7 +7,8 @@ a {
 	background-color: #FFF;
 	color: #444;
 }
-.btn.btn-nobg:hover {
+.btn.btn-nobg:hover, 
+.btn.btn-nobg.active {
 	background-color: #25ad9f;
 	color: #FFF;
 }

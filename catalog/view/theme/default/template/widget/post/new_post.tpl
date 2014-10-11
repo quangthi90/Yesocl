@@ -8,7 +8,7 @@
             </div>
             <div class="btn-toolbar" role="toolbar">
                 <div class="btn-group btn-group-sm">
-                    <a class="btn btn-nobg"><i class="fa fa-picture-o"></i> Image</a>
+                    <a class="btn btn-nobg" data-bind="click: toggleUploadingImage, css: { 'active' : activeImageUploading() }"><i class="fa fa-picture-o"></i> Image</a>
                     <a class="btn btn-nobg"><i class="fa fa-link"></i> Link</a>
                 </div>
                 <div class="btn-group btn-group-sm pull-right">
@@ -16,8 +16,10 @@
                 </div>
             </div>
         </div>
-        <div class="dropzone" data-bind="uploader: true, uploadOptions: uploadOptions" style="margin-bottom: 20px;">     
+        <!-- ko if: toggleImage() -->        
+        <div class="dropzone" id="newpost-dropzone" data-bind="uploader: images, uploadOptions: uploadOptions" style="margin-bottom: 20px;">
         </div>
+        <!-- /ko -->
     </div>
 {% endblock 
 %}

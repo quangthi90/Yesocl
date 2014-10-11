@@ -15,7 +15,8 @@ var YesGlobal = YesGlobal || {};
 
 	Y.Constants = {
 		Messages: {
-			COMMON_CONFIRM : "Are you sure you want to do this selection ?"
+			COMMON_CONFIRM : "Are you sure you want to do this selection ?",
+			DELETE_UPLOAD_FILE_CONFIRM : "Are you sure you want to remove uploaded files ?"
 		},
 		Triggers: {
 			MENU_VISIBILITY_CHANGED : "MENU_VISIBILITY_CHANGED",
@@ -457,10 +458,47 @@ var YesGlobal = YesGlobal || {};
 				throw 'Dropzone is not loaded !';
 			}
 			var valueAssigner = valueAccessor(), allBindings = allBindingsAccessor(); 
-			var uploadOptions = allBindings.uploadOptions;
+			var uploadOptions = allBindings.uploadOptions.options;
 			uploadOptions.paramName = "files";
+			var callbacks = allBindings.uploadOptions.callbacks;
+			
 			Dropzone.autoDiscover = false;
-			self.DropzoneInstance = $(element).dropzone(uploadOptions);
+			self.DropzoneInstance = new Dropzone("#" + element.id, uploadOptions);
+
+			self.DropzoneInstance.on("success", function(file, response) {
+				if(response === undefined || response === null || 
+					response.files === undefined || response.files.length === 0) {
+					return;
+				}
+				var uploadedFile = response.files[0];
+				if(uploadedFile.error === undefined) {
+					valueAssigner.push(uploadedFile);
+				}
+			});
+			self.DropzoneInstance.on("maxfilesexceeded", function(file) {
+				self.DropzoneInstance.removeFile(file);
+			});
+			self.DropzoneInstance.on("processing", function(file) {
+				if(callbacks.processing && typeof callbacks.processing === "function"){
+					callbacks.processing(file);
+				}
+			});
+			self.DropzoneInstance.on("queuecomplete", function() {
+				if(callbacks.completedAll && typeof callbacks.completedAll === "function"){
+					callbacks.completedAll();
+				}
+			});
+			self.DropzoneInstance.on("removedfile", function(file) {
+				valueAssigner.remove(function(item) {
+					return item.name === file.name;
+				});
+			});
+		};
+		self.update = function(element, valueAccessor, allBindingsAccessor) {
+			var valueAssigner = valueAccessor();
+			if(valueAssigner() === null || valueAssigner().length === 0) {
+				self.DropzoneInstance.removeAllFiles(true);
+			}
 		};
 		/* ============= END PUBLIC METHODS ================ */
 
