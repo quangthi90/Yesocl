@@ -238,6 +238,7 @@
 				if(postListWidget != null) {					
 					postListWidget.addPost(data);
 				}
+				self.toggleUploadingImage();
 			}, function(errorInfo) {
 				//Show message fail
 			});

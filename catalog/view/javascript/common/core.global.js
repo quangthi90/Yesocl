@@ -473,6 +473,13 @@ var YesGlobal = YesGlobal || {};
 				var uploadedFile = response.files[0];
 				if(uploadedFile.error === undefined) {
 					valueAssigner.push(uploadedFile);
+					file.id = uploadedFile.name;
+				}else {
+					if(file.previewElement) {
+						var jPreview = $(file.previewElement);
+						jPreview.removeClass("dz-success").addClass("dz-error");
+						jPreview.find("span[dz-error-message]").html(uploadedFile.error);
+					}
 				}
 			});
 			self.DropzoneInstance.on("maxfilesexceeded", function(file) {
@@ -490,7 +497,7 @@ var YesGlobal = YesGlobal || {};
 			});
 			self.DropzoneInstance.on("removedfile", function(file) {
 				valueAssigner.remove(function(item) {
-					return item.name === file.name;
+					return item.name === file.id;
 				});
 			});
 		};
