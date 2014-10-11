@@ -7,8 +7,7 @@
 {% block title %}{{ heading_title }}{% endblock %}
 
 {% block stylesheet %}
-    {{ block('wall_post_block_stylesheet') }}
-    <link rel="stylesheet" href="{{ asset_css('library/dropzone/dropzone.css') }}" />
+    {{ block('wall_post_block_stylesheet') }}    
 {% endblock %}
 {% block body %}
     <div class="innerAll">

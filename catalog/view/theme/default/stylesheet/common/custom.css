@@ -139,6 +139,8 @@ body.loading #common-loading {
 	text-align: center;
 	display: block;
 	cursor: zoom-in;
+	border: none;
+	padding: 0px;
 }
 .post-item .comment .text-input {
 	max-width: 100%;

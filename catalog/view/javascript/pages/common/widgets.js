@@ -187,8 +187,9 @@
 	            parallelUploads: 2,
 	            uploadMultiple: false,
 	            addRemoveLinks: true,
-	            //previewsContainer: "#dropzone-container",
-	            maxFiles: 10,
+	            maxFiles: 5,
+	            dictRemoveFile: "X",
+	            dictCancelUpload: "X",
 	            thumbnailWidth: 100,
 	            thumbnailHeight: 100,
 	            acceptedFiles: "image/*"

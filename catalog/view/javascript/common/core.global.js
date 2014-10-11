@@ -459,7 +459,7 @@ var YesGlobal = YesGlobal || {};
 			}
 			var valueAssigner = valueAccessor(), allBindings = allBindingsAccessor(); 
 			var uploadOptions = allBindings.uploadOptions.options;
-			uploadOptions.paramName = "files";
+			uploadOptions.paramName = "files";			
 			var callbacks = allBindings.uploadOptions.callbacks;
 			
 			Dropzone.autoDiscover = false;
@@ -483,7 +483,7 @@ var YesGlobal = YesGlobal || {};
 				}
 			});
 			self.DropzoneInstance.on("maxfilesexceeded", function(file) {
-				self.DropzoneInstance.removeFile(file);
+				self.DropzoneInstance.removeFile(file);				
 			});
 			self.DropzoneInstance.on("processing", function(file) {
 				if(callbacks.processing && typeof callbacks.processing === "function"){

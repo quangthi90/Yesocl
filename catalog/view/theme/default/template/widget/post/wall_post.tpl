@@ -42,8 +42,19 @@
                     </div>
                 </div>
                 <!-- Content -->
-                <div class="innerAll post-content" data-bind="html: $data.content, zoomImageInContent: true, seeMore: true">
-                </div>
+                <div class="innerAll post-content" >
+                    <div class="media">
+                        <!-- ko if: $data.image() != '' -->
+                        <img class="media-object pull-left thumb" data-bind="attr: { 'src' : $data.image(), 'data-zoom' : $data.thumb() }, loadImage: true" />
+                        <!-- /ko -->
+                        <div class="media-body">
+                            <!-- ko if: $data.title() != '' -->
+                            <h4 class="media-heading" data-bind="text: $data.title"></h4>
+                            <!-- /ko -->
+                            <div data-bind="html: $data.content, zoomImageInContent: true, seeMore: true"></div>
+                        </div>
+                    </div>
+                </div>                
                 <div class="innerAll border-bottom border-top bg-gray text-small">
                     <!-- ko if: !$data.isLiked() -->
                     <a data-bind="click: likePost"><i class="icon-thumbs-up text-larger half innerR"></i>{% trans %}Like{% endtrans %}</a>

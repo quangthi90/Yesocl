@@ -3,26 +3,20 @@ var YesGlobal = YesGlobal || {};
 (function($, ko, window, Y, undefined) {	
 
 	function initZoomImageEvent(el){
-		var src = el.data("zoom-image") ? el.data("zoom-image"): el.attr("src");
+		var src = el.data("zoom") ? el.data("zoom"): el.attr("src");
 		var title = el.attr("title");
 		var alt = el.attr("alt");
 
         el.on("click", function(){
             $.magnificPopup.open({
-              items: {
-                src: src
-              },
-              type: 'image'
-            });
-        });
-	}
-	function loadImage(imgsrc){
-        el.on("click", function(){
-            $.magnificPopup.open({
-              items: {
-                src: imgsrc
-              },
-              type: 'image'
+            	items: {
+	           		src: src
+	            },
+	            type: 'image',
+	            image: {
+					verticalFit: false
+				},
+				closeBtnInside: false
             });
         });
 	}
@@ -268,12 +262,10 @@ var YesGlobal = YesGlobal || {};
 		};
 		ko.bindingHandlers.loadImage = {
 		    init: function (element, valueAccessor, allBindingsAccessor) {
-		        var image = ko.utils.unwrapObservable(valueAccessor());
-		        loadImage(image);
+		        initZoomImageEvent($(element));
 		    },
 		    update: function (element, valueAccessor, allBindingsAccessor) {
-		        var image = ko.utils.unwrapObservable(valueAccessor());
-		        loadImage(image);
+		        initZoomImageEvent($(element));
 		    }
 		};
 		ko.bindingHandlers.uploader = new Y.Uploader();
