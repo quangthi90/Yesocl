@@ -92,6 +92,9 @@
     <script src="{{ asset_js('library/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset_js('library/expander/expander.min.js') }}"></script>
     <script src="{{ asset_js('library/autosize/jquery.autosize.min.js') }}"></script>
+    <script src="{{ asset_js('library/mention/jquery.elastic.js') }}"></script>
+    <script src="{{ asset_js('library/mention/underscore.min.js') }}"></script>
+    <script src="{{ asset_js('library/mention/jquery.mentions.js') }}"></script>
     {% block library_javascript %}
     {% endblock %}
 

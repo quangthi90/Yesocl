@@ -23,7 +23,7 @@ var YesGlobal = YesGlobal || {};
 
 	function initSeemore(ele) {
 		ele.expander({
-            slicePoint: 150,
+            slicePoint: 800,
             widow: 2,
             expandSpeed: 100,
             expandText: '[...]',
@@ -220,7 +220,7 @@ var YesGlobal = YesGlobal || {};
 		                            return {
 		                                id : obj.code,
 		                                name: obj.code,
-		                                wall: yRouting.generate("StockPage", { stock_code : obj.code }),
+		                                wall: Y.Routing.generate("StockPage", { stock_code : obj.code }),
 		                                type: "stock",
 		                                avatar : "image/stock_icon.png"
 		                            }
@@ -231,7 +231,7 @@ var YesGlobal = YesGlobal || {};
 		                }        
 		            },
 		            onMentionChanged: function(){
-		                var content = $(element).mentionsInput("getHtmlContent");
+		                var content = $(element).mentionsInput("val");
 		                observableAttr(content);
 		            },
 		            fullNameTrigger: false
@@ -241,7 +241,51 @@ var YesGlobal = YesGlobal || {};
 		        var observableAttr = valueAccessor();
 		        if(observableAttr().length === 0){
 		            $(element).mentionsInput("reset");
-		            $(element).height(35).focus();
+		            $(element).height(50).focus();
+		        }
+		    }
+		};
+		ko.bindingHandlers.mention1 = {
+		    init: function (element, valueAccessor, allBindingsAccessor) {
+		        var observableAttr = valueAccessor();
+		        $(element).textntags({
+		            onDataRequest: function (mode, query, triggerChar, callback) {
+		                var query = query.toLowerCase();
+		                if(triggerChar === "@") {
+		                    Y.Utils.initUserListForTag(function(queryData){
+		                        result = _.filter(queryData, function(item) {
+		                            return item.name.toLowerCase().indexOf(query) > -1;
+		                        });
+		                        callback.call(this, _.first(result, 5));
+		                    });
+		                    return;
+		                }
+		                if(triggerChar === "$") {
+		                    Y.Utils.initStockList(function(queryData){
+		                        result = _.filter(queryData, function(item) {		                                            
+		                            return item.code.toLowerCase().indexOf(query.toLowerCase()) > -1;
+		                        });
+		                        var lastResult = _.map(_.first(result, 5), function(obj) {
+		                            return {
+		                                id : obj.code,
+		                                name: obj.code,
+		                                wall: Y.Routing.generate("StockPage", { stock_code : obj.code }),
+		                                type: "stock",
+		                                avatar : "image/stock_icon.png"
+		                            }
+		                        });
+		                        callback.call(this, lastResult);
+		                    });
+		                    return;
+		                }      
+		            }
+		        });
+		    },
+		    update: function (element, valueAccessor, allBindingsAccessor) {
+		        var observableAttr = valueAccessor();
+		        if(observableAttr().length === 0){
+		            $(element).textntags("reset");
+		            $(element).height(50).focus();
 		        }
 		    }
 		};

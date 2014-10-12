@@ -6,21 +6,11 @@
 @import '../library/icons/pictoicons/css/picto.css';
 @import '../library/jquery-ui/jquery-ui.min.css';
 @import '../library/animate/animate.min.css';
-@import '../library/fullcalendar/fullcalendar.css';
 @import '../library/core_prettyprint/prettify.css';
-@import '../library/bootstrap-controls/bootstrap-wysihtml5-0.0.2.css';
-@import '../library/bootstrap-controls/bootstrap-datepicker.css';
-@import '../library/bootstrap-controls/bootstrap-select.css';
-@import '../library/bootstrap-controls/bootstrap-switch.css';
-@import '../library/bootstrap-controls/bootstrap-timepicker.css';
-@import '../library/select2/select2.css';
 @import '../library/dropzone/dropzone.css';
-@import '../library/jcrop/jquery.jcrop.css';
 @import '../library/magnific-popup/magnific-popup.css';
+@import '../library/mention/mention.css';
 @import '../library/notifications_gritter/jquery.gritter.css';
-@import '../library/notifications_notyfy/jquery.notyfy.css';
-@import '../library/notifications_notyfy/notyfy.theme.default.css';
-@import '../library/rangeslider/ithing.css';
 
 .scripts-async .container-fluid {
   visibility: hidden;

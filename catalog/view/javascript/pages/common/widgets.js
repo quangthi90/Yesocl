@@ -178,8 +178,9 @@
 		self.uniqueName = "YES_POST_NEW";
 		self.images = ko.observableArray([]);
 		self.isUploading = ko.observable(false);
-		self.toggleImage = ko.observable(false);
-
+		self.hasImage = ko.observable(false);
+		self.hasTitle = ko.observable(false);
+		self.isFocusingTitle = ko.observable(true);
 		self.uploadOptions = {
 			options: {
 				url: Y.Routing.generate("UploadFile"),
@@ -212,21 +213,29 @@
 		}, this);
 
 		self.activeImageUploading = ko.computed(function(){
-			if(self.isUploading() || self.toggleImage())
+			if(self.isUploading() || self.hasImage())
 				return true;
 			return false;
 		});
 
-		self.toggleUploadingImage = function(){
+		self.toggleImage = function(){
 			if(self.images().length > 0) {
 				Y.Utils.showConfirmMessage(Y.Constants.Messages.DELETE_UPLOAD_FILE_CONFIRM, function(){
-					self.toggleImage(!self.toggleImage());
+					self.hasImage(!self.hasImage());
 				}, function(){
 					//Close or cancel event
 				});
 			}else {
-				self.toggleImage(!self.toggleImage());
+				self.hasImage(!self.hasImage());
 			}
+		};
+
+		self.toggleTitle = function(){
+			if(self.hasTitle()){
+				self.newPost().title("");
+			}
+			self.hasTitle(!self.hasTitle());
+			self.isFocusingTitle(self.hasTitle());
 		};
 
 		self.addPost = function() {
@@ -239,7 +248,9 @@
 				if(postListWidget != null) {					
 					postListWidget.addPost(data);
 				}
-				self.toggleUploadingImage();
+				if(self.hasImage()){
+					self.hasImage(false);
+				}
 			}, function(errorInfo) {
 				//Show message fail
 			});
@@ -276,11 +287,11 @@
 		function _returnPostData(){
 			var content = ko.utils.unwrapObservable(self.newPost().content);
 			var title = ko.utils.unwrapObservable(self.newPost().title);
-			var postImgs = ko.utils.arrayMap(self.images(), function(file){
+			var postImgs = self.hasImage() ? ko.utils.arrayMap(self.images(), function(file){
 				return file.url;
-			});
+			}) : [];
 			return {
-				isAdvance : false,
+				isAdvance : self.hasTitle() && title.length > 0,
 				thumbs: postImgs,
 				title : title ? title.trim(): "",
 				content: content ? content.trim(): "",

@@ -215,7 +215,7 @@ var YesGlobal = YesGlobal || {};
 	            callback(Y.Caches.StockList);
 	        }else {
 	            var ajaxOptions = {
-	                url: Routing.generate('ApiGetAllStocks'),
+	                url: Y.Routing.generate('ApiGetAllStocks'),
 	                async: false
 	            };
 	            var successCallback = function(data){
@@ -234,7 +234,7 @@ var YesGlobal = YesGlobal || {};
 	            callback(window.yListFriends);
 	        }else {
 	            var ajaxOptions = {
-	                url: Routing.generate('ApiGetAllFriends'),
+	                url: Y.Routing.generate('ApiGetAllFriends'),
 	                async: false
 	            };
 	            var successCallback = function(data){
@@ -254,12 +254,16 @@ var YesGlobal = YesGlobal || {};
 	        }else {
 	            var apiUrl = "";
 	            if(Y.Caches.CurrentPost == null){
-	                apiUrl = Routing.generate('ApiGetAllFriends');
+	                apiUrl = Y.Routing.generate("ApiGetAllTags");
 	            }else {
-	                apiUrl = Routing.generate("ApiGetCommentTags", {
+	                apiUrl = Y.Routing.generate("ApiGetCommentTags", {
 	                    post_type : Y.Caches.CurrentPost ? Y.Caches.CurrentPost.type : "",
 	                    post_slug: Y.Caches.CurrentPost ? Y.Caches.CurrentPost.slug : ""
 	                });
+	            }
+	            if(apiUrl.length === 0) {
+	            	console.log("Route is invavlid !");
+	            	return [];
 	            }
 	            var ajaxOptions = {
 	                url: apiUrl,
@@ -433,7 +437,9 @@ var YesGlobal = YesGlobal || {};
 	            method = '';
 	        }
 	        var url = this.routing.getItem(name);
-	        
+	        if(url === undefined)
+	        	return "";
+
 	        for ( var key in params ){
 	            if ( params[key] == '' ) continue;
 	            url = url.replace( '{' + key + '}', params[key] );

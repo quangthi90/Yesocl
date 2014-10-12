@@ -5,12 +5,15 @@ a {
 
 .btn.btn-nobg {
 	background-color: #FFF;
-	color: #444;
+	color: #444;	
 }
-.btn.btn-nobg:hover, 
+.btn.btn-nobg:hover {
+	color: #25ad9f;
+}
 .btn.btn-nobg.active {
-	background-color: #25ad9f;
+	background-color: #25ad9f;	
 	color: #FFF;
+	border-right: 1px solid #FFF;
 }
 
 textarea {
@@ -185,5 +188,8 @@ body.loading #common-loading {
 }
 .post-item .comment-item:hover > .post-options .dropdown-toggle i {
 	color: #25ad9f;
+}
+.new-post-part {
+	margin-bottom: 15px;
 }
 /*================================== END POST =====================================*/
