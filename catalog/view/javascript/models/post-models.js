@@ -35,6 +35,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.userTags = ko.observableArray(data.user_tags || []);
 		that.stockTags = ko.observableArray(data.stock_tags || []);
 		that.comment = ko.observable(data.comment || {});
+		that.isEditMode = ko.observable(false);
 
 		that.contentDisplay = ko.computed(function(){
 			var rawContent = that.content();
@@ -131,7 +132,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.content = ko.observable(data.content || '');
 		that.isLiked = ko.observable(data.like_count || false);
 		that.likeCount = ko.observable(data.like_count || 0);
-		that.isInit = ko.observable(true);
+		that.hasEditFocus = ko.observable(true);
 
 		that.contentDisplay = ko.computed(function(){
 			var rawContent = that.content();
@@ -157,6 +158,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		var that = this;
 		that.commentList = ko.observableArray([]);
 		that.postData = data.postData || {};
+		that.currentEditComment = ko.observable(null);
 		that.newComment = ko.observable();
 		that.totalComments = ko.observable(data.totalComments || 0);
 		that.currentPage = ko.observable(1);
@@ -210,8 +212,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		};
 
 		that.edit = function(item) {
-			Y.Utils.showInfoMessage("Not yet done !", function(){
-			});
+			that.currentEditComment(item);
 		};
 
 		//START PRIVATE METHODS

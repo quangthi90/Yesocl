@@ -93,8 +93,15 @@
                             <div class="media-body innerTB">
                                 <a class="strong text-inverse text-small" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a> 
                                 <small class="text-muted text-small" data-bind="timeAgo: $data.created"></small>
+                                <!-- ko if: $parent.currentEditComment() == null || $parent.currentEditComment().id != $data.id -->
                                 <div class="text-small wraptext innerB innerR half comment-content" data-bind="html: $data.contentDisplay, zoomImageInContent: true, seeMore: true">
                                 </div>
+                                <!-- /ko -->
+                                <!-- ko ifnot: $parent.currentEditComment() == null || $parent.currentEditComment().id != $data.id -->
+                                <div class="innerAll">
+                                    <textarea class="form-control text-small text-input resize-ver animated" data-bind="valueUpdate: 'afterkeydown', autoSize: content, css: { 'disabled' : $parent.isProcessing }, hasFocus: $data.hasEditFocus()" type="text" placeholder="{% trans %}Your comment here...{% endtrans %}"></textarea>
+                                </div>
+                                <!-- /ko -->
                                 <!-- ko if: !$data.isLiked() -->
                                 <a data-bind="click: $parent.like" class="text-small"><i class="icon-thumbs-up half innerR"></i>{% trans %}Like{% endtrans %}</a>
                                 <!-- /ko -->
