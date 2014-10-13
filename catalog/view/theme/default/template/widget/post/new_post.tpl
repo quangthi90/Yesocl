@@ -9,7 +9,7 @@
                     <input type="text" data-bind="value: title, css: { 'disabled' : $parent.isPosting() }, valueUpdate: 'afterkeydown', hasFocus: $parent.isFocusingTitle()" class="form-control" placeholder="Enter a title ..." />
                 </div>
                 <!-- /ko -->
-                <textarea data-bind="css: { 'disabled' : $parent.isPosting() }, valueUpdate: 'afterkeydown', autoSize: content, mention: content" placeholder="Share something ..." class="form-control rounded-none border-none resize-ver animated new-post-content"></textarea>
+                <textarea spellcheck="false" data-bind="css: { 'disabled' : $parent.isPosting() }, valueUpdate: 'afterkeydown', autoSize: content, mention: content" placeholder="Share something ..." class="form-control rounded-none border-none resize-ver animated new-post-content"></textarea>
             </div>
             <div class="btn-toolbar" role="toolbar">
                 <div class="btn-group btn-group-sm">

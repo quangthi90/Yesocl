@@ -51,7 +51,7 @@
                             <!-- ko if: $data.title() != '' -->
                             <h4 class="media-heading" data-bind="text: $data.title"></h4>
                             <!-- /ko -->
-                            <div data-bind="html: $data.content, zoomImageInContent: true, seeMore: true"></div>
+                            <div data-bind="html: $data.contentDisplay, zoomImageInContent: true, seeMore: true"></div>
                         </div>
                     </div>
                 </div>                
@@ -93,7 +93,7 @@
                             <div class="media-body innerTB">
                                 <a class="strong text-inverse text-small" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a> 
                                 <small class="text-muted text-small" data-bind="timeAgo: $data.created"></small>
-                                <div class="text-small wraptext innerB half comment-content" data-bind="html: $data.content, zoomImageInContent: true, seeMore: true">
+                                <div class="text-small wraptext innerB innerR half comment-content" data-bind="html: $data.contentDisplay, zoomImageInContent: true, seeMore: true">
                                 </div>
                                 <!-- ko if: !$data.isLiked() -->
                                 <a data-bind="click: $parent.like" class="text-small"><i class="icon-thumbs-up half innerR"></i>{% trans %}Like{% endtrans %}</a>

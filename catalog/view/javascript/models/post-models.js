@@ -36,6 +36,15 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.stockTags = ko.observableArray(data.stock_tags || []);
 		that.comment = ko.observable(data.comment || {});
 
+		that.contentDisplay = ko.computed(function(){
+			var rawContent = that.content();
+			if(rawContent){
+				rawContent = rawContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
+				return Y.Utils.parseTaggedText(rawContent);
+			}
+			return "";
+		});
+
 		that.likePost = function() {
 			var ajaxOptions = {
 				url : Y.Routing.generate('ApiPutPostLike', {
@@ -123,6 +132,15 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.isLiked = ko.observable(data.like_count || false);
 		that.likeCount = ko.observable(data.like_count || 0);
 		that.isInit = ko.observable(true);
+
+		that.contentDisplay = ko.computed(function(){
+			var rawContent = that.content();
+			if(rawContent){
+				rawContent = rawContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
+				return Y.Utils.parseTaggedText(rawContent);
+			}
+			return "";
+		});
 
 		that.reset = function() {
 			that.id = "";

@@ -2,6 +2,14 @@
 a {
 	cursor: pointer !important;
 }
+a.tag-link {
+	color: #0E0E0E;
+	font-size: 13px;
+	font-weight: bold;
+}
+a.tag-link:hover {
+	color: #25ad9f;
+}
 
 .btn.btn-nobg {
 	background-color: #FFF;
