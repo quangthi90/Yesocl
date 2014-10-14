@@ -41,6 +41,10 @@
                         loadPost: {
                             name: "ApiGetUserPost", 
                             params: { user_slug : "{{ current_user.slug }}" }
+                        },
+                        savePost : { 
+                            name: "ApiPutPost", 
+                            params: {}
                         }
                     }
                 };

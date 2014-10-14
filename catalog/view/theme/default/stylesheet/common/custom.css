@@ -1,4 +1,10 @@
 /*================================== START COMMON =================================*/
+input[type="text"]:focus,
+input[type="text"]:active,
+input[type="text"]:hover {
+  background-color: #FFF;
+}
+
 a {
 	cursor: pointer !important;
 }
@@ -144,6 +150,10 @@ body.loading #common-loading {
 }
 .post-item .post-content {	
 }
+.post-item .post-content .post-images {
+}
+.post-item .post-content .post-content-details {	
+}
 .post-item .post-content img {	
 	max-width: 100%;
 	height: auto;
@@ -153,6 +163,8 @@ body.loading #common-loading {
 	border: none;
 	padding: 0px;
 }
+.post-item .post-content .post-editing {	
+}
 .post-item .text-input {
 	max-width: 100%;
 	min-width: 100%;	
@@ -160,7 +172,8 @@ body.loading #common-loading {
 	height: 30px;
 	font-size: 12px;
 }
-.post-item .mentions-input-box .mentions > div {
+.post-item .comment .mentions-input-box .mentions > div,
+.post-item .comment-list .mentions-input-box .mentions > div {
 	font-size: 12px;
 }
 .post-item .comment-list > .comment-item {

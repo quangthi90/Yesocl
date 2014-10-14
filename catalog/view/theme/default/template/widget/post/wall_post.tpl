@@ -42,18 +42,43 @@
                     </div>
                 </div>
                 <!-- Content -->
-                <div class="innerAll post-content" >
-                    <div class="media">
+                <div class="innerAll overflow-hidden post-content">
+                    <!-- ko if: $parent.currentEditingPost() == null || $parent.currentEditingPost().id != $data.id -->
+                    <div class="innerR pull-left post-images">
                         <!-- ko if: $data.image() != '' -->
-                        <img class="media-object pull-left thumb" data-bind="attr: { 'src' : $data.image(), 'data-zoom' : $data.thumb() }, loadImage: true" />
+                        <img class="media-object thumb" data-bind="attr: { 'src' : $data.image(), 'data-zoom' : $data.thumb() }, loadImage: true" />
                         <!-- /ko -->
-                        <div class="media-body">
-                            <!-- ko if: $data.title() != '' -->
-                            <h4 class="media-heading" data-bind="text: $data.title"></h4>
-                            <!-- /ko -->
-                            <div data-bind="html: $data.contentDisplay, zoomImageInContent: true, seeMore: true"></div>
-                        </div>
                     </div>
+                    <div class="display-inline post-content-details">
+                        <!-- ko if: $data.title() != '' -->
+                        <h4 class="heading" data-bind="text: $data.title"></h4>
+                        <!-- /ko -->
+                        <div data-bind="html: $data.contentDisplay, zoomImageInContent: true, seeMore: true"></div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: $parent.currentEditingPost() != null && $parent.currentEditingPost().id == $data.id -->
+                    <div class="edit-post-container" data-bind="with: $parent.currentEditingPost">
+                        <div class="innerAll bg-gray overflow-hidden post-content-details post-editing">
+                            <div class="innerB">
+                                <input type="text" data-bind="value: $data.title, valueUpdate: 'afterkeydown', hasFocus: $parents[1].hasEditFocus(), enable: !$parents[1].isProcessing(), executeOnEscape: $parents[1].cancelEdit" class="form-control" placeholder="Enter a title ..." />
+                            </div>
+                            <div class="innerB">
+                                <div class="edit-container">
+                                    <textarea class="form-control resize-ver animated" data-bind="valueUpdate: 'afterkeydown', enable: !$parents[1].isProcessing(), mention: $data.content, autoSize: $data.content, resetHeight: 35, executeOnEscape: $parents[1].cancelEdit" type="text" placeholder="{% trans %}Enter content ...{% endtrans %}"></textarea>
+                                </div>
+                            </div>
+                            <div class="innerT pull-right">
+                                <button  data-bind="click: $parents[1].submitEdit, css: { 'disabled' : !$parents[1].canSubmitEdit() }" class="btn btn-primary btn-sm">{% trans %}OK{% endtrans %}</button>
+                                <button data-bind="click: $parents[1].cancelEdit, css: { 'disabled' : $parents[1].isProcessing() }" class="btn btn-default btn-sm">{% trans %}Cancel{% endtrans %}</button>
+                            </div>
+                        </div>
+                        <div class="innerT post-images">
+                            <!-- ko if: $data.image() != '' -->
+                            <img class="media-object thumb" data-bind="attr: { 'src' : $data.image(), 'data-zoom' : $data.thumb() }, loadImage: true" />
+                            <!-- /ko -->
+                        </div>                        
+                    </div>
+                    <!-- /ko -->
                 </div>                
                 <div class="innerAll border-bottom border-top bg-gray text-small">
                     <!-- ko if: !$data.isLiked() -->
@@ -100,7 +125,7 @@
                                 <!-- ko ifnot: $parent.currentEditComment() == null || $parent.currentEditComment().id != $data.id -->
                                 <div class="innerAll padding-left-none" data-bind="with: $parent.currentEditComment">
                                     <div class="edit-container">
-                                        <textarea class="form-control text-input resize-ver animated" data-bind="valueUpdate: 'afterkeydown', resetHeight: 35, css: { 'disabled' : $parent.isProcessing }, hasFocus: $parents[1].hasEditFocus(), mention: $data.content, autoSize: $data.content, executeOnEscape: $parents[1].cancelEdit" type="text" placeholder="{% trans %}Your comment here...{% endtrans %}"></textarea>
+                                        <textarea class="form-control text-input resize-ver animated" data-bind="valueUpdate: 'afterkeydown', enable: !$parents[1].isProcessing(), hasFocus: $parents[1].hasEditFocus(), mention: $data.content, autoSize: $data.content, resetHeight: 35, executeOnEscape: $parents[1].cancelEdit" type="text" placeholder="{% trans %}Your comment here...{% endtrans %}"></textarea>
                                     </div>                                    
                                     <div class="innerT pull-right">
                                         <button  data-bind="click: $parents[1].submitEdit, css: { 'disabled' : !$parents[1].canSubmitEdit() }" class="btn btn-primary btn-sm">{% trans %}OK{% endtrans %}</button>
@@ -137,7 +162,7 @@
                     <!-- /ko -->
                     </div>
                     <div class="comment" data-bind="with: $data.newComment">
-                        <textarea rows="1" class="form-control text-input resize-ver animated" data-bind="valueUpdate: 'afterkeydown', css: { 'disabled' : $parent.isProcessing }, executeOnEnter: $parent.add, shiftKeyRequired: true, mention: content, autoSize: content, resetHeight: 28" type="text" placeholder="{% trans %}Your comment here...{% endtrans %}"></textarea>
+                        <textarea rows="1" class="form-control text-input resize-ver animated" data-bind="valueUpdate: 'afterkeydown', enable: !$parent.isProcessing(), executeOnEnter: $parent.add, shiftKeyRequired: true, mention: content, autoSize: content, resetHeight: 28" type="text" placeholder="{% trans %}Your comment here...{% endtrans %}"></textarea>
                     </div>
                 </div>
             </div>

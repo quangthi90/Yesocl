@@ -92,7 +92,23 @@ YesGlobal.Models = YesGlobal.Models || {};
 			};
 		};
 
-		that.fullyToJSON = function(){
+		that.toEditJson = function(){
+			return {
+				id : ko.utils.unwrapObservable(that.id),
+				title : ko.utils.unwrapObservable(that.title),
+				content : ko.utils.unwrapObservable(that.content),
+				thumb : ko.utils.unwrapObservable(that.thumb),
+				image : ko.utils.unwrapObservable(that.image),
+				description : ko.utils.unwrapObservable(that.description),
+				slug : ko.utils.unwrapObservable(that.slug),
+				type : ko.utils.unwrapObservable(that.type),
+				category : ko.utils.unwrapObservable(that.category),
+				userTags : ko.utils.unwrapObservable(that.userTags),
+				stockTags : ko.utils.unwrapObservable(that.stockTags)
+			};
+		};
+
+		that.fullyToJson = function(){
 			return {
 				id : ko.utils.unwrapObservable(that.id),
 				title : ko.utils.unwrapObservable(that.title),

@@ -191,7 +191,6 @@ var YesGlobal = YesGlobal || {};
 		    init: function (element, valueAccessor, allBindingsAccessor) {
 		        $(element).autosize();
 		        if(valueAccessor()()){
-		        	console.log("dfdf");
 		        	$(element).trigger("autosize.resize");
 		        }
 		        $(element).on(Y.Constants.Triggers.INPUT_CONTENT_CHANGED, function() {

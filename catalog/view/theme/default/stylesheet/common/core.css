@@ -184,6 +184,9 @@
 .display-block {
   display: block !important;
 }
+.display-inline {
+  display: inline !important;
+}
 .display-block-inline {
   display: inline-block !important;
 }
