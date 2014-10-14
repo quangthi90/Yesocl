@@ -130,6 +130,8 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.canDelete = data.can_delete || false;
 		that.canEdit = data.can_edit || false;
 		that.content = ko.observable(data.content || '');
+		that.userTags = ko.observable(data.user_tags || []);
+		that.stockTags = ko.observable(data.stock_tags || []);
 		that.isLiked = ko.observable(data.like_count || false);
 		that.likeCount = ko.observable(data.like_count || 0);
 		that.hasEditFocus = ko.observable(true);
@@ -151,6 +153,15 @@ YesGlobal.Models = YesGlobal.Models || {};
 			that.content("");
 			that.isLiked(false);
 			that.likeCount(0);
+			that.userTags([]);
+			that.stockTags([]);
+		};
+
+		that.toJson = function() {
+			return {
+				id : ko.unwrapObservable(that.id),
+				content: ko.unwrapObservable(that.content)
+			};
 		};
 	};
 
@@ -191,11 +202,12 @@ YesGlobal.Models = YesGlobal.Models || {};
 
 		that.add = function(model, ele) {
 			var content = that.newComment().content();
+			var tags = Y.Utils.parseTagsInfo(content);
 			if(content && content.trim().length > 0 && !that.isProcessing()) {
 				_addComment({
 					content : content,
-					userTags: [],
-					stockTags: []
+					userTags: tags.userTags,
+					stockTags: tags.stockTags
 				}, function(data) {
 					that.newComment().reset();
 					$(ele).trigger(Y.Constants.Triggers.INPUT_CONTENT_CHANGED);

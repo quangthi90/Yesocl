@@ -160,6 +160,9 @@ body.loading #common-loading {
 	height: 30px;
 	font-size: 12px;
 }
+.post-item .comment .mentions-input-box .mentions > div {
+	font-size: 12px;
+}
 .post-item .comment-list > .comment-item {
 	position: relative;
 	overflow: visible;

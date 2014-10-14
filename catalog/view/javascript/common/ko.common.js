@@ -239,9 +239,10 @@ var YesGlobal = YesGlobal || {};
 		    },
 		    update: function (element, valueAccessor, allBindingsAccessor) {
 		        var observableAttr = valueAccessor();
-		        if(observableAttr().length === 0){
+		        var resetHeight = allBindingsAccessor().resetHeight || 50;
+		        if(observableAttr() === null || observableAttr() === undefined || observableAttr().length === 0){
 		            $(element).mentionsInput("reset");
-		            $(element).height(50).focus();
+		            $(element).height(resetHeight);
 		        }
 		    }
 		};

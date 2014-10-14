@@ -309,6 +309,29 @@ var YesGlobal = YesGlobal || {};
 
 			return text;
 	    },
+	    parseTagsInfo: function(text) {
+	        var mentionItemRegex = /@\[([^\]]+)\]\(([^:]+):([^:]+)\)/;
+			var match;
+			var result = {
+				userTags: [],
+				stockTags: []
+			};
+			while(match = mentionItemRegex.exec(text)){
+				var matchedText = match[0];
+		        var value = match[1];
+		        var type = match[2];
+		        var id = match[3];
+		        if(type == "contact") {
+		        	result.userTags.push(id);
+		        }
+		        else if(type == "stock") {
+		        	result.stockTags.push(id); 
+		        }
+		        text = text.replace(matchedText, "");
+			}
+
+			return result;
+	    },
 	    getKoContext: function(eleId){
 	        if(eleId !== undefined){
 	            return ko.contextFor(document.getElementById(eleId));

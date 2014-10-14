@@ -290,13 +290,14 @@
 			var postImgs = self.hasImage() ? ko.utils.arrayMap(self.images(), function(file){
 				return file.url;
 			}) : [];
+			var tags = Y.Utils.parseTagsInfo(content);
 			return {
 				isAdvance : self.hasTitle() && title.length > 0,
 				thumbs: postImgs,
 				title : title ? title.trim(): "",
 				content: content ? content.trim(): "",
-				userTags: [],
-				stockTags: []
+				userTags: tags.userTags,
+				stockTags: tags.stockTags
 			};
 		}
 
