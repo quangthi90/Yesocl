@@ -159,8 +159,8 @@ YesGlobal.Models = YesGlobal.Models || {};
 
 		that.toJson = function() {
 			return {
-				id : ko.unwrapObservable(that.id),
-				content: ko.unwrapObservable(that.content)
+				id : ko.utils.unwrapObservable(that.id),
+				content: ko.utils.unwrapObservable(that.content)
 			};
 		};
 	};
@@ -170,6 +170,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.commentList = ko.observableArray([]);
 		that.postData = data.postData || {};
 		that.currentEditComment = ko.observable(null);
+		that.currentComment = ko.observable(null);
 		that.newComment = ko.observable();
 		that.totalComments = ko.observable(data.totalComments || 0);
 		that.currentPage = ko.observable(1);
@@ -224,7 +225,29 @@ YesGlobal.Models = YesGlobal.Models || {};
 		};
 
 		that.edit = function(item) {
-			that.currentEditComment(item);
+			that.currentComment(item);
+			var editItem = new Y.Models.CommentModel(item.toJson());
+			that.currentEditComment(editItem);
+		};
+
+		that.cancelEdit = function(item) {
+			that.currentEditComment(null);
+		};
+
+		that.submitEdit = function(item) {
+			var content = item.content();		
+			if(content && content.trim().length > 0 && !that.isProcessing()) {
+				var tags = Y.Utils.parseTagsInfo(content);
+				_saveComment({
+					id: item.id,
+					content : content,
+					userTags: tags.userTags,
+					stockTags: tags.stockTags
+				}, function(data) {
+					that.currentEditComment(null);
+					that.currentComment().content(data.content);
+				});
+			}	
 		};
 
 		//START PRIVATE METHODS
@@ -295,6 +318,35 @@ YesGlobal.Models = YesGlobal.Models || {};
 					//Show message
 					if(failCallback && typeof failCallback == "function") {
 						failCallback();
+					}
+				}
+				that.isProcessing(false);
+			};
+			Y.Utils.ajaxCall(ajaxOptions, function() { 
+				that.isProcessing(true); 
+			}, successCallback, function() {
+				that.isProcessing(false) ; 
+			});
+		}
+
+		function _saveComment(commentData, sucCallback, failCallback) {
+			var ajaxOptions = {
+				url : Y.Routing.generate("ApiPutComment", {
+					post_type: that.postData.type,
+					comment_id : commentData.id
+				}),
+				data: commentData
+			};
+
+			var successCallback = function(data){
+				if(data.success === "ok") {
+					if(sucCallback && typeof sucCallback == "function") {
+						sucCallback(data.comment);
+					}
+				}else{
+					//Show message
+					if(failCallback && typeof failCallback == "function") {
+						failCallback(data.error);
 					}
 				}
 				that.isProcessing(false);

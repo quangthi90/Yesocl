@@ -98,11 +98,13 @@
                                 </div>
                                 <!-- /ko -->
                                 <!-- ko ifnot: $parent.currentEditComment() == null || $parent.currentEditComment().id != $data.id -->
-                                <div class="innerAll padding-left-none">
-                                    <textarea class="form-control text-small text-input resize-ver animated margin-bottom" data-bind="valueUpdate: 'afterkeydown', autoSize: content, resetHeight: 35, css: { 'disabled' : $parent.isProcessing }, hasFocus: $data.hasEditFocus()" type="text" placeholder="{% trans %}Your comment here...{% endtrans %}"></textarea>
+                                <div class="innerAll padding-left-none" data-bind="with: $parent.currentEditComment">
+                                    <div class="edit-container">
+                                        <textarea class="form-control text-input resize-ver animated" data-bind="valueUpdate: 'afterkeydown', resetHeight: 35, css: { 'disabled' : $parent.isProcessing }, hasFocus: $data.hasEditFocus(), mention: $data.content, autoSize: $data.content" type="text" placeholder="{% trans %}Your comment here...{% endtrans %}"></textarea>
+                                    </div>                                    
                                     <div class="innerT pull-right">
-                                        <button class="btn btn-primary btn-sm">{% trans %}OK{% endtrans %}</button>
-                                        <button class="btn btn-default btn-sm">{% trans %}Cancel{% endtrans %}</button>
+                                        <button  data-bind="click: $parents[1].submitEdit" class="btn btn-primary btn-sm">{% trans %}OK{% endtrans %}</button>
+                                        <button data-bind="click: $parents[1].cancelEdit" class="btn btn-default btn-sm">{% trans %}Cancel{% endtrans %}</button>
                                     </div>
                                 </div>
                                 <!-- /ko -->

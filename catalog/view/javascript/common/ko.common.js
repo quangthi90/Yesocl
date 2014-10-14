@@ -176,6 +176,10 @@ var YesGlobal = YesGlobal || {};
 		ko.bindingHandlers.autoSize = {
 		    init: function (element, valueAccessor, allBindingsAccessor) {
 		        $(element).autosize();
+		        if(valueAccessor()()){
+		        	console.log("dfdf");
+		        	$(element).trigger("autosize.resize");
+		        }
 		        $(element).on(Y.Constants.Triggers.INPUT_CONTENT_CHANGED, function() {
 		        	$(element).trigger("autosize.resize");
 		        });
@@ -236,6 +240,11 @@ var YesGlobal = YesGlobal || {};
 		            },
 		            fullNameTrigger: false
 		        });
+				var instance = $(element).data("mentionsInput");
+				var initText = observableAttr();
+				if(instance && initText) {
+					instance.set(initText);
+				}
 		    },
 		    update: function (element, valueAccessor, allBindingsAccessor) {
 		        var observableAttr = valueAccessor();
