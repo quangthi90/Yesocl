@@ -80,12 +80,26 @@ var YesGlobal = YesGlobal || {};
 		};
 		ko.bindingHandlers.executeOnEnter = {
 		    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-		        var allBindings = allBindingsAccessor();
+		        var allBindings = allBindingsAccessor();		        
 		        $(element).keypress(function (e) {
 		            var keyCode = (e.which ? e.which : e.keyCode);
-		            if (keyCode === 13) {
+		            var shiftKeyRequired = allBindings.shiftKeyRequired || false;
+		            if (keyCode === 13 && e.shiftKey === !shiftKeyRequired) {
 		            	e.preventDefault();
 		                return allBindings.executeOnEnter.call(viewModel, viewModel, element);
+		            }
+		            return true;
+		        });
+		    }
+		};
+		ko.bindingHandlers.executeOnEscape = {
+		    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+		        var allBindings = allBindingsAccessor();		        
+		        $(element).keypress(function (e) {
+		            var keyCode = (e.which ? e.which : e.keyCode);
+		            if (keyCode === 27) {
+		            	e.preventDefault();
+		                return allBindings.executeOnEscape.call(viewModel, viewModel, element);
 		            }
 		            return true;
 		        });

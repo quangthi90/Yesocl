@@ -134,7 +134,6 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.stockTags = ko.observable(data.stock_tags || []);
 		that.isLiked = ko.observable(data.like_count || false);
 		that.likeCount = ko.observable(data.like_count || 0);
-		that.hasEditFocus = ko.observable(true);
 
 		that.contentDisplay = ko.computed(function(){
 			var rawContent = that.content();
@@ -176,6 +175,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.currentPage = ko.observable(1);
 		that.canLoadMore = ko.observable(data.commentList && data.commentList.length == 3);
 		that.isProcessing = ko.observable(false);
+		that.hasEditFocus = ko.observable(undefined);
 
 		that.like = function(item) {
 			var ajaxOptions = {
@@ -228,10 +228,12 @@ YesGlobal.Models = YesGlobal.Models || {};
 			that.currentComment(item);
 			var editItem = new Y.Models.CommentModel(item.toJson());
 			that.currentEditComment(editItem);
+			that.hasEditFocus(true);
 		};
 
 		that.cancelEdit = function(item) {
 			that.currentEditComment(null);
+			that.hasEditFocus(undefined);
 		};
 
 		that.submitEdit = function(item) {
@@ -245,10 +247,18 @@ YesGlobal.Models = YesGlobal.Models || {};
 					stockTags: tags.stockTags
 				}, function(data) {
 					that.currentEditComment(null);
+					that.hasEditFocus(undefined);
 					that.currentComment().content(data.content);
 				});
 			}	
 		};
+
+		that.canSubmitEdit = ko.computed(function(){
+			if(that.currentEditComment() == null)
+				return false;
+			var content = that.currentEditComment().content();	
+			return (content && content.trim().length > 0 && !that.isProcessing());
+		});
 
 		//START PRIVATE METHODS
 		function _loadMore(sucCallback, failCallback) {

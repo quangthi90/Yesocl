@@ -100,11 +100,11 @@
                                 <!-- ko ifnot: $parent.currentEditComment() == null || $parent.currentEditComment().id != $data.id -->
                                 <div class="innerAll padding-left-none" data-bind="with: $parent.currentEditComment">
                                     <div class="edit-container">
-                                        <textarea class="form-control text-input resize-ver animated" data-bind="valueUpdate: 'afterkeydown', resetHeight: 35, css: { 'disabled' : $parent.isProcessing }, hasFocus: $data.hasEditFocus(), mention: $data.content, autoSize: $data.content" type="text" placeholder="{% trans %}Your comment here...{% endtrans %}"></textarea>
+                                        <textarea class="form-control text-input resize-ver animated" data-bind="valueUpdate: 'afterkeydown', resetHeight: 35, css: { 'disabled' : $parent.isProcessing }, hasFocus: $parents[1].hasEditFocus(), mention: $data.content, autoSize: $data.content, executeOnEscape: $parents[1].cancelEdit" type="text" placeholder="{% trans %}Your comment here...{% endtrans %}"></textarea>
                                     </div>                                    
                                     <div class="innerT pull-right">
-                                        <button  data-bind="click: $parents[1].submitEdit" class="btn btn-primary btn-sm">{% trans %}OK{% endtrans %}</button>
-                                        <button data-bind="click: $parents[1].cancelEdit" class="btn btn-default btn-sm">{% trans %}Cancel{% endtrans %}</button>
+                                        <button  data-bind="click: $parents[1].submitEdit, css: { 'disabled' : !$parents[1].canSubmitEdit() }" class="btn btn-primary btn-sm">{% trans %}OK{% endtrans %}</button>
+                                        <button data-bind="click: $parents[1].cancelEdit, css: { 'disabled' : $parents[1].isProcessing() }" class="btn btn-default btn-sm">{% trans %}Cancel{% endtrans %}</button>
                                     </div>
                                 </div>
                                 <!-- /ko -->
@@ -137,7 +137,7 @@
                     <!-- /ko -->
                     </div>
                     <div class="comment" data-bind="with: $data.newComment">
-                        <textarea rows="1" class="form-control text-input resize-ver animated" data-bind="valueUpdate: 'afterkeydown', autoSize: content, resetHeight: 28, css: { 'disabled' : $parent.isProcessing }, executeOnEnter: $parent.add, mention: content" type="text" placeholder="{% trans %}Your comment here...{% endtrans %}"></textarea>
+                        <textarea rows="1" class="form-control text-input resize-ver animated" data-bind="valueUpdate: 'afterkeydown', css: { 'disabled' : $parent.isProcessing }, executeOnEnter: $parent.add, shiftKeyRequired: true, mention: content, autoSize: content, resetHeight: 28" type="text" placeholder="{% trans %}Your comment here...{% endtrans %}"></textarea>
                     </div>
                 </div>
             </div>
