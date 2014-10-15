@@ -12,11 +12,15 @@
 		self.apiUrls = options.apiUrls || {};
 		self.needEffect = false;
 
+		self.isProcessing = ko.observable(false);
 		self.isLoadSuccess = ko.observable(false);
 		self.isLoadingMore = ko.observable(false);
 
 		self.currentPage = ko.observable(1);
 		self.postList = ko.observableArray([]);
+		self.currentEditingPost = ko.observable();
+		self.currentPost = ko.observable();
+		self.hasEditFocus = ko.observable(undefined);
 
 		/*  ============= END PROPERTIES ==================== */
 
@@ -45,7 +49,7 @@
 				var newPost = new Y.Models.PostModel(post);
 				self.postList.unshift(newPost);
 			}			
-		};
+		};		
 		self.deletePost = function(post){
 			Y.Utils.showConfirmMessage(Y.Constants.Messages.COMMON_CONFIRM, function(){
 				_deletePost(post, function(){
@@ -55,8 +59,40 @@
 				//Close or cancel event
 			});
 		};
-		self.editPost = function(post){
+		self.editPost = function(post) {
+			self.currentPost(post);
+			var rawPost = post.toEditJson();
+			self.currentEditingPost(new Y.Models.PostModel(rawPost));
+			self.hasEditFocus(true);
 		};
+
+		self.cancelEdit = function(item) {
+			self.currentEditingPost(null);
+			self.hasEditFocus(undefined);
+		};
+
+		self.submitEdit = function(item) {
+			var postData = _returnEditData();
+			if(self.isProcessing() || postData.content.length === 0) {
+				return;
+			}
+			_savePost(postData, function(data){
+				self.currentEditingPost(null);
+				self.hasEditFocus(undefined);
+				self.currentPost().content(data.content || "");
+				self.currentPost().title(data.title || "");
+			}, function(errorInfo) {
+				//Show message fail
+			});
+		};
+
+		self.canSubmitEdit = ko.computed(function(){
+			if(self.currentEditingPost() == null)
+				return false;
+			var content = self.currentEditingPost().content();	
+			return (content && content.trim().length > 0 && !self.isProcessing());
+		});
+
 		self.afterRender = function(param1, param2){
 			_handleEffects();
 		};
@@ -122,6 +158,34 @@
 		function _loadMoreComment(callback) {			
 		}
 
+		function _savePost(post, sucCallback, failCallback) {
+			var apiSavePost = self.apiUrls.savePost;
+			apiSavePost.params.post_slug = post.slug;
+			apiSavePost.params.post_type = post.type;
+			var ajaxOptions = {
+				url: Y.Routing.generate(apiSavePost.name, apiSavePost.params),
+				data: post
+			};
+			var successCallback = function(data){
+				if(data.success === "ok"){
+					if(sucCallback && typeof sucCallback === "function") {
+						sucCallback(data.post);
+					}					
+				} else {
+					if (failCallback && typeof failCallback == "function") {
+						failCallback(data.error);
+					};
+				}
+				self.isProcessing(false);
+			};
+
+			//Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, 
+				function() { self.isProcessing(true); }, successCallback, 
+				function() { self.isProcessing(false); }
+			);
+		}
+
 		function _deletePost(post, callback) {
 			var ajaxOptions = {
 				url: Y.Routing.generate("ApiDeletePost", {
@@ -139,6 +203,23 @@
 			}
 			//Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		}
+
+		function _returnEditData(){
+			var content = ko.utils.unwrapObservable(self.currentEditingPost().content);
+			var title = ko.utils.unwrapObservable(self.currentEditingPost().title);
+			var slug = ko.utils.unwrapObservable(self.currentEditingPost().slug);
+			var type = ko.utils.unwrapObservable(self.currentEditingPost().type);
+			var tags = Y.Utils.parseTagsInfo(content);
+			return {
+				isAdvance : title && title.length > 0,
+				title : title ? title.trim(): "",
+				slug: slug,
+				type: type,
+				content: content ? content.trim(): "",
+				userTags: tags.userTags,
+				stockTags: tags.stockTags
+			};
 		}
 
 		function _handleEffects() {
@@ -290,13 +371,14 @@
 			var postImgs = self.hasImage() ? ko.utils.arrayMap(self.images(), function(file){
 				return file.url;
 			}) : [];
+			var tags = Y.Utils.parseTagsInfo(content);
 			return {
 				isAdvance : self.hasTitle() && title.length > 0,
 				thumbs: postImgs,
 				title : title ? title.trim(): "",
 				content: content ? content.trim(): "",
-				userTags: [],
-				stockTags: []
+				userTags: tags.userTags,
+				stockTags: tags.stockTags
 			};
 		}
 

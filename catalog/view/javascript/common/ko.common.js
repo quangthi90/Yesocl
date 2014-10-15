@@ -80,12 +80,26 @@ var YesGlobal = YesGlobal || {};
 		};
 		ko.bindingHandlers.executeOnEnter = {
 		    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
-		        var allBindings = allBindingsAccessor();
+		        var allBindings = allBindingsAccessor();		        
 		        $(element).keypress(function (e) {
 		            var keyCode = (e.which ? e.which : e.keyCode);
-		            if (keyCode === 13) {
+		            var shiftKeyRequired = allBindings.shiftKeyRequired || false;
+		            if (keyCode === 13 && e.shiftKey === !shiftKeyRequired) {
 		            	e.preventDefault();
 		                return allBindings.executeOnEnter.call(viewModel, viewModel, element);
+		            }
+		            return true;
+		        });
+		    }
+		};
+		ko.bindingHandlers.executeOnEscape = {
+		    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+		        var allBindings = allBindingsAccessor();		        
+		        $(element).keypress(function (e) {
+		            var keyCode = (e.which ? e.which : e.keyCode);
+		            if (keyCode === 27) {
+		            	e.preventDefault();
+		                return allBindings.executeOnEscape.call(viewModel, viewModel, element);
 		            }
 		            return true;
 		        });
@@ -176,6 +190,9 @@ var YesGlobal = YesGlobal || {};
 		ko.bindingHandlers.autoSize = {
 		    init: function (element, valueAccessor, allBindingsAccessor) {
 		        $(element).autosize();
+		        if(valueAccessor()()){
+		        	$(element).trigger("autosize.resize");
+		        }
 		        $(element).on(Y.Constants.Triggers.INPUT_CONTENT_CHANGED, function() {
 		        	$(element).trigger("autosize.resize");
 		        });
@@ -236,12 +253,18 @@ var YesGlobal = YesGlobal || {};
 		            },
 		            fullNameTrigger: false
 		        });
+				var instance = $(element).data("mentionsInput");
+				var initText = observableAttr();
+				if(instance && initText) {
+					instance.set(initText);
+				}
 		    },
 		    update: function (element, valueAccessor, allBindingsAccessor) {
 		        var observableAttr = valueAccessor();
-		        if(observableAttr().length === 0){
+		        var resetHeight = allBindingsAccessor().resetHeight || 50;
+		        if(observableAttr() === null || observableAttr() === undefined || observableAttr().length === 0){
 		            $(element).mentionsInput("reset");
-		            $(element).height(50).focus();
+		            $(element).height(resetHeight);
 		        }
 		    }
 		};

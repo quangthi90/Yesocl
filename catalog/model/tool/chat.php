@@ -1,8 +1,6 @@
 <?php
 class ModelToolChat extends Model {
 	public function pushMessage( $sChannelName, $sUsername, $sContent, $sEmail ) {
-		$oMessage = $oRoom->getMessages()->last();
-
 		$aOptions = $this->sanitiseInput(array(
 			'nickname' => substr( htmlspecialchars($sUsername), 0, 30 ),
 			'text' => substr( htmlspecialchars($sContent), 0, 300 ),
@@ -21,7 +19,6 @@ class ModelToolChat extends Model {
 
 	private function sanitiseInput( $aChatInfo, $bGetGravatar = true ) {
 	  	$email = isset($aChatInfo['email'])?$aChatInfo['email']:'';
-	  	var_dump($aChatInfo);
 	  	$aOptions = array();
 	  	$aOptions['displayName'] = substr(htmlspecialchars($aChatInfo['nickname']), 0, 30);
 	  	$aOptions['text'] = substr(htmlspecialchars($aChatInfo['text']), 0, 300);

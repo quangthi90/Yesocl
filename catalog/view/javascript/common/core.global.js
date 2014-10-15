@@ -14,6 +14,9 @@ var YesGlobal = YesGlobal || {};
 	};
 
 	Y.Constants = {
+		Regexs: {
+			TAG_REGEX: /@\[([^\]]+)\]\(([^:]+):([^:]+)\)/g
+		},
 		Messages: {
 			COMMON_CONFIRM : "Are you sure you want to do this selection ?",
 			DELETE_UPLOAD_FILE_CONFIRM : "Are you sure you want to remove uploaded files ?"
@@ -283,6 +286,51 @@ var YesGlobal = YesGlobal || {};
 	            }
 	            Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	        }
+	    },
+	    parseTaggedText: function(text) {
+	        var mentionItemRegex = /@\[([^\]]+)\]\(([^:]+):([^:]+)\)/;
+			var match;
+			var replaceText = "", link="";
+			while(match = mentionItemRegex.exec(text)){
+				var matchedText = match[0];
+		        var value = match[1];
+		        var type = match[2];
+		        var id = match[3];
+		        if(type == "contact") {
+		        	link = Y.Routing.generate("WallPage", { user_slug : id });
+	                replaceText = '<a class="tag-link wall-link" href="' + link + '">@' + value + '</a>';
+		        }
+		        else if(type == "stock") {
+		        	link = Y.Routing.generate("StockPage", { stock_code : id });        
+	                replaceText = '<a class="tag-link stock-link" href="' + link + '">$' + value + '</a>';  
+		        }     
+		        text = text.replace(matchedText, replaceText);
+			}
+
+			return text;
+	    },
+	    parseTagsInfo: function(text) {
+	        var mentionItemRegex = /@\[([^\]]+)\]\(([^:]+):([^:]+)\)/;
+			var match;
+			var result = {
+				userTags: [],
+				stockTags: []
+			};
+			while(match = mentionItemRegex.exec(text)){
+				var matchedText = match[0];
+		        var value = match[1];
+		        var type = match[2];
+		        var id = match[3];
+		        if(type == "contact") {
+		        	result.userTags.push(id);
+		        }
+		        else if(type == "stock") {
+		        	result.stockTags.push(id); 
+		        }
+		        text = text.replace(matchedText, "");
+			}
+
+			return result;
 	    },
 	    getKoContext: function(eleId){
 	        if(eleId !== undefined){

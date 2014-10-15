@@ -92,6 +92,10 @@ set_error_handler('error_handler');
 $url = new Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));	
 $registry->set('url', $url);
 
+// Pusher
+$pusher = new Pusher(PUSHER_APP_KEY, PUSHER_APP_SECRET, PUSHER_APP_ID);
+$registry->set('pusher', $pusher);
+
 // Request
 $request = new Request();
 $registry->set('request', $request);

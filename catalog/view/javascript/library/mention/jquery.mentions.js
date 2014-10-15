@@ -33,7 +33,7 @@
       autocompleteListItemIcon   : _.template('<div class="icon <%= icon %>"></div>'),
       mentionsOverlay            : _.template('<div class="mentions"><div></div></div>'),
       mentionItemHighlight       : _.template('<strong><span><%= value %></span></strong>'),
-      mentionItemSyntax          : _.template('@[<%= id %>](<%= type %>:<%= value %>)'),
+      mentionItemSyntax          : _.template('@[<%= value %>](<%= type %>:<%= id %>)'),
       mentionItemContent         : _.template('<a href="<%= wall %>" class="wall-link" data-ref="<%= id %>" data-content-syntax="@[<%= value %>](<%= type %>:<%= id %>)"><%= value %></a>')      
     },
     mentionItemRegex: /@\[([^\]]+)\]\(([^:]+):([^:]+)\)/g

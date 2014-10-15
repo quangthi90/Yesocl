@@ -35,6 +35,16 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.userTags = ko.observableArray(data.user_tags || []);
 		that.stockTags = ko.observableArray(data.stock_tags || []);
 		that.comment = ko.observable(data.comment || {});
+		that.isEditMode = ko.observable(false);
+
+		that.contentDisplay = ko.computed(function(){
+			var rawContent = that.content();
+			if(rawContent){
+				rawContent = rawContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
+				return Y.Utils.parseTaggedText(rawContent);
+			}
+			return "";
+		});
 
 		that.likePost = function() {
 			var ajaxOptions = {
@@ -82,7 +92,23 @@ YesGlobal.Models = YesGlobal.Models || {};
 			};
 		};
 
-		that.fullyToJSON = function(){
+		that.toEditJson = function(){
+			return {
+				id : ko.utils.unwrapObservable(that.id),
+				title : ko.utils.unwrapObservable(that.title),
+				content : ko.utils.unwrapObservable(that.content),
+				thumb : ko.utils.unwrapObservable(that.thumb),
+				image : ko.utils.unwrapObservable(that.image),
+				description : ko.utils.unwrapObservable(that.description),
+				slug : ko.utils.unwrapObservable(that.slug),
+				type : ko.utils.unwrapObservable(that.type),
+				category : ko.utils.unwrapObservable(that.category),
+				userTags : ko.utils.unwrapObservable(that.userTags),
+				stockTags : ko.utils.unwrapObservable(that.stockTags)
+			};
+		};
+
+		that.fullyToJson = function(){
 			return {
 				id : ko.utils.unwrapObservable(that.id),
 				title : ko.utils.unwrapObservable(that.title),
@@ -120,9 +146,19 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.canDelete = data.can_delete || false;
 		that.canEdit = data.can_edit || false;
 		that.content = ko.observable(data.content || '');
+		that.userTags = ko.observable(data.user_tags || []);
+		that.stockTags = ko.observable(data.stock_tags || []);
 		that.isLiked = ko.observable(data.like_count || false);
 		that.likeCount = ko.observable(data.like_count || 0);
-		that.isInit = ko.observable(true);
+
+		that.contentDisplay = ko.computed(function(){
+			var rawContent = that.content();
+			if(rawContent){
+				rawContent = rawContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
+				return Y.Utils.parseTaggedText(rawContent);
+			}
+			return "";
+		});
 
 		that.reset = function() {
 			that.id = "";
@@ -132,6 +168,15 @@ YesGlobal.Models = YesGlobal.Models || {};
 			that.content("");
 			that.isLiked(false);
 			that.likeCount(0);
+			that.userTags([]);
+			that.stockTags([]);
+		};
+
+		that.toJson = function() {
+			return {
+				id : ko.utils.unwrapObservable(that.id),
+				content: ko.utils.unwrapObservable(that.content)
+			};
 		};
 	};
 
@@ -139,11 +184,14 @@ YesGlobal.Models = YesGlobal.Models || {};
 		var that = this;
 		that.commentList = ko.observableArray([]);
 		that.postData = data.postData || {};
+		that.currentEditComment = ko.observable(null);
+		that.currentComment = ko.observable(null);
 		that.newComment = ko.observable();
 		that.totalComments = ko.observable(data.totalComments || 0);
 		that.currentPage = ko.observable(1);
 		that.canLoadMore = ko.observable(data.commentList && data.commentList.length == 3);
 		that.isProcessing = ko.observable(false);
+		that.hasEditFocus = ko.observable(undefined);
 
 		that.like = function(item) {
 			var ajaxOptions = {
@@ -171,11 +219,12 @@ YesGlobal.Models = YesGlobal.Models || {};
 
 		that.add = function(model, ele) {
 			var content = that.newComment().content();
+			var tags = Y.Utils.parseTagsInfo(content);
 			if(content && content.trim().length > 0 && !that.isProcessing()) {
 				_addComment({
 					content : content,
-					userTags: [],
-					stockTags: []
+					userTags: tags.userTags,
+					stockTags: tags.stockTags
 				}, function(data) {
 					that.newComment().reset();
 					$(ele).trigger(Y.Constants.Triggers.INPUT_CONTENT_CHANGED);
@@ -192,9 +241,40 @@ YesGlobal.Models = YesGlobal.Models || {};
 		};
 
 		that.edit = function(item) {
-			Y.Utils.showInfoMessage("Not yet done !", function(){
-			});
+			that.currentComment(item);
+			var editItem = new Y.Models.CommentModel(item.toJson());
+			that.currentEditComment(editItem);
+			that.hasEditFocus(true);
 		};
+
+		that.cancelEdit = function(item) {
+			that.currentEditComment(null);
+			that.hasEditFocus(undefined);
+		};
+
+		that.submitEdit = function(item) {
+			var content = item.content();		
+			if(content && content.trim().length > 0 && !that.isProcessing()) {
+				var tags = Y.Utils.parseTagsInfo(content);
+				_saveComment({
+					id: item.id,
+					content : content,
+					userTags: tags.userTags,
+					stockTags: tags.stockTags
+				}, function(data) {
+					that.currentEditComment(null);
+					that.hasEditFocus(undefined);
+					that.currentComment().content(data.content);
+				});
+			}	
+		};
+
+		that.canSubmitEdit = ko.computed(function(){
+			if(that.currentEditComment() == null)
+				return false;
+			var content = that.currentEditComment().content();	
+			return (content && content.trim().length > 0 && !that.isProcessing());
+		});
 
 		//START PRIVATE METHODS
 		function _loadMore(sucCallback, failCallback) {
@@ -264,6 +344,35 @@ YesGlobal.Models = YesGlobal.Models || {};
 					//Show message
 					if(failCallback && typeof failCallback == "function") {
 						failCallback();
+					}
+				}
+				that.isProcessing(false);
+			};
+			Y.Utils.ajaxCall(ajaxOptions, function() { 
+				that.isProcessing(true); 
+			}, successCallback, function() {
+				that.isProcessing(false) ; 
+			});
+		}
+
+		function _saveComment(commentData, sucCallback, failCallback) {
+			var ajaxOptions = {
+				url : Y.Routing.generate("ApiPutComment", {
+					post_type: that.postData.type,
+					comment_id : commentData.id
+				}),
+				data: commentData
+			};
+
+			var successCallback = function(data){
+				if(data.success === "ok") {
+					if(sucCallback && typeof sucCallback == "function") {
+						sucCallback(data.comment);
+					}
+				}else{
+					//Show message
+					if(failCallback && typeof failCallback == "function") {
+						failCallback(data.error);
 					}
 				}
 				that.isProcessing(false);
