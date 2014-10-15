@@ -10,6 +10,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.content = ko.observable(data.content || '');
 		that.thumb = ko.observable(data.thumb || '');
 		that.image = ko.observable(data.image || '');
+		that.images = ko.observable(data.images || []);
 		that.created = data.created || null;
 		that.description = data.description || '';
 		that.slug = data.slug || '';

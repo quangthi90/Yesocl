@@ -44,9 +44,18 @@
                 <!-- Content -->
                 <div class="innerAll overflow-hidden post-content">
                     <!-- ko if: $parent.currentEditingPost() == null || $parent.currentEditingPost().id != $data.id -->
-                    <div class="innerR pull-left post-images">
+                    <div class="innerR half pull-left post-images">
                         <!-- ko if: $data.image() != '' -->
-                        <img class="media-object thumb" data-bind="attr: { 'src' : $data.image(), 'data-zoom' : $data.thumb() }, loadImage: true" />
+                        <div class="main-image">
+                            <img class="media-object thumb" data-bind="attr: { 'src' : $data.image(), 'data-zoom' : $data.thumb() }, loadImage: true" />    
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko if: $data.images() && $data.images().length > 0 -->
+                        <div class="innerT image-items" data-bind="galleryImage: true">
+                            <!-- ko foreach: $data.images() -->
+                            <a class="image-item" data-bind="attr: { href : $data.large }"><img width="70px" data-bind="attr: { src : $data.small }"></a>
+                            <!-- /ko -->
+                        </div>
                         <!-- /ko -->
                     </div>
                     <div class="display-inline post-content-details">
