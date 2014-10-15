@@ -14,7 +14,7 @@ var YesGlobal = YesGlobal || {};
 	            },
 	            type: 'image',
 	            image: {
-					verticalFit: false
+					verticalFit: true
 				},
 				closeBtnInside: false
             });
@@ -29,7 +29,7 @@ var YesGlobal = YesGlobal || {};
 			closeBtnInside: false,
 			mainClass: 'mfp-with-zoom mfp-img-mobile',
 			image: {
-				verticalFit: false,
+				verticalFit: true,
 				titleSrc: function(item) {
 					return item.el.attr('title');
 				}

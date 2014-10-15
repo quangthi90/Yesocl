@@ -1,6 +1,7 @@
 {% extends '@template/default/template/layout/basic/master.tpl' %}
 
 {% use '@template/default/template/widget/post/wall_post.tpl' %}
+{% use '@template/default/template/widget/post/recent_news.tpl' %}
 {% use '@template/default/template/widget/post/new_post.tpl' %}
 {% use '@template/default/template/widget/account/user_block.tpl' %}
 
@@ -13,7 +14,7 @@
     <div class="innerAll">
         <div class="row">
             <div class="col-lg-9 col-md-8">
-            {{ block('user_cover') }}
+            {{ block('timeline_cover') }}
             {{ block('new_post_block') }}
             {{ block('wall_post_block') }}
             </div>
