@@ -118,6 +118,7 @@ class ControllerApiMessage extends Controller {
 
 		$this->load->model('friend/message');
 		$this->load->model('tool/object');
+		$this->load->model('tool/chat');
 
 		$oRoom = $this->model_friend_message->add( 
 			$idRoom,
@@ -133,8 +134,11 @@ class ControllerApiMessage extends Controller {
             )));
 		}
 
+		// Push message
 		$aRoom = $this->model_tool_object->formatRoom( $oRoom );
 		$aMessage = $this->model_tool_object->formatMessage( $oRoom->getMessages()->last() );
+
+		$this->model_tool_chat->pushMessage( $oRoom );
 
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
