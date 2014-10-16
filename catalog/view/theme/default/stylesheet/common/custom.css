@@ -219,12 +219,17 @@ body.loading #common-loading {
 }
 .post-item .post-images .image-items {
 	text-align: center;
+	overflow: hidden;
 }
 .post-item .post-images .image-items .image-item {
 	display: inline-block;
-	padding: 2px;
+	float: left;
+	margin: 0px;
+	padding: 0px;
 }
 .post-item .post-images .image-items .image-item img {
+	border: 1px solid #fff;
+    width: 82px;
 }
 
 .new-post-part {

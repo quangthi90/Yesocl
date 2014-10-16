@@ -51,9 +51,9 @@
                         </div>
                         <!-- /ko -->
                         <!-- ko if: $data.images() && $data.images().length > 0 -->
-                        <div class="innerT image-items" data-bind="galleryImage: true">
+                        <div class="image-items" data-bind="galleryImage: true">
                             <!-- ko foreach: $data.images() -->
-                            <a class="image-item" data-bind="attr: { href : $data.large }"><img width="70px" data-bind="attr: { src : $data.small }"></a>
+                            <a class="image-item" data-bind="attr: { href : $data.large }"><img data-bind="attr: { src : $data.small }"></a>
                             <!-- /ko -->
                         </div>
                         <!-- /ko -->
