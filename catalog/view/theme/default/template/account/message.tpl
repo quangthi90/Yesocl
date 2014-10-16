@@ -9,27 +9,77 @@
     <div class="innerAll">
 		<div data-bind="with: MesageView" id="widget-messages" class="widget widget-messages widget-heading-simple widget-body-white">
             <div class="widget-body padding-none margin-none">
-                <div class="innerAll bg-gray">
-                    {#<h2 data-bind="text: DemoText"></h2>#}
-                </div>
                 <div class="row row-merge borders">
+                    <div class="col-md-9 detailsWrapper">
+                        <!-- ko if: $data.activeRoom() == null -->
+                        <div class="alert alert-info" role="alert">{% trans %}No active room(s) available{% endtrans %}</div>
+                        <!-- /ko -->
+                        <div data-bind="with: activeRoom">
+                            <!-- User -->
+                            <div class="bg-gray innerAll">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h4 class="innerT half margin-none truncated-text display-block text-uppercase" data-bind="text: $data.name"></h4>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="pull-right">
+                                            <a href="#type" class="btn btn-default bg-white btn-sm" data-toggle="collapse" data-bind="click: $parent.clickNewMessage"><i class="fa fa-pencil"></i> {% trans %}New Message{% endtrans %}</a> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                 
+                            <div class="border-top padding-none margin-none" data-bind="foreach: messageList">
+                                <!--  Message -->
+                                <div class="media margin-none innerAll">
+                                    <a data-bind="link: { title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }" class="pull-left hidden-xs">
+                                        <img data-bind="attr: {src: $data.user.avatar}" width="60" class="media-object">
+                                    </a>
+                                    <div class="media-body innerTB">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="innerT half">
+                                                    <div class="media">
+                                                        <div class="pull-left">
+                                                            <a class="strong text-inverse" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a>
+                                                            <span class="innerR text-muted visible-xs" data-bind="timeAgo: $data.created"></span>
+                                                        </div>
+                                                        <div class="media-body" data-bind="text: $data.content"></div>
+                                                    </div>
+                                                </div>  
+                                            </div>
+                                            <div class="col-sm-6 hidden-xs">
+                                                <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
+                                                <span class="pull-right innerR innerT text-right  text-muted" data-bind="timeAgo: $data.created"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
+                        </div> 
+                        <div class="innerAll">
+                            <div class="border-top">
+                                <input id="js-mess-to" type="text" class="form-control rounded-none border-none" placeholder="{% trans %}To{% endtrans %}..." data-bind="visible: isNewMessage(), value: $data.messageTo"/>
+                            </div>
+                            <div class="border-top border-bottom">
+                                <textarea id="js-mess-content" type="text" class="form-control rounded-none border-none" placeholder="{% trans %}Write your messages{% endtrans %}..." data-bind="value: $data.messageContent"></textarea>
+                            </div>
+                            <div class="pull-right">
+                                <a class="btn btn-default" data-bind="click: clickSendMessage">{% trans %}Send{% endtrans %}</a>
+                            </div>
+                        </div>                       
+                    </div>
                     <div class="col-md-3 listWrapper">
                         <div class="innerAll">
-                            <form autocomplete="off" class="form-inline margin-none">
-                                <div class="input-group input-group-sm">
-                                    <input type="text" class="form-control" placeholder="Find messages .." />
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-primary btn-xs pull-right"><i class="fa fa-search"></i></button>
-                                    </span>
-                                </div>
-                            </form>
+                            <input type="text" class="form-control border-none large-text strong" placeholder="{% trans %}Search rooms ...{% endtrans %}" />
                         </div>
-                        <div class="bg-gray text-center strong border-top innerAll half"><span data-bind="text: totalRoom"></span> {% trans %}messages{% endtrans %} <i class="fa fa-circle-arrow-down"></i></div>
+                        <div class="bg-gray text-center strong border-top innerAll half">
+                            <span data-bind="text: totalRoom() + ( totalRoom() > 1 ? ' {% trans %}rooms{% endtrans %}' : ' {% trans %}room{% endtrans %}')"></span>
+                        </div>
                         <ul class="list-unstyled" id="js-list-message" data-bind="foreach: { data: $data.roomList, afterRender: addMoreEvents }">
-                            <li class="border-bottom" data-bind="click: $parent.clickRoomItem, css: { 'bg-primary' : $data.id == ($parent.activeRoom() != null ? $parent.activeRoom().id : 0) }">
+                            <li class="border-bottom" data-bind="click: $parent.clickRoomItem, css: { 'active' : $data.id == ($parent.activeRoom() != null ? $parent.activeRoom().id : 0) }">
                                 <div class="media innerAll">
                                     <div class="media-object pull-left hidden-phone">
-                                        <a href="#">
+                                        <a data-bind="link: { title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }" >
                                             <img data-bind="attr: {src: $data.user.avatar}" height="40px" width="40px" alt="Image" />
                                         </a>
                                     </div>
@@ -40,74 +90,7 @@
                                 </div>
                             </li>
                         </ul>
-                    </div>
-                    <div class="col-md-9 detailsWrapper">
-                        <!-- User -->
-                        <div class="bg-primary">
-                            <div class="media" data-bind="with: $data.activeRoom()">
-                                <a href="" class="pull-left">
-                                    <img data-bind="attr: {src: $data.user.avatar}" width="65" class="media-object">
-                                </a>
-                                <div class="media-body innerTB innerR">
-                                    <div class="innerT half pull-right">
-                                        <div class="dropdown">
-                                            <button class="btn btn-default dropdown-toggle rounded-right  btn-sm" data-toggle="dropdown">
-                                                {% trans %}Action{% endtrans %} <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li><a href="#">{% trans %}Remove Message{% endtrans %}</a></li>
-                                            </ul>
-                                        </div>
-                                        <a href="#type" class="btn btn-default bg-white btn-sm" data-toggle="collapse" data-bind="click: $parent.clickNewMessage">
-                                            <i class="fa fa-pencil"></i> {% trans %}New Message{% endtrans %}
-                                        </a>
-                                    </div>
-                                    <h4 class="text-white pull-left innerAll strong display-block margin-none" data-bind="text: $data.name"></h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-gray innerAll text-center margin-none"><a href="" class="text-muted lead"><i class="icon-time-clock"></i> View Archive</a></div>
-                        <!-- ko if: $data.activeRoom() != null -->
-                        <div class="widget border-top padding-none margin-none" data-bind="foreach: $data.activeRoom().messageList">
-                            <!--  Message -->
-                            <div class="media margin-none innerAll">
-                                <a href="" class="pull-left hidden-xs">
-                                    <img data-bind="attr: {src: $data.user.avatar}" width="60" class="media-object">
-                                </a>
-                                <div class="media-body innerTB">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="innerT half">
-                                                <div class="media">
-                                                    <div class="pull-left">
-                                                        <a class="strong text-inverse" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a>
-                                                        <span class="innerR text-muted visible-xs" data-bind="timeAgo: $data.created"></span>
-                                                    </div>
-                                                    <div class="media-body" data-bind="text: $data.content"></div>
-                                                </div>
-                                            </div>  
-                                        </div>
-                                        <div class="col-sm-6 hidden-xs">
-                                            <i class="icon-time-clock pull-right text-muted innerT half fa fa-2x"></i>
-                                            <span class="pull-right innerR innerT text-right  text-muted" data-bind="timeAgo: $data.created"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /ko -->
-                        <div>
-                            <div class="border-top">
-                                <input id="js-mess-to" type="text" class="form-control rounded-none border-none" placeholder="{% trans %}To{% endtrans %}..." data-bind="visible: isNewMessage(), value: $data.messageTo"/>
-                            </div>
-                            <div class="border-top border-bottom">
-                                <textarea id="js-mess-content" type="text" class="form-control rounded-none border-none" placeholder="{% trans %}Write your messages{% endtrans %}..." data-bind="value: $data.messageContent"></textarea>
-                            </div>
-                            <div class="pull-right">
-                                <a class="btn btn-default" data-bind="click: clickSendMessage">{% trans %}Send{% endtrans %}</a>
-                            </div>
-                        </div>
-                    </div>
+                    </div>                    
                 </div>
             </div>
         </div>
