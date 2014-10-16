@@ -82,11 +82,10 @@ class ModelUserPost extends Model {
 			foreach ($aData['thumbs'] as $index => $aThumbInfo ) {
 				$sFolderLink = $this->config->get('user')['default']['image_link'];
 				$sFolderName = $this->config->get('post')['default']['image_folder'];
-				$sAvatarName = $this->config->get('post')['default']['avatar_name'];
-				$sPath = $sFolderLink . $oAuthor->getId() . '/' . $sFolderName . '/' . $oPost->getId() . '/' . $sAvatarName . '.' . $aThumbInfo['extension'];
+				$sPath = $sFolderLink . $oAuthor->getId() . '/' . $sFolderName . '/' . $oPost->getId() . '/' . uniqid() . '.' . $aThumbInfo['extension'];
 				$sDest = DIR_IMAGE . $sPath;
 				if ( $this->model_tool_image->moveFile($aThumbInfo['image_link'], $sDest) ){
-					if ( $index == 0 )
+					if ( $index == 0 ) 
 						$oPost->setThumb( $sPath );
 					else
 						$oPost->addImage( $sPath );
