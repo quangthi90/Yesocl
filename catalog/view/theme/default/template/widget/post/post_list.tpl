@@ -1,7 +1,5 @@
-{% block wall_post_block_stylesheet %}
-{% endblock %}
-{% block wall_post_block %}    
-    <div data-bind="with: WallPostList" id="wall-post-list" class="wall-post-list">
+{% block post_list_block %}    
+    <div data-bind="with: PostList" id="post-list">
         <div class="post-list-container">
             <!-- ko foreach: { data: postList, beforeRemove: doDeleteEffect, afterAdd: doAddEffect, afterRender: afterRender } -->
             <div class="widget post-item">
@@ -179,5 +177,5 @@
         </div>
     </div>
 {% endblock %}
-{% block wall_post_block_javascript %}
+{% block post_list_block_javascript %}
 {% endblock %}

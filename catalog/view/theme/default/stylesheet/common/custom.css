@@ -213,6 +213,25 @@ body.loading #common-loading {
 .post-item .comment-item:hover > .post-options .dropdown-toggle i {
 	color: #25ad9f;
 }
+.post-item .post-images {	
+}
+.post-item .post-images .main-image {	
+}
+.post-item .post-images .image-items {
+	text-align: center;
+	overflow: hidden;
+}
+.post-item .post-images .image-items .image-item {
+	display: inline-block;
+	float: left;
+	margin: 0px;
+	padding: 0px;
+}
+.post-item .post-images .image-items .image-item img {
+	border: 1px solid #fff;
+    width: 82px;
+}
+
 .new-post-part {
 	margin-bottom: 15px;
 }

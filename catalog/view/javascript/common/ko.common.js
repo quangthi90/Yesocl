@@ -14,11 +14,37 @@ var YesGlobal = YesGlobal || {};
 	            },
 	            type: 'image',
 	            image: {
-					verticalFit: false
+					verticalFit: true
 				},
 				closeBtnInside: false
             });
         });
+	}
+
+	function initImageGallery(el) {
+		el.magnificPopup({
+			delegate: 'a',
+			type: 'image',
+			closeOnContentClick: false,
+			closeBtnInside: false,
+			mainClass: 'mfp-with-zoom mfp-img-mobile',
+			image: {
+				verticalFit: true,
+				titleSrc: function(item) {
+					return item.el.attr('title');
+				}
+			},
+			gallery: {
+				enabled: true
+			},
+			zoom: {
+				enabled: true,
+				duration: 500,
+				opener: function(element) {
+					return element.find('img');
+				}
+			}
+		});
 	}
 
 	function initSeemore(ele) {
@@ -333,6 +359,14 @@ var YesGlobal = YesGlobal || {};
 		    },
 		    update: function (element, valueAccessor, allBindingsAccessor) {
 		        initZoomImageEvent($(element));
+		    }
+		};
+		ko.bindingHandlers.galleryImage = {
+			init: function (element, valueAccessor, allBindingsAccessor) {
+		        initImageGallery($(element));
+		    },
+		    update: function (element, valueAccessor, allBindingsAccessor) {
+		        initImageGallery($(element));
 		    }
 		};
 		ko.bindingHandlers.uploader = new Y.Uploader();

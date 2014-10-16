@@ -7,9 +7,9 @@
             <a href="{{ path('HomePage') }}"><span class="text" style="font-size: 25px;">YESOCL</span></a>
         </div>
         <ul class="menu list-unstyled">
-            <li class="hasSubmenu {% if menu == 'refresh' %}active{% endif %}">
-                <a href="#menu-bf3509948e337ef2a1e23f03f7e2aa66" data-toggle="collapse"><i class="icon-refresh-1"></i><span>{% trans %}What's new{% endtrans %}</span></a>
-                <ul class="collapse" id="menu-bf3509948e337ef2a1e23f03f7e2aa66">
+            <li class="{#hasSubmenu#} {% if menu == 'refresh' %}active{% endif %}">
+                <a href="{{ path('RefreshPage') }}"{#data-toggle="collapse"#}><i class="icon-refresh-1"></i><span>{% trans %}What's new{% endtrans %}</span></a>
+                <ul class="collapse hidden">
                     <li class=""><a href="#"><i class="icon-thumbs-up"></i><span>All posts</span></a></li>
                     <li class=""><a href="#"><i class="icon-thumbs-up"></i><span>Branch posts</span></a></li>
                     <li class=""><a href="#"><i class="icon-thumbs-up"></i><span>Stock posts</span></a></li>
