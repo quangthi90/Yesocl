@@ -27,11 +27,10 @@ YesGlobal.Models = YesGlobal.Models || {};
 				}),
 				data : {
 					limit : 10
-				},
-				async : false
+				}
 			};
 			var successCallback = function(data){
-				if(data.success === "ok"){
+				if(data.success === "ok") {
 					ko.utils.arrayForEach(data.messages, function(m){
 						var messageItem = new Y.Models.MessageModel(m);
 						that.messageList.push(messageItem);
@@ -47,7 +46,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 			};
 			//Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
-		}
+		};
 
 		that.addMessage = function(roomData, lastMessage){
 			that.updated(roomData.updated);
@@ -55,7 +54,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 			if ( lastMessage !== null ){
 				that.messageList.push(lastMessage);
 			}
-		}
+		};
 
 		/* ============= END PUBLIC METHODS ============= */
 
@@ -75,10 +74,8 @@ YesGlobal.Models = YesGlobal.Models || {};
 			};
 		};
 		/* ============= END PRIVATE METHODS =============== */
-	}
-})(jQuery, ko, YesGlobal);
+	};
 
-(function($, ko, Y, undefined) {
 	Y.Models.MessageModel = function (data) {
 		var that = this;
 		
@@ -92,5 +89,5 @@ YesGlobal.Models = YesGlobal.Models || {};
 
 		/* ============= START PRIVATE METHODS ============= */
 		/* ============= END PRIVATE METHODS =============== */
-	}
+	};
 })(jQuery, ko, YesGlobal);

@@ -1,0 +1,55 @@
+/*================================== START MESSAGE =================================*/
+.widget-messages {
+}
+.widget-messages .widget-message-container {
+    height: 558px;
+}
+.widget-message-container .message-thread {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 75%;
+}
+.widget-message-container .message-rooms {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    width: 25%;
+}
+
+.widget-message-container .active-room-container {
+	position: relative;
+	height: 100%;
+}
+.widget-message-container .message-rooms-container {
+	position: relative;
+	height: 100%;	
+}
+.widget-message-container .active-room-container .message-list {
+	position: absolute;
+	left: 0px;
+	top: 50px;
+	right: 0px;
+	bottom: 70px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.widget-message-container .active-room-container .new-messsage-container {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+.widget-message-container .message-rooms-container .room-list {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 80px;
+	bottom: 0px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+/*================================== END MESSAGE =====================================*/

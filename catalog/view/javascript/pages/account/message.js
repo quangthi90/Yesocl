@@ -5,13 +5,13 @@
 		var self = this;
 
 		/* ============= START PROPERTIES ================== */
-		self.uniqueName = "YES_MESSAGE_VIEWMODEL";
-		self.canLoadMore = ko.observable(options.canLoadMore || false);
+		self.uniqueName = "YES_MESSAGE_VIEWMODEL";		
 		self.apiUrls = options.apiUrls || {};
 
 		self.isLoadSuccess = ko.observable(false);
 		self.isLoadingMore = ko.observable(false);
 		self.isNewMessage = ko.observable(false);
+		self.canLoadMore = ko.observable(options.canLoadMore || false);
 
 		self.currentPage = ko.observable(1);
 		self.roomList = ko.observableArray([]);
@@ -23,7 +23,19 @@
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
-		this.loadMoreRoom = function(){
+		self.activeRoom.subscribe(function(item){
+			if(item === null) return;			
+			if(item.canLoadMore() && !self.isLoadingMore()){
+				self.isLoadingMore(true);
+				item.loadMessage(function(data){
+					self.isLoadingMore(false);
+					self.isLoadSuccess(false);
+				});
+			}
+			self.isLoadSuccess(true);
+		});
+
+		self.loadMoreRoom = function(){
 			if(!self.canLoadMore() || self.isLoadingMore()) return;
 
 			self.isLoadingMore(true);
@@ -33,31 +45,22 @@
 			});
 		};
 
-		self.addMoreEvents = function(){
-			_selectFirstRoom();
+		self.addMoreEvents = function(){			
 		};
 
-		self.clickRoomItem = function(item, event){			
-			self.activeRoom(item);
-			if(item.canLoadMore() && !self.isLoadingMore()){
-				self.isLoadingMore(true);
-				item.loadMessage(function(data){
-					self.isLoadingMore(false);
-					self.isLoadSuccess(false);
-				});
-			}
-			self.isLoadSuccess(true);
+		self.clickRoomItem = function(item, event){
+			self.activeRoom(item);			
 		}
 
-		self.clickNewMessage = function(){
+		self.toggleNewMessage = function(){
 			self.isNewMessage(!self.isNewMessage());			
 			if (self.activeRoom() != null)
 				self.activeRoom(null);
 			else
 				_selectFirstRoom();
-		}
+		};
 
-		self.clickSendMessage = function(callback){
+		self.sendMessage = function(){
 			if ( !self.messageContent() ) return;
 			
 			// send message to old user
@@ -72,7 +75,7 @@
 					});
 					
 				}
-				if ( room !== null ){
+				if (room !== null ){
 					self.activeRoom(room);
 					_sendMessageToOldRoom(room.id, self.messageContent(), function(data){
 						_selectFirstRoom();
@@ -88,7 +91,8 @@
 
 			// send message to new user
 			}else{
-				_sendMessageToOldRoom(self.activeRoom().id, self.messageContent(), callback);
+				_sendMessageToOldRoom(self.activeRoom().id, self.messageContent(), function(){					
+				});
 			}
 		}
 		/* ============= END PUBLIC METHODS ================ */
@@ -113,7 +117,7 @@
 					self.totalRoom( data.total_room );
 					if(data.canLoadMore !== undefined) {
 						self.canLoadMore(data.canLoadMore);
-					}
+					}					
 				}
 				self.isLoadSuccess(true);
 
@@ -126,7 +130,9 @@
 		}
 
 		function _selectFirstRoom() {
-			$("#js-list-message > li:first-child").click();
+			if(self.roomList().length > 0){
+				self.activeRoom(self.roomList()[0]);
+			}
 		}
 
 		function _sendMessageToOldRoom(room_id, content, callback){
@@ -185,14 +191,9 @@
 		}
 
 		function _init(){
-            // $(window).scroll(function(e) {
-            //     if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-            //         self.loadMore();
-            //     }
-            // });
-
             _loadRoom(function(){
             	$(window).scrollTop(0);
+            	_selectFirstRoom();
             });
 		}
 

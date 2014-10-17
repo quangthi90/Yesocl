@@ -370,6 +370,7 @@ var YesGlobal = YesGlobal || {};
 		    }
 		};
 		ko.bindingHandlers.uploader = new Y.Uploader();
+		
 	}
 	
 	initBindingHanler();
