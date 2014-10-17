@@ -332,6 +332,16 @@ var YesGlobal = YesGlobal || {};
 
 			return result;
 	    },
+	    extractTextLink: function(text) {
+	    	text = text ? text.trim().toLowerCase() : "";
+	    	var urlRegex = /(https?:\/\/[^\s]+)/g;
+	    	return text.replace(urlRegex, function(url) {
+	    		if(url.indexOf(Y.Routing.BaseUrl) === 0) {
+	    			return '<a href="' + url + '">' + url + '</a>';	
+	    		}
+		        return '<a target="_blank" href="' + url + '">' + url + '</a>';
+		    });
+	    },
 	    getKoContext: function(eleId){
 	        if(eleId !== undefined){
 	            return ko.contextFor(document.getElementById(eleId));
@@ -565,5 +575,22 @@ var YesGlobal = YesGlobal || {};
 
 		/* ============= START PRIVATE METHODS ============= */
 		/* ============= END PRIVATE METHODS =============== */
+	};
+
+	/ ========================== START COMMON INIT ============================ /
+	function _initGlobal() {
+		if (!String.prototype.trim) {
+		   	String.prototype.trim = function(){
+		   		return this.replace(/^\s+|\s+$/g, '');
+		   	};
+		}
+		String.prototype.keepNewLine = function(){
+			return this.replace(/(?:\r\n|\r|\n)/g, '<br />');
+		};
+		String.prototype.extractTextLink = function(){
+			return Y.Utils.extractTextLink(this);
+		};
 	}
+	_initGlobal();
+	/ ========================== END COMMON INIT ============================== /
 })(jQuery, ko, window, YesGlobal);

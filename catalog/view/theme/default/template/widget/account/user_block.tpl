@@ -1,35 +1,32 @@
 {% block timeline_cover %}
+    {% set currUser = get_current_user() %}
     <div class="timeline-cover">
         <div class="cover image">
             <div class="top">
                 <img src="{{ asset_img('cover_demo.jpg') }}" class="img-responsive" />
             </div>
             <ul class="list-unstyled">
-                <li class="active"><a href="index.html?lang=en"><i class="fa fa-fw fa-clock-o"></i> <span>Timeline</span></a></li>
-                <li><a href="about_1.html?lang=en"><i class="fa fa-fw fa-user"></i> <span>About</span></a></li>
-                <li><a href="media_1.html?lang=en"><i class="fa fa-fw icon-photo-camera"></i> <span>Photos</span> <small>(102)</small></a></li>
-                <li><a href="contacts_1.html?lang=en"><i class="fa fa-fw icon-group"></i><span> Friends </span><small>(19)</small></a></li>
-                <li><a href="messages.html?lang=en"><i class="fa fa-fw icon-envelope-fill-1"></i> <span>Messages</span> <small>(2 new)</small></a></li>
+                <li class="active"><a><i class="fa fa-fw icon-road-sign"></i><span> Timeline</span></a></li>                
+                <li><a href="{{ path('FriendPage', {user_slug: currUser.slug}) }}"><i class="fa fa-fw icon-group"></i><span> Friends</span></a></li>
+                <li><a href="{{ path('MessagePage') }}"><i class="fa fa-fw fa-envelope"></i><span> Messages</span></a></li>
+                <li><a href="{{ path('ProfilePage', { user_slug: currUser.slug }) }}"><i class="fa fa-fw fa-user"></i><span> Profile</span></a></li>
             </ul>
-        </div>
-        {% set currUser = get_current_user() %}
-        {% if is_logged() and currUser != null %}
-            <div class="widget cover image">    
-                <div class="widget-body padding-none margin-none">
-                    <div class="photo">
-                        <img src="{{ currUser.avatar }}" width="120" alt="" class="img-circle">
-                    </div>
-                    <div class="innerAll border-right pull-left">
-                        <h3 class="margin-none">{{ currUser.username }}</h3>
-                        <span>{{ currUser.current }}</span>
-                    </div>
-                    <div class="innerAll pull-left">
-                        <p class="lead margin-none "> <i class="fa fa-quote-left text-muted fa-fw"></i> What a fun Partyyy</p>
-                    </div>
+        </div>        
+        <div class="widget cover image">
+            <div class="widget-body padding-none margin-none">
+                <div class="photo">
+                    <img src="{{ currUser.avatar }}" width="120" alt="" class="img-circle">
                 </div>
-                <div class="clearfix"></div>
+                <div class="innerAll border-right pull-left">
+                    <h3 class="margin-none">{{ currUser.username }}</h3>
+                    <span>{{ currUser.current }}</span>
+                </div>
+                <div class="innerAll pull-left">
+                    <p class="lead margin-none "> <i class="fa fa-quote-left text-muted fa-fw"></i> What a fun Partyyy</p>
+                </div>
             </div>
-        {% endif %}
+            <div class="clearfix"></div>
+        </div>
     </div>    
 {% endblock %}
 {% block user_cover %}

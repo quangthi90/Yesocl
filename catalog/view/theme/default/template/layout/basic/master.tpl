@@ -115,6 +115,8 @@
             if (user){
                 Y.CurrentUser = JSON.parse(user);
             }
+            Y.Routing.BaseUrl = '{{ base }}';
+            Y.Routing.BaseUrl = Y.Routing.BaseUrl.toLowerCase();
         }(YesGlobal));
     </script>
     {% block common_javascript %}

@@ -41,7 +41,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.contentDisplay = ko.computed(function(){
 			var rawContent = that.content();
 			if(rawContent){
-				rawContent = rawContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
+				rawContent = rawContent.keepNewLine().extractTextLink();
 				return Y.Utils.parseTaggedText(rawContent);
 			}
 			return "";
@@ -155,7 +155,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.contentDisplay = ko.computed(function(){
 			var rawContent = that.content();
 			if(rawContent){
-				rawContent = rawContent.replace(/(?:\r\n|\r|\n)/g, '<br />');
+				rawContent = rawContent.keepNewLine().extractTextLink();
 				return Y.Utils.parseTaggedText(rawContent);
 			}
 			return "";
