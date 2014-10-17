@@ -8,7 +8,6 @@
 		self.uniqueName = "YES_MESSAGE_VIEWMODEL";		
 		self.apiUrls = options.apiUrls || {};
 
-		self.isLoadSuccess = ko.observable(false);
 		self.isLoadingMore = ko.observable(false);
 		self.isNewMessage = ko.observable(false);
 		self.canLoadMore = ko.observable(options.canLoadMore || false);
@@ -27,12 +26,10 @@
 			if(item === null) return;			
 			if(item.canLoadMore() && !self.isLoadingMore()){
 				self.isLoadingMore(true);
-				item.loadMessage(function(data){
+				item.loadMessage(function(data) {
 					self.isLoadingMore(false);
-					self.isLoadSuccess(false);
 				});
 			}
-			self.isLoadSuccess(true);
 		});
 
 		self.loadMoreRoom = function(){
@@ -45,7 +42,7 @@
 			});
 		};
 
-		self.addMoreEvents = function(){			
+		self.addMoreEvents = function(){
 		};
 
 		self.clickRoomItem = function(item, event){
@@ -59,42 +56,7 @@
 			else
 				_selectFirstRoom();
 		};
-
-		self.sendMessage = function(){
-			if ( !self.messageContent() ) return;
-			
-			// send message to old user
-			if ( self.messageTo() ){
-				var userSlugs = self.messageTo().split(', ');
-				var room = null;
-				if ( userSlugs.length == 1 ){
-					ko.utils.arrayForEach(self.roomList(), function(r){
-						if ( r.user.slug == userSlugs[0] ) {
-							room = r;
-						}
-					});
-					
-				}
-				if (room !== null ){
-					self.activeRoom(room);
-					_sendMessageToOldRoom(room.id, self.messageContent(), function(data){
-						_selectFirstRoom();
-						self.isNewMessage(!self.isNewMessage());
-						self.messageTo("");
-					});
-				}else{
-					_sendMessageToNewRoom(userSlugs, self.messageContent(), function(data){
-						self.isNewMessage(!self.isNewMessage());
-						self.messageTo("");
-					});
-				}
-
-			// send message to new user
-			}else{
-				_sendMessageToOldRoom(self.activeRoom().id, self.messageContent(), function(){					
-				});
-			}
-		}
+		
 		/* ============= END PUBLIC METHODS ================ */
 
 		/* ============= START PRIVATE METHODS ============= */
@@ -111,6 +73,7 @@
 			var successCallback = function(data){
 				if(data.success === "ok"){
 					ko.utils.arrayForEach(data.rooms, function(r){
+						r.newMessageCallback = _scrollToBottomMessageList;
 						var roomItem = new Y.Models.RoomModel(r);
 						self.roomList.push(roomItem);
 					});
@@ -119,8 +82,6 @@
 						self.canLoadMore(data.canLoadMore);
 					}					
 				}
-				self.isLoadSuccess(true);
-
 				if(callback && typeof callback === "function"){
 					callback(data);
 				}
@@ -133,66 +94,17 @@
 			if(self.roomList().length > 0){
 				self.activeRoom(self.roomList()[0]);
 			}
-		}
+		}		
 
-		function _sendMessageToOldRoom(room_id, content, callback){
-			var ajaxOptions = {
-				url: Y.Routing.generate("ApiPostMessage"),
-				data : {
-					room_id : room_id,
-					content: content
-				}
-			};
-			var successCallback = function(data){
-				if(data.success === "ok"){
-					if ( self.activeRoom().messageList().length > 0 ){
-						self.activeRoom().addMessage(data.room, data.message);
-					}else{
-						self.activeRoom().addMessage(data.room, null);
-					}
-					self.roomList.sort(function(r1, r2){
-						return r1.updated() == r2.updated() ? 0 : (r1.updated() < r2.updated() ? 1 : -1)
-					});
-					self.messageContent("");
-				}
-				self.isLoadSuccess(true);
-
-				if(callback && typeof callback === "function"){
-					callback(data);
-				}
-			};
-			//Call common ajax Call:
-			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
-		}
-
-		function _sendMessageToNewRoom(userSlugs, content, callback){
-			var ajaxOptions = {
-				url: Y.Routing.generate("ApiPostMessage"),
-				data : {
-					user_slugs : userSlugs,
-					content: content
-				}
-			};
-			var successCallback = function(data){
-				if(data.success === "ok"){
-					var roomItem = new Y.Models.RoomModel(data.room);
-					self.roomList.unshift(roomItem);
-					self.messageContent("");
-					_selectFirstRoom();
-				}
-				self.isLoadSuccess(true);
-
-				if(callback && typeof callback === "function"){
-					callback(data);
-				}
-			};
-			//Call common ajax Call:
-			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		function _scrollToBottomMessageList() {
+			var listContainer = ele.find(".js-message-list");
+			if(listContainer.length > 0){
+				listContainer.animate({ scrollTop: listContainer[0].scrollHeight }, 1000);
+			}
 		}
 
 		function _init(){
             _loadRoom(function(){
-            	$(window).scrollTop(0);
             	_selectFirstRoom();
             });
 		}

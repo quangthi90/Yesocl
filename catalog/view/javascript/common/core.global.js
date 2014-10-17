@@ -13,6 +13,16 @@ var YesGlobal = YesGlobal || {};
 	    CurrentPost: null
 	};
 
+	Y.Enums = {
+		MessageStatus : {
+			NONE: 0,
+			SENDING: 1,
+			SENT: 2,
+			SEEN: 3,
+			ERROR: 4
+		}
+	};
+
 	Y.Constants = {
 		Regexs: {
 			TAG_REGEX: /@\[([^\]]+)\]\(([^:]+):([^:]+)\)/g
@@ -24,7 +34,8 @@ var YesGlobal = YesGlobal || {};
 		Triggers: {
 			MENU_VISIBILITY_CHANGED : "MENU_VISIBILITY_CHANGED",
 			INPUT_CONTENT_CHANGED : "INPUT_CONTENT_CHANGED",
-			POST_LOADED : "POST_LOADED"
+			POST_LOADED : "POST_LOADED",
+			NEW_MESSAGE_LOADED: "NEW_MESSAGE_LOADED"
 		},
 		SettingKeys : {
 			SHOW_LEFT_SIDEBAR : "SHOW_LEFT_SIDEBAR",

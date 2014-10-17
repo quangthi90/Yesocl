@@ -369,8 +369,7 @@ var YesGlobal = YesGlobal || {};
 		        initImageGallery($(element));
 		    }
 		};
-		ko.bindingHandlers.uploader = new Y.Uploader();
-		
+		ko.bindingHandlers.uploader = new Y.Uploader();		
 	}
 	
 	initBindingHanler();

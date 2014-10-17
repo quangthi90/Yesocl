@@ -29,6 +29,9 @@ a.tag-link:hover {
 	color: #FFF;
 	border-right: 1px solid #FFF;
 }
+.cursor-pointer {
+	cursor: pointer;
+}
 
 textarea {
 	min-height: 35px;	

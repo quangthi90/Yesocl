@@ -18,8 +18,8 @@
                         <div class="bg-gray text-center strong border-top border-bottom innerAll half">
                             <span data-bind="text: totalRoom() + ( totalRoom() > 1 ? ' {% trans %}rooms{% endtrans %}' : ' {% trans %}room{% endtrans %}')"></span>
                         </div>
-                        <ul class="list-unstyled room-list" id="js-list-message" data-bind="foreach: { data: $data.roomList, afterRender: addMoreEvents }">
-                            <li class="border-bottom" data-bind="click: $parent.clickRoomItem, css: { 'active' : $data.id == ($parent.activeRoom() != null ? $parent.activeRoom().id : 0) }">
+                        <ul class="list-unstyled room-list" data-bind="foreach: { data: $data.roomList, afterRender: addMoreEvents }">
+                            <li class="border-bottom cursor-pointer room-item" data-bind="click: $parent.clickRoomItem, css: { 'active' : $data.id == ($parent.activeRoom() != null ? $parent.activeRoom().id : 0) }">
                                 <div class="media innerAll">
                                     <div class="media-object pull-left hidden-phone">
                                         <a data-bind="link: { title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }" >
@@ -49,9 +49,9 @@
                                 </div>
                             </div>
                         </div>                 
-                        <div class="border-top padding-none margin-none message-list" data-bind="foreach: messageList">
+                        <div class="border-top padding-none margin-none message-list js-message-list" data-bind="foreach: messageList">
                             <!--  Message -->
-                            <div class="media margin-none innerAll border-bottom message-item">
+                            <div class="media margin-none innerAll border-bottom message-item" data-bind="css: { 'sending': $data.status() === 1, 'sent': $data.status() === 2, 'seen': $data.status() === 3 , 'error': $data.status() === 4 }">
                                 <a data-bind="link: { title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }" class="pull-left hidden-xs message-creator">
                                     <img data-bind="attr: {src: $data.user.avatar}" width="35" class="media-object">
                                 </a>
@@ -69,12 +69,9 @@
                                 </div>
                             </div>
                         </div> 
-                        <div class="new-messsage-container">
-                            <div class="border-top" data-bind="visible: $parent.isNewMessage()">
-                                <input id="js-mess-to" type="text" class="form-control rounded-none border-none" placeholder="{% trans %}To{% endtrans %}..." data-bind="value: $parent.messageTo"/>
-                            </div>
+                        <div class="new-messsage-container" data-bind="with: $data.newMessage">
                             <div class="border-top border-bottom">
-                                <textarea type="text" class="form-control rounded-none border-none no-resize" placeholder="{% trans %}Write your messages{% endtrans %}..." data-bind="value: $parent.messageContent"></textarea>
+                                <textarea type="text" class="form-control rounded-none border-none no-resize" placeholder="{% trans %}Write your messages{% endtrans %}..." data-bind="value: content, valueUpdate:'afterkeydown', executeOnEnter: $parent.addMessage, shiftKeyRequired: true"></textarea>
                             </div>
                         </div>                          
                     </div>

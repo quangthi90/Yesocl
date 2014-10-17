@@ -46,10 +46,23 @@
 	position: absolute;
 	left: 0px;
 	right: 0px;
-	top: 80px;
+	top: 83px;
 	bottom: 0px;
 	overflow-y: auto;
 	overflow-x: hidden;
+}
+.message-rooms-container .room-list .room-item {
+	border-right: 2px solid #FFF;
+}
+.message-rooms-container .room-list .room-item.active,
+.message-rooms-container .room-list .room-item:hover {
+	border-right: 2px solid #25ad9f;
+}
+.message-list .message-item {	
+}
+.message-list .message-item.msg-sending {
+	background-color: #F0F0F0;
+	opacity: 0.8;
 }
 
 /*================================== END MESSAGE =====================================*/
