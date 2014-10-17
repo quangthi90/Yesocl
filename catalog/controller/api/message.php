@@ -134,11 +134,12 @@ class ControllerApiMessage extends Controller {
             )));
 		}
 
-		// Push message
 		$aRoom = $this->model_tool_object->formatRoom( $oRoom );
-		$aMessage = $this->model_tool_object->formatMessage( $oRoom->getMessages()->last() );
+		$oMessage = $oRoom->getMessages()->last();
+		$aMessage = $this->model_tool_object->formatMessage( $oMessage );
 
-		$this->model_tool_chat->pushMessage( $oRoom );
+		// Push message
+		$this->model_tool_chat->pushMessage( $oRoom->getId(), $aMessage['user']['username'], $aMessage['content'], $aMessage['user']['avatar'] );
 
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',

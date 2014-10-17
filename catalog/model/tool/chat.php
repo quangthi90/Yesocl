@@ -1,10 +1,10 @@
 <?php
 class ModelToolChat extends Model {
-	public function pushMessage( $sChannelName, $sUsername, $sContent, $sEmail ) {
+	public function pushMessage( $sChannelName, $sUsername, $sContent, $sAvatar ) {
 		$aOptions = $this->sanitiseInput(array(
 			'nickname' => substr( htmlspecialchars($sUsername), 0, 30 ),
 			'text' => substr( htmlspecialchars($sContent), 0, 300 ),
-			'email' => substr( htmlspecialchars($sEmail), 0, 100 )
+			'avatar' => $sAvatar
 		));
 
 		$sActivityType = $this->config->get('pusher')['type']['message'];
@@ -12,18 +12,17 @@ class ModelToolChat extends Model {
 		$oActivity = new Activity($sActivityType, $aOptions['text'], $aOptions);
 
 		$data = $oActivity->getMessage();
+		
 		$response = $this->pusher->trigger($sChannelName, $sActivityType, $data, null, true);
 
 		return true;
 	}
 
-	private function sanitiseInput( $aChatInfo, $bGetGravatar = true ) {
-	  	$email = isset($aChatInfo['email'])?$aChatInfo['email']:'';
+	private function sanitiseInput( $aChatInfo ) {
 	  	$aOptions = array();
 	  	$aOptions['displayName'] = substr(htmlspecialchars($aChatInfo['nickname']), 0, 30);
 	  	$aOptions['text'] = substr(htmlspecialchars($aChatInfo['text']), 0, 300);
-	  	$aOptions['email'] = substr(htmlspecialchars($email), 0, 100);
-	  	$aOptions['get_gravatar'] = $bGetGravatar;
+	  	$aOptions['image'] = substr(htmlspecialchars($aChatInfo['avatar']), 0, 100);
 	  	return $aOptions;
 	}
 }
@@ -44,20 +43,10 @@ class Activity {
 	    $this->type = $activity_type;
 	    $this->id = uniqid();
 	    $this->date = date('r');
-	    
 	    $this->action_text = $action_text;
 	    $this->display_name = $options['displayName'];
-	    $this->image = $options['image'];
-    
-	    if( $options['get_gravatar'] && $options['email'] ) {
-	      	$this->image['url'] = $this->get_gravatar($options['email']);
-	      
-	      	if( is_null($this->display_name) ) {
-		        $profile = $this->get_gravatar_profile($options['email']);
-		        if( isset($profile['displayName']) ) {
-		          $this->display_name = $profile['displayName'];
-		        }
-	      	}
+	    if ( !empty($options['image']) ) {
+	    	$this->image = $options['image'];
 	    }
     }
   
@@ -78,7 +67,6 @@ class Activity {
   
   	private function set_default_options($options) {
 	    $defaults = array(
-	    	'email' => null,
 	    	'displayName' => null,
 	    	'image' => array(
 	    		'url' => 'http://www.gravatar.com/avatar?d=wavatar&s=48',
