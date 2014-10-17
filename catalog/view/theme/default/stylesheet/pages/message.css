@@ -60,7 +60,7 @@
 }
 .message-list .message-item {	
 }
-.message-list .message-item.msg-sending {
+.message-list .message-item.sending {
 	background-color: #F0F0F0;
 	opacity: 0.8;
 }
