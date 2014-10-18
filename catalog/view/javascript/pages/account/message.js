@@ -31,11 +31,7 @@
 			if(!self.canLoadMore() || self.isLoadingMore()) return;
 
 			self.currentPage(self.currentPage() + 1);
-			_loadRoom(function(){
-				if(callback && typeof callback === "function"){
-					callback();
-				}
-			});
+			_loadRoom();
 		};
 
 		self.clickRoomItem = function(item, event){
@@ -57,7 +53,16 @@
 
 				msgList.scroll(function() {
 				    if ($(this).scrollTop() === 0 && self.activeRoom() != null) {
-				        self.activeRoom().loadMoreMessage();
+				    	var me = $(this);
+				    	me.find(".message-item").first().addClass("first-old-message");				    	
+				        self.activeRoom().loadMoreMessage(function(data){
+				        	if(data.messages && data.messages.length > 0){
+				        		var firstOffsetTop = me.find(".first-old-message").first().offset().top;
+				        		var offsetTop = me.offset().top;
+				        		me.scrollTop(firstOffsetTop - offsetTop);
+				        		me.find(".message-item").removeClass("first-old-message");
+				        	}
+				        });
 				    }
 				});
 				msgList.data("scroll-binded", true);
@@ -69,9 +74,7 @@
 
 				roomList.scroll(function() {   
 				    if ($(this).scrollTop() + $(this).height() === $(this)[0].scrollHeight) {				    	
-				       	self.loadMoreRoom(function(data){
-
-				       	});
+				       	self.loadMoreRoom();
 				    }
 				});
 				roomList.data("scroll-binded", true);
@@ -131,7 +134,7 @@
 		function _scrollToBottomMessageList() {
 			var listContainer = ele.find(".js-message-list");
 			if(listContainer.length > 0){
-				listContainer.animate({ scrollTop: listContainer[0].scrollHeight }, 1000);
+				listContainer.animate({ scrollTop: listContainer[0].scrollHeight }, 0);
 			}
 		}
 
