@@ -123,12 +123,13 @@ class ControllerApiMessage extends Controller {
 		$this->load->model('tool/object');
 		$this->load->model('tool/chat');
 
-		$oRoom = $this->model_friend_message->add( 
-			$idRoom,
-			$this->customer->getId(), 
-			$aUserToSlugs, 
-			$sContent 
-		);
+		$oRoom = $this->model_friend_message->add($idRoom, array(
+			'user_from_id' => $this->customer->getId(), 
+			'user_to_slugs' => $aUserToSlugs, 
+			'content' => $sContent,
+			'userTags' => empty($this->request->post['userTags']) ? array() : $this->request->post['userTags'],
+			'stockTags' => empty($this->request->post['stockTags']) ? array() : $this->request->post['stockTags']
+		));
 
 		if ( !$oRoom ){
 			return $this->response->setOutput(json_encode(array(
