@@ -53,7 +53,8 @@ YesGlobal.Models = YesGlobal.Models || {};
 
 		that.loadMoreMessage = function(sucCallback, failCallback) {
 			if(that.isLoadingMore() || !that.canLoadMore()) return;
-
+			
+			that.currentPage(that.currentPage() + 1);
 			_loadMessage(
 				function(data) {
 					ko.utils.arrayForEach(data.messages, function(m){
