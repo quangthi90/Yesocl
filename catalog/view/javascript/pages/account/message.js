@@ -35,7 +35,9 @@
 		};
 
 		self.clickRoomItem = function(item, event){
-			self.activeRoom(item);			
+			if(self.activeRoom() != null && self.activeRoom().id != item.id) {
+				self.activeRoom(item);
+			}
 		};
 
 		self.toggleNewMessage = function(){
