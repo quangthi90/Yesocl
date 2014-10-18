@@ -24,23 +24,23 @@
 		/* ============= START PUBLIC METHODS ============== */
 		self.activeRoom.subscribe(function(item){
 			if(item === null) return;			
-			item.loadMessage(function(data) {				
-			});
+			item.loadMessage();
 		});
 
-		self.loadMoreRoom = function(){
+		self.loadMoreRoom = function(callback){
 			if(!self.canLoadMore() || self.isLoadingMore()) return;
 
-			self.isLoadingMore(true);
 			self.currentPage(self.currentPage() + 1);
-			_loadRoom(function(data){
-				self.isLoadingMore(false);
+			_loadRoom(function(){
+				if(callback && typeof callback === "function"){
+					callback();
+				}
 			});
 		};
 
 		self.clickRoomItem = function(item, event){
 			self.activeRoom(item);			
-		}
+		};
 
 		self.toggleNewMessage = function(){
 			self.isNewMessage(!self.isNewMessage());			
@@ -50,26 +50,42 @@
 				_selectFirstRoom();
 		};
 
-		self.addMsgListHandles = function(){
+		self.addMsgScrollHandlers = function(){
 			var msgList = ele.find(".js-message-list");
-			if(msgList.data("scroll-binded") == true) return;
+			if(msgList.length > 0){
+				if(msgList.data("scroll-binded") == true) return;
 
-			msgList.scroll(function() {
-			    var pos = $(this).scrollTop();
-			    if (pos == 0 && self.activeRoom() != null) {
-			        self.activeRoom().loadMoreMessage();
-			    }
-			});
-			msgList.data("scroll-binded", true);
+				msgList.scroll(function() {
+				    if ($(this).scrollTop() === 0 && self.activeRoom() != null) {
+				        self.activeRoom().loadMoreMessage();
+				    }
+				});
+				msgList.data("scroll-binded", true);
+			}
+
+			var roomList = ele.find(".room-list");
+			if(roomList.length > 0){
+				if(roomList.data("scroll-binded") == true) return;
+
+				roomList.scroll(function() {   
+				    if ($(this).scrollTop() + $(this).height() === $(this)[0].scrollHeight) {				    	
+				       	self.loadMoreRoom(function(data){
+
+				       	});
+				    }
+				});
+				roomList.data("scroll-binded", true);
+			}
 		};
 		
 		/* ============= END PUBLIC METHODS ================ */
 
 		/* ============= START PRIVATE METHODS ============= */
-		function _loadRoom(callback){
+		function _loadRoom(sucCallback, failCallback){
 			var loadOptions = self.apiUrls.loadRoomMessage.params || {},
 				url = self.apiUrls.loadRoomMessage.name;
 			loadOptions.page = self.currentPage();
+
 			var ajaxOptions = {
 				url: Y.Routing.generate(url, loadOptions),
 				data : {
@@ -83,17 +99,27 @@
 						var roomItem = new Y.Models.RoomModel(r);
 						self.roomList.push(roomItem);
 					});
-					self.totalRoom( data.total_room );
-					if(data.canLoadMore !== undefined) {
-						self.canLoadMore(data.canLoadMore);
-					}					
+					self.totalRoom(data.total_room);
+					self.canLoadMore(data.canLoadMore || false);
+					if(sucCallback && typeof sucCallback === "function"){
+						sucCallback(data);
+					}				
+				}else {
+					if(failCallback && typeof failCallback === "function"){
+						failCallback(data);
+					}
 				}
-				if(callback && typeof callback === "function"){
-					callback(data);
-				}
+				self.isLoadingMore(false);
 			};
 			//Call common ajax Call:
-			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+			Y.Utils.ajaxCall(ajaxOptions, function(){
+				self.isLoadingMore(true);
+			}, successCallback, function(){
+				self.isLoadingMore(false);
+				if(failCallback && typeof failCallback === "function"){
+					failCallback(data);
+				}
+			});
 		}
 
 		function _selectFirstRoom() {
