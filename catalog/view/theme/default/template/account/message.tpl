@@ -56,12 +56,27 @@
                                     <img data-bind="attr: {src: $data.user.avatar}" width="35" class="media-object">
                                 </a>
                                 <div class="media-body">
-                                    <div class="message-body">
+                                    <div class="message-body">                                        
                                         <div class="pull-left">
                                             <a class="strong text-inverse text-small" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a>
                                         </div>
                                         <div class="pull-right">
                                             <span class="text-right text-muted text-small" data-bind="timeAgo: $data.created"></span>
+                                            <span>&nbsp;</span>
+                                            <span class="text-right text-muted text-small">
+                                                <!-- ko if: $data.status() === 1 -->
+                                                <i class="fa fa-spin fa-refresh"></i> Sending
+                                                <!-- /ko -->
+                                                <!-- ko if: $data.status() === 2 -->
+                                                <i class="fa fa-check"></i> Sent
+                                                <!-- /ko -->
+                                                <!-- ko if: $data.status() === 3 -->
+                                                <i class="fa fa-check-circle"></i> Seen
+                                                <!-- /ko -->
+                                                <!-- ko if: $data.status() === 4 -->
+                                                <i class="fa fa-warning"></i> Error
+                                                <!-- /ko -->
+                                            </span>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>

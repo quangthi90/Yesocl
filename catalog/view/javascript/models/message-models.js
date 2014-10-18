@@ -27,7 +27,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 					page: that.currentPage()
 				}),
 				data : {
-					limit : 20
+					limit : 50
 				}
 			};			
 			var successCallback = function(data){
@@ -64,6 +64,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 				status: Y.Enums.MessageStatus.SENDING
 			});
 			that.messageList.push(initNewMessage);
+			that.newMessage().reset();
 			if(that.newMessageCallback && typeof that.newMessageCallback === "function"){
 				that.newMessageCallback();
 			}
@@ -72,13 +73,13 @@ YesGlobal.Models = YesGlobal.Models || {};
 				content: messageContent,
 				room_id: that.id
 			};
-			_addMessageToRoom(messageData, function(data) {
-				initNewMessage.status(Y.Enums.SENT);
-				initNewMessage.id = data.message.id;
+			_addMessageToRoom(messageData, function(data) {				
+				initNewMessage.status(Y.Enums.MessageStatus.SENT);
+				initNewMessage.id = data.message.id;			
 				that.lastMessage(data.room.last_message);				
 				that.updated(data.room.updated);
 			}, function(data) {
-				initNewMessage.status(Y.Enums.ERROR);
+				initNewMessage.status(Y.Enums.MessageStatus.ERROR);
 				//Message
 			});
 		};
@@ -107,8 +108,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 				data : messageData
 			};
 
-			var successCallback = function(data){
-				that.newMessage().reset();
+			var successCallback = function(data){				
 				if(data.success === "ok"){
 					if(sucCallback && typeof sucCallback === "function"){
 						sucCallback(data);
@@ -128,7 +128,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 	Y.Models.MessageModel = function (data) {
 		var that = this;		
 		/* ============= START PROPERTIES ================== */
-		that.id = data.id || new Date().getTime();
+		that.id = data.id || new Date().getTime() + "";
 		that.content = ko.observable(data.content || "");
 		that.status = ko.observable(data.status || Y.Enums.MessageStatus.NONE);
 		that.user = data.user || {};

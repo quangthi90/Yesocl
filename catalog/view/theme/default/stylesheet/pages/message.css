@@ -58,11 +58,14 @@
 .message-rooms-container .room-list .room-item:hover {
 	border-right: 2px solid #25ad9f;
 }
-.message-list .message-item {	
+.message-list .message-item {
+	position: relative;
 }
 .message-list .message-item.sending {
-	background-color: #F0F0F0;
 	opacity: 0.8;
+}
+.message-list .message-item .message-status {
+	margin-left: 10px;
 }
 
 /*================================== END MESSAGE =====================================*/
