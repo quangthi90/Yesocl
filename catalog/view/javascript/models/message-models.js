@@ -53,7 +53,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 
 		that.loadMoreMessage = function(sucCallback, failCallback) {
 			if(that.isLoadingMore() || !that.canLoadMore()) return;
-			
+
 			that.currentPage(that.currentPage() + 1);
 			_loadMessage(
 				function(data) {
@@ -90,8 +90,11 @@ YesGlobal.Models = YesGlobal.Models || {};
 				that.newMessageCallback();
 			}
 
+			var tags = Y.Utils.parseTagsInfo(messageContent);
 			var messageData = {
 				content: messageContent,
+				userTags: tags.userTags,
+				stockTags: tags.stockTags,
 				room_id: that.id
 			};
 			_addMessageToRoom(messageData, function(data) {
