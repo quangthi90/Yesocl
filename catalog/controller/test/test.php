@@ -77,4 +77,16 @@ Class ControllerTestTest extends Controller {
        		$this->model_friend_friend->makeFriend(	$idUser, "533126bfa7c0e9442b000000");
 		}
 	}
+
+	public function updateLiveToken(){
+		$this->load->model('user/user');
+		$aUsers = $this->model_user_user->getUsers();
+
+		foreach($aUsers as $oUser)
+		{
+			$oUser->setLiveToken(uniqid());
+		}
+
+		$this->dm->flush();
+	}
 }
