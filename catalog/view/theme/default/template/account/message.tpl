@@ -18,7 +18,7 @@
                         <div class="bg-gray text-center strong border-top border-bottom innerAll half">
                             <span data-bind="text: totalRoom() + ( totalRoom() > 1 ? ' {% trans %}rooms{% endtrans %}' : ' {% trans %}room{% endtrans %}')"></span>
                         </div>
-                        <ul class="list-unstyled room-list" data-bind="foreach: { data: $data.roomList, afterRender: addMoreEvents }">
+                        <ul class="list-unstyled room-list" data-bind="foreach: { data: $data.roomList }">
                             <li class="border-bottom cursor-pointer room-item" data-bind="click: $parent.clickRoomItem, css: { 'active' : $data.id == ($parent.activeRoom() != null ? $parent.activeRoom().id : 0) }">
                                 <div class="media innerAll">
                                     <div class="media-object pull-left hidden-phone">
@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="media-body">
                                         <div><span class="strong text-small" data-bind="text: $data.name"></span> <small class="text-italic pull-right label label-default" data-bind="timeAgo: $data.lastMessage().created"></small></div>
-                                        <div class="text-small truncated-text" data-bind="text: $data.lastMessage().content"></div>
+                                        <div class="text-small truncated-text" data-bind="html: $data.lastMessageContent"></div>
                                     </div>
                                 </div>
                             </li>
@@ -48,10 +48,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                 
-                        <div class="border-top padding-none margin-none message-list js-message-list" data-bind="foreach: messageList">
+                        </div>
+                        <div class="text-center innerAll half bg-primary message-loading hide" data-bind="css: { 'hide': !$data.isLoadingMore() }">
+                            <i class="fa fa-spin fa-refresh"></i> {% trans %}Loading more messages {% endtrans %} ...
+                        </div>
+                        <div class="border-top padding-none margin-none message-list js-message-list" data-bind="foreach: { data: $data.messageList, afterRender: $parent.addMsgListHandles }">
                             <!--  Message -->
-                            <div class="media margin-none innerAll border-bottom message-item" data-bind="css: { 'sending': $data.status() === 1, 'sent': $data.status() === 2, 'seen': $data.status() === 3 , 'error': $data.status() === 4 }">
+                            <div class="media margin-none innerAll border-bottom message-item" data-bind="css: { 'fadeIn': $data.status() > 0, 'msg-sending': $data.status() === 1, 'msg-sent': $data.status() === 2, 'msg-seen': $data.status() === 3 , 'msg-error': $data.status() === 4 }">
                                 <a data-bind="link: { title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }" class="pull-left hidden-xs message-creator">
                                     <img data-bind="attr: {src: $data.user.avatar}" width="35" class="media-object">
                                 </a>
@@ -80,13 +83,13 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <div class="message-content" data-bind="text: $data.content"></div>
+                                    <div class="message-content" data-bind="html: $data.contentDisplay"></div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                         <div class="new-messsage-container" data-bind="with: $data.newMessage">
                             <div class="border-top border-bottom">
-                                <textarea type="text" class="form-control rounded-none border-none no-resize" placeholder="{% trans %}Write your messages{% endtrans %}..." data-bind="value: content, valueUpdate:'afterkeydown', executeOnEnter: $parent.addMessage, shiftKeyRequired: true"></textarea>
+                                <textarea type="text" class="form-control rounded-none border-none no-resize" placeholder="{% trans %}Write new message{% endtrans %}..." data-bind="mention: content, autoSize: content, valueUpdate:'afterkeydown', executeOnEnter: $parent.addMessage, shiftKeyRequired: true"></textarea>
                             </div>
                         </div>                          
                     </div>

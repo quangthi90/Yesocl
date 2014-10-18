@@ -36,11 +36,18 @@
 	overflow-y: auto;
 	overflow-x: hidden;
 }
+.widget-message-container .active-room-container .message-loading {
+	z-index: 100;
+	position: absolute;
+	top: 50px;
+	left: 0;right: 0px;
+}
 .widget-message-container .active-room-container .new-messsage-container {
 	position: absolute;
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
+	border-top: 1px solid #B0B0B0;
 }
 .widget-message-container .message-rooms-container .room-list {
 	position: absolute;
@@ -61,11 +68,17 @@
 .message-list .message-item {
 	position: relative;
 }
-.message-list .message-item.sending {
-	opacity: 0.8;
+.message-list .message-item.msg-sending {
+	opacity: 0.5;	
 }
 .message-list .message-item .message-status {
 	margin-left: 10px;
+}
+
+.widget-message-container .mentions-input-box .mentions-autocomplete-list {
+	bottom: 100%;
+	width: 50%;
+	min-width: 300px;
 }
 
 /*================================== END MESSAGE =====================================*/

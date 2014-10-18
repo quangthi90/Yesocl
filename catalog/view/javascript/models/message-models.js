@@ -15,40 +15,60 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.newMessage = ko.observable(new Y.Models.MessageModel({}));
 		
 		that.currentPage = ko.observable(1);
-		that.canLoadMore = ko.observable(data.canLoadMore || true);
+		that.canLoadMore = ko.observable(data.canLoadMore || false);
+		that.isLoadingMore = ko.observable(false);
 		that.newMessageCallback = data.newMessageCallback || undefined;
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============= */
+		that.lastMessageContent = ko.computed(function(){
+			var message = that.lastMessage();
+			if(message && message.content){
+				var rawContent = message.content.keepNewLine().extractTextLink();
+				return Y.Utils.parseTaggedText(rawContent);
+			}
+			return "";
+		});
+
 		that.loadMessage = function(sucCallback, failCallback) {
-			var ajaxOptions = {
-				url: Y.Routing.generate("ApiGetMessages", {
-					room_id: that.id,
-					page: that.currentPage()
-				}),
-				data : {
-					limit : 50
-				}
-			};			
-			var successCallback = function(data){
-				if(data.success === "ok") {
+			_loadMessage(
+				function(data) {
 					ko.utils.arrayForEach(data.messages, function(m){
 						var messageItem = new Y.Models.MessageModel(m);
 						that.messageList.push(messageItem);
-					});
-					if(data.canLoadMore !== undefined) {
-						that.canLoadMore(data.canLoadMore);
-					}
+					});					
 					if(that.newMessageCallback && typeof that.newMessageCallback === "function"){
 						that.newMessageCallback();
+					}				
+					if(sucCallback && typeof sucCallback === "function"){
+						sucCallback(data);
 					}
-				}				
-				if(sucCallback && typeof sucCallback === "function"){
-					sucCallback(data);
+				}, function(data) {
+					if(failCallback && typeof failCallback === "function"){
+						failCallback(data);
+					}
 				}
-			};
-			//Call common ajax Call:
-			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
+			);
+		};
+
+		that.loadMoreMessage = function(sucCallback, failCallback) {
+			if(that.isLoadingMore() || !that.canLoadMore()) return;
+
+			_loadMessage(
+				function(data) {
+					ko.utils.arrayForEach(data.messages, function(m){
+						var messageItem = new Y.Models.MessageModel(m);
+						that.messageList.unshift(messageItem);
+					});		
+					if(sucCallback && typeof sucCallback === "function"){
+						sucCallback(data);
+					}
+				}, function(data) {
+					if(failCallback && typeof failCallback === "function"){
+						failCallback(data);
+					}
+				}
+			);
 		};
 
 		that.addMessage = function(){
@@ -73,7 +93,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 				content: messageContent,
 				room_id: that.id
 			};
-			_addMessageToRoom(messageData, function(data) {				
+			_addMessageToRoom(messageData, function(data) {
 				initNewMessage.status(Y.Enums.MessageStatus.SENT);
 				initNewMessage.id = data.message.id;			
 				that.lastMessage(data.room.last_message);				
@@ -102,6 +122,41 @@ YesGlobal.Models = YesGlobal.Models || {};
 		/* ============= END PUBLIC METHODS ============= */
 
 		/* ============= START PRIVATE METHODS ============= */	
+		function _loadMessage(sucCallback, failCallback) {			
+			var ajaxOptions = {
+				url: Y.Routing.generate("ApiGetMessages", {
+					room_id: that.id,
+					page: that.currentPage()
+				}),
+				data : {
+					limit : 10
+				},
+				showLoading: false
+			};			
+			var successCallback = function(data){
+				that.isLoadingMore(false);
+				if(data.success === "ok") {
+					that.canLoadMore(data.canLoadMore || true);
+					if(sucCallback && typeof sucCallback === "function"){
+						sucCallback(data);
+					}									
+				}else {
+					if(failCallback && typeof failCallback === "function"){
+						failCallback(data);
+					}
+				}
+			};
+			//Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, function(){
+				that.isLoadingMore(true);
+			}, successCallback, function(){
+				that.isLoadingMore(false);
+				if(failCallback && typeof failCallback === "function"){
+					failCallback(data);
+				}
+			});
+		};
+
 		function _addMessageToRoom(messageData, sucCallback, failCallback){
 			var ajaxOptions = {
 				url: Y.Routing.generate("ApiPostMessage"),
@@ -138,6 +193,15 @@ YesGlobal.Models = YesGlobal.Models || {};
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============= */
+		that.contentDisplay = ko.computed(function(){
+			var rawContent = that.content();
+			if(rawContent){
+				rawContent = rawContent.keepNewLine().extractTextLink();
+				return Y.Utils.parseTaggedText(rawContent);
+			}
+			return "";
+		});
+
 		that.reset = function(){
 			that.id = "",
 			that.content("");			

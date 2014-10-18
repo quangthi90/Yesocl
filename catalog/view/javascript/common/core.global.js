@@ -344,10 +344,9 @@ var YesGlobal = YesGlobal || {};
 			return result;
 	    },
 	    extractTextLink: function(text) {
-	    	text = text ? text.trim().toLowerCase() : "";
 	    	var urlRegex = /(https?:\/\/[^\s]+)/g;
 	    	return text.replace(urlRegex, function(url) {
-	    		if(url.indexOf(Y.Routing.BaseUrl) === 0) {
+	    		if(url.toLowerCase().indexOf(Y.Routing.BaseUrl) === 0) {
 	    			return '<a href="' + url + '">' + url + '</a>';	
 	    		}
 		        return '<a target="_blank" href="' + url + '">' + url + '</a>';

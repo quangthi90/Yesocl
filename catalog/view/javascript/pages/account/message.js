@@ -24,12 +24,8 @@
 		/* ============= START PUBLIC METHODS ============== */
 		self.activeRoom.subscribe(function(item){
 			if(item === null) return;			
-			if(item.canLoadMore() && !self.isLoadingMore()){
-				self.isLoadingMore(true);
-				item.loadMessage(function(data) {
-					self.isLoadingMore(false);
-				});
-			}
+			item.loadMessage(function(data) {				
+			});
 		});
 
 		self.loadMoreRoom = function(){
@@ -42,9 +38,6 @@
 			});
 		};
 
-		self.addMoreEvents = function(){
-		};
-
 		self.clickRoomItem = function(item, event){
 			self.activeRoom(item);			
 		}
@@ -55,6 +48,19 @@
 				self.activeRoom(null);
 			else
 				_selectFirstRoom();
+		};
+
+		self.addMsgListHandles = function(){
+			var msgList = ele.find(".js-message-list");
+			if(msgList.data("scroll-binded") == true) return;
+
+			msgList.scroll(function() {
+			    var pos = $(this).scrollTop();
+			    if (pos == 0 && self.activeRoom() != null) {
+			        self.activeRoom().loadMoreMessage();
+			    }
+			});
+			msgList.data("scroll-binded", true);
 		};
 		
 		/* ============= END PUBLIC METHODS ================ */
