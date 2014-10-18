@@ -136,7 +136,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 			var successCallback = function(data){
 				that.isLoadingMore(false);
 				if(data.success === "ok") {
-					that.canLoadMore(data.canLoadMore || true);
+					that.canLoadMore(data.canLoadMore || false);
 					if(sucCallback && typeof sucCallback === "function"){
 						sucCallback(data);
 					}									
