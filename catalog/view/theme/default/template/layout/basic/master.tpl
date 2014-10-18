@@ -109,7 +109,7 @@
     <script src="{{ asset_js('pages/common/widgets.js') }}"></script>    
     <script id="Yes.Global">
         (function(Y, undefined) {
-            var user = '{{ get_current_user()|raw }}';
+            var user = '{{ get_current_user()|json_encode()|raw }}';
             var routing = '{{ get_routing_list()|raw }}';
             Y.Routing = new Y.RoutingManager( JSON.parse(routing) );
             if (user){

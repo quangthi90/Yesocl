@@ -1,19 +1,11 @@
 <?php
 class ModelToolChat extends Model {
-	public function pushMessage( $sChannelName, $sUsername, $sContent, $sAvatar ) {
-		$aOptions = $this->sanitiseInput(array(
-			'nickname' => substr( htmlspecialchars($sUsername), 0, 30 ),
-			'text' => substr( htmlspecialchars($sContent), 0, 300 ),
-			'avatar' => $sAvatar
-		));
-
-		$sActivityType = $this->config->get('pusher')['type']['message'];
-
-		$oActivity = new Activity($sActivityType, $aOptions['text'], $aOptions);
-
-		$data = $oActivity->getMessage();
-		
-		$response = $this->pusher->trigger($sChannelName, $sActivityType, $data, null, true);
+	public function pushMessage( $aChannelNames, $sActivityType, $aOptions = array() ) {
+		// var_dump($aOptions);exit;
+		foreach ( $aChannelNames as $sChannelName ) {
+			$a = $this->pusher->trigger($sChannelName, $sActivityType, $aOptions, null, true);
+			// var_dump($a);
+		}
 
 		return true;
 	}
@@ -34,6 +26,7 @@ class Activity {
   	private $date = null;
   	private $id;
   	private $type;
+  	private $data;
   
   	public function __construct($activity_type, $action_text, $options = array()) {
 	    $options = $this->set_default_options($options);
@@ -45,6 +38,7 @@ class Activity {
 	    $this->date = date('r');
 	    $this->action_text = $action_text;
 	    $this->display_name = $options['displayName'];
+	    $this->data = $options['data'];
 	    if ( !empty($options['image']) ) {
 	    	$this->image = $options['image'];
 	    }
@@ -60,7 +54,8 @@ class Activity {
 		        'displayName' => $this->display_name,
 		        'objectType' => 'person',
 		        'image' => $this->image
-	      	)
+	      	),
+	      	'data' => $this->data
 	    );
 	    return $activity;
   	}
