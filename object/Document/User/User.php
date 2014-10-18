@@ -92,6 +92,9 @@ Class User {
 	/** @MongoDB\Boolean */
 	private $deleted;
 
+	/** @MongoDB\String */
+	private $liveToken;
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
@@ -443,6 +446,14 @@ Class User {
 
 	public function getTokenTime(){
 		return $this->tokenTime;
+	}
+
+	public function setLiveToken( $liveToken ){
+		$this->liveToken = $liveToken;
+	}
+
+	public function getLiveToken(){
+		return $this->liveToken;
 	}
 
 	public function setBranches( $branches ){
