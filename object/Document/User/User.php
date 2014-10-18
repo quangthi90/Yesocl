@@ -130,8 +130,7 @@ Class User {
 			'slug'			=> $this->getSlug(),
 			'email' 		=> $this->getPrimaryEmail()->getEmail(),
 			'current'		=> $this->getMeta()->getCurrent(),
-			'gender'		=> $this->meta->getSex(),
-			'live_token'	=> $this->getLiveToken()
+			'gender'		=> $this->meta->getSex()
 		);
 
 		return $data;

@@ -115,6 +115,7 @@ class ExtensionLoader
         }
         $aUser = $oUser->formatToCache();
         $aUser['avatar'] = $this->registry->get('model_tool_image')->getAvatarUser( $aUser['avatar'], $aUser['email'], $width, $height );
+        $aUser['live_token'] = $oUser->getLiveToken();
         
         return $aUser;
     }
