@@ -32,7 +32,7 @@
 	left: 0px;
 	top: 50px;
 	right: 0px;
-	bottom: 70px;
+	bottom: 101px;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
@@ -47,7 +47,7 @@
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
-	border-top: 1px solid #B0B0B0;
+	border-top: 1px solid #B0B0B0;	
 }
 .widget-message-container .message-rooms-container .room-list {
 	position: absolute;
@@ -77,8 +77,22 @@
 
 .widget-message-container .mentions-input-box .mentions-autocomplete-list {
 	bottom: 100%;
-	width: 50%;
-	min-width: 300px;
+}
+.widget-message-container .emotion-overview-list {
+	background-color: #fff;
+    border: 1px solid #aaa;
+    bottom: 30px;
+    right: 0px;
+    padding: 5px;
+    position: absolute;
+    width: 250px;
+    z-index: 999;
+}
+.widget-message-container .emoticon:hover {
+	background-color: #FFF;
+}
+.widget-message-container .emotion-overview-list .emoticon:hover {
+	background-color: #F0F0F0;
 }
 
 /*================================== END MESSAGE =====================================*/

@@ -17,6 +17,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.currentPage = ko.observable(1);
 		that.canLoadMore = ko.observable(data.canLoadMore || false);
 		that.isLoadingMore = ko.observable(false);
+		that.isRegisterd = ko.observable(false);
 		that.newMessageCallback = data.newMessageCallback || undefined;
 		/*  ============= END PROPERTIES ==================== */
 
@@ -24,7 +25,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.lastMessageContent = ko.computed(function(){
 			var message = that.lastMessage();
 			if(message && message.content){
-				var rawContent = message.content.keepNewLine().extractTextLink();
+				var rawContent = message.content.keepNewLine().extractTextLink().extractTextEmoticon();
 				return Y.Utils.parseTaggedText(rawContent);
 			}
 			return "";
@@ -99,8 +100,8 @@ YesGlobal.Models = YesGlobal.Models || {};
 			};
 			_addMessageToRoom(messageData, function(data) {
 				initNewMessage.status(Y.Enums.MessageStatus.SENT);
-				initNewMessage.id = data.message.id;			
-				that.lastMessage(data.room.last_message);				
+				initNewMessage.id = data.message.id;
+				that.lastMessage(data.room.last_message);	
 				that.updated(data.room.updated);
 			}, function(data) {
 				initNewMessage.status(Y.Enums.MessageStatus.ERROR);
@@ -200,7 +201,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.contentDisplay = ko.computed(function(){
 			var rawContent = that.content();
 			if(rawContent){
-				rawContent = rawContent.keepNewLine().extractTextLink();
+				rawContent = rawContent.keepNewLine().extractTextLink().extractTextEmoticon();
 				return Y.Utils.parseTaggedText(rawContent);
 			}
 			return "";

@@ -4,7 +4,7 @@
 
 {% block stylesheet %}
     <link rel="stylesheet" href="{{ asset_css('pages/message.css') }}" />
-    <link rel="stylesheet" href="{{ asset_css('library/bootstrap-controls/bootstrap-select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset_css('library/emoticons/emoticons.css') }}" />
 {% endblock %}
 {% block body %}
     <div class="innerAll">
@@ -87,10 +87,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="new-messsage-container" data-bind="with: $data.newMessage">
+                        <div class="new-messsage-container" data-bind="with: $data.newMessage, emoticon: true">
                             <div class="border-top border-bottom">
                                 <textarea type="text" class="form-control rounded-none border-none no-resize" placeholder="{% trans %}Write new message{% endtrans %}..." data-bind="mention: content, autoSize: content, valueUpdate:'afterkeydown', executeOnEnter: $parent.addMessage, shiftKeyRequired: true"></textarea>
                             </div>
+                            <div class="btn-toolbar" role="toolbar">
+                                <div class="btn-group btn-group-sm pull-right">                                    
+                                    <a class="btn btn-nobg" title="Add a image"><i class="fa fa-picture-o"></i></a>
+                                    <a class="btn btn-nobg emotion-show" title="Add a icon"><i class="fa fa-meh-o"></i></a>
+                                </div>
+                            </div>                      
                         </div>                          
                     </div>
                 </div>                
@@ -99,6 +105,7 @@
     </div>
 {% endblock %}
 {% block library_javascript %}
+    <script src="{{ asset_js('library/emoticons/emoticons.js') }}"></script>
 {% endblock %}
 {% block common_javascript %}
     <script src="{{ asset_js('models/message-models.js') }}"></script>

@@ -2,6 +2,7 @@ var YesGlobal = YesGlobal || {};
 
 (function($, ko, window, Y, undefined) {
 
+	Y.PusherInstance = undefined;
 	Y.Widgets = {};
 	Y.GlobalKoModel = {};
 	Y.CurrentUser = {};
@@ -44,6 +45,9 @@ var YesGlobal = YesGlobal || {};
 	};
 
 	Y.Configs = {
+		pusherKey: "22dc8822a1badda84d02",
+		pusherOptions: {		
+		},
 	    ajaxOptions : {
 	        url : "",
 	        type: "POST",
@@ -589,6 +593,9 @@ var YesGlobal = YesGlobal || {};
 
 	/ ========================== START COMMON INIT ============================ /
 	function _initGlobal() {
+		//Init pusher
+		Y.PusherInstance = new Pusher(Y.Configs.pusherKey, Y.Configs.pusherOptions);
+
 		if (!String.prototype.trim) {
 		   	String.prototype.trim = function(){
 		   		return this.replace(/^\s+|\s+$/g, '');
@@ -599,6 +606,12 @@ var YesGlobal = YesGlobal || {};
 		};
 		String.prototype.extractTextLink = function(){
 			return Y.Utils.extractTextLink(this);
+		};
+		String.prototype.extractTextEmoticon = function(){
+			if($.emoticons){
+				return $.emoticons.replace(this);
+			}
+			return this;
 		};
 	}
 	_initGlobal();

@@ -133,6 +133,10 @@
 			}
 		}		
 
+		function _subscribeRoomChanel(){
+			if(Y.PusherInstance && self.roomList().length == 0) return;
+		}
+
 		function _scrollToBottomMessageList() {
 			var listContainer = ele.find(".js-message-list");
 			if(listContainer.length > 0){
