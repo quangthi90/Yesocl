@@ -1,0 +1,244 @@
+body { 
+  background: #000 url(../image/b-bg.png) repeat top left;
+}
+
+#y-login-header {
+  margin: 0px auto;
+  max-height: 100px;
+  overflow: hidden;
+  background: #000 url(../image/h-bg.png) repeat top left;
+}
+
+#y-login-header > div {
+  margin: 0px auto;
+  width: 980px;  
+  padding: 20px 10px;
+  overflow: hidden;
+}
+
+#y-login-header img.logo {
+  float: left;
+}
+
+#y-login-header h3.welcome {
+  color: #fff;
+  float: left;
+  font-size: 15px;
+  margin: 23px 0px 0px 10px;  
+}
+
+#y-frm-login
+{
+  width: 500px;
+  display: block;
+  border: 1px solid #ddd;  
+  position: relative;
+  background:#fff;  
+  padding: 15px;
+  margin: 60px auto; 
+}
+
+
+#y-frm-login .frm-title {
+  padding: 5px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#y-frm-login .frm-title strong{
+  color: #2d8806;
+}
+
+#y-frm-login .frm-content {
+    padding: 10px 0px 25px 90px;
+    border-bottom: 1px solid #ddd;
+}
+
+#y-frm-login .frm-content .checkbox-container {
+  padding: 0px 0px 5px 50px;
+}
+
+#y-frm-login .frm-content .btns {
+  padding: 5px 0px 0px 50px;
+}
+
+#y-frm-login .frm-content .input-prepend {
+  margin-bottom: 15px;
+}
+
+#y-frm-login .frm-footer {
+  padding: 10px 0px 0px 90px;
+}
+
+#y-frm-login .frm-footer ul {
+  list-style: circle;
+  padding-left: 18px;
+}
+
+#y-frm-login .frm-footer ul li{
+  font-size: 12px;
+}
+
+#y-frm-login .frm-footer  ul li a {
+  font-weight: bold;
+  color: #2d8806;
+}
+
+.checkbox-container label{
+  display: inline;
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+.checkbox-container input {
+  margin: 0px;
+  padding: 0px;
+}
+
+#y-frm-login .frm-content .input-prepend span.add-on {
+  padding: 8px 15px;
+}
+
+#y-frm-login .frm-content .input-prepend input {
+  height: 23px;
+}
+
+#y-frm-password .frm-content {
+  border-bottom: none;
+  padding-left: 70px;
+}
+
+#y-frm-password .input-prepend span.add-on {
+  width: 60px;
+}
+
+#y-frm-password .input-prepend span.add-on i {
+  margin-right: 4px;
+}
+
+#y-frm-password .frm-content .btns {
+  padding-left: 90px;
+}
+
+.btn-file input[type="file"] {
+  width: auto;
+}
+
+.btn-file input[type="file"] {
+  height: 30px;
+  /* In IE7, the height of the select element cannot be changed by height, only font-size */
+
+  *margin-top: 4px;
+  /* For IE7, add top margin to align select with labels */
+
+  line-height: 30px;
+}
+
+.btn-file input[type="file"]:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.btn-file > input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  font-size: 23px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  transform: translate(-300px, 0) scale(4);
+  direction: ltr;
+}
+
+.fileupload {
+  margin-bottom: 9px;
+}
+
+.fileupload .uneditable-input {
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+  cursor: text;
+}
+
+.fileupload .thumbnail {
+  display: inline-block;
+  margin-bottom: 5px;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.fileupload .thumbnail > img {
+  display: inline-block;
+  max-height: 100%;
+  vertical-align: middle;
+}
+
+.fileupload .btn {
+  vertical-align: middle;
+}
+
+.fileupload-exists .fileupload-new,
+.fileupload-new .fileupload-exists {
+  display: none;
+}
+
+.fileupload-inline .fileupload-controls {
+  display: inline;
+}
+
+.fileupload-new .input-append .btn-file {
+  -webkit-border-radius: 0 3px 3px 0;
+     -moz-border-radius: 0 3px 3px 0;
+          border-radius: 0 3px 3px 0;
+}
+
+.control-group.warning .fileupload .uneditable-input {
+  color: #a47e3c;
+  border-color: #a47e3c;
+}
+
+.control-group.warning .fileupload .fileupload-preview {
+  color: #a47e3c;
+}
+
+.control-group.warning .fileupload .thumbnail {
+  border-color: #a47e3c;
+}
+
+.control-group.error .fileupload .uneditable-input {
+  color: #b94a48;
+  border-color: #b94a48;
+}
+
+.control-group.error .fileupload .fileupload-preview {
+  color: #b94a48;
+}
+
+.control-group.error .fileupload .thumbnail {
+  border-color: #b94a48;
+}
+
+.control-group.success .fileupload .uneditable-input {
+  color: #468847;
+  border-color: #468847;
+}
+
+.control-group.success .fileupload .fileupload-preview {
+  color: #468847;
+}
+
+.control-group.success .fileupload .thumbnail {
+  border-color: #468847;
+}
