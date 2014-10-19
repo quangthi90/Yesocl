@@ -1,8 +1,9 @@
-{% extends '@template/default/template/common/layout.tpl' %}
+{% extends '@template/default/template/layout/basic/master.tpl' %}
 
 {% block title %}{% trans %}Change Password{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
+    <link href="{{ asset_css_old('common/yes.css') }}" rel="stylesheet" media="screen" />
     <link href="{{ asset_css_old('account.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
 
