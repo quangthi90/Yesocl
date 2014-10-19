@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div id="message-thread" class="border-top border-left border-right message-thread">
-                    <div data-bind="with: activeRoom" class="active-room-container">
+                    <div data-bind="with: $data.activeRoom, css: { 'hide' : $data.activeRoom() == null || $data.isNewMessage() }" class="active-room-container">
                         <div class="bg-gray innerAll" class="room-info-container">
                             <div class="row">
                                 <div class="col-md-8">
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="pull-right">
-                                        <a href="#type" class="btn btn-default bg-white btn-sm" data-bind="click: $parent.toggleNewMessage"><i class="fa fa-pencil"></i> <span class="hidden-xs">{% trans %}New Message{% endtrans %}</span></a> 
+                                        <a class="btn btn-default bg-white btn-sm" data-bind="click: $parent.toggleNewMessage"><i class="fa fa-pencil"></i> <span class="hidden-xs">{% trans %}New Message{% endtrans %}</span></a> 
                                     </div>
                                 </div>
                             </div>
@@ -98,8 +98,38 @@
                                 </div>
                             </div>                      
                         </div>                          
+                    </div>                    
+                    <!-- ko ifnot: $data.activeRoom() != null && !$data.isNewMessage() -->
+                    <div class="active-room-container">
+                        <div class="bg-gray innerAll" class="room-info-container">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h4 class="innerT half margin-none text-capitalize">New message</h4>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="pull-right">
+                                        <a class="btn btn-default bg-white btn-sm" data-bind="click: toggleNewMessage"><i class="fa fa-list"></i> <span class="hidden-xs">{% trans %}Message list{% endtrans %}</span></a> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+                        <div class="new-message-info">
+                            <input type="text" id="msg-to" class="form-control">
+                        </div>                     
+                        <div class="new-messsage-container" data-bind="with: $data.globalNewMessage, emoticon: true">
+                            <div class="border-top border-bottom">
+                                <textarea type="text" class="form-control rounded-none border-none no-resize" placeholder="{% trans %}Write new message{% endtrans %}..." data-bind="mention: content, autoSize: content, valueUpdate:'afterkeydown', executeOnEnter: $parent.addMessage, shiftKeyRequired: true"></textarea>
+                            </div>
+                            <div class="btn-toolbar" role="toolbar">
+                                <div class="btn-group btn-group-sm pull-right">                                    
+                                    <a class="btn btn-nobg" title="Add a image"><i class="fa fa-picture-o"></i></a>
+                                    <a class="btn btn-nobg emotion-show" title="Add a icon"><i class="fa fa-meh-o"></i></a>
+                                </div>
+                            </div>                      
+                        </div>                          
                     </div>
-                </div>                
+                    <!-- /ko -->
+                </div>
             </div>
         </div>
     </div>

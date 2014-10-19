@@ -16,6 +16,7 @@
 		self.roomList = ko.observableArray([]);
 		self.totalRoom = ko.observable(0);
 		self.activeRoom = ko.observable();
+		self.globalNewMessage = ko.observable(new Y.Models.MessageModel({}));
 
 		self.messageTo = ko.observable("");
 		self.messageContent = ko.observable("");
@@ -41,11 +42,7 @@
 		};
 
 		self.toggleNewMessage = function(){
-			self.isNewMessage(!self.isNewMessage());			
-			if (self.activeRoom() != null)
-				self.activeRoom(null);
-			else
-				_selectFirstRoom();
+			self.isNewMessage(!self.isNewMessage());
 		};
 
 		self.addMsgScrollHandlers = function(){

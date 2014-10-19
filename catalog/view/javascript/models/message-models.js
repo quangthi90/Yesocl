@@ -60,7 +60,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 				function(data) {
 					ko.utils.arrayForEach(data.messages, function(m){
 						var messageItem = new Y.Models.MessageModel(m);
-						that.messageList.unshift(messageItem);
+						that.messageList.push(messageItem);
 					});		
 					if(sucCallback && typeof sucCallback === "function"){
 						sucCallback(data);

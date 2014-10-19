@@ -594,7 +594,7 @@ var YesGlobal = YesGlobal || {};
 	/ ========================== START COMMON INIT ============================ /
 	function _initGlobal() {
 		//Init pusher
-		Y.PusherInstance = new Pusher(Y.Configs.pusherKey, Y.Configs.pusherOptions);
+		//Y.PusherInstance = new Pusher(Y.Configs.pusherKey, Y.Configs.pusherOptions);
 
 		if (!String.prototype.trim) {
 		   	String.prototype.trim = function(){
