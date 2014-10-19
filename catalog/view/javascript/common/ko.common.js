@@ -77,7 +77,24 @@ var YesGlobal = YesGlobal || {};
       	var triggerBtn = ele.find(".emotion-show");
       	var overviewList = ele.find(".emotion-overview-list").html($.emoticons.toString()).hide();
       	triggerBtn.on('click',function(){
-			overviewList.slideToggle();
+			overviewList.slideToggle(500, function(){
+				if(overviewList.css("display") === "none"){
+					triggerBtn.removeClass("active");
+					$("#message-overlay").remove();
+				}else {
+					triggerBtn.addClass("active");
+					$("<div id='message-overlay'></div>").css({
+						'position': 'absolute',
+						'top': '0',
+						'left': '0',
+						'bottom': '0',
+						'right': '0',
+						'z-index': '998'
+					}).appendTo(ele).on("click", function(){
+						triggerBtn.trigger("click");
+					});
+				}
+			});
 		});
 		overviewList.find('.emoticon').on('click', function(){
 			var targetInput = ele.find("textarea");

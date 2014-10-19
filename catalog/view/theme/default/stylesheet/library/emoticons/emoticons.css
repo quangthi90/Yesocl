@@ -1,0 +1,129 @@
+.emoticon {
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    text-indent: -10000px;
+    overflow: hidden;
+    cursor: inherit;
+    /*background: url('demo/angel.gif') no-repeat;*/
+    text-align: center;
+}
+.emoticon:hover{;
+	background-color: silver;
+}
+#overview{
+	background-color: #fff;
+}
+.emoticonshow{
+	width: 23px;
+	height: 23px;
+	background-color: #fff;
+	background: url('emoticon.png') no-repeat;
+	text-align: center;
+	padding: 2px;
+}
+.emoticonshow:hover{
+	background-color: silver;
+	border-radius: 5px;
+}
+.emoticon-smile { background: url('smile.gif') 2px 2px no-repeat;}
+.emoticon-sad-smile { background: url('sad-smile.gif') 2px 2px no-repeat; }
+.emoticon-big-smile { background: url('big-smile.gif') 2px 2px no-repeat; }
+.emoticon-cool { background: url('cool.gif') 2px 2px no-repeat; }
+.emoticon-surprised { background: url('surprised.gif') 2px 2px no-repeat; }
+.emoticon-wink { background: url('wink.gif') 2px 2px no-repeat; }
+.emoticon-crying { background: url('crying.gif') 2px 2px no-repeat; }
+.emoticon-sweating { background: url('sweating.gif') 2px 2px no-repeat; }
+.emoticon-speechless { background: url('speechless.gif') 2px 2px no-repeat; }
+.emoticon-kiss { background: url('kiss.gif') 2px 2px no-repeat; }
+.emoticon-tongue-out { background: url('tongue-out.gif') 2px 2px no-repeat; }
+.emoticon-blush { background: url('blush.gif') 2px 2px no-repeat; }
+.emoticon-wondering { background: url('wondering.gif') 2px 2px no-repeat; }
+.emoticon-sleepy { background: url('sleepy.gif') 2px 2px no-repeat; }
+.emoticon-dull { background: url('dull.gif') 2px 2px no-repeat; }
+.emoticon-in-love { background: url('in-love.gif') 2px 2px no-repeat; }
+.emoticon-evil-grin { background: url('evil-grin.gif') 2px 2px no-repeat; }
+.emoticon-talking { background: url('talking.gif') 2px 2px no-repeat; }
+.emoticon-yawn { background: url('yawn.gif') 2px 2px no-repeat; }
+.emoticon-puke { background: url('puke.gif') 2px 2px no-repeat; }
+.emoticon-doh { background: url('doh.gif') 2px 2px no-repeat; }
+.emoticon-angry { background: url('angry.gif') 2px 2px no-repeat; }
+.emoticon-speechless-1 { background: url('speechless-1.gif') 2px 2px no-repeat; }
+.emoticon-it-wasnt { background: url('it-wasnt.gif') 2px 2px no-repeat; }
+.emoticon-kiss-1 { background: url('kiss-1.gif') 2px 2px no-repeat; }
+.emoticon-party { background: url('party.gif') 2px 2px no-repeat; }
+.emoticon-tongue-out-1 { background: url('tongue-out.gif') 2px 2px no-repeat; }
+.emoticon-wondering-1 { background: url('wondering-1.gif') 2px 2px no-repeat; }
+.emoticon-worried { background: url('worried.gif') 2px 2px no-repeat; }
+.emoticon-mmm { background: url('mmm.gif') 2px 2px no-repeat; }
+.emoticon-sleepy-1 { background: url('sleepy-1.gif') 2px 2px no-repeat; }
+.emoticon-dull-1 { background: url('dull-1.gif') 2px 2px no-repeat; }
+.emoticon-nerd { background: url('nerd.gif') 2px 2px no-repeat; }
+.emoticon-evil-grin-1 { background: url('evil-grin.gif') 2px 2px no-repeat; }
+.emoticon-lips-sealed { background: url('lips-sealed.gif') 2px 2px no-repeat; }
+.emoticon-hi { background: url('hi.gif') 2px 2px no-repeat; }
+.emoticon-call { background: url('call.gif') 2px 2px no-repeat; }
+.emoticon-devil { background: url('devil.gif') 2px 2px no-repeat; }
+.emoticon-angel { background: url('angel.gif') 2px 2px no-repeat; }
+.emoticon-angry-1 { background: url('angry-1.gif') 2px 2px no-repeat; }
+.emoticon-envy { background: url('envy.gif') 2px 2px no-repeat; }
+.emoticon-worried-1 { background: url('worried-1.gif') 2px 2px no-repeat; }
+.emoticon-nerd-1 { background: url('nerd-1.gif') 2px 2px no-repeat; }
+.emoticon-wait { background: url('wait.gif') 2px 2px no-repeat; }
+.emoticon-bear { background: url('bear.gif') 2px 2px no-repeat; }
+.emoticon-lips-sealed-1 { background: url('lips-sealed.gif') 2px 2px no-repeat; }
+.emoticon-make-up { background: url('make-up.gif') 2px 2px no-repeat; }
+.emoticon-giggle { background: url('giggle.gif') 2px 2px no-repeat; }
+.emoticon-clapping { background: url('clapping.gif') 2px 2px no-repeat; }
+.emoticon-thinking { background: url('thinking.gif') 2px 2px no-repeat; }
+.emoticon-bow { background: url('bow.gif') 2px 2px no-repeat; }
+.emoticon-rofl { background: url('rofl.gif') 2px 2px no-repeat; }
+.emoticon-whew { background: url('whew.gif') 2px 2px no-repeat; }
+.emoticon-happy { background: url('happy.gif') 2px 2px no-repeat; }
+.emoticon-smirk { background: url('smirk.gif') 2px 2px no-repeat; }
+.emoticon-nod { background: url('nod.gif') 2px 2px no-repeat; }
+.emoticon-shake { background: url('shake.gif') 2px 2px no-repeat; }
+.emoticon-punch { background: url('punch.gif') 2px 2px no-repeat; }
+.emoticon-emo { background: url('emo.gif') 2px 2px no-repeat; }
+.emoticon-yes { background: url('yes.gif') 2px 2px no-repeat; }
+.emoticon-no { background: url('no.gif') 2px 2px no-repeat; }
+.emoticon-handshake { background: url('handshake.gif') 2px 2px no-repeat; }
+.emoticon-skype { background: url('skype.gif') 2px 2px no-repeat; }
+.emoticon-heart { background: url('heart.gif') 2px 2px no-repeat; }
+.emoticon-broken-heart { background: url('broken-heart.gif') 2px 2px no-repeat; }
+.emoticon-mail { background: url('mail.gif') 2px 2px no-repeat; }
+.emoticon-flower { background: url('flower.gif') 2px 2px no-repeat; }
+.emoticon-rain { background: url('rain.gif') 2px 2px no-repeat; }
+.emoticon-sun { background: url('sun.gif') 2px 2px no-repeat; }
+.emoticon-time { background: url('time.gif') 2px 2px no-repeat; }
+.emoticon-music { background: url('music.gif') 2px 2px no-repeat; }
+.emoticon-movie { background: url('movie.gif') 2px 2px no-repeat; }
+.emoticon-phone { background: url('phone.gif') 2px 2px no-repeat; }
+.emoticon-coffee { background: url('coffee.gif') 2px 2px no-repeat; }
+.emoticon-pizza { background: url('pizza.gif') 2px 2px no-repeat; }
+.emoticon-cash { background: url('cash.gif') 2px 2px no-repeat; }
+.emoticon-muscle { background: url('muscle.gif') 2px 2px no-repeat; }
+.emoticon-cake { background: url('cake.gif') 2px 2px no-repeat; }
+.emoticon-beer { background: url('beer.gif') 2px 2px no-repeat; }
+.emoticon-drink { background: url('drink.gif') 2px 2px no-repeat; }
+.emoticon-dance { background: url('dance.gif') 2px 2px no-repeat; }
+.emoticon-ninja { background: url('ninja.gif') 2px 2px no-repeat; }
+.emoticon-star { background: url('star.gif') 2px 2px no-repeat; }
+.emoticon-mooning { background: url('mooning.gif') 2px 2px no-repeat; }
+.emoticon-middlefinger { background: url('middlefinger.gif') 2px 2px no-repeat; }
+.emoticon-bandit { background: url('bandit.gif') 2px 2px no-repeat; }
+.emoticon-drunk { background: url('drunk.gif') 2px 2px no-repeat; }
+.emoticon-smoke { background: url('smoke.gif') 2px 2px no-repeat; }
+.emoticon-toivo { background: url('toivo.gif') 2px 2px no-repeat; }
+.emoticon-rock { background: url('rock.gif') 2px 2px no-repeat; }
+.emoticon-headbang { background: url('headbang.gif') 2px 2px no-repeat; }
+.emoticon-bug { background: url('bug.gif') 2px 2px no-repeat; }
+.emoticon-fubar { background: url('fubar.gif') 2px 2px no-repeat; }
+.emoticon-poolparty { background: url('poolparty.gif') 2px 2px no-repeat; }
+.emoticon-swear { background: url('swear.gif') 2px 2px no-repeat; }
+.emoticon-tmi { background: url('tmi.gif') 2px 2px no-repeat; }
+.emoticon-heidy { background: url('heidy.gif') 2px 2px no-repeat; }
+.emoticon-myspace { background: url('myspace.gif') 2px 2px no-repeat; }
+.emoticon-malthe { background: url('malthe.gif') 2px 2px no-repeat; }
+.emoticon-tauri { background: url('tauri.gif') 2px 2px no-repeat; }
+.emoticon-priidu { background: url('priidu.gif') 2px 2px no-repeat; }

@@ -607,6 +607,12 @@ var YesGlobal = YesGlobal || {};
 		String.prototype.extractTextLink = function(){
 			return Y.Utils.extractTextLink(this);
 		};
+		String.prototype.extractTextEmoticon = function(){
+			if($.emoticons){
+				return $.emoticons.replace(this);
+			}
+			return this;
+		};
 	}
 	_initGlobal();
 	/ ========================== END COMMON INIT ============================== /
