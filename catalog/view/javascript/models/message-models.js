@@ -109,6 +109,28 @@ YesGlobal.Models = YesGlobal.Models || {};
 			});
 		};
 
+		that.addMessageToOldRoom = function(messageData, sucCallback, failCallback){
+			var tags = Y.Utils.parseTagsInfo(that.messageData.content);
+			var messageData = {
+				content: messageContent,
+				userTags: tags.userTags,
+				stockTags: tags.stockTags,
+				room_id: that.id
+			};
+			_addMessageToRoom(messageData, function(data) {
+				that.lastMessage(data.room.last_message);	
+				that.updated(data.room.updated);
+
+				if(sucCallback && typeof sucCallback == "function"){
+					sucCallback(data);
+				}
+			}, function(data) {
+				if(failCallback && typeof failCallback == "function"){
+					failCallback(data);
+				}
+			});
+		};
+
 		that.toJson = function(){
 			return {
 				post_type: that.type,

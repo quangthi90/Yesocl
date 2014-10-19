@@ -5,6 +5,7 @@
 {% block stylesheet %}
     <link rel="stylesheet" href="{{ asset_css('pages/message.css') }}" />
     <link rel="stylesheet" href="{{ asset_css('library/emoticons/emoticons.css') }}" />
+    <link rel="stylesheet" href="{{ asset_css('library/select2/select2.css') }}" />
 {% endblock %}
 {% block body %}
     <div class="innerAll">
@@ -113,12 +114,12 @@
                                 </div>
                             </div>
                         </div>   
-                        <div class="new-message-info">
-                            <input type="text" id="msg-to" class="form-control">
+                        <div class="new-message-info inner-2x innerAll">
+                            <input data-bind="autoCompleteTag: toTags, autoOptions: { dataRequest: $data.userDataRequest, formatResult: $data.formatResult }" type="text" id="msg-to" class="form-control" placeholder="Find user(s) to send ...">
                         </div>                     
                         <div class="new-messsage-container" data-bind="with: $data.globalNewMessage, emoticon: true">
                             <div class="border-top border-bottom">
-                                <textarea type="text" class="form-control rounded-none border-none no-resize" placeholder="{% trans %}Write new message{% endtrans %}..." data-bind="mention: content, autoSize: content, valueUpdate:'afterkeydown', executeOnEnter: $parent.addMessage, shiftKeyRequired: true"></textarea>
+                                <textarea type="text" class="form-control rounded-none border-none no-resize" placeholder="{% trans %}Write new message{% endtrans %}..." data-bind="mention: content, autoSize: content, valueUpdate:'afterkeydown', executeOnEnter: $parent.addGlobalMessage, shiftKeyRequired: true"></textarea>
                             </div>
                             <div class="btn-toolbar" role="toolbar">
                                 <div class="btn-group btn-group-sm pull-right">                                    
@@ -136,6 +137,7 @@
 {% endblock %}
 {% block library_javascript %}
     <script src="{{ asset_js('library/emoticons/emoticons.js') }}"></script>
+    <script src="{{ asset_js('library/select/select2.min.js') }}"></script>
 {% endblock %}
 {% block common_javascript %}
     <script src="{{ asset_js('models/message-models.js') }}"></script>

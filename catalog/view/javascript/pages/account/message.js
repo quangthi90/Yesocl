@@ -17,6 +17,7 @@
 		self.totalRoom = ko.observable(0);
 		self.activeRoom = ko.observable();
 		self.globalNewMessage = ko.observable(new Y.Models.MessageModel({}));
+		self.toTags = ko.observable([]);
 
 		self.messageTo = ko.observable("");
 		self.messageContent = ko.observable("");
@@ -24,8 +25,10 @@
 
 		/* ============= START PUBLIC METHODS ============== */
 		self.activeRoom.subscribe(function(item){
-			if(item === null) return;			
-			item.loadMessage();
+			if(item === null) return;
+			if(item.messageList().length === 0){
+				item.loadMessage();	
+			}
 		});
 
 		self.loadMoreRoom = function(callback){
@@ -79,7 +82,82 @@
 				roomList.data("scroll-binded", true);
 			}
 		};
+
+		self.addGlobalMessage = function(){
+			var toSlugs = self.toTags();
+			var messageContent = self.globalNewMessage().content().trim();
+			if(toSlugs.length === 0 || messageContent.length === 0){
+				return;
+			}
+
+			var room = null;
+			if (toSlugs.length == 1 ){
+				room = ko.utils.arrayFirst(self.roomList(), function(r){
+					return  r.user.slug == toSlugs[0] ;
+				});
+			}
+			if (room !== null ){
+				room.addMessageToOldRoom({
+					content: messageContent
+				}, function(data){
+					self.globalNewMessage().reset();
+					self.toTags([]);
+					self.isNewMessage(false);
+					self.activeRoom(room);
+				}, function(data){
+					//Message
+				});
+			} else {
+				var tags = Y.Utils.parseTagsInfo(messageContent);
+				var messageData = {
+					content: messageContent,
+					userTags: tags.userTags,
+					stockTags: tags.stockTags,
+					user_slugs: toSlugs
+				};
+
+				_addMessageToRoom(messageData, function(data) {
+					self.globalNewMessage().reset();
+					self.toTags([]);
+					self.isNewMessage(false);
+					var newRoom = new Y.Models.RoomModel(data.room);
+					var newMessage = new Y.Models.MessageModel(data.message);
+					newRoom.messageList.push(newMessage);
+					self.roomList.unshift(newRoom);
+					self.activeRoom(newRoom);					
+				}, function(data) {
+					//Message
+				});
+			}
+		};
 		
+		self.userDataRequest = function(query){
+			var term = query.term.toLowerCase();
+			var data = { results: [] };
+
+			Y.Utils.initFriendList(function(returnData) {
+				if(returnData){
+					var temp = ko.utils.arrayFilter(returnData, function(item){
+						return item.username.toLowerCase().indexOf(term) >= 0;
+					});
+					data.results = ko.utils.arrayMap(temp, function(item) {
+						return {
+							id : item.slug,
+							text: item.username,
+							avatar: item.avatar
+						};
+					})
+				}
+			});
+			return data;
+		};
+
+		self.formatResult = function(item){
+			var html = "<img height='30' width='30' style='float: left; margin-right: 10px;' src='" + item.avatar + "' alt='" + item.text + "'/>";
+			html += item.text;
+			return html;
+		};
+
 		/* ============= END PUBLIC METHODS ================ */
 
 		/* ============= START PRIVATE METHODS ============= */
@@ -122,6 +200,27 @@
 					failCallback(data);
 				}
 			});
+		}
+
+		function _addMessageToRoom(messageData, sucCallback, failCallback){
+			var ajaxOptions = {
+				url: Y.Routing.generate("ApiPostMessage"),
+				data : messageData
+			};
+
+			var successCallback = function(data){				
+				if(data.success === "ok"){
+					if(sucCallback && typeof sucCallback === "function"){
+						sucCallback(data);
+					}
+				}else {
+					if(failCallback && typeof failCallback === "function"){
+						failCallback(data);
+					}
+				}
+			};
+			//Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
 		}
 
 		function _selectFirstRoom() {

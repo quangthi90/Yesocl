@@ -11,6 +11,7 @@ var YesGlobal = YesGlobal || {};
 	Y.Caches = {
 	    StockList: [],
 	    UsersCanTag: [],
+	    FriendList: [],
 	    CurrentPost: null
 	};
 
@@ -248,16 +249,16 @@ var YesGlobal = YesGlobal || {};
 	        }
 	    },
 	    initFriendList: function(callback) {
-	        if(window.yListFriends){
-	            callback(window.yListFriends);
+	        if(Y.Caches.FriendList && Y.Caches.FriendList.length > 0){
+	            callback(Y.Caches.FriendList);
 	        }else {
 	            var ajaxOptions = {
-	                url: Y.Routing.generate('ApiGetAllFriends'),
+	                url: Y.Routing.generate('ApiGetAllTags'),
 	                async: false
 	            };
 	            var successCallback = function(data){
 	                if(data.success === "ok"){
-	                    window.yListFriends = data.friends;                    
+	                    Y.Caches.FriendList = data.friends;                  
 	                    callback(data.friends);
 	                }else {
 	                    callback([]);

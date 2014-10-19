@@ -110,22 +110,20 @@ var YesGlobal = YesGlobal || {};
 	function initBindingHanler(){
 		ko.bindingHandlers.autoCompleteTag = {
 		    init: function(element, valueAccessor, allBindingsAccessor) {
-		        "use strict";
+		    	var options = allBindingsAccessor().autoOptions;
 		        $(element).select2({
-		            multiple: true,
-		            minimumInputLength: 1,
+		            multiple: options.multiple !== undefined ? options.multiple : true,
+		            minimumInputLength: options.minimumInputLength || 1,
 		            query: function (query) {
-		                Y.Utils.initStockList(function(queryData) {
-		                    var data = { results : [] };
-		                    ko.utils.arrayForEach(queryData, function(t) {
-		                        if(t.code.toUpperCase().indexOf(query.term.toUpperCase()) >= 0){
-		                            data.results.push({ id: t.code, text: t.code });
-		                        }
-		                    });
-		                    query.callback(data);
-		                });                
+		            	var data = options.dataRequest(query);
+		            	query.callback(data);	                    
 		            },
-		            formatResult: function(item) { return item.text },
+		            formatResult: function(item, container, query) {
+		            	if(options.formatResult && typeof options.formatResult == "function"){
+		            		return options.formatResult(item);
+		            	}
+		            	return item.text;
+		            },
 		            formatSelection: function(item) { return item.text },
 		            initSelection : function (element, callback) {
 		                var data = [];
@@ -139,10 +137,15 @@ var YesGlobal = YesGlobal || {};
 		                callback(data);
 		            }
 		        });
-
+				$(element).on("change", function(e){
+					valueAccessor()($(this).select2("val"));			
+				});
 		    },
-		    update: function(element) {
-		        "use strict";
+		    update: function(element, valueAccessor, allBindingsAccessor) {
+		        if(valueAccessor()().length === 0){
+		        	$(element).select2("val", "");
+		        	return;
+		        }
 		        $(element).trigger("change");
 		    }
 		};
