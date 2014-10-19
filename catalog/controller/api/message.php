@@ -1,6 +1,6 @@
 <?php
 class ControllerApiMessage extends Controller {
-	private $limit = 20;
+	private $limit = 5;
 
 	public function getLastRooms() {
 		$oLoggedUser = $this->customer->getUser();
@@ -80,11 +80,11 @@ class ControllerApiMessage extends Controller {
 		if ( $oRoom ) {
 			$lMessages = $oRoom->getMessages();
 			$iTotalMessages = $lMessages->count();
-			$aResultMessages = $lMessages->slice( $iTotalMessages - ($iPage * $iLimit), $iLimit );
+			$iStart = $iTotalMessages - ($iPage * $iLimit) < 0 ? 0 : $iTotalMessages - ($iPage * $iLimit);
+			$aResultMessages = $lMessages->slice( $iStart, $iLimit );
 			if ( $iPage * $iLimit < $iTotalMessages ) {
 				$bCanLoadMore = true;
 			}
-			$aResultMessages = array_reverse($aResultMessages);
 			$aMessages = $this->model_tool_object->formatMessages( $aResultMessages );
 		}
 
