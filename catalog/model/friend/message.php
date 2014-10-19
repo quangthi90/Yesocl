@@ -47,7 +47,7 @@ class ModelFriendMessage extends Model {
 
 		$oMessage = new Message();
 		$oMessage->setAuthor( $oUserFrom );
-		$oMessage->setContent( $sContent );
+		$oMessage->setContent( $aData['content'] );
 		$oMessage->addReader( $oUserFrom );
 		$oMessage->setUserTags( $aData['userTags'] );
 		$oMessage->setStockTags( $aData['stockTags'] );
