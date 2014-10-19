@@ -11,17 +11,19 @@ class ControllerAccountAvatar extends Controller {
 
     $this->document->setTitle($this->language->get('heading_title'));
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/avatar.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/avatar.tpl';
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/temp/avatar.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/account/temp/avatar.tpl';
 		} else {
-			$this->template = 'default/template/account/avatar.tpl';
+			$this->template = 'default/template/account/temp/avatar.tpl';
 		}
 		
 		$this->children = array(
-			'common/sidebar_control',
-			'common/footer',
-			'common/header'
-		);
+      'layout/basic/leftsidebar',
+      'layout/basic/rightsidebar',
+      'layout/basic/navbar',
+      'layout/basic/footer',
+      'widget/account/user'
+    );
 				
 		$this->response->setOutput($this->twig_render());			
 	}

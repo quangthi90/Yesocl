@@ -44,6 +44,7 @@ class ExtensionLoader
         return array(
             new Twig_SimpleFunction('path', array($this, 'path')),
             new Twig_SimpleFunction('asset_css', array($this, 'assetCss')),
+            new Twig_SimpleFunction('asset_css_old', array($this, 'assetCssOld')),
             new Twig_SimpleFunction('asset_js', array($this, 'assetJS')),
             new Twig_SimpleFunction('asset_js_old', array($this, 'assetJSOld')),
             new Twig_SimpleFunction('asset_img', array($this, 'assetImg')),
@@ -92,6 +93,10 @@ class ExtensionLoader
 
     public function assetCss( $path ){
         return HTTPS_SERVER . 'catalog/view/theme/default/stylesheet/' . $path;
+    }
+
+    public function assetCssOld( $path ){
+        return HTTPS_SERVER . 'catalog/view/theme/default/stylesheet_bk/' . $path;
     }
 
     public function assetJS( $path ){

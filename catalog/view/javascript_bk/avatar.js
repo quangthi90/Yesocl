@@ -1,4 +1,4 @@
-(function($, document, undefined) {
+(function($, document, Y, undefined) {
     function ImageUploader(el){
         this.$jqXHR = null;
         this.$container = el;
@@ -214,7 +214,7 @@
 
         var promise = $.ajax({
             type: 'POST',
-            url:  yRouting.generate('SaveAvatar'),
+            url:  Y.Routing.generate('SaveAvatar'),
             data: that.data,
             dataType: 'json'
         });
@@ -259,4 +259,4 @@
             new ImageUploader($(this));       
         });
     });
-}(jQuery, document));
+}(jQuery, document, YesGlobal));
