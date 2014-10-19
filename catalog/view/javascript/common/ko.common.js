@@ -100,7 +100,7 @@ var YesGlobal = YesGlobal || {};
 			var targetInput = ele.find("textarea");
 			var sCode = $(this).html();
 			var sOldText = targetInput.val();
-			targetInput.val(sOldText + sCode);
+			targetInput.val(sOldText + sCode).trigger("input");
 		}); 
 	}
 
