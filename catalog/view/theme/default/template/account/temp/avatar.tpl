@@ -1,9 +1,10 @@
-{% extends '@template/default/template/common/layout.tpl' %}
+{% extends '@template/default/template/layout/basic/master.tpl' %}
 
 {% block title %}{% trans %}Change Avatar{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
-    <link href="{{ asset_css('libs/jquery.jcrop.min.css') }}" rel="stylesheet" media="screen" />
+    <link href="{{ asset_css_old('common/yes.css') }}" rel="stylesheet" media="screen" />
+    <link href="{{ asset_css_old('libs/jquery.jcrop.min.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block body %}
@@ -61,14 +62,14 @@
 {% endblock %}
 
 {% block javascript %}
-<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.ui.widget.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.load-image.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.canvas-to-blob.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.iframe-transport.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-process.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-image.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-validate.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('libs/jquery.jcrop.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('avatar.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js_old('libs/upload/jquery.ui.widget.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js_old('libs/upload/jquery.load-image.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js_old('libs/upload/jquery.canvas-to-blob.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js_old('libs/upload/jquery.iframe-transport.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js_old('libs/upload/jquery.fileupload.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js_old('libs/upload/jquery.fileupload-process.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js_old('libs/upload/jquery.fileupload-image.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js_old('libs/upload/jquery.fileupload-validate.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js_old('libs/jquery.jcrop.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js_old('avatar.js') }}"></script>
 {% endblock %}

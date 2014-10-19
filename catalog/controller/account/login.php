@@ -22,10 +22,10 @@ class ControllerAccountLogin extends Controller {
       		$this->redirect( $this->extension->path('HomePage') );
     	}
 				
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/login.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/login.tpl';
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/temp/login.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/account/temp/login.tpl';
 		} else {
-			$this->template = 'default/template/account/login.tpl';
+			$this->template = 'default/template/account/temp/login.tpl';
 		}
 
 		$this->children = array(

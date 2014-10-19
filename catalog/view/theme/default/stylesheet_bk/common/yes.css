@@ -145,7 +145,7 @@ body
   width:auto;
   overflow:hidden;
   font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
-  background-color: #ECEBEB;
+  /*background-color: #ECEBEB;*/
 }
 ul{
   padding: 0px;
@@ -583,12 +583,12 @@ a.btn-link-circle:hover i {
   height: 58px;  
 }
 #y-content {
-  padding: 20px 0px 20px 20px;    
+  /*padding: 20px 0px 20px 20px;    
   position: absolute;    
   top: 58px;
   left: 15px;
   right:0px;
-  bottom: 21px;    
+  bottom: 21px;  */  
   background-color: #F5F5F5;
   /*background: #ECEBEB url('../../image/y-bg.png') repeat-x scroll;*/
 }

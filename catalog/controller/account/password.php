@@ -31,10 +31,10 @@ class ControllerAccountPassword extends Controller {
 
 		$this->data['show_old_pass'] = !$this->customer->getUser()->getPassword() ? false : true;
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/password.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/password.tpl';
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/temp/password.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/account/temp/password.tpl';
 		} else {
-			$this->template = 'default/template/account/password.tpl';
+			$this->template = 'default/template/account/temp/password.tpl';
 		}
 		
 		$this->children = array(

@@ -67,10 +67,10 @@ class ControllerAccountForgotten extends Controller {
 			$this->data['warning'] = $this->error['warning'];
 		}
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/forgotten.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/forgotten.tpl';
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/temp/forgotten.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/account/temp/forgotten.tpl';
 		} else {
-			$this->template = 'default/template/account/forgotten.tpl';
+			$this->template = 'default/template/account/temp/forgotten.tpl';
 		}
 		
 		$this->children = array(

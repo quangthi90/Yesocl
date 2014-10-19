@@ -3,7 +3,7 @@
 {% block title %}{% trans %}Login{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
-<link href="{{ asset_css('account.css') }}" rel="stylesheet" media="screen" />
+<link href="{{ asset_css_old('account.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block body %}
