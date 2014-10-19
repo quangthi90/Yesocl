@@ -58,10 +58,10 @@ YesGlobal.Models = YesGlobal.Models || {};
 			that.currentPage(that.currentPage() + 1);
 			_loadMessage(
 				function(data) {
-					ko.utils.arrayForEach(data.messages, function(m){
-						var messageItem = new Y.Models.MessageModel(m);
-						that.messageList.push(messageItem);
-					});		
+					for (var i = data.messages.length - 1; i >= 0; i--) {
+						var messageItem = new Y.Models.MessageModel(data.messages[i]);
+						that.messageList.unshift(messageItem);						
+					};
 					if(sucCallback && typeof sucCallback === "function"){
 						sucCallback(data);
 					}
