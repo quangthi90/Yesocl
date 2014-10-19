@@ -79,11 +79,12 @@ class ControllerApiMessage extends Controller {
 
 		if ( $oRoom ) {
 			$lMessages = $oRoom->getMessages();
-			$aResultMessages = $lMessages->slice( ($iPage - 1) * $iLimit, $iLimit );
 			$iTotalMessages = $lMessages->count();
+			$aResultMessages = $lMessages->slice( $iTotalMessages - ($iPage * $iLimit), $iLimit );
 			if ( $iPage * $iLimit < $iTotalMessages ) {
 				$bCanLoadMore = true;
 			}
+			$aResultMessages = array_reverse($aResultMessages);
 			$aMessages = $this->model_tool_object->formatMessages( $aResultMessages );
 		}
 
