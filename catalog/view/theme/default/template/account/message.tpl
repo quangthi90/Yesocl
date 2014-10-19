@@ -87,7 +87,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="new-messsage-container" data-bind="with: $data.newMessage">
+                        <div class="new-messsage-container" data-bind="with: $data.newMessage, emoticon: true">
                             <div class="border-top border-bottom">
                                 <textarea type="text" class="form-control rounded-none border-none no-resize" placeholder="{% trans %}Write new message{% endtrans %}..." data-bind="mention: content, autoSize: content, valueUpdate:'afterkeydown', executeOnEnter: $parent.addMessage, shiftKeyRequired: true"></textarea>
                             </div>
@@ -99,6 +99,7 @@
     </div>
 {% endblock %}
 {% block library_javascript %}
+    <script src="{{ asset_js('library/emoticons.js') }}"></script>
 {% endblock %}
 {% block common_javascript %}
     <script src="{{ asset_js('models/message-models.js') }}"></script>

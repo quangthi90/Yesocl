@@ -17,6 +17,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.currentPage = ko.observable(1);
 		that.canLoadMore = ko.observable(data.canLoadMore || false);
 		that.isLoadingMore = ko.observable(false);
+		that.isRegisterd = ko.observable(false);
 		that.newMessageCallback = data.newMessageCallback || undefined;
 		/*  ============= END PROPERTIES ==================== */
 
@@ -99,8 +100,8 @@ YesGlobal.Models = YesGlobal.Models || {};
 			};
 			_addMessageToRoom(messageData, function(data) {
 				initNewMessage.status(Y.Enums.MessageStatus.SENT);
-				initNewMessage.id = data.message.id;			
-				that.lastMessage(data.room.last_message);				
+				initNewMessage.id = data.message.id;
+				that.lastMessage(data.room.last_message);	
 				that.updated(data.room.updated);
 			}, function(data) {
 				initNewMessage.status(Y.Enums.MessageStatus.ERROR);

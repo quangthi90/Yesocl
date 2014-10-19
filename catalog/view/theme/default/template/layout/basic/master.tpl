@@ -83,6 +83,7 @@
     <script src="{{ asset_js('library/bootstrap/js/bootstrap.min.js') }}"></script> 
     <script src="{{ asset_js('library/momment/moment.min.js') }}"></script>
     <script src="{{ asset_js('library/knockout/knockout.js') }}"></script>
+    <script src="{{ asset_js('library/pusher/pusher.min.js') }}"></script>
     {#<script src="{{ asset_js('library/core_less-js/less.min.js') }}"></script>#}
     <script src="{{ asset_js('library/core_browser/ie/ie.prototype.polyfill.js') }}"></script>     
     <script src="{{ asset_js('library/core_nicescroll/jquery.nicescroll.min.js') }}"></script>
