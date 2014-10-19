@@ -38,6 +38,8 @@ class Customer {
 				$this->avatar = $customer_query->getAvatar();
 				$this->friend_requests = $customer_query->getFriendRequests();
 				$this->user = $customer_query;
+				$customer_query->setLiveToken( uniqid() );
+				$this->db->getDm()->flush();
 			} else {
 				$this->logout();
 			}

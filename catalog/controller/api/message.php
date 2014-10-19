@@ -123,12 +123,13 @@ class ControllerApiMessage extends Controller {
 		$this->load->model('tool/object');
 		$this->load->model('tool/chat');
 
-		$oRoom = $this->model_friend_message->add( 
-			$idRoom,
-			$this->customer->getId(), 
-			$aUserToSlugs, 
-			$sContent 
-		);
+		$oRoom = $this->model_friend_message->add($idRoom, array(
+			'user_from_id' => $this->customer->getId(), 
+			'user_to_slugs' => $aUserToSlugs, 
+			'content' => $sContent,
+			'userTags' => empty($this->request->post['userTags']) ? array() : $this->request->post['userTags'],
+			'stockTags' => empty($this->request->post['stockTags']) ? array() : $this->request->post['stockTags']
+		));
 
 		if ( !$oRoom ){
 			return $this->response->setOutput(json_encode(array(
@@ -142,7 +143,22 @@ class ControllerApiMessage extends Controller {
 		$aMessage = $this->model_tool_object->formatMessage( $oMessage );
 
 		// Push message
-		$this->model_tool_chat->pushMessage( $oRoom->getId(), $aMessage['user']['username'], $aMessage['content'], $aMessage['user']['avatar'] );
+		$lUsers = $oRoom->getUsers();
+		$aChannelNames = array();
+		foreach ( $lUsers as $oUser ) {
+			if ( $oUser->getId() != $this->customer->getId() ) {
+				$aChannelNames[] = $oUser->getLiveToken();
+			}
+		}
+		$sActivityType = $this->config->get('pusher')['type']['message'];
+		$this->model_tool_chat->pushMessage( 
+			$aChannelNames, 
+			$sActivityType,
+			array(
+				'room_id' => $aRoom['id'],
+				'message' => $aMessage
+			)
+		);
 
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',

@@ -13,14 +13,14 @@ class ModelFriendMessage extends Model {
 	 * 	- String content message
 	 * @return: Boolean
 	 */
-	public function add( $idRoom = null, $idUserFrom, $aUserToSlugs = array(), $sContent ){
+	public function add( $idRoom = null, $aData = array() ){
 		$oRoom = null;
 		if ( $idRoom != null ) {
 			$oRoom = $this->dm->getRepository('Document\Friend\MessageRoom')->find( $idRoom );
-		} elseif ( count($aUserToSlugs) == 1 ) {
-			$oUserTo = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aUserToSlugs[0] );
+		} elseif ( count($aData['user_to_slugs']) == 1 ) {
+			$oUserTo = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aData['user_to_slugs'][0] );
 			if ( $oUserTo ) {
-				$aUserIds = array( $idUserFrom, $oUserTo->getId() );
+				$aUserIds = array( $aData['user_from_id'], $oUserTo->getId() );
 				$lRooms = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array(
 					'users.id' => array( '$all' => $aUserIds )
 				));
@@ -32,7 +32,7 @@ class ModelFriendMessage extends Model {
 			}
 		}
 
-		$oUserFrom = $this->dm->getRepository('Document\User\User')->find( $idUserFrom );
+		$oUserFrom = $this->dm->getRepository('Document\User\User')->find( $aData['user_from_id'] );
 		if ( !$oRoom ) {
 			$oRoom = new MessageRoom();
 			$oRoom->setCreator( $oUserFrom );
@@ -49,6 +49,8 @@ class ModelFriendMessage extends Model {
 		$oMessage->setAuthor( $oUserFrom );
 		$oMessage->setContent( $sContent );
 		$oMessage->addReader( $oUserFrom );
+		$oMessage->setUserTags( $aData['userTags'] );
+		$oMessage->setStockTags( $aData['stockTags'] );
 		$oRoom->addMessage( $oMessage );
 
 		$this->dm->flush();

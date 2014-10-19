@@ -21,6 +21,12 @@ Class Message {
     /** @MongoDB\ReferenceMany(targetDocument="Document\User\User") */
     private $readers = array();
 
+    /** @MongoDB\Collection */
+	private $stockTags = array();
+
+    /** @MongoDB\Collection */
+	private $userTags = array();
+
     /** @MongoDB\Date */
 	private $created;
 
@@ -92,5 +98,29 @@ Class Message {
 
 	public function getCreated(){
 		return $this->created;
+	}
+
+	public function addStockTag( $stockTag ){
+		$this->stockTags[] = $stockTag;
+	}
+
+	public function setStockTags( $stockTags ){
+		$this->stockTags = $stockTags;
+	}
+
+	public function getStockTags(){
+		return $this->stockTags;
+	}
+
+	public function addUserTag( $userTag ){
+		$this->userTags[] = $userTag;
+	}
+
+	public function setUserTags( $userTags ){
+		$this->userTags = $userTags;
+	}
+
+	public function getUserTags(){
+		return $this->userTags;
 	}
 }
