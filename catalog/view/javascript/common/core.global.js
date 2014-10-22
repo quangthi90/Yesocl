@@ -2,7 +2,6 @@ var YesGlobal = YesGlobal || {};
 
 (function($, ko, window, Y, undefined) {
 
-	Y.PusherInstance = undefined;
 	Y.Widgets = {};
 	Y.GlobalKoModel = {};
 	Y.CurrentUser = {};
@@ -37,7 +36,9 @@ var YesGlobal = YesGlobal || {};
 			MENU_VISIBILITY_CHANGED : "MENU_VISIBILITY_CHANGED",
 			INPUT_CONTENT_CHANGED : "INPUT_CONTENT_CHANGED",
 			POST_LOADED : "POST_LOADED",
-			NEW_MESSAGE_LOADED: "NEW_MESSAGE_LOADED"
+			NEW_MESSAGE_LOADED: "NEW_MESSAGE_LOADED",
+			PUSHER_RECONNECTED: "PUSHER_RECONNECTED",
+			CURRENT_USER_CHANGED: "CURRENT_USER_CHANGED"
 		},
 		SettingKeys : {
 			SHOW_LEFT_SIDEBAR : "SHOW_LEFT_SIDEBAR",
@@ -46,10 +47,7 @@ var YesGlobal = YesGlobal || {};
 	};
 
 	Y.Configs = {
-		pusherKey: "22dc8822a1badda84d02",
-		pusherOptions: {		
-		},
-	    ajaxOptions : {
+		ajaxOptions : {
 	        url : "",
 	        type: "POST",
 	        cache: false,
@@ -102,6 +100,10 @@ var YesGlobal = YesGlobal || {};
 	};
 
 	Y.Utils = {
+		setCurrentUser: function(user){
+			Y.CurrentUser = user;
+			$(window).trigger(Y.Constants.Triggers.CURRENT_USER_CHANGED);
+		},
 	    ajaxCall : function(options, beforeCallback, successCallback, failCallback) {
 	        "use strict";
 
@@ -389,6 +391,11 @@ var YesGlobal = YesGlobal || {};
 	    convertDateToString: function(timeStamp, dateFormat){
 	        var dayWrapper = moment(new Date(timeStamp*1000));
 	        return dayWrapper.format(dateFormat);
+	    },
+	    log: function(obj){
+	    	if(window.console && window.console.log){
+	    		window.console.log(obj);
+	    	}
 	    }
 	};
 
@@ -592,11 +599,102 @@ var YesGlobal = YesGlobal || {};
 		/* ============= END PRIVATE METHODS =============== */
 	};
 
+	/*===== START PUSHER ===== */
+	var _PusherManager = function(options) {
+		var self = this;
+
+		var debugMode = options.debugMode || true;
+		var pusherKey = "22dc8822a1badda84d02";		
+		var defaultOptions = {
+		};
+		
+		self.options = $.extend({}, defaultOptions, options);		
+		self.GlobalChanel = undefined;
+		self.IsGlobalChanelEnabled = false;
+
+		//Public handling
+		window.onbeforeunload = function(){
+			_turnOffPusher();
+			return undefined;
+		};
+		$(window).on(Y.Constants.Triggers.CURRENT_USER_CHANGED, function(){
+			if(!self.Instance){
+				_initPusher();
+			}
+			if(!Y.CurrentUser.live_token) return;
+			
+			self.GlobalChanel = self.Instance.subscribe(Y.CurrentUser.live_token);
+			if(self.GlobalChanel) {
+				self.GlobalChanel.bind('pusher:subscription_succeeded', function() {
+					self.IsGlobalChanelEnabled = true;
+				});
+
+				self.GlobalChanel.bind('pusher:subscription_error', function(status) {
+					self.IsGlobalChanelEnabled = false;
+				});
+			}		
+		});
+
+		//Private handling	
+		function _initPusher()	{
+			self.Instance = new Pusher(pusherKey, this.options);
+
+			//Add eventlisteners
+			self.Instance.connection.bind("error", function( err ) { 
+				_handleError(err);
+			});
+			self.Instance.connection.bind("state_change", function(state) {
+				_handleConnectionState(state);
+			});
+			self.Instance.connection.bind("connecting_in", function(delay) {
+				_debug("The connection came again");
+			});
+		}
+		function _handleError(err) {
+			if(err.data.code === 4004 ) {
+			    _debug("Detected limit error");
+		  	}else {
+		  		_debug(err);
+		  	}
+		}
+		function _handleConnectionState(state){
+			_debug("The connection state changed: " + state.previous + " => " + state.current);
+			var current = state.current;
+			switch(current){
+				case "initialized":
+					break;
+				case "connecting":
+					break;
+				case "connected":
+					if(state.previous === "unavailable"){
+						$(window).trigger(Y.Constants.Triggers.PUSHER_RECONNECTED);
+					}
+					break;
+				case "unavailable":
+					break;
+				case "disconnected":
+					break;
+			}
+		}
+		function _turnOffPusher() {
+			if(self.Instance) {
+				self.Instance.disconnect();
+				_debug("Disconnected Pusher !")
+			}
+		}
+		function _debug(obj){
+			if(debugMode){
+				Y.Utils.log(obj);
+			}
+		}
+		_initPusher();
+	};
+	Y.PusherManager = new _PusherManager({});
+	/*===== END PUSHER ===== */
+
 	/ ========================== START COMMON INIT ============================ /
 	function _initGlobal() {
-		//Init pusher
-		//Y.PusherInstance = new Pusher(Y.Configs.pusherKey, Y.Configs.pusherOptions);
-
+		
 		if (!String.prototype.trim) {
 		   	String.prototype.trim = function(){
 		   		return this.replace(/^\s+|\s+$/g, '');
@@ -614,6 +712,16 @@ var YesGlobal = YesGlobal || {};
 			}
 			return this;
 		};
+		//Refresh after 1 minute
+		setInterval(function(){
+			$(".ago").each(function(i) {
+				var ele = $(this);
+				var time = ele.data("timeValue");
+				if(time){
+					ele.text(Y.Utils.convertToTimeAgo(time));
+				}
+			});
+		}, 60*1000);
 	}
 	_initGlobal();
 	/ ========================== END COMMON INIT ============================== /

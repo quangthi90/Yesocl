@@ -212,16 +212,10 @@ var YesGlobal = YesGlobal || {};
 		        if (timeValue) {
 		            $(element).text(Y.Utils.convertToTimeAgo(timeValue));
 		            $(element).attr('title', Y.Utils.convertDateToString(timeValue, "LLLL"));
-		        } else {
-		            $(element).text('-');
-		        }
-		    },
-		    update: function (element, valueAccessor, allBindingsAccessor) {
-		        var value = valueAccessor();
-		        var timeValue = ko.utils.unwrapObservable(value);
-		        if (timeValue) {
-		            $(element).text(Y.Utils.convertToTimeAgo(timeValue));
-		            $(element).attr('title', Y.Utils.convertDateToString(timeValue, "LLLL"));
+		            $(element).data("timeValue", timeValue);
+		            if(!$(element).hasClass("ago")) {
+		            	$(element).addClass("ago");
+		            }
 		        } else {
 		            $(element).text('-');
 		        }
@@ -235,16 +229,6 @@ var YesGlobal = YesGlobal || {};
 		        if (dateValue) {
 		            $(element).text(Y.Utils.convertDateToString(dateValue, dateFormat));
 		            $(element).attr("title", Y.Utils.convertDateToString(dateValue, dateFormat));
-		        } else {
-		            $(element).text('-');
-		        }
-		    },
-		    update: function (element, valueAccessor, allBindingsAccessor) {
-		        var value = valueAccessor(), allBindings = allBindingsAccessor();
-		        var dateFormat = allBindings.dateFormat || "LLLL";
-		        var dateValue = ko.utils.unwrapObservable(value);
-		        if (dateValue) {
-		            $(element).text(Y.Utils.convertDateToString(dateValue, dateFormat));
 		        } else {
 		            $(element).text('-');
 		        }

@@ -114,10 +114,9 @@
             var routing = '{{ get_routing_list()|raw }}';
             Y.Routing = new Y.RoutingManager( JSON.parse(routing) );
             if (user){
-                Y.CurrentUser = JSON.parse(user);
+                Y.Utils.setCurrentUser(JSON.parse(user));
             }
-            Y.Routing.BaseUrl = '{{ base }}';
-            Y.Routing.BaseUrl = Y.Routing.BaseUrl.toLowerCase();
+            Y.Routing.BaseUrl = '{{ base }}'.toLowerCase();
         }(YesGlobal));
     </script>
     {% block common_javascript %}

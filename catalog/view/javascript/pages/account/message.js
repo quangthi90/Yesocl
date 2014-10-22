@@ -11,6 +11,7 @@
 		self.isLoadingMore = ko.observable(false);
 		self.isNewMessage = ko.observable(false);
 		self.canLoadMore = ko.observable(options.canLoadMore || false);
+		self.isPusherInitialized = ko.observable(false);
 
 		self.currentPage = ko.observable(1);
 		self.roomList = ko.observableArray([]);
@@ -229,8 +230,24 @@
 			}
 		}		
 
-		function _subscribeRoomChanel(){
-			if(Y.PusherInstance && self.roomList().length == 0) return;
+		function _subscribeMessageChanel(){
+			if(Y.PusherManager && Y.PusherManager.Instance && Y.PusherManager.GlobalChanel) {
+				self.isPusherInitialized(true);
+
+				//Register event for message:
+				Y.PusherManager.GlobalChanel.bind("chat-message", function(responseData) {
+					Y.Utils.log(responseData);
+				});
+
+			} else {
+				self.isPusherInitialized(true);
+				Y.Utils.log("Pusher is not initialized !");
+			}
+			if(!self.isPusherInitialized()) {
+				$(window).on(Y.Constants.Triggers.PUSHER_RECONNECTED, function(){
+					_subscribeMessageChanel();
+				});
+			}
 		}
 
 		function _scrollToBottomMessageList() {
@@ -243,6 +260,7 @@
 		function _init(){
             _loadRoom(function(){
             	_selectFirstRoom();
+            	_subscribeMessageChanel();
             });
 		}
 

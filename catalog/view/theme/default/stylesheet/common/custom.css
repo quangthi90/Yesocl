@@ -16,6 +16,12 @@ a.tag-link {
 a.tag-link:hover {
 	color: #25ad9f;
 }
+a.black-color {
+	color: #0E0E0E !important;
+}
+a.black-color:hover {
+	color: #000 !important;
+}
 
 .btn.btn-nobg {
 	background-color: #FFF;
