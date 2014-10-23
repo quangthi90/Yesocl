@@ -689,7 +689,7 @@ var YesGlobal = YesGlobal || {};
 		}
 		_initPusher();
 	};
-	Y.PusherManager = new _PusherManager({});
+	//Y.PusherManager = new _PusherManager({});
 	/*===== END PUSHER ===== */
 
 	/ ========================== START COMMON INIT ============================ /

@@ -13,6 +13,8 @@
 		self.canLoadMore = ko.observable(options.canLoadMore || false);
 		self.isPusherInitialized = ko.observable(false);
 
+		self.roomQuery = ko.observable("");
+		self.realRoomQuery = ko.computed(self.roomQuery).extend({ throttle: 300 });
 		self.currentPage = ko.observable(1);
 		self.roomList = ko.observableArray([]);
 		self.totalRoom = ko.observable(0);
@@ -30,6 +32,12 @@
 			if(item.messageList().length === 0){
 				item.loadMessage();	
 			}
+		});
+		self.realRoomQuery.subscribe(function(value){
+			value = value.toLowerCase().trim();
+			ko.utils.arrayForEach(self.roomList(), function(r) {
+				r.visible(r.name.toLowerCase().indexOf(value) >= 0);
+			});
 		});
 
 		self.loadMoreRoom = function(callback){
@@ -257,7 +265,28 @@
 			}
 		}
 
+		function _layout(){
+			if(ele.length === 0) return;
+
+			$(window).resize(function(){
+				var maxHeight = $("html").height();
+				if(ele.hasClass("widget-message-page")){
+					var navHeight = $("#top-mavbar").height();
+					var gap = 20;
+					var marginTop = parseInt(ele.css("margin-top"));
+					var marginBottom = parseInt(ele.css("margin-bottom"));
+					console.log("marginTop: ", marginTop);
+					console.log("marginBottom: ", marginBottom);
+					console.log("maxHeight: ", maxHeight);
+					console.log("navHeight: ", navHeight);
+					ele.height(maxHeight - navHeight - (isNaN(marginTop) ? 0 : marginTop) - (isNaN(marginBottom) ? 0 : marginBottom) - 2*gap);
+				}
+			});
+			$(window).trigger("resize");
+		}
+
 		function _init(){
+			_layout();
             _loadRoom(function(){
             	_selectFirstRoom();
             	_subscribeMessageChanel();

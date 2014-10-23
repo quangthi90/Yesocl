@@ -9,18 +9,18 @@
 {% endblock %}
 {% block body %}
     <div class="innerAll">
-		<div data-bind="with: MesageView" id="widget-messages" class="widget widget-messages widget-heading-simple widget-body-white">
+		<div data-bind="with: MesageView" id="widget-messages" class="widget widget-messages widget-heading-simple widget-body-white widget-message-page">
             <div id="widget-message-container" class="widget-body padding-none margin-none widget-message-container">
                 <div id="message-rooms" class="border-top border-left message-rooms">
                     <div class="message-rooms-container">
                         <div class="innerAll">
-                            <input type="text" class="form-control border-none large-text strong" placeholder="{% trans %}Search rooms ...{% endtrans %}" />
+                            <input data-bind="value: $data.roomQuery, valueUpdate: 'afterkeydown'" type="text" class="form-control border-none large-text strong" placeholder="{% trans %}Search rooms ...{% endtrans %}" />
                         </div>
                         <div class="bg-gray text-center strong border-top border-bottom innerAll half">
                             <span data-bind="text: totalRoom() + ( totalRoom() > 1 ? ' {% trans %}rooms{% endtrans %}' : ' {% trans %}room{% endtrans %}')"></span>
                         </div>
                         <ul class="list-unstyled room-list" data-bind="foreach: { data: $data.roomList, afterRender: addMsgScrollHandlers}">
-                            <li class="border-bottom cursor-pointer room-item" data-bind="click: $parent.clickRoomItem, css: { 'active' : $data.id == ($parent.activeRoom() != null ? $parent.activeRoom().id : 0) }">
+                            <li class="border-bottom cursor-pointer room-item" data-bind="click: $parent.clickRoomItem, css: { 'active' : $data.id == ($parent.activeRoom() != null ? $parent.activeRoom().id : 0), 'hidden' : !$data.visible() }">
                                 <div class="media innerAll">
                                     <div class="media-object pull-left hidden-phone">
                                         <a data-bind="link: { title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }" >
@@ -40,10 +40,10 @@
                     <div data-bind="with: $data.activeRoom, css: { 'hide' : $data.activeRoom() == null || $data.isNewMessage() }" class="active-room-container">
                         <div class="bg-gray innerAll" class="room-info-container">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-xs-8">
                                     <h4 class="innerT half margin-none truncated-text display-block text-capitalize" data-bind="text: $data.name"></h4>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-xs-4">
                                     <div class="pull-right">
                                         <a class="btn btn-default bg-white btn-sm" data-bind="click: $parent.toggleNewMessage"><i class="fa fa-pencil"></i> <span class="hidden-xs">{% trans %}New Message{% endtrans %}</span></a> 
                                     </div>

@@ -1,8 +1,9 @@
 /*================================== START MESSAGE =================================*/
 .widget-messages {
+	height: 500px;
 }
 .widget-messages .widget-message-container {
-    height: 558px;
+    min-height: 100%;
 }
 .widget-message-container .message-thread {
     position: absolute;

@@ -14,6 +14,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.messageList = ko.observableArray([]);
 		that.newMessage = ko.observable(new Y.Models.MessageModel({}));
 		
+		that.visible = ko.observable(true);
 		that.currentPage = ko.observable(1);
 		that.canLoadMore = ko.observable(data.canLoadMore || false);
 		that.isLoadingMore = ko.observable(false);

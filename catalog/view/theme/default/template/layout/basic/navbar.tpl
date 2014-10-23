@@ -1,6 +1,6 @@
 {% set currUser = get_current_user() %}
 {% if is_logged() and currUser != null %}
-  <div class="navbar hidden-print navbar-default box main" role="navigation">
+  <div id="top-mavbar" class="navbar hidden-print navbar-default box main" role="navigation">
       <div class="user-action user-action-btn-navbar pull-right border-left">
           <a href="#menu-right" class="btn btn-sm btn-navbar btn-open-right"><i class="fa fa-comments fa-2x"></i></a>
       </div>

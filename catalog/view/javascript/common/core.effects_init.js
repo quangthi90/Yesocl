@@ -280,8 +280,7 @@ if (window.location != window.parent.location)
 		if (typeof animations == 'undefined' && typeof $.fn.niceScroll != 'undefined')
 			$('.hasNiceScroll, #menu-right, #menu').getNiceScroll().show().resize();
 
-		if (typeof Holder != 'undefined')
-		{
+		if (typeof Holder != 'undefined'){
 			Holder.add_theme("dark", {background:"#424242", foreground:"#aaa", size:9}).run();
 			Holder.add_theme("white", {background:"#fff", foreground:"#c9c9c9", size:9}).run();
 		}
@@ -289,12 +288,7 @@ if (window.location != window.parent.location)
 		if ($('.scripts-async').length)
 			$('.scripts-async .container-fluid').css('visibility', 'visible');
 	});
-	$(window).on(globalTriggers.POST_LOADED, function(e, data){
 
-		//Handle some custom events
-
-		$(window).trigger('gridalicious-loaded');
-	})
 	/* ======================= END HANDLE EVENTS ========================= */
 
 	// weird chrome bug, sometimes the window load event isn't triggered
