@@ -32,8 +32,13 @@
                                         <div class="text-small truncated-text" data-bind="html: $data.lastMessageContent"></div>
                                     </div>
                                 </div>
-                            </li>
+                            </li>                            
                         </ul>
+                        <!-- ko if: $data.noRoomAvailable() -->
+                        <div class="innerAll strong text-center text-small truncated-text">
+                            {% trans %}No rooms available{% endtrans %}
+                        </div>
+                        <!-- /ko -->
                     </div>
                 </div>
                 <div id="message-thread" class="border-top border-left border-right message-thread">

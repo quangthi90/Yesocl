@@ -219,6 +219,20 @@ var YesGlobal = YesGlobal || {};
 		        } else {
 		            $(element).text('-');
 		        }
+		    },
+		    update: function (element, valueAccessor, allBindingsAccessor) {
+		        var value = valueAccessor();
+		        var timeValue = ko.utils.unwrapObservable(value);
+		        if (timeValue) {
+		            $(element).text(Y.Utils.convertToTimeAgo(timeValue));
+		            $(element).attr('title', Y.Utils.convertDateToString(timeValue, "LLLL"));
+		            $(element).data("timeValue", timeValue);
+		            if(!$(element).hasClass("ago")) {
+		            	$(element).addClass("ago");
+		            }
+		        } else {
+		            $(element).text('-');
+		        }
 		    }
 		};
 		ko.bindingHandlers.dateTimeText = {

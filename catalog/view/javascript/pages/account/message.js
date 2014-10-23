@@ -39,6 +39,13 @@
 				r.visible(r.name.toLowerCase().indexOf(value) >= 0);
 			});
 		});
+		self.noRoomAvailable = ko.computed(function(){
+			if(self.roomList().length === 0) return true;
+			var temp = ko.utils.arrayFirst(self.roomList(), function(r){
+				return r.visible();
+			});
+			return !temp;
+		});
 
 		self.loadMoreRoom = function(callback){
 			if(!self.canLoadMore() || self.isLoadingMore()) return;
@@ -48,6 +55,7 @@
 		};
 
 		self.clickRoomItem = function(item, event){
+			self.isNewMessage(false);
 			if(self.activeRoom() != null && self.activeRoom().id != item.id) {
 				self.activeRoom(item);
 			}
@@ -184,7 +192,7 @@
 			var successCallback = function(data){
 				if(data.success === "ok"){
 					ko.utils.arrayForEach(data.rooms, function(r){
-						r.newMessageCallback = _scrollToBottomMessageList;
+						r.newMessageCallback =  _newMessageCallback;
 						var roomItem = new Y.Models.RoomModel(r);
 						self.roomList.push(roomItem);
 					});
@@ -263,6 +271,10 @@
 			if(listContainer.length > 0){
 				listContainer.animate({ scrollTop: listContainer[0].scrollHeight }, 0);
 			}
+		}
+
+		function _newMessageCallback(data){
+			_scrollToBottomMessageList();			
 		}
 
 		function _layout(){
