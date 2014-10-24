@@ -190,6 +190,7 @@ $registry->set('document', new Document());
 // Customer
 $customer = new Customer($registry);
 $registry->set('customer', $customer);
+$customer->updateLiveToken();
 
 //  Encryption
 $registry->set('encryption', new Encryption($config->get('config_encryption')));
