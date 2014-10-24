@@ -10,27 +10,7 @@ class ControllerAccountMessage extends Controller {
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
-		$this->load->model('friend/message');
-		$this->load->model('tool/image');
-		// $idCurrentUser = $this->customer->getId();
-		/*$lMessages = $this->model_friend_message->getLastMessages( $idCurrentUser );
-
-		$this->data['users'] = array();
-		$this->data['messages'] = array();
-		foreach ( $lMessages as $key => $oMessage ) {
-			$this->data['messages'][] = array(
-				'content' 		=> $oMessage->getContent(),
-				'object_id' 	=> $oMessage->getObject()->getId(),
-				'is_sender'		=> $oMessage->getIsSender(),
-				'created' 		=> $oMessage->getCreated(),
-				'read'			=> $oMessage->getRead()
-			);
-
-			$oUser = $oMessage->getObject();
-			$aUser = $oUser->formatToCache();
-			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 100, 100 );
-			$this->data['users'][$aUser['id']] = $aUser;
-		}*/
+		$this->data['activity_type'] = $this->config->get('pusher')['type'];
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/message.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/message.tpl';
