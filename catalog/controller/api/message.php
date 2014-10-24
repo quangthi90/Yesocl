@@ -167,5 +167,38 @@ class ControllerApiMessage extends Controller {
             'message' => $aMessage
         )));
 	}
+
+	public function changeRoomName(){
+		// name is required
+		if ( empty($this->request->post['name']) ){
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'name is empty'
+            )));
+		}
+		$sName = $this->request->post['name'];
+
+		// room ID
+		if ( !empty($this->request->post['room_id']) ) {
+			$idRoom = $this->request->post['room_id'];
+		} else {
+			$idRoom = null;
+		}
+
+		$this->load->model('friend/room');
+
+		$bResult = $this->model_friend_room->edit( $idRoom, array('name' => $sName) );
+
+		if ( !$bResult ){
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'rename room not success'
+            )));
+		}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok'
+        )));
+	}
 }
 ?>
