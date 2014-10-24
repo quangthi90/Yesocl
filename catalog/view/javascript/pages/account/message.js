@@ -87,13 +87,13 @@
 
 			var roomList = ele.find(".room-list");
 			if(roomList.length > 0 && !roomList.data("scroll-binded")){
-				roomList.scroll(function() {   
+				roomList.scroll(function() {
 				    if ($(this).scrollTop() + $(this).height() === $(this)[0].scrollHeight) {				    	
 				       	self.loadMoreRoom();
 				    }
 				});
 				roomList.data("scroll-binded", true);
-			}			
+			}	
 		};
 
 		self.addGlobalMessage = function(){
@@ -133,11 +133,12 @@
 					self.globalNewMessage().reset();
 					self.toTags([]);
 					self.isNewMessage(false);
+
 					var newRoom = new Y.Models.RoomModel(data.room);
 					var newMessage = new Y.Models.MessageModel(data.message);
 					newRoom.messageList.push(newMessage);
 					self.roomList.unshift(newRoom);
-					self.activeRoom(newRoom);					
+					self.activeRoom(newRoom);				
 				}, function(data) {
 					//Message
 				});

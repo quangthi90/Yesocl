@@ -259,11 +259,16 @@ var YesGlobal = YesGlobal || {};
 		ko.bindingHandlers.niceScroll = {
 		    init: function (element, valueAccessor, allBindingsAccessor) {
 		    	window.makeNiceScroll($(element));
-		    	ko.utils.
+		    	ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+		            $(element).trigger(Y.Constants.Triggers.ELEMENT_REMOVED_BY_KO);
+		        });
 		    },
 		    update: function (element, valueAccessor, allBindingsAccessor) {
 		        var acessor = valueAccessor();
 		    	window.makeNiceScroll($(element));
+		    	ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+		            $(element).trigger(Y.Constants.Triggers.ELEMENT_REMOVED_BY_KO);
+		        });
 		    }
 		};
 		ko.bindingHandlers.emoticon = {

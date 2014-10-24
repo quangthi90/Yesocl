@@ -110,17 +110,19 @@ YesGlobal.Models = YesGlobal.Models || {};
 			});
 		};
 
-		that.addMessageToOldRoom = function(messageData, sucCallback, failCallback){
-			var tags = Y.Utils.parseTagsInfo(that.messageData.content);
+		that.addMessageToOldRoom = function(msgData, sucCallback, failCallback){
+			var tags = Y.Utils.parseTagsInfo(msgData.content);
 			var messageData = {
-				content: messageContent,
+				content: msgData.content,
 				userTags: tags.userTags,
 				stockTags: tags.stockTags,
 				room_id: that.id
 			};
 			_addMessageToRoom(messageData, function(data) {
-				that.lastMessage(data.room.last_message);	
+				that.lastMessage(data.room.last_message);
 				that.updated(data.room.updated);
+				var newMessage = new Y.Models.MessageModel(data.message);
+				that.messageList.push(newMessage);
 
 				if(sucCallback && typeof sucCallback == "function"){
 					sucCallback(data);

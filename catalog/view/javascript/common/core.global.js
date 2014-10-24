@@ -38,7 +38,8 @@ var YesGlobal = YesGlobal || {};
 			POST_LOADED : "POST_LOADED",
 			NEW_MESSAGE_LOADED: "NEW_MESSAGE_LOADED",
 			PUSHER_RECONNECTED: "PUSHER_RECONNECTED",
-			CURRENT_USER_CHANGED: "CURRENT_USER_CHANGED"
+			CURRENT_USER_CHANGED: "CURRENT_USER_CHANGED",
+			ELEMENT_REMOVED_BY_KO: "ELEMENT_REMOVED_BY_KO"
 		},
 		SettingKeys : {
 			SHOW_LEFT_SIDEBAR : "SHOW_LEFT_SIDEBAR",
@@ -102,7 +103,7 @@ var YesGlobal = YesGlobal || {};
 	Y.Utils = {
 		setCurrentUser: function(user){
 			Y.CurrentUser = user;
-			//$(window).trigger(Y.Constants.Triggers.CURRENT_USER_CHANGED);
+			$(window).trigger(Y.Constants.Triggers.CURRENT_USER_CHANGED);
 		},
 	    ajaxCall : function(options, beforeCallback, successCallback, failCallback) {
 	        "use strict";
@@ -703,7 +704,7 @@ var YesGlobal = YesGlobal || {};
 			}
 		}
 		
-		//_initPusher();
+		_initPusher();
 	};
 	Y.PusherManager = new _PusherManager({});
 	/*===== END PUSHER ===== */

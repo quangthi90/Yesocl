@@ -110,7 +110,14 @@ if (window.location != window.parent.location)
 			cursorborder: "none",
 			cursorborderradius: "0",
 			cursorcolor: primaryColor
-		});	
+		});
+		jEle.off(Y.Constants.Triggers.ELEMENT_REMOVED_BY_KO);
+		jEle.on(Y.Constants.Triggers.ELEMENT_REMOVED_BY_KO, function(){
+			var niceInstance = $(this).getNiceScroll();
+            if(niceInstance.length > 0){
+            	niceInstance.remove();
+            }
+		});
 	};
 
 	window.disableContentNiceScroll = function() {
