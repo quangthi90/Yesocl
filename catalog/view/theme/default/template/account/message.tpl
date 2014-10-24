@@ -28,7 +28,10 @@
                                         </a>
                                     </div>
                                     <div class="media-body">
-                                        <div><span class="strong text-small" data-bind="text: $data.name"></span> <small class="text-italic pull-right label label-default" data-bind="timeAgo: $data.lastMessage().created"></small></div>
+                                        <div>
+                                        <span class="strong text-small" data-bind="text: $data.name"></span> 
+                                        <small class="text-italic pull-right label label-default room-time" data-bind="timeAgo: $data.lastMessage().created"></small>
+                                        </div>
                                         <div class="text-small truncated-text" data-bind="html: $data.lastMessageContent"></div>
                                     </div>
                                 </div>
@@ -156,7 +159,8 @@
                         loadRoomMessage: {
                             name: "ApiGetRooms"
                         }
-                    }
+                    },
+                    eventType: '{{ event_type["new-message"] }}'
                 };
                 var mesageView = new Y.Widgets.MessageView(mesageOptions, $("#widget-messages"));
                 Y.GlobalKoModel.MesageView = mesageView;

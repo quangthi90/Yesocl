@@ -61,10 +61,21 @@
 }
 .message-rooms-container .room-list .room-item {
 	border-left: 2px solid #FFF;
+	position: relative;
+}
+.message-rooms-container .room-list .room-item .room-time {
+	position: absolute;
+	right: 5px;
+	top: 2px;
+	font-size: 9px;
+	display: none;
 }
 .message-rooms-container .room-list .room-item.active,
 .message-rooms-container .room-list .room-item:hover {
 	border-left: 2px solid #25ad9f;
+}
+.message-rooms-container .room-list .room-item:hover .room-time {
+	display: block;
 }
 .message-list .message-item {
 	position: relative;

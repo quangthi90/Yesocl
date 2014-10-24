@@ -7,6 +7,7 @@
 		/* ============= START PROPERTIES ================== */
 		self.uniqueName = "YES_MESSAGE_VIEWMODEL";		
 		self.apiUrls = options.apiUrls || {};
+		self.eventType = options.eventType || "";
 
 		self.isLoadingMore = ko.observable(false);
 		self.isNewMessage = ko.observable(false);
@@ -112,35 +113,11 @@
 			};
 
 			_addMessageToRoom(messageData, function(data) {
-				if(!data.room || !data.message) return;
-
-				var returnRoom = data.room;
-				var returnMessage = data.message;
-				var existingRoom = ko.utils.arrayFirst(self.roomList(), function(r) {
-					return r.id == returnRoom.id;
+				_addMessageDataToRoom(data, function(){
+					self.globalNewMessage().reset();
+					self.toTags([]);
+					self.isNewMessage(false);					
 				});
-
-				var newMessage = new Y.Models.MessageModel(returnMessage);
-				//Old room
-				if(existingRoom){
-					existingRoom.updated(returnRoom.updated);
-					existingRoom.lastMessage(returnRoom.last_message);
-					existingRoom.messageList.push(newMessage);
-					self.activeRoom(existingRoom);
-				} 
-				// New room
-				else { 
-					var newRoom = new Y.Models.RoomModel(returnRoom);					
-					newRoom.messageList.push(newMessage);
-					self.roomList.unshift(newRoom);
-					self.activeRoom(newRoom);
-				}			
-
-				//Reset
-				self.globalNewMessage().reset();
-				self.toTags([]);
-				self.isNewMessage(false);
-				_newMessageCallback();
 			}, function(data) {
 				//Message
 			});
@@ -238,6 +215,48 @@
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
 		}
 
+		function _addMessageDataToRoom(data, callback){
+			if(!data.room || !data.message) return;
+
+			var returnRoom = data.room;
+			var returnMessage = data.message;
+			var existingRoom = ko.utils.arrayFirst(self.roomList(), function(r) {
+				return r.id == returnRoom.id;
+			});
+
+			var newMessage = new Y.Models.MessageModel(returnMessage);
+			//Old room
+			if(existingRoom){
+				existingRoom.updated(returnRoom.updated);
+				existingRoom.lastMessage(returnRoom.last_message);
+				existingRoom.messageList.push(newMessage);
+				if(returnMessage.user.id == Y.CurrentUser.id) {
+					self.activeRoom(existingRoom);
+					_newMessageCallback();
+				}else {
+					if(self.activeRoom() != null && self.activeRoom().id == returnRoom.id){
+						_scrollToBottomMessageList();
+					}
+				}		
+			} 
+			// New room
+			else { 
+				var newRoom = new Y.Models.RoomModel(returnRoom);
+				newRoom.messageList.push(newMessage);
+				self.roomList.unshift(newRoom);				
+				if(returnMessage.user.id == Y.CurrentUser.id) {
+					self.activeRoom(newRoom);
+					_newMessageCallback();
+				}else {
+					_updateOrderRoom();
+				}
+			}			
+
+			if(callback && typeof callback === "function"){
+				callback();
+			}
+		}
+
 		function _selectFirstRoom() {
 			if(self.roomList().length > 0){
 				self.activeRoom(self.roomList()[0]);
@@ -249,9 +268,13 @@
 				self.isPusherInitialized(true);
 
 				//Register event for message:
-				Y.PusherManager.GlobalChanel.bind("chat-message", function(responseData) {
-					Y.Utils.log(responseData);
-				});
+				Y.PusherManager.GlobalChanel.bind(self.eventType, function(responseData) {
+					_addMessageDataToRoom(responseData, function(){
+						if(self.activeRoom() == null && self.roomList().length > 0) {
+							self.activeRoom(self.roomList()[0]);
+						}
+					});
+				});		
 
 			} else {
 				self.isPusherInitialized(true);
@@ -302,9 +325,9 @@
 
 		function _init(){
 			_layout();
+			_subscribeMessageChanel();
             _loadRoom(function(){
-            	_selectFirstRoom();
-            	_subscribeMessageChanel();
+            	_selectFirstRoom();            	
             });
 		}
 

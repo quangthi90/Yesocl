@@ -648,7 +648,7 @@ var YesGlobal = YesGlobal || {};
 				self.GlobalChanel.bind('pusher:subscription_error', function(status) {
 					self.IsGlobalChanelEnabled = false;
 				});
-			}		
+			}			
 		});
 
 		//Private handling	
