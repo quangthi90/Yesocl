@@ -19,7 +19,7 @@
                         <div class="bg-gray text-center strong border-top border-bottom innerAll half">
                             <span data-bind="text: totalRoom() + ( totalRoom() > 1 ? ' {% trans %}rooms{% endtrans %}' : ' {% trans %}room{% endtrans %}')"></span>
                         </div>
-                        <ul class="list-unstyled room-list" data-bind="foreach: { data: $data.roomList, afterRender: addMsgScrollHandlers}">
+                        <ul class="list-unstyled room-list" data-bind="foreach: { data: $data.roomList, afterRender: addMsgScrollHandlers }, niceScroll: $parent.addMsgScrollHandlers">
                             <li class="border-bottom cursor-pointer room-item" data-bind="click: $parent.clickRoomItem, css: { 'active' : $data.id == ($parent.activeRoom() != null ? $parent.activeRoom().id : 0), 'hidden' : !$data.visible() }">
                                 <div class="media innerAll">
                                     <div class="media-object pull-left hidden-phone">
@@ -58,8 +58,7 @@
                         <div class="text-center innerAll half bg-primary message-loading hide" data-bind="css: { 'hide': !$data.isLoadingMore() }">
                             <i class="fa fa-spin fa-refresh"></i> {% trans %}Loading more messages {% endtrans %} ...
                         </div>
-                        <div class="border-top padding-none margin-none message-list js-message-list" data-bind="foreach: { data: $data.messageList, afterRender: $parent.addMsgScrollHandlers }">
-                            <!--  Message -->
+                        <div class="border-top padding-none margin-none message-list js-message-list" data-bind="foreach: { data: $data.messageList, afterRender: $parent.addMsgScrollHandlers }, niceScroll: $parent.addMsgScrollHandlers">
                             <div class="media margin-none innerAll border-bottom message-item" data-bind="css: { 'fadeIn': $data.status() > 0, 'msg-sending': $data.status() === 1, 'msg-sent': $data.status() === 2, 'msg-seen': $data.status() === 3 , 'msg-error': $data.status() === 4 }">
                                 <a data-bind="link: { title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }" class="pull-left hidden-xs message-creator">
                                     <img data-bind="attr: {src: $data.user.avatar}" width="35" class="media-object">

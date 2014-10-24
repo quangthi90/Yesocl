@@ -102,7 +102,7 @@ var YesGlobal = YesGlobal || {};
 	Y.Utils = {
 		setCurrentUser: function(user){
 			Y.CurrentUser = user;
-			$(window).trigger(Y.Constants.Triggers.CURRENT_USER_CHANGED);
+			//$(window).trigger(Y.Constants.Triggers.CURRENT_USER_CHANGED);
 		},
 	    ajaxCall : function(options, beforeCallback, successCallback, failCallback) {
 	        "use strict";
@@ -391,6 +391,21 @@ var YesGlobal = YesGlobal || {};
 	    convertDateToString: function(timeStamp, dateFormat){
 	        var dayWrapper = moment(new Date(timeStamp*1000));
 	        return dayWrapper.format(dateFormat);
+	    },
+	    random : function(){
+	    	var argc = arguments.length;
+			if (argc === 0) {
+				min = 0;
+				max = 2147483647;
+			}
+			else if (argc === 1) {
+				throw new Error('Warning: mt_rand() expects exactly 2 parameters, 1 given');
+			}
+			else {
+				min = parseInt(min, 10);
+				max = parseInt(max, 10);
+			}
+			return Math.floor(Math.random() * (max - min + 1)) + min;
 	    },
 	    log: function(obj){
 	    	if(window.console && window.console.log){
@@ -687,9 +702,10 @@ var YesGlobal = YesGlobal || {};
 				Y.Utils.log(obj);
 			}
 		}
-		_initPusher();
+		
+		//_initPusher();
 	};
-	//Y.PusherManager = new _PusherManager({});
+	Y.PusherManager = new _PusherManager({});
 	/*===== END PUSHER ===== */
 
 	/ ========================== START COMMON INIT ============================ /
@@ -712,6 +728,7 @@ var YesGlobal = YesGlobal || {};
 			}
 			return this;
 		};
+
 		//Refresh after 1 minute
 		setInterval(function(){
 			$(".ago").each(function(i) {

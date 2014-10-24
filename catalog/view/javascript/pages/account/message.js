@@ -67,9 +67,7 @@
 
 		self.addMsgScrollHandlers = function(){
 			var msgList = ele.find(".js-message-list");
-			if(msgList.length > 0){
-				if(msgList.data("scroll-binded") == true) return;
-
+			if(msgList.length > 0 && !msgList.data("scroll-binded")) {
 				msgList.scroll(function() {
 				    if ($(this).scrollTop() === 0 && self.activeRoom() != null) {
 				    	var me = $(this);
@@ -84,20 +82,18 @@
 				        });
 				    }
 				});
-				msgList.data("scroll-binded", true);
+				msgList.data("scroll-binded", true);				
 			}
 
 			var roomList = ele.find(".room-list");
-			if(roomList.length > 0){
-				if(roomList.data("scroll-binded") == true) return;
-
+			if(roomList.length > 0 && !roomList.data("scroll-binded")){
 				roomList.scroll(function() {   
 				    if ($(this).scrollTop() + $(this).height() === $(this)[0].scrollHeight) {				    	
 				       	self.loadMoreRoom();
 				    }
 				});
 				roomList.data("scroll-binded", true);
-			}
+			}			
 		};
 
 		self.addGlobalMessage = function(){
@@ -287,10 +283,6 @@
 					var gap = 20;
 					var marginTop = parseInt(ele.css("margin-top"));
 					var marginBottom = parseInt(ele.css("margin-bottom"));
-					console.log("marginTop: ", marginTop);
-					console.log("marginBottom: ", marginBottom);
-					console.log("maxHeight: ", maxHeight);
-					console.log("navHeight: ", navHeight);
 					ele.height(maxHeight - navHeight - (isNaN(marginTop) ? 0 : marginTop) - (isNaN(marginBottom) ? 0 : marginBottom) - 2*gap);
 				}
 			});

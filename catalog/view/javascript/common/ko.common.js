@@ -256,6 +256,16 @@ var YesGlobal = YesGlobal || {};
 		        initSeemore($(element));
 		    }
 		};
+		ko.bindingHandlers.niceScroll = {
+		    init: function (element, valueAccessor, allBindingsAccessor) {
+		    	window.makeNiceScroll($(element));
+		    	ko.utils.
+		    },
+		    update: function (element, valueAccessor, allBindingsAccessor) {
+		        var acessor = valueAccessor();
+		    	window.makeNiceScroll($(element));
+		    }
+		};
 		ko.bindingHandlers.emoticon = {
 		    init: function (element, valueAccessor, allBindingsAccessor) {
 		        initEmoticons($(element));
@@ -417,7 +427,7 @@ var YesGlobal = YesGlobal || {};
 		        initImageGallery($(element));
 		    }
 		};
-		ko.bindingHandlers.uploader = new Y.Uploader();		
+		ko.bindingHandlers.uploader = new Y.Uploader();	
 	}
 	
 	initBindingHanler();

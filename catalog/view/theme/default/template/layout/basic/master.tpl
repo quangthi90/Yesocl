@@ -73,7 +73,6 @@
         infoColor = "#4a8bc2",
         warningColor = "#ab7a4b",
         inverseColor = "#45484d";
-        var themerPrimaryColor = primaryColor;
     </script>
     <!-- FOOTER SCRIPTS -->
     <!-- Library Script -->

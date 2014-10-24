@@ -60,11 +60,11 @@
 	overflow-x: hidden;
 }
 .message-rooms-container .room-list .room-item {
-	border-right: 2px solid #FFF;
+	border-left: 2px solid #FFF;
 }
 .message-rooms-container .room-list .room-item.active,
 .message-rooms-container .room-list .room-item:hover {
-	border-right: 2px solid #25ad9f;
+	border-left: 2px solid #25ad9f;
 }
 .message-list .message-item {
 	position: relative;
