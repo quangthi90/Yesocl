@@ -10,7 +10,7 @@ class ControllerAccountMessage extends Controller {
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
-		$this->data['activity_type'] = $this->config->get('pusher')['message']['new-message'];
+		$this->data['event_type'] = $this->config->get('pusher')['message'];
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/message.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/message.tpl';
