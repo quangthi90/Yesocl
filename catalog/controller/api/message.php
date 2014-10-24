@@ -156,7 +156,7 @@ class ControllerApiMessage extends Controller {
 			$aChannelNames, 
 			$sActivityType,
 			array(
-				'room_id' => $aRoom['id'],
+				'room' => $aRoom,
 				'message' => $aMessage
 			)
 		);
