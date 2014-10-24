@@ -25,7 +25,7 @@ class ModelFriendMessage extends Model {
 					'users.id' => array( '$all' => $aUserIds )
 				));
 				foreach ( $lRooms as $oRoom ) {
-					if ( $oRoom->getUsers()->count() == 2 ) {
+					if ( $oRoom->getUsers()->count() <= 2 ) {
 						break;
 					}
 				}
@@ -37,7 +37,7 @@ class ModelFriendMessage extends Model {
 			$oRoom = new MessageRoom();
 			$oRoom->setCreator( $oUserFrom );
 			$oRoom->addUser( $oUserFrom );
-			foreach ( $aUserToSlugs as $sUserToSlug ) {
+			foreach ( $aData['user_to_slugs'] as $sUserToSlug ) {
 				$oUserTo = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserToSlug );
 				$oRoom->addUser( $oUserTo );
 			}

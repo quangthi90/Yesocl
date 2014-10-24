@@ -31,7 +31,7 @@ class ControllerApiMessage extends Controller {
 		$iTotalRoomMessage = 0;
 		if ( $lRoomMessages ){
 			$iTotalRoomMessage = $lRoomMessages->count();
-			if ( $page * $iLimit < $iTotalRoomMessage ){
+			if ( $iPage * $iLimit < $iTotalRoomMessage ){
                 $bCanLoadMore = true;
             }
 			foreach ( $lRoomMessages as $oRoomMessage ) {
