@@ -88,13 +88,13 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <div class="message-content" data-bind="html: $data.contentDisplay"></div>
+                                    <div class="message-content" data-bind="html: $data.contentDisplay, seeMore: true"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="new-messsage-container" data-bind="with: $data.newMessage, emoticon: true">
                             <div class="border-top border-bottom">
-                                <textarea type="text" class="form-control rounded-none border-none no-resize" placeholder="{% trans %}Write new message{% endtrans %}..." data-bind="mention: content, autoSize: content, valueUpdate:'afterkeydown', executeOnEnter: $parent.addMessage, shiftKeyRequired: true"></textarea>
+                                <textarea style="min-height: 68px;" type="text" class="form-control rounded-none border-none no-resize" placeholder="{% trans %}Write new message{% endtrans %}..." data-bind="mention: content, valueUpdate:'afterkeydown', executeOnEnter: $parent.addMessage, shiftKeyRequired: true"></textarea>
                             </div>
                             <div class="btn-toolbar" role="toolbar">
                                 <div class="btn-group btn-group-sm pull-right">                                    
@@ -118,12 +118,12 @@
                                 </div>
                             </div>
                         </div>   
-                        <div class="new-message-info inner-2x innerAll">
+                        <div class="inner-2x innerAll border-top new-message-info">
                             <input data-bind="autoCompleteTag: toTags, autoOptions: { dataRequest: $data.userDataRequest, formatResult: $data.formatResult }" type="text" id="msg-to" class="form-control" placeholder="Find user(s) to send ...">
                         </div>                     
                         <div class="new-messsage-container" data-bind="with: $data.globalNewMessage, emoticon: true">
                             <div class="border-top border-bottom">
-                                <textarea type="text" class="form-control rounded-none border-none no-resize" placeholder="{% trans %}Write new message{% endtrans %}..." data-bind="mention: content, autoSize: content, valueUpdate:'afterkeydown', executeOnEnter: $parent.addGlobalMessage, shiftKeyRequired: true"></textarea>
+                                <textarea style="min-height: 68px;" type="text" class="form-control rounded-none border-none no-resize" placeholder="{% trans %}Write new message{% endtrans %}..." data-bind="valueUpdate:'afterkeydown', mention: content, executeOnEnter: $parent.addGlobalMessage, shiftKeyRequired: true"></textarea>
                             </div>
                             <div class="btn-toolbar" role="toolbar">
                                 <div class="btn-group btn-group-sm pull-right">                                    

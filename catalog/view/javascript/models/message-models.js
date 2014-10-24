@@ -26,7 +26,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.lastMessageContent = ko.computed(function(){
 			var message = that.lastMessage();
 			if(message && message.content){
-				var rawContent = message.content.keepNewLine().extractTextLink().extractTextEmoticon();
+				var rawContent = message.content.extractTextLink().extractTextEmoticon();
 				return Y.Utils.parseTaggedText(rawContent);
 			}
 			return "";
@@ -104,33 +104,12 @@ YesGlobal.Models = YesGlobal.Models || {};
 				initNewMessage.id = data.message.id;
 				that.lastMessage(data.room.last_message);	
 				that.updated(data.room.updated);
+				if(that.newMessageCallback && typeof that.newMessageCallback === "function"){
+					that.newMessageCallback();
+				}			
 			}, function(data) {
 				initNewMessage.status(Y.Enums.MessageStatus.ERROR);
 				//Message
-			});
-		};
-
-		that.addMessageToOldRoom = function(msgData, sucCallback, failCallback){
-			var tags = Y.Utils.parseTagsInfo(msgData.content);
-			var messageData = {
-				content: msgData.content,
-				userTags: tags.userTags,
-				stockTags: tags.stockTags,
-				room_id: that.id
-			};
-			_addMessageToRoom(messageData, function(data) {
-				that.lastMessage(data.room.last_message);
-				that.updated(data.room.updated);
-				var newMessage = new Y.Models.MessageModel(data.message);
-				that.messageList.push(newMessage);
-
-				if(sucCallback && typeof sucCallback == "function"){
-					sucCallback(data);
-				}
-			}, function(data) {
-				if(failCallback && typeof failCallback == "function"){
-					failCallback(data);
-				}
 			});
 		};
 

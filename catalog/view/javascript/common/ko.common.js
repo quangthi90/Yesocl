@@ -285,6 +285,8 @@ var YesGlobal = YesGlobal || {};
 		        $(element).on(Y.Constants.Triggers.INPUT_CONTENT_CHANGED, function() {
 		        	$(element).trigger("autosize.resize");
 		        });
+		    },
+		    update: function (element, valueAccessor, allBindingsAccessor) {
 		    }
 		};
 		ko.bindingHandlers.mention = {
