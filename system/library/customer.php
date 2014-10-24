@@ -207,7 +207,8 @@ class Customer {
   	}
 
   	public function updateLiveToken(){
-  		$this->user->setLiveToken( uniqid() );
+  		if ( !$this->user ) return;
+  		$this->user->setLiveToken( $this->user->getId() );
   		$this->db->getDm()->flush();
   	}
 }
