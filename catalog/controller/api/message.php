@@ -151,7 +151,7 @@ class ControllerApiMessage extends Controller {
 				$aChannelNames[] = $oUser->getLiveToken();
 			}
 		}
-		$sActivityType = $this->config->get('pusher')['type']['message'];
+		$sActivityType = $this->config->get('pusher')['message']['new-message'];
 		$this->model_tool_chat->pushMessage( 
 			$aChannelNames, 
 			$sActivityType,
