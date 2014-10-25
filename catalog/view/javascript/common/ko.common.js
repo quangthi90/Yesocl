@@ -104,6 +104,8 @@ var YesGlobal = YesGlobal || {};
 		}); 
 	}
 
+
+
 	/*
 	Custom KO Handlers
 	*/
@@ -238,11 +240,12 @@ var YesGlobal = YesGlobal || {};
 		ko.bindingHandlers.dateTimeText = {
 		    init: function (element, valueAccessor, allBindingsAccessor) {
 		        var value = valueAccessor(), allBindings = allBindingsAccessor();
-		        var dateFormat = allBindings.dateFormat || "LLLL";
+		        var dateFormat = allBindings.dateFormat;
 		        var dateValue = ko.utils.unwrapObservable(value);
 		        if (dateValue) {
-		            $(element).text(Y.Utils.convertDateToString(dateValue, dateFormat));
-		            $(element).attr("title", Y.Utils.convertDateToString(dateValue, dateFormat));
+		        	var text = Y.Utils.convertDateToString(dateValue, dateFormat);
+		            $(element).text(text);
+		            $(element).attr("title", Y.Utils.convertDateToString(dateValue, "LLLL"));
 		        } else {
 		            $(element).text('-');
 		        }
@@ -254,6 +257,33 @@ var YesGlobal = YesGlobal || {};
 		    },
 		    update: function (element, valueAccessor, allBindingsAccessor) {
 		        initSeemore($(element));
+		    }
+		};
+		ko.bindingHandlers.notify = {
+		    init: function (element, valueAccessor, allBindingsAccessor) {
+		        var value = valueAccessor();
+		        if(value() > 0){
+		        	var id = window.setInterval(function(){
+		        		$(element).toggleClass("notifing");
+		        	}, 500);
+		        	$(element).data("intervalId", id);
+
+		        	ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+			            var id =$(element).data("intervalId");
+				        if(id){
+				        	window.clearInterval(id);
+				        }
+			        });
+		        }
+		    },
+		    update: function (element, valueAccessor, allBindingsAccessor) {
+		    	if(valueAccessor()() == 0){
+		    		var id =$(element).data("intervalId");
+			        if(id){
+			        	window.clearInterval(id);
+			        }
+			        return;
+		    	}
 		    }
 		};
 		ko.bindingHandlers.niceScroll = {

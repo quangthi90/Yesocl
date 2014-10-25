@@ -390,9 +390,32 @@ var YesGlobal = YesGlobal || {};
 	        return dayWrapper.format("MMM Do YYYY");
 	    },
 	    convertDateToString: function(timeStamp, dateFormat){
-	        var dayWrapper = moment(new Date(timeStamp*1000));
-	        return dayWrapper.format(dateFormat);
-	    },
+	    	var dayWrapper = moment(new Date(timeStamp*1000));
+	    	if(dateFormat){
+	        	return dayWrapper.format(dateFormat);	
+	    	}
+
+	        var diffY = moment().diff(dayWrapper, "years");
+	        if(diffY > 0){
+	            return dayWrapper.format("MMM Do YYYY");
+	        }
+	        var diffM = moment().diff(dayWrapper, "months");
+	        if(diffM <= 12 && diffM > 0){
+	            if(dayWrapper.toDate().getFullYear() === moment().toDate().getFullYear()){
+	            	return dayWrapper.format("MMM Do");
+	            }else{
+	            	return dayWrapper.format("MMM Do YYYY");
+	            }
+	        }
+	        var diffD = moment().diff(dayWrapper, "days");
+	        if(diffD <= 31 && diffD > 7){
+	        	return dayWrapper.format("Do h:mm a");
+	        }
+	        if(diffD <= 7 && diffD > 1){
+	        	return dayWrapper.format("ddd h:mm a");
+	        }
+	        return dayWrapper.format("h:mm a");
+	    },	    
 	    random : function(){
 	    	var argc = arguments.length;
 			if (argc === 0) {

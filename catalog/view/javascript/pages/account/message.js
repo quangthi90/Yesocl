@@ -60,6 +60,7 @@
 			if(self.activeRoom() != null && self.activeRoom().id != item.id) {
 				self.activeRoom(item);
 			}
+			self.activeRoom().unread(0);
 			_scrollToBottomMessageList();
 		};
 
@@ -236,7 +237,9 @@
 				}else {
 					if(self.activeRoom() != null && self.activeRoom().id == returnRoom.id){
 						_scrollToBottomMessageList();
-					}
+					}else{
+						existingRoom.unread(existingRoom.unread() + 1);
+					}					
 				}		
 			} 
 			// New room
@@ -249,6 +252,7 @@
 					_newMessageCallback();
 				}else {
 					_updateOrderRoom();
+					newRoom.unread(newRoom.unread() + 1);
 				}
 			}			
 

@@ -66,9 +66,24 @@
 .message-rooms-container .room-list .room-item .room-time {
 	position: absolute;
 	right: 5px;
-	top: 2px;
+	top: 30px;
 	font-size: 9px;
 	display: none;
+}
+.message-rooms-container .room-list .room-item .room-name {
+	width: 85%;
+}
+.message-rooms-container .room-list .room-item .room-last-content {
+	width: 80%;
+}
+.message-rooms-container .room-list .room-item .room-notification {
+	position: absolute;
+	right: 10px;
+	top: 5px;
+	border: none;
+}
+.message-rooms-container .room-list .room-item .room-notification.notifing{
+	background-color: #b55151;	
 }
 .message-rooms-container .room-list .room-item.active,
 .message-rooms-container .room-list .room-item:hover {

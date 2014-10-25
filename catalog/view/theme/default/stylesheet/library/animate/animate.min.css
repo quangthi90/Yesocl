@@ -1,4 +1,6 @@
-.animated{-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-ms-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-duration:0.5s;-moz-animation-duration:0.5s;-ms-animation-duration:0.5s;-o-animation-duration:0.5s;animation-duration:0.5s;}.animated.hinge{-webkit-animation-duration:0.5s;-moz-animation-duration:0.5s;-ms-animation-duration:0.5s;-o-animation-duration:0.5s;animation-duration:0.5s;}@-webkit-keyframes flash {
+.animated {-webkit-animation-fill-mode:both;-moz-animation-fill-mode:both;-ms-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;-webkit-animation-duration:0.5s;-moz-animation-duration:0.5s;-ms-animation-duration:0.5s;-o-animation-duration:0.5s;animation-duration:0.5s;}
+.animated.hinge{-webkit-animation-duration:0.5s;-moz-animation-duration:0.5s;-ms-animation-duration:0.5s;-o-animation-duration:0.5s;animation-duration:0.5s;}
+@-webkit-keyframes flash {
 	0%, 50%, 100% {opacity: 1;}	25%, 75% {opacity: 0;}
 }
 
@@ -3429,4 +3431,34 @@
 	-moz-animation-name: rollOut;
 	-o-animation-name: rollOut;
 	animation-name: rollOut;
+}
+
+@keyframes blink {
+	0% {background-color: blue}
+	50% {background-color: black}
+}
+@keyframes changeColor {
+	0% {
+		background-color: red;
+		border-color: black;
+	}
+	100% {
+		background-color: green;
+		border-color: yellow;
+	}
+}
+@keyframes changeSize {
+	0% {transform: scale(1)}
+	65% {transform: scale(1.2)}
+	100% {transform: scale(1.4)}
+}
+
+.blink {	
+	-webkit-animation: blink 1s step-end infinite;
+	-moz-animation: blink 1s step-end infinite;
+	-o-animation: blink 1s step-end infinite;
+	animation: blink 1s step-end infinite;
+}
+.change-color {
+	animation: changeColor 3s infinite;	
 }

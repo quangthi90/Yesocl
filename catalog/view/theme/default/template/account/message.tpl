@@ -20,7 +20,7 @@
                             <span data-bind="text: totalRoom() + ( totalRoom() > 1 ? ' {% trans %}rooms{% endtrans %}' : ' {% trans %}room{% endtrans %}')"></span>
                         </div>
                         <ul class="list-unstyled room-list" data-bind="foreach: { data: $data.roomList, afterRender: addMsgScrollHandlers }, niceScroll: $parent.addMsgScrollHandlers">
-                            <li class="border-bottom cursor-pointer room-item" data-bind="click: $parent.clickRoomItem, css: { 'active' : $data.id == ($parent.activeRoom() != null ? $parent.activeRoom().id : 0), 'hidden' : !$data.visible() }">
+                            <li class="border-bottom cursor-pointer room-item" data-bind="click: $parent.clickRoomItem, css: { 'active bg-primary' : $data.id == ($parent.activeRoom() != null ? $parent.activeRoom().id : 0), 'hidden' : !$data.visible() }">
                                 <div class="media innerAll">
                                     <div class="media-object pull-left hidden-phone">
                                         <a data-bind="link: { title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }" >
@@ -29,13 +29,16 @@
                                     </div>
                                     <div class="media-body">
                                         <div>
-                                        <span class="strong text-small" data-bind="text: $data.name"></span> 
-                                        <small class="text-italic pull-right label label-default room-time" data-bind="timeAgo: $data.lastMessage().created"></small>
+                                            <span class="strong text-small truncated-text display-block room-name" data-bind="text: $data.name"></span> 
+                                            <small class="text-italic pull-right label label-default room-time" data-bind="dateTimeText: $data.lastMessage().created"></small>
+                                            <!-- ko if: $data.unread() > 0 -->
+                                            <span class="badge badge-success room-notification" data-bind=", text: $data.unread, notify: $data.unread"></span>
+                                            <!-- /ko -->
                                         </div>
-                                        <div class="text-small truncated-text" data-bind="html: $data.lastMessageContent"></div>
+                                        <div class="text-small truncated-text room-last-content" data-bind="html: $data.lastMessageContent"></div>
                                     </div>
                                 </div>
-                            </li>                            
+                            </li>                          
                         </ul>
                         <!-- ko if: $data.noRoomAvailable() -->
                         <div class="innerAll strong text-center text-small truncated-text">
@@ -72,7 +75,7 @@
                                             <a class="strong text-inverse text-small" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a>
                                         </div>
                                         <div class="pull-right">
-                                            <span class="text-right text-muted text-small" data-bind="timeAgo: $data.created"></span>
+                                            <span class="text-right text-muted text-small" data-bind="dateTimeText: $data.created"></span>
                                             <span>&nbsp;</span>
                                             <span class="text-right text-muted text-small">
                                                 <!-- ko if: $data.status() === 1 -->
