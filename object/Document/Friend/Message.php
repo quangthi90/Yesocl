@@ -18,9 +18,6 @@ Class Message {
 	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User") */
     private $author;
 
-    /** @MongoDB\ReferenceMany(targetDocument="Document\User\User") */
-    private $readers = array();
-
     /** @MongoDB\Collection */
 	private $stockTags = array();
 
@@ -78,18 +75,6 @@ Class Message {
 
 	public function getAuthor(){
 		return $this->author;
-	}
-
-	public function addReader( User $user ){
-		$this->readers[] = $user;
-	}
-
-	public function setReaders( $users ){
-		$this->readers = $users;
-	}
-
-	public function getReaders(){
-		return $this->readers;
 	}
 
 	public function setCreated( $created ){

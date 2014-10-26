@@ -19,7 +19,7 @@ Class MessageRoom {
 	 */
 	private $name;
 
-    /** @MongoDB\ReferenceMany(targetDocument="Document\User\User") */
+    /** @MongoDB\Hash */
     private $users = array();
 
 	/** @MongoDB\EmbedMany(targetDocument="Message") */
@@ -105,8 +105,8 @@ Class MessageRoom {
 		return $this->name;
 	}
 
-	public function addUser( User $user ){
-		$this->users[] = $user;
+	public function addUser( $idUser, $iUnRead ){
+		$this->users[$idUser] = $iUnRead;
 	}
 
 	public function setUsers( $users ){
