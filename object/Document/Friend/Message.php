@@ -36,19 +36,8 @@ Class Message {
 		return array(
 			'id' => $this->getId(),
 			'content' => $this->getContent(),
-			'created' => $created,
-			'is_read' => $this->checkIsRead( $idUser )
+			'created' => $created
 		);
-	}
-
-	private function checkIsRead( $idUser ) {
-		$lReaders = $this->getReaders();
-		foreach ( $lReaders as $oUser ) {
-			if ( $idUser == $oUser->getId() ) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	/** @MongoDB\PrePersist */

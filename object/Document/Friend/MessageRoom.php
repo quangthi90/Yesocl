@@ -19,8 +19,13 @@ Class MessageRoom {
 	 */
 	private $name;
 
-    /** @MongoDB\Hash */
+    /** @MongoDB\ReferenceMany(targetDocument="Document\User\User") */
     private $users = array();
+
+    /**
+	 * @MongoDB\Hash
+	 */
+	private $unReads = array();
 
 	/** @MongoDB\EmbedMany(targetDocument="Message") */
 	private $messages = array();
@@ -105,8 +110,8 @@ Class MessageRoom {
 		return $this->name;
 	}
 
-	public function addUser( $idUser, $iUnRead ){
-		$this->users[$idUser] = $iUnRead;
+	public function addUser( User $user ){
+		$this->users[] = $user;
 	}
 
 	public function setUsers( $users ){
@@ -115,6 +120,18 @@ Class MessageRoom {
 
 	public function getUsers(){
 		return $this->users;
+	}
+
+	public function addUnRead( $key, $unRead ){
+		$this->unReads[$key] = $unRead;
+	}
+
+	public function setUnReads( $unReads ){
+		$this->unReads = $unReads;
+	}
+
+	public function getUnReads(){
+		return $this->unReads;
 	}
 
 	public function setCreator( User $user ){

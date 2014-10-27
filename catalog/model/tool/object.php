@@ -229,6 +229,7 @@ class ModelToolObject extends Model
 		$oLastMessage = $oRoomMessage->getMessages()->last();
 		$aRoomMessage['last_message'] = $this->formatMessage( $oLastMessage, $iWidth, $iHeight );
 		$aRoomMessage['user'] = $this->formatUser( $oRoomMessage->getLastUser($oLoggedUser), $iWidth, $iHeight );
+		$aRoomMessage['unread_count'] = $oRoomMessage->getUnReads()[$oLoggedUser->getId()] ? $oRoomMessage->getUnReads()[$oLoggedUser->getId()] : 0;
 
 		return $aRoomMessage;
 	}
