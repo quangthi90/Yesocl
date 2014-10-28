@@ -164,4 +164,5 @@ $_['route']['ApiGetRooms']					= 'api/message/getLastRooms/';
 $_['route']['ApiGetMessages']				= 'api/message/getLastMessages/';
 $_['route']['ApiPostMessage']				= 'api/message/send/';
 $_['route']['ApiPutRoomName']				= 'api/message/changeRoomName/';
+$_['route']['ApiPutRoomRead']				= 'api/message/readRoomMessage/';
 ?>

@@ -179,10 +179,13 @@ class ControllerApiMessage extends Controller {
 		$sName = $this->request->post['name'];
 
 		// room ID
-		if ( !empty($this->request->post['room_id']) ) {
-			$idRoom = $this->request->post['room_id'];
+		if ( !empty($this->request->get['room_id']) ) {
+			$idRoom = $this->request->get['room_id'];
 		} else {
-			$idRoom = null;
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'room ID is not empty'
+            )));
 		}
 
 		$this->load->model('friend/room');
@@ -193,6 +196,33 @@ class ControllerApiMessage extends Controller {
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'rename room not success'
+            )));
+		}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok'
+        )));
+	}
+
+	public function readRoomMessage(){
+		// room ID
+		if ( !empty($this->request->post['room_id']) ) {
+			$idRoom = $this->request->post['room_id'];
+		} else {
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'room ID is not empty'
+            )));
+		}
+
+		$this->load->model('friend/room');
+
+		$bResult = $this->model_friend_room->read( $idRoom );
+
+		if ( !$bResult ){
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'read room message not success'
             )));
 		}
 
