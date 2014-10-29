@@ -3,10 +3,10 @@ YesGlobal.Models = YesGlobal.Models || {};
 (function($, ko, Y, undefined) {
 	Y.Models.RoomModel = function (data) {
 		var that = this;
-
+		var backupName = "";
 		/* ============= START PROPERTIES ================== */
 		that.id = data.id || '';
-		that.name = data.name || '';
+		that.name = ko.observable(data.name || "");
 		that.user = data.user || {};
 		that.created = data.created || null;
 		that.updated = ko.observable(data.updated || null);
@@ -20,7 +20,10 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.canLoadMore = ko.observable(data.canLoadMore || false);
 		that.isLoadingMore = ko.observable(false);
 		that.isRegisterd = ko.observable(false);
+		that.isRoomEditing = ko.observable(false);
+		that.hasFocusEditingRoom = ko.observable(true);
 		that.newMessageCallback = data.newMessageCallback || undefined;
+
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============= */
@@ -114,6 +117,43 @@ YesGlobal.Models = YesGlobal.Models || {};
 			});
 		};
 
+		that.toggleEditRoom = function(){
+			if(!that.isRoomEditing()){
+				backupName = that.name();
+			} else {
+				that.name(backupName);
+			}
+			that.isRoomEditing(!that.isRoomEditing());
+			that.hasFocusEditingRoom(that.isRoomEditing());
+		};
+
+		that.offEditRoom = function(){
+			that.isRoomEditing(false);
+			that.name(backupName);
+		};
+
+		that.editRoomName = function(){
+			var newName = that.name().trim();
+			if(newName.length === 0) return;
+
+			var ajaxOptions = {
+				url: Y.Routing.generate("ApiPutRoomName", { room_id: that.id }),
+				data : { name : newName }
+			};
+
+			var successCallback = function(data){				
+				if(data.success === "ok"){
+					that.isRoomEditing(false);
+				} else {
+					that.name(backupName);
+				}
+			};
+			//Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, function(){
+				that.name(backupName);
+			});
+		};
+
 		that.toJson = function(){
 			return {
 				post_type: that.type,
@@ -170,7 +210,8 @@ YesGlobal.Models = YesGlobal.Models || {};
 		function _addMessageToRoom(messageData, sucCallback, failCallback){
 			var ajaxOptions = {
 				url: Y.Routing.generate("ApiPostMessage"),
-				data : messageData
+				data : messageData,
+				showLoading: false
 			};
 
 			var successCallback = function(data){				

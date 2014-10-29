@@ -12,7 +12,7 @@
 		self.isLoadingMore = ko.observable(false);
 		self.isNewMessage = ko.observable(false);
 		self.canLoadMore = ko.observable(options.canLoadMore || false);
-		self.isPusherInitialized = ko.observable(false);
+		self.isPusherInitialized = ko.observable(false);	
 
 		self.roomQuery = ko.observable("");
 		self.realRoomQuery = ko.computed(self.roomQuery).extend({ throttle: 300 });
@@ -163,7 +163,8 @@
 				url: Y.Routing.generate(url, loadOptions),
 				data : {
 					limit : 10
-				}
+				},
+				showLoading: false
 			};
 			var successCallback = function(data){
 				if(data.success === "ok"){
@@ -198,7 +199,8 @@
 		function _addMessageToRoom(messageData, sucCallback, failCallback){
 			var ajaxOptions = {
 				url: Y.Routing.generate("ApiPostMessage"),
-				data : messageData
+				data : messageData,
+				showLoading: false
 			};
 
 			var successCallback = function(data){				

@@ -38,7 +38,7 @@
                                         <div class="text-small truncated-text room-last-content" data-bind="html: $data.lastMessageContent"></div>
                                     </div>
                                 </div>
-                            </li>                          
+                            </li>
                         </ul>
                         <!-- ko if: $data.noRoomAvailable() -->
                         <div class="innerAll strong text-center text-small truncated-text">
@@ -52,11 +52,28 @@
                         <div class="bg-gray innerAll" class="room-info-container">
                             <div class="row">
                                 <div class="col-xs-8">
+                                    <!-- ko ifnot: isRoomEditing() -->
                                     <h4 class="innerT half margin-none truncated-text display-block text-capitalize" data-bind="text: $data.name"></h4>
+                                    <!-- /ko -->
+                                    <!-- ko if: isRoomEditing() -->
+                                    <input class="form-control input-sm" type="text" data-bind="valueUpdate:'afterkeydown', value: $data.name, hasFocus: hasFocusEditingRoom(), executeOnEnter: $data.editRoomName, executeOnEscape: $data.offEditRoom, shiftKeyRequired: true" placeholder="{% trans %}Room name{% endtrans %}..."/>
+                                    <!-- /ko -->
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="pull-right">
-                                        <a class="btn btn-default bg-white btn-sm" data-bind="click: $parent.toggleNewMessage"><i class="fa fa-pencil"></i> <span class="hidden-xs">{% trans %}New Message{% endtrans %}</span></a> 
+                                        <a class="btn btn-default bg-white btn-sm" data-bind="click: $parent.toggleNewMessage"><i class="fa fa-pencil"></i> <span class="hidden-xs">{% trans %}New Message{% endtrans %}</span></a>
+                                    </div>
+                                    <div class="btn-group btn-group-sm pull-right">
+                                        <button data-toggle="dropdown" class="btn btn-default bg-white dropdown-toggle" type="button">
+                                            <i class="fa fa-cog"></i>
+                                            <span class="hidden-xs">{% trans %}Actions{% endtrans %}</span>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a data-bind="click: toggleEditRoom">{% trans %}Edit room name{% endtrans %}</a></li>
+                                            <li><a>{% trans %}Add member{% endtrans %}</a></li>
+                                            <li><a>{% trans %}Remove member{% endtrans %}</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
