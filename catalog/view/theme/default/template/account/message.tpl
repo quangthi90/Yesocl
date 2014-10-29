@@ -111,7 +111,7 @@
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
-                                    <div class="message-content" data-bind="html: $data.contentDisplay, seeMore: true"></div>
+                                    <div class="message-content wraptext" data-bind="html: $data.contentDisplay, seeMore: true"></div>
                                 </div>
                             </div>
                         </div>
