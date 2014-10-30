@@ -184,12 +184,22 @@
 	                }
 	            },{scope: 'email,user_birthday'});
 	        }
+	        function callFBLogout(){
+	        	FB.Event.subscribe('auth.logout', function(response) {
+				    FB.logout(function(response) {
+				        // FB.logout() called without an access token.
+				    });
+				});
+	        }
 	        $('.btn-fb-login').click(function(){
 	            if ( $(this).hasClass('disabled') ){
 	                return false;
 	            }
 	            $(this).addClass('disabled');
 	            callFBLogin();
+	        });
+	        $('.btn-fb-logout').click(function(){
+	            callFBLogout();
 	        });
 		</script>
 		{% endif %}

@@ -23,6 +23,7 @@ $_['route']['CommentDelete']				= 'post/comment/deleteComment';
 $_['route']['CommentEdit']					= 'post/comment/editComment';
 
 // Page
+$_['route']['AboutPage']					= 'common/about';
 $_['route']['RefreshPage']					= 'common/refresh';
 $_['route']['SetDisplayRefreshPage']		= 'common/refresh/setOption';
 $_['route']['WelcomePage']					= '';

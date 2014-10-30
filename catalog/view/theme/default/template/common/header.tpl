@@ -45,7 +45,7 @@
                 </a>
               </li>
               <li class="divider"></li>
-              <li>
+              <li class="btn-fb-logout">
                 <a href="{{ path('Logout') }}">
                   <i class="icon-signout"></i> {% trans %}Log out{% endtrans %}
                 </a>

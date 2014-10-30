@@ -3,6 +3,10 @@
     background-color: #FFF;
     top: 48px;
 }
+.news-ticker-container {
+  max-height: 45px;
+  overflow-y: auto;
+}
 #post-detail {
     width: 100%;
     height: 100%;

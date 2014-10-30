@@ -23,6 +23,7 @@ $_['routing']['CommentDelete']					= '{post_type}/post/{post_slug}/comment/{comm
 $_['routing']['CommentEdit']					= '{post_type}/post/{post_slug}/comment/{comment_id}/edit/';
 
 // Page
+$_['routing']['AboutPage']					    = 'about/';
 $_['routing']['RefreshPage'] 					= 'what-s-new/';
 $_['routing']['SetDisplayRefreshPage'] 			= 'what-s-new/setoption/{option}';
 $_['routing']['WelcomePage']					= '';
