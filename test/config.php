@@ -27,6 +27,11 @@ define('YS_VERSION', '1.5.1');
 define('FB_API_ID', '562278927194046');
 define('FB_API_SECRET', '2290a3072f7d664613cfbdc14fab632d');
 
+// Pusher
+define('PUSHER_APP_KEY', '22dc8822a1badda84d02');
+define('PUSHER_APP_SECRET', 'f27ab33b3ec6453e693d');
+define('PUSHER_APP_ID', '88643');
+
 // DB
 define('DB_DRIVER', 'mysql');
 define('DB_HOSTNAME', 'localhost');
