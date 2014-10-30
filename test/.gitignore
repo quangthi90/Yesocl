@@ -7,8 +7,6 @@
 /system/cache
 /image/cache
 /object/hydrator
-/config.php
-/admin/config.php
 /object/repository
 /object/hydrator
 /object/proxy
