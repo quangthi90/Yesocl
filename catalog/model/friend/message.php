@@ -32,6 +32,7 @@ class ModelFriendMessage extends Model {
 					if ( $oRoom->getUsers()->count() <= 2 ) {
 						break;
 					}
+					$oRoom = null;
 				}
 			}
 		}

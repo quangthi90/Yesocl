@@ -195,7 +195,7 @@ class ControllerApiMessage extends Controller {
 		if ( !$bResult ){
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
-                'error' => 'rename room not success'
+                'error' => 'Room ID not exist or this user is not creator'
             )));
 		}
 
