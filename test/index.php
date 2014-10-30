@@ -65,8 +65,8 @@ Twig_Autoloader::register();
 $twig_loader = new Twig_Loader_Filesystem(DIR_TEMPLATE);
 $twig_loader->addPath(DIR_TEMPLATE, 'template');
 $twig = new Twig_Environment($twig_loader, array(
-    'cache' => DIR_SYSTEM . '/Twig',
-    'auto_reload' => true
+    // 'cache' => DIR_SYSTEM . '/Twig',
+    // 'auto_reload' => true
 	));
 $twig->addExtension(new Twig_Extension_StringLoader());
 $twig->addExtension(new Twig_Extensions_Extension_I18n());
