@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yesocl - Social Network</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen" />
+    <link href="css/yes.css" rel="stylesheet" media="screen" />
+	<link href="css/datepicker.css" rel="stylesheet" media="screen" />
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/datepicker.js"></script>    
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+			//Scale Intro Image:
+			scaleIntro();
+			//Date Picker:
+			$('.y-date').datepicker();			
+			//Join clicked:
+			$('a.link-join').click(function(e){
+				e.preventDefault();		
+				var ele = $(this).children('span:first-child');
+				$('#overlay').fadeIn(function(){					
+					$('#intro-bg').css('margin','0');					
+					$('#y-frm-login').animate(
+						{
+							right : '50px'
+						},600
+					);					
+				});
+			});			
+			//if close button is clicked
+			$('.y-frm .close').click(function (e) {
+				//Cancel the link behavior
+				e.preventDefault();				
+				closeLoginForm();
+			});					
+			//if overlay is clicked
+			$('#overlay').click(function () {
+				closeLoginForm();
+			});	
+			$(window).resize(function () {				  
+				scaleIntro();	
+			});				
+        });		
+		//Close Form:
+		function closeLoginForm(){				
+			$('#y-frm-login').animate(
+				{
+					right : '-9990px'
+				},500,	
+				function(){
+					$('#overlay').fadeOut(300, function(){
+						$('#intro-bg').css('margin','0px auto');
+					});												
+				}					
+			);
+		}			
+		//Scale img Intro
+		function scaleIntro(){
+			var h = $(window).height();
+			var header = $('#y-header').height();
+			var footer = $('#y-footer').height();
+			var content = h - header - footer;			
+			$('#intro-bg').height(content);
+			$('#intro-bg').width(content*760/630);		
+		}
+    </script>
+</head>
+<body>
+    <div id="y-container">
+        <div id="y-header" class="y-sub-container-1">
+            <div id="y-logo" class="fl">
+                <a href="#">YESOCL NETWORK </a>
+            </div>
+            <div class=".y-container fr">                 
+                <ul id="y-welcome-menu" class="fl y-menu unstyled">
+                    <li><a href="http://yestoc.com" target="blank">Yestock</a> </li>
+                    <li><a href="#">Why Yesocl ?</a> </li>
+                    <li><a href="#">About Us</a> </li>
+                </ul>                
+                <div id="y-form-login" class="fr">
+                    <form action="#" method="post">
+                        <div class="list-controls fr">
+                            <button type="submit" class="btn btn-ystandard">Sign in</button>
+                        </div>
+                        <div class="control-group fr">
+                            <label>Password</label>
+                            <input type="password" id="inputPassword" name="inputPassword" />
+                            <a href="#" class="small-link">Forgot password !</a>
+                        </div>                        
+                        <div class="control-group fr">
+                            <label>
+                                Email</label>
+                            <input type="text" id="inputEmail" name="inputEmail" />
+                            <label class="checkbox"><input type="checkbox" name="remember" />
+                                Remember me
+                            </label>
+                        </div>                    
+                    </form>
+                </div>
+            </div>           
+        </div>
+        <div class="clear"></div>
+        <div id="y-content" class="y-sub-container-1">
+            <div id="intro-bg">
+                <img src="img/intro-2-bg.png" alt="" width="100%" height="100%" />
+                <a href="#" class="link-join"><span>Join</span></a>
+            </div>
+            <div id="y-frm-login" class="y-frm">
+                <a href="#" class="close">Close</a>
+                <div class="frm-title">
+                    Join <strong>YESOCL.com</strong>
+                </div>
+                <div class="frm-content">
+                    <form action="#" class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label" for="reg-first-name">First Name</label>
+                            <div class="controls">
+                                <input type="text" id="reg-first-name" placeholder="Please enter your first name" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="reg-last-name">Last Name</label>
+                            <div class="controls">
+                                <input type="text" id="reg-last-name" placeholder="Please enter your last name" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="reg-email">Email</label>
+                            <div class="controls">
+                                <input type="text" id="reg-email" placeholder="Please enter your email" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="reg-password">
+                                Password</label>
+                            <div class="controls">
+                                <input type="password" id="reg-password" placeholder="Please enter your password" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="reg-re-password">
+                                Re-type Password</label>
+                            <div class="controls">
+                                <input type="password" id="reg-re-password" placeholder="Please re-enter your password" />
+                            </div>
+                        </div>
+						<div class="control-group">
+                            <label class="control-label" for="reg-birthay">
+                                Birthday</label>
+                            <div class="controls">
+                                <input type="text" class="y-date" id="reg-birthay" data-datepicker-format="mm/dd/yyyy"  placeholder="Please enter your birthday" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="reg-sex">
+                                Sex</label>
+                            <div class="controls">
+                                <select id="reg-sex">
+                                    <option>-- Select sex --</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Unknow</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <label class="checkbox">
+                                    <input type="checkbox" name="lg-remember" />Remember me</label>
+                                <button type="submit" class="btn btn-ystandard">Sign in</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div id="y-footer" class="y-sub-container-1">
+            <div class="y-footer-container fl">
+                <div class="language-selection">                    
+                    <form action="#" class="form-inline">
+                        <div class="input-prepend">
+                            <span class="add-on">Language </span>
+                            <select name="lang-code" id="select1">
+                                <option>English</option>
+                                <option>Viet Nam</option>
+                                <option>Japanese</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="copyright">
+                    Copyright &copy; 2012 - <strong>YESOCL.com</strong>
+                </div>
+            </div>
+            <div class="y-footer-container fr">
+                <div class="links-footer">
+                    <a href="#">Mobile Version</a> - <a href="#">Create Group</a> - <a href="#">Create Profiles</a>
+                    - <a href="#">Careers</a> - <a href="#">User privacy</a> - <a href="#">Term</a>
+                    - <a href="#">Help</a>
+                </div>
+                <div class="footer-help">
+                    <div class="help-phone fl">
+                        083.888.888 - 083.999.999
+                    </div>
+                    <div class="help-email fl">
+                        <a href="mailto:support@yesocl.com">support@yesocl.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="overlay"></div>
+</body>
+</html>
