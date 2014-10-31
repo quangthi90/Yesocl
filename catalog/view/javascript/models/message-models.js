@@ -27,6 +27,10 @@ YesGlobal.Models = YesGlobal.Models || {};
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============= */
+		that.isCreator = ko.computed(function(){
+			if(!Y.CurrentUser) return false;
+			return Y.CurrentUser.id == that.user.id;
+		});
 		that.lastMessageContent = ko.computed(function(){
 			var message = that.lastMessage();
 			if(message && message.content){
@@ -142,16 +146,22 @@ YesGlobal.Models = YesGlobal.Models || {};
 			};
 
 			var successCallback = function(data){				
-				if(data.success === "ok"){
-					that.isRoomEditing(false);
-				} else {
+				if(data.success !== "ok"){
 					that.name(backupName);
+					//Message
 				}
+				that.isRoomEditing(false);
 			};
 			//Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, function(){
 				that.name(backupName);
+				that.isRoomEditing(false);
 			});
+		};
+
+		that.openMembers = function(){
+			//$("#modal-msg-members").modal('show');
+			Y.Utils.showInfoMessage("In Processing");
 		};
 
 		that.toJson = function(){

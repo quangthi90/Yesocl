@@ -1,4 +1,5 @@
 {% extends '@template/default/template/layout/basic/master.tpl' %}
+{% use '@template/default/template/common/dialogs.tpl' %}
 
 {% block title %}{{ heading_title }}{% endblock %}
 
@@ -49,6 +50,9 @@
                 </div>
                 <div id="message-thread" class="border-top border-left border-right message-thread">
                     <div data-bind="with: $data.activeRoom, css: { 'hide' : $data.activeRoom() == null || $data.isNewMessage() }" class="active-room-container">
+                        <div class="hidden">
+                            {{ block('modal_msg_members') }}
+                        </div>
                         <div class="bg-gray innerAll" class="room-info-container">
                             <div class="row">
                                 <div class="col-xs-8">
@@ -70,9 +74,9 @@
                                             <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a data-bind="click: toggleEditRoom">{% trans %}Edit room name{% endtrans %}</a></li>
-                                            <li><a>{% trans %}Add member{% endtrans %}</a></li>
-                                            <li><a>{% trans %}Remove member{% endtrans %}</a></li>
+                                            <li data-bind="visible: isCreator"><a data-bind="click: toggleEditRoom">{% trans %}Edit room name{% endtrans %}</a></li>
+                                            <li data-bind="visible: isCreator"><a data-bind="click: openMembers">{% trans %}Manage members{% endtrans %}</a></li>
+                                            <li><a>{% trans %}Leave room{% endtrans %}</a></li>
                                         </ul>
                                     </div>
                                 </div>
