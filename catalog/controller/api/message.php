@@ -233,12 +233,12 @@ class ControllerApiMessage extends Controller {
 
 	public function getRoomUsers(){
 		// room ID
-		if ( !empty($this->request->post['room_id']) ) {
-			$idRoom = $this->request->post['room_id'];
+		if ( !empty($this->request->get['room_id']) ) {
+			$idRoom = $this->request->get['room_id'];
 		} else {
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
-                'error' => 'room ID is not empty'
+                'error' => 'room ID is empty'
             )));
 		}
 
