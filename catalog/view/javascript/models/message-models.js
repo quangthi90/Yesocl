@@ -15,7 +15,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.newMessage = ko.observable(new Y.Models.MessageModel({}));
 		
 		that.visible = ko.observable(true);
-		that.unread = ko.observable(data.unread || 0);
+		that.unread = ko.observable(data.unread_count || 0);
 		that.currentPage = ko.observable(1);
 		that.canLoadMore = ko.observable(data.canLoadMore || false);
 		that.isLoadingMore = ko.observable(false);
@@ -34,7 +34,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.lastMessageContent = ko.computed(function(){
 			var message = that.lastMessage();
 			if(message && message.content){
-				var rawContent = message.content.extractTextLink().extractTextEmoticon();
+				var rawContent = message.content;
 				return Y.Utils.parseTaggedText(rawContent);
 			}
 			return "";
@@ -49,7 +49,8 @@ YesGlobal.Models = YesGlobal.Models || {};
 					});					
 					if(that.newMessageCallback && typeof that.newMessageCallback === "function"){
 						that.newMessageCallback();
-					}				
+					}
+
 					if(sucCallback && typeof sucCallback === "function"){
 						sucCallback(data);
 					}
@@ -159,9 +160,25 @@ YesGlobal.Models = YesGlobal.Models || {};
 			});
 		};
 
+		that.updateReadStatus = function(){
+			if(that.unread() === 0) {
+				return;
+			}
+			var ajaxOptions = {
+				url: Y.Routing.generate("ApiPutRoomRead", { room_id: that.id }),
+				showLoading: false
+			};
+			var successCallback = function(data){
+				if(data.success === "ok"){
+					that.unread(0);
+				}
+			};
+			//Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		};
+
 		that.openMembers = function(){
-			//$("#modal-msg-members").modal('show');
-			Y.Utils.showInfoMessage("In Processing");
+			$("#modal-msg-members").modal('show');			
 		};
 
 		that.toJson = function(){
@@ -182,7 +199,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		/* ============= END PUBLIC METHODS ============= */
 
 		/* ============= START PRIVATE METHODS ============= */	
-		function _loadMessage(sucCallback, failCallback) {			
+		function _loadMessage(sucCallback, failCallback) {
 			var ajaxOptions = {
 				url: Y.Routing.generate("ApiGetMessages", {
 					room_id: that.id,
@@ -239,7 +256,6 @@ YesGlobal.Models = YesGlobal.Models || {};
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
 		}
 	};
-
 
 	Y.Models.MessageModel = function (data) {
 		var that = this;		

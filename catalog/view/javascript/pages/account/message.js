@@ -11,6 +11,7 @@
 
 		self.isLoadingMore = ko.observable(false);
 		self.isNewMessage = ko.observable(false);
+		self.isProcessNewMessage = ko.observable(false);
 		self.canLoadMore = ko.observable(options.canLoadMore || false);
 		self.isPusherInitialized = ko.observable(false);	
 
@@ -60,7 +61,7 @@
 			if(self.activeRoom() != null && self.activeRoom().id != item.id) {
 				self.activeRoom(item);
 			}
-			self.activeRoom().unread(0);
+			self.activeRoom().updateReadStatus();
 			_scrollToBottomMessageList();
 		};
 
@@ -113,14 +114,17 @@
 				user_slugs: toSlugs
 			};
 
-			_addMessageToRoom(messageData, function(data) {
+			self.isProcessNewMessage(true);
+			_addMessageToRoom(messageData, function(data) {	
 				_addMessageDataToRoom(data, function(){
+					self.isProcessNewMessage(false);
 					self.globalNewMessage().reset();
 					self.toTags([]);
-					self.isNewMessage(false);					
+					self.isNewMessage(false);
 				});
 			}, function(data) {
 				//Message
+				self.isProcessNewMessage(false);
 			});
 		};
 		
@@ -164,7 +168,7 @@
 				data : {
 					limit : 10
 				},
-				showLoading: false
+				showLoading: true
 			};
 			var successCallback = function(data){
 				if(data.success === "ok"){
@@ -256,7 +260,7 @@
 					_updateOrderRoom();
 					newRoom.unread(newRoom.unread() + 1);
 				}
-			}			
+			}		
 
 			if(callback && typeof callback === "function"){
 				callback();
