@@ -44,6 +44,9 @@ class ModelFriendRoom extends Model {
 		// check is exist
 		if ( !$oRoom ) return false;
 
+		// check is author
+		if ( $oRoom->getCreator()->getId() != $this->customer->getId() ) return false;
+
 		$oRoom->addUnRead( $this->customer->getId(), 0 );
 
 		$this->dm->flush();
