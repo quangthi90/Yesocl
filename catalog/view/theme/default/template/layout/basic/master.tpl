@@ -64,6 +64,8 @@
             {{ include(template_from_string( footer )) }}
         {% endblock %}
     </div>
+    {% block common_html %}   
+    {% endblock %}    
     <!-- REQUIRED VARIABLES SCRIPTS -->
     <script data-id="App.Config">
         var App = {}; 

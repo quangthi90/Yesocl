@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="{{ asset_css('library/emoticons/emoticons.css') }}" />
     <link rel="stylesheet" href="{{ asset_css('library/select2/select2.css') }}" />
 {% endblock %}
+{% block common_html %}
+    {{ block('modal_msg_members') }}
+{% endblock %}
 {% block body %}
     <div class="innerAll">
 		<div data-bind="with: MesageView" id="widget-messages" class="widget widget-messages widget-heading-simple widget-body-white widget-message-page">
@@ -49,10 +52,7 @@
                     </div>
                 </div>
                 <div id="message-thread" class="border-top border-left border-right message-thread">
-                    <div data-bind="with: $data.activeRoom, css: { 'hide' : $data.activeRoom() == null || $data.isNewMessage() }" class="active-room-container">
-                        <div class="hidden">
-                            {{ block('modal_msg_members') }}
-                        </div>
+                    <div data-bind="with: $data.activeRoom, css: { 'hide' : $data.activeRoom() == null || $data.isNewMessage() }" class="active-room-container">                        
                         <div class="bg-gray innerAll" class="room-info-container">
                             <div class="row">
                                 <div class="col-xs-8">
@@ -86,12 +86,12 @@
                             <i class="fa fa-spin fa-refresh"></i> {% trans %}Loading more messages {% endtrans %} ...
                         </div>
                         <div class="border-top padding-none margin-none message-list js-message-list" data-bind="foreach: { data: $data.messageList, afterRender: $parent.addMsgScrollHandlers }, niceScroll: $parent.addMsgScrollHandlers">
-                            <div class="media margin-none innerAll border-bottom message-item" data-bind="css: { 'fadeIn': $data.status() > 0, 'msg-sending': $data.status() === 1, 'msg-sent': $data.status() === 2, 'msg-seen': $data.status() === 3 , 'msg-error': $data.status() === 4 }">
+                            <div class="media margin-none innerAll border-bottom message-item" data-bind="css: { 'fadeIn': $data.status() > 0, 'msg-seen': $data.status() === 3 , 'msg-error': $data.status() === 4 }">
                                 <a data-bind="link: { title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }" class="pull-left hidden-xs message-creator">
                                     <img data-bind="attr: {src: $data.user.avatar}" width="35" class="media-object">
                                 </a>
                                 <div class="media-body">
-                                    <div class="message-body">                                        
+                                    <div class="message-body">
                                         <div class="pull-left">
                                             <a class="strong text-inverse text-small" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a>
                                         </div>
@@ -99,12 +99,6 @@
                                             <span class="text-right text-muted text-small" data-bind="dateTimeText: $data.created"></span>
                                             <span>&nbsp;</span>
                                             <span class="text-right text-muted text-small">
-                                                <!-- ko if: $data.status() === 1 -->
-                                                <i class="fa fa-spin fa-refresh"></i> Sending
-                                                <!-- /ko -->
-                                                <!-- ko if: $data.status() === 2 -->
-                                                <i class="fa fa-check"></i> Sent
-                                                <!-- /ko -->
                                                 <!-- ko if: $data.status() === 3 -->
                                                 <i class="fa fa-check-circle"></i> Seen
                                                 <!-- /ko -->
@@ -133,6 +127,9 @@
                     </div>                    
                     <!-- ko ifnot: $data.activeRoom() != null && !$data.isNewMessage() -->
                     <div class="active-room-container">
+                        <div class="bg-primary hidden" style="opacity: 0.4;z-index: 999;position:absolute;width: 100%; height: 100%;background-color: #F0F0F0;" data-bind="css: { 'hidden': !$data.isProcessNewMessage() }">
+                            <p style="text-align: center;padding-top: 10%;font-weight: bold;"><i class="fa fa-spin fa-refresh"></i> {% trans %}Sending{% endtrans %} ...</p>
+                        </div>
                         <div class="bg-gray innerAll" class="room-info-container">
                             <div class="row">
                                 <div class="col-md-8">
@@ -164,7 +161,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
 {% endblock %}
 {% block library_javascript %}
     <script src="{{ asset_js('library/emoticons/emoticons.js') }}"></script>

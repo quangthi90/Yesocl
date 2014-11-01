@@ -110,6 +110,11 @@
   -moz-box-shadow: none !important;
   -webkit-box-shadow: none !important;
 }
+.box-shadow-light {
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
 .bg-container {
   background: #eaeaea !important;
 }
