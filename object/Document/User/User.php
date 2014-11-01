@@ -128,7 +128,6 @@ Class User {
 			'username' 		=> $this->getUsername(),
 			'avatar' 		=> $this->getAvatar(),
 			'slug'			=> $this->getSlug(),
-			'email' 		=> $this->getPrimaryEmail()->getEmail(),
 			'current'		=> $this->getMeta()->getCurrent(),
 			'gender'		=> $this->meta->getSex()
 		);

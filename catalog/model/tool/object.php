@@ -286,7 +286,7 @@ class ModelToolObject extends Model
 		$this->load->model('tool/image');
 		
 		$aUser = $oUser->formatToCache();
-		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], $iWidth, $iHeight );
+		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $oUser->getPrimaryEmail()->getEmail(), $iWidth, $iHeight );
 		$aUser['fr_status'] = $this->checkFriendStatus( $this->customer->getId(), $aUser['id'] );
 		$aUser['fl_status'] = $this->checkFollowerStatus( $this->customer->getId(), $aUser['id'] );
 
