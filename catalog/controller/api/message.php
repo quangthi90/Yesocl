@@ -230,5 +230,40 @@ class ControllerApiMessage extends Controller {
             'success' => 'ok'
         )));
 	}
+
+	public function getRoomUsers(){
+		// room ID
+		if ( !empty($this->request->post['room_id']) ) {
+			$idRoom = $this->request->post['room_id'];
+		} else {
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'room ID is not empty'
+            )));
+		}
+
+		$this->load->model('friend/room');
+		$this->load->model('tool/object');
+
+		$oRoom = $this->model_friend_room->getRoom( $idRoom );
+
+		if ( !$oRoom ){
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'Room\'id ' . $idRoom . ' is not exist'
+            )));
+		}
+
+		$aUsers = array();
+		$lUsers = $oRoom->getUsers();
+		foreach ( $lUsers as $oUser ) {
+			$aUsers[] = $this->model_tool_object->formatUser( $oUser );
+		}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'users' => $aUsers
+        )));
+	}
 }
 ?>

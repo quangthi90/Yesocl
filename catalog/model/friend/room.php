@@ -53,5 +53,18 @@ class ModelFriendRoom extends Model {
 
 		return true;
 	}
+
+	/**
+	 * Get Room By Room ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 *	- Object MongoID Room
+	 * @return: Object Room
+	 */
+	public function getRoom( $idRoom ){
+		$oRoom = $this->dm->getRepository('Document\Friend\MessageRoom')->find( $idRoom );
+
+		return $oRoom;
+	}
 }
 ?>

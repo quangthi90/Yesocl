@@ -163,4 +163,5 @@ $_['routing']['ApiGetMessages']					= 'services/get/message/{room_id}/page/{page
 $_['routing']['ApiPostMessage']					= 'services/post/message/send/';
 $_['routing']['ApiPutRoomName']					= 'services/put/room/{room_id}/name/';
 $_['routing']['ApiPutRoomRead']					= 'services/put/room/{room_id}/read/';
+$_['routing']['ApiGetRoomUsers']				= 'services/get/room/{room_id}/users/';
 ?>
