@@ -6,12 +6,14 @@ YesGlobal.Models = YesGlobal.Models || {};
 		var backupName = "";
 		/* ============= START PROPERTIES ================== */
 		that.id = data.id || '';
-		that.name = ko.observable(data.name || "");
-		that.user = data.user || {};
+		that.author = data.author || {};
+		that.name = ko.observable(data.name || "");		
+		that.lastUser = ko.observable(data.last_user || {});
 		that.created = data.created || null;
 		that.updated = ko.observable(data.updated || null);
 		that.lastMessage = ko.observable(data.last_message || {});
 		that.messageList = ko.observableArray([]);
+		that.members = ko.observableArray([]);
 		that.newMessage = ko.observable(new Y.Models.MessageModel({}));
 		
 		that.visible = ko.observable(true);
@@ -29,7 +31,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		/* ============= START PUBLIC METHODS ============= */
 		that.isCreator = ko.computed(function(){
 			if(!Y.CurrentUser) return false;
-			return Y.CurrentUser.id == that.user.id;
+			return Y.CurrentUser.id == that.author.id;
 		});
 		that.lastMessageContent = ko.computed(function(){
 			var message = that.lastMessage();
@@ -175,10 +177,6 @@ YesGlobal.Models = YesGlobal.Models || {};
 			};
 			//Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
-		};
-
-		that.openMembers = function(){
-			$("#modal-msg-members").modal('show');			
 		};
 
 		that.toJson = function(){

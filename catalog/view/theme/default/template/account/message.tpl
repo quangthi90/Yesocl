@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="{{ asset_css('library/select2/select2.css') }}" />
 {% endblock %}
 {% block common_html %}
-    {{ block('modal_msg_members') }}
+    <div data-bind="with: MesageView.roomMemberManager">
+        {{ block('modal_msg_members') }}
+    </div>    
 {% endblock %}
 {% block body %}
     <div class="innerAll">
@@ -27,8 +29,8 @@
                             <li class="border-bottom cursor-pointer room-item" data-bind="click: $parent.clickRoomItem, css: { 'active bg-primary' : $data.id == ($parent.activeRoom() != null ? $parent.activeRoom().id : 0), 'hidden' : !$data.visible() }">
                                 <div class="media innerAll">
                                     <div class="media-object pull-left hidden-phone">
-                                        <a data-bind="link: { title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }" >
-                                            <img data-bind="attr: {src: $data.user.avatar}" width="35px" alt="Image" />
+                                        <a data-bind="link: { title: $data.lastUser().username, route: 'WallPage', params: { user_slug: $data.lastUser().slug } }" >
+                                            <img data-bind="attr: {src: $data.lastUser().avatar}" width="35px" alt="Image" />
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -52,7 +54,7 @@
                     </div>
                 </div>
                 <div id="message-thread" class="border-top border-left border-right message-thread">
-                    <div data-bind="with: $data.activeRoom, css: { 'hide' : $data.activeRoom() == null || $data.isNewMessage() }" class="active-room-container">                        
+                    <div data-bind="with: $data.activeRoom, css: { 'hide' : $data.activeRoom() == null || $data.isNewMessage() }" class="active-room-container">                                         
                         <div class="bg-gray innerAll" class="room-info-container">
                             <div class="row">
                                 <div class="col-xs-8">
@@ -75,7 +77,7 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li data-bind="visible: isCreator"><a data-bind="click: toggleEditRoom">{% trans %}Edit room name{% endtrans %}</a></li>
-                                            <li data-bind="visible: isCreator"><a data-bind="click: openMembers">{% trans %}Manage members{% endtrans %}</a></li>
+                                            <li data-bind="visible: isCreator"><a data-bind="click: $parent.openMembers">{% trans %}Manage members{% endtrans %}</a></li>
                                             <li><a>{% trans %}Leave room{% endtrans %}</a></li>
                                         </ul>
                                     </div>

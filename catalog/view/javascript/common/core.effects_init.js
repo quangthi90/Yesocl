@@ -118,6 +118,7 @@ if (window.location != window.parent.location)
             	niceInstance.remove();
             }
 		});
+		jEle.getNiceScroll().resize().show();
 	};
 
 	window.disableContentNiceScroll = function() {

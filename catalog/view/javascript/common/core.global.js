@@ -690,6 +690,7 @@ var YesGlobal = YesGlobal || {};
 			});
 		}
 		function _handleError(err) {
+			Y.Utils.log(err);
 			if(err.data.code === 4004 ) {
 			    _debug("Detected limit error");
 		  	}else {

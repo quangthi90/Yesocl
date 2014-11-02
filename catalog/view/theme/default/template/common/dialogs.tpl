@@ -1,103 +1,24 @@
 {% block modal_msg_members %}
-    <div id="modal-msg-members" class="modal" aria-hidden="false">    
-        <div class="modal-dialog">
+    <div id="modal-msg-members" class="modal" data-backdrop="static" aria-hidden="false">    
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
                     <h3 class="modal-title">{% trans %}Room members{% endtrans %} </h3>
                 </div>
                 <div class="modal-body bg-gray">
-                    <div class="innerAll half">
-                        <ul class="list-unstyled clearfix user-list">
-                            
+                    <div class="innerAll half nice-scroll" style="max-height: 500px;">
+                        <ul class="list-unstyled clearfix user-list" data-bind="foreach: members">
                             <li class="box-shadow-light pull-left bg-white user-item">
                                 <div class="media innerAll">
                                     <div class="media-object pull-left">
-                                        <a href="http://localhost/yesocl1/wall-page/quang-thi/" title="Quang Thi">
-                                            <img width="35px" alt="Image" src="http://localhost/yesocl1/image/cache/data/catalog/user/533126bfa7c0e9442b000000/avatar-65x65.jpg">
+                                        <a data-bind="link: { title: $data.username, route: 'WallPage', params: { user_slug: $data.slug } }" >
+                                            <img data-bind="attr: {src: $data.avatar}" width="35px" alt="Image" />
                                         </a>
                                     </div>
                                     <div class="media-body">
-                                        <a class="strong text-small truncated-text display-block room-name">Quang Thi</a>
-                                        <div class="text-small truncated-text room-last-content">working on fly</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="box-shadow-light pull-left bg-white user-item">
-                                <div class="media innerAll">
-                                    <div class="media-object pull-left">
-                                        <a href="http://localhost/yesocl1/wall-page/quang-thi/" title="Quang Thi">
-                                            <img width="35px" alt="Image" src="http://localhost/yesocl1/image/cache/data/catalog/user/533126bfa7c0e9442b000000/avatar-65x65.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <a class="strong text-small truncated-text display-block room-name">Quang Thi</a>
-                                        <div class="text-small truncated-text room-last-content">working on fly</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="box-shadow-light pull-left bg-white user-item">
-                                <div class="media innerAll">
-                                    <div class="media-object pull-left">
-                                        <a href="http://localhost/yesocl1/wall-page/quang-thi/" title="Quang Thi">
-                                            <img width="35px" alt="Image" src="http://localhost/yesocl1/image/cache/data/catalog/user/533126bfa7c0e9442b000000/avatar-65x65.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <a class="strong text-small truncated-text display-block room-name">Quang Thi</a>
-                                        <div class="text-small truncated-text room-last-content">working on fly</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="box-shadow-light pull-left bg-white user-item">
-                                <div class="media innerAll">
-                                    <div class="media-object pull-left">
-                                        <a href="http://localhost/yesocl1/wall-page/quang-thi/" title="Quang Thi">
-                                            <img width="35px" alt="Image" src="http://localhost/yesocl1/image/cache/data/catalog/user/533126bfa7c0e9442b000000/avatar-65x65.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <a class="strong text-small truncated-text display-block room-name">Quang Thi</a>
-                                        <div class="text-small truncated-text room-last-content">working on fly</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="box-shadow-light pull-left bg-white user-item">
-                                <div class="media innerAll">
-                                    <div class="media-object pull-left">
-                                        <a href="http://localhost/yesocl1/wall-page/quang-thi/" title="Quang Thi">
-                                            <img width="35px" alt="Image" src="http://localhost/yesocl1/image/cache/data/catalog/user/533126bfa7c0e9442b000000/avatar-65x65.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <a class="strong text-small truncated-text display-block room-name">Quang Thi</a>
-                                        <div class="text-small truncated-text room-last-content">working on fly</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="box-shadow-light pull-left bg-white user-item">
-                                <div class="media innerAll">
-                                    <div class="media-object pull-left">
-                                        <a href="http://localhost/yesocl1/wall-page/quang-thi/" title="Quang Thi">
-                                            <img width="35px" alt="Image" src="http://localhost/yesocl1/image/cache/data/catalog/user/533126bfa7c0e9442b000000/avatar-65x65.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <a class="strong text-small truncated-text display-block room-name">Quang Thi</a>
-                                        <div class="text-small truncated-text room-last-content">working on fly</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="box-shadow-light pull-left bg-white user-item">
-                                <div class="media innerAll">
-                                    <div class="media-object pull-left">
-                                        <a href="http://localhost/yesocl1/wall-page/quang-thi/" title="Quang Thi">
-                                            <img width="35px" alt="Image" src="http://localhost/yesocl1/image/cache/data/catalog/user/533126bfa7c0e9442b000000/avatar-65x65.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <a class="strong text-small truncated-text display-block room-name">Quang Thi</a>
-                                        <div class="text-small truncated-text room-last-content">working on fly</div>
+                                        <a data-bind="link: { title: $data.username, text: $data.username, route: 'WallPage', params: { user_slug: $data.slug } }" class="strong text-small truncated-text display-block"></a>
+                                        <div class="text-small truncated-text" data-bind="text: $data.current">working on fly</div>
                                     </div>
                                 </div>
                             </li>

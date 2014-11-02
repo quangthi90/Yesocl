@@ -26,6 +26,10 @@
 
 		self.messageTo = ko.observable("");
 		self.messageContent = ko.observable("");
+
+		self.roomMemberManager = new Y.Widgets.RoomMembers({
+			ele: $("#modal-msg-members")
+		});
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
@@ -38,7 +42,7 @@
 		self.realRoomQuery.subscribe(function(value){
 			value = value.toLowerCase().trim();
 			ko.utils.arrayForEach(self.roomList(), function(r) {
-				r.visible(r.name.toLowerCase().indexOf(value) >= 0);
+				r.visible(r.name().toLowerCase().indexOf(value) >= 0);
 			});
 		});
 		self.noRoomAvailable = ko.computed(function(){
@@ -128,6 +132,11 @@
 			});
 		};
 		
+		self.openMembers = function(){
+			self.roomMemberManager.setActiveRoom(self.activeRoom());
+			self.roomMemberManager.open();
+		};
+
 		self.userDataRequest = function(query){
 			var term = query.term.toLowerCase();
 			var data = { results: [] };
@@ -342,6 +351,77 @@
 		}
 
 		_init();
+		/* ============= END PRIVATE METHODS =============== */
+	};
+
+	Y.Widgets.RoomMembers = function(options) {
+		var self = this;
+
+		/* ============= START PROPERTIES ================== */
+		var modalEle = options.ele || undefined;
+		self.activeRoom = ko.observable(options.activeRoom || null);
+		/*  ============= END PROPERTIES ==================== */
+
+		/* ============= START PUBLIC METHODS ============== */
+		self.members = ko.computed(function(){
+			if(self.activeRoom() !== null && self.activeRoom().members){
+				return self.activeRoom().members() || [];	
+			}
+			return [];
+		});
+		self.open = function(){
+			if(self.activeRoom() === null){
+				return;
+			}
+			if(self.activeRoom().members().length === 0){
+				_loadMembers({ room_id : self.activeRoom().id }, function(data){
+					self.activeRoom().members(data.users);
+					_openModal();
+				}, function(){
+					//Message
+				});
+			}else{
+				_openModal();
+			}
+		};
+		self.close = function(){
+			if(modalEle){
+				modalEle.modal("hide");	
+			}
+		};
+		self.setActiveRoom = function(room) {
+			self.activeRoom(room);
+		};
+		/* ============= END PUBLIC METHODS ================ */
+
+		/* ============= START PRIVATE METHODS ============= */
+		function _loadMembers(postData, sucCallback, failCallback) {
+			var ajaxOptions = {
+				url: Y.Routing.generate("ApiGetRoomUsers", postData)
+			};
+			var successCallback = function(data){
+				if(data.success === "ok"){					
+					if(sucCallback && typeof sucCallback === "function"){
+						sucCallback(data);
+					}				
+				}else {
+					if(failCallback && typeof failCallback === "function"){
+						failCallback(data);
+					}
+				}
+			};
+			//Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
+		}
+		function _openModal(){
+			if(!modalEle){
+				return;
+			}
+			modalEle.on("shown.bs.modal", function(){
+				window.makeNiceScroll(modalEle.find(".nice-scroll"));
+			});
+			modalEle.modal("show");
+		}
 		/* ============= END PRIVATE METHODS =============== */
 	};
 	
