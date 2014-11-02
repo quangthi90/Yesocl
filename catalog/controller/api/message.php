@@ -361,5 +361,47 @@ class ControllerApiMessage extends Controller {
             'room' => $aRoom
         )));
 	}
+
+	/**
+	 * Add member to Room
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 *	- Get string Object Room ID
+	 *	- Post array User's Slugs
+	 * @return: Object Room
+	 */
+	public function removeRoomUser(){
+		// room ID
+		if ( !empty($this->request->get['room_id']) ) {
+			$idRoom = $this->request->get['room_id'];
+		} else {
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'room ID is empty'
+            )));
+		}
+
+		if ( empty($this->request->post['user_slug']) ) {
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'user slug is empty'
+            )));
+		}
+
+		$this->load->model('friend/room');
+		$this->load->model('tool/object');
+
+		$oRoom = $this->model_friend_room->edit( $idRoom, $this->request->post );
+
+		$aRoom = array();
+		if ( $oRoom ){
+			$aRoom = $this->model_tool_object->formatRoom( $oRoom );
+		}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'room' => $aRoom
+        )));
+	}
 }
 ?>

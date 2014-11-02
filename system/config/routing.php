@@ -165,4 +165,5 @@ $_['routing']['ApiPutRoomName']					= 'services/put/room/{room_id}/name/';
 $_['routing']['ApiPutRoomRead']					= 'services/put/room/{room_id}/read/';
 $_['routing']['ApiGetRoomUsers']				= 'services/get/room/{room_id}/users/';
 $_['routing']['ApiPutRoomUser']					= 'services/put/room/{room_id}/user/';
+$_['routing']['ApiDeleteRoomUser']				= 'services/delete/room/{room_id}/user/';
 ?>

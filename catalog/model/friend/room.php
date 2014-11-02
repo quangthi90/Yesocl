@@ -26,11 +26,12 @@ class ModelFriendRoom extends Model {
 		if ( !empty($aData['name']) )
 			$oRoom->setName( $aData['name'] );
 
+		// user_slugs is add user
 		if ( !empty($aData['user_slugs']) ) {
 			foreach ( $aData['user_slugs'] as $sUserSlug ) {
 				$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
 				if ( !$oUser ) continue;
-				
+
 				if ( !isset($oRoom->getUnReads()[$oUser->getId()]) ) {
 					$oRoom->addUnRead( $oUser->getId(), 0 );
 					$oRoom->addUser( $oUser );
@@ -38,9 +39,36 @@ class ModelFriendRoom extends Model {
 			}
 		}
 
+		// user_slug is remove user
+		if ( !empty($aData['user_slug']) ) {
+			if ( $oRoom->getCreator()->getSlug() == $aData['user_slug'] ) {
+				$this->delete( $oRoom->getId() );
+				return null;
+			}
+
+			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aData['user_slug'] );
+			$oRoom->getUsers()->removeElement( $oUser );
+			$aUnReads = $oRoom->getUnReads();
+			unset($aUnReads[$oUser->getId()]);
+			$oRoom->setUnReads( $aUnReads );
+		}
+
 		$this->dm->flush();
 
 		return $oRoom;
+	}
+
+	/**
+	 * Delete Room
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 *	- Object MongoID Room
+	 * @return: Boolean
+	 */
+	public function delete( $idRoom ) {
+		$oRoom = $this->dm->getRepository('Document\Friend\MessageRoom')->find( $idRoom );
+		$this->dm->remove( $oRoom );
+		$this->dm->flush();
 	}
 
 	/**
