@@ -6698,6 +6698,9 @@ div.DTCR_pointer {
   .modal-dialog {
     width: 620px;
   }
+  .modal-dialog.modal-lg {
+    width: 900px;
+  }
 }
 /* --- LOADING [less.pagination] from assets/components/ui_pagination/pagination.less */
 .pager li > a,

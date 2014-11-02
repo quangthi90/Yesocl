@@ -38,6 +38,9 @@ a.black-color:hover {
 .cursor-pointer {
 	cursor: pointer;
 }
+.modal {
+	overflow-y: auto;
+}
 
 textarea {
 	min-height: 35px;	
@@ -252,5 +255,15 @@ body.loading #common-loading {
 	width: 48%;
 	margin: 1%;
 	box-shadow: 0 0 3px 1px #f0f0f0;
+	position: relative;
+}
+.user-list .user-item .remove{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	display: none;
+}
+.user-list .user-item:hover .remove{
+	display: block;
 }
 /*================================== END USER =====================================*/
