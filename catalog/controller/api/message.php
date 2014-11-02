@@ -2,6 +2,14 @@
 class ControllerApiMessage extends Controller {
 	private $limit = 5;
 
+	/**
+	 * Return last rooms of logged user
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 *	- Post int limit
+	 *	- Get int page
+	 * @return: List object Rooms
+	 */
 	public function getLastRooms() {
 		$oLoggedUser = $this->customer->getUser();
 
@@ -47,6 +55,15 @@ class ControllerApiMessage extends Controller {
         )));
 	}
 
+	/**
+	 * Get Last messages by Room ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 *	- Post int limit
+	 *	- Get int page
+	 *	- Get string Object Room ID
+	 * @return: List object Messages
+	 */
 	public function getLastMessages() {
 		// Room ID is required
 		if ( !empty($this->request->get['room_id']) ) {
@@ -96,6 +113,15 @@ class ControllerApiMessage extends Controller {
         )));
 	}
 
+	/**
+	 * Send Message
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 *	- Post string Content
+	 *	- Post string Object Room ID
+	 *	- Post array string User's slugs
+	 * @return: List object Rooms
+	 */
 	public function send(){
 		// content is required
 		if ( empty($this->request->post['content']) ){
@@ -172,6 +198,14 @@ class ControllerApiMessage extends Controller {
         )));
 	}
 
+	/**
+	 * Change Room Name
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 *	- Post string Room name
+	 *	- Get string Object Room ID
+	 * @return: Boolean Is success
+	 */
 	public function changeRoomName(){
 		// name is required
 		if ( empty($this->request->post['name']) ){
@@ -208,10 +242,16 @@ class ControllerApiMessage extends Controller {
         )));
 	}
 
+	/**
+	 * Reset unread count of logged user to 0
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: Get string Object Room ID
+	 * @return: Boolean is Success
+	 */
 	public function readRoomMessage(){
 		// room ID
-		if ( !empty($this->request->post['room_id']) ) {
-			$idRoom = $this->request->post['room_id'];
+		if ( !empty($this->request->get['room_id']) ) {
+			$idRoom = $this->request->get['room_id'];
 		} else {
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
@@ -235,6 +275,12 @@ class ControllerApiMessage extends Controller {
         )));
 	}
 
+	/**
+	 * Get all users in Room
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: Get string Object Room ID
+	 * @return: Array Object Users
+	 */
 	public function getRoomUsers(){
 		// room ID
 		if ( !empty($this->request->get['room_id']) ) {
@@ -270,6 +316,14 @@ class ControllerApiMessage extends Controller {
         )));
 	}
 
+	/**
+	 * Add member to Room
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 *	- Get string Object Room ID
+	 *	- Post array User's Slugs
+	 * @return: Object Room
+	 */
 	public function addRoomUser(){
 		// room ID
 		if ( !empty($this->request->get['room_id']) ) {
