@@ -145,11 +145,15 @@ class ControllerApiMessage extends Controller {
 
 		// Push message
 		$lUsers = $oRoom->getUsers();
-		$aChannelNames = array();
-		foreach ( $lUsers as $oUser ) {
-			if ( $oUser->getId() != $this->customer->getId() ) {
-				$aChannelNames[] = $oUser->getLiveToken();
+		if ( $idRoom == null ) {
+			$aChannelNames = array();
+			foreach ( $lUsers as $oUser ) {
+				if ( $oUser->getId() != $this->customer->getId() ) {
+					$aChannelNames[] = $oUser->getLiveToken();
+				}
 			}
+		} else {
+			$aChannelNames = array( $idRoom );
 		}
 		$sActivityType = $this->config->get('pusher')['message']['new-message'];
 		$this->model_tool_chat->pushMessage( 
