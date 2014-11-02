@@ -269,5 +269,43 @@ class ControllerApiMessage extends Controller {
             'users' => $aUsers
         )));
 	}
+
+	public function addRoomUser(){
+		// room ID
+		if ( !empty($this->request->get['room_id']) ) {
+			$idRoom = $this->request->get['room_id'];
+		} else {
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'room ID is empty'
+            )));
+		}
+
+		if ( empty($this->request->post['user_slugs']) ) {
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'user slugs is empty'
+            )));
+		}
+
+		$this->load->model('friend/room');
+		$this->load->model('tool/object');
+
+		$oRoom = $this->model_friend_room->edit( $idRoom, $this->request->post );
+
+		if ( !$oRoom ){
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'Room is not exist or permission deney'
+            )));
+		}
+
+		$aRoom = $this->model_tool_object->formatRoom( $oRoom );
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'room' => $aRoom
+        )));
+	}
 }
 ?>

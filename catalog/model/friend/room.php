@@ -26,9 +26,21 @@ class ModelFriendRoom extends Model {
 		if ( !empty($aData['name']) )
 			$oRoom->setName( $aData['name'] );
 
+		if ( !empty($aData['user_slugs']) ) {
+			foreach ( $aData['user_slugs'] as $sUserSlug ) {
+				$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
+				if ( !$oUser ) continue;
+				
+				if ( !isset($oRoom->getUnReads()[$oUser->getId()]) ) {
+					$oRoom->addUnRead( $oUser->getId(), 0 );
+					$oRoom->addUser( $oUser );
+				}
+			}
+		}
+
 		$this->dm->flush();
 
-		return true;
+		return $oRoom;
 	}
 
 	/**

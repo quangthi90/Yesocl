@@ -166,4 +166,5 @@ $_['route']['ApiPostMessage']				= 'api/message/send/';
 $_['route']['ApiPutRoomName']				= 'api/message/changeRoomName/';
 $_['route']['ApiPutRoomRead']				= 'api/message/readRoomMessage/';
 $_['route']['ApiGetRoomUsers']				= 'api/message/getRoomUsers/';
+$_['route']['ApiPutRoomUser']				= 'api/message/addRoomUser/';
 ?>
