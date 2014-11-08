@@ -390,6 +390,7 @@ class ControllerApiMessage extends Controller {
 
 		$this->load->model('friend/room');
 		$this->load->model('tool/object');
+		$this->load->model('tool/chat');
 
 		$oRoom = $this->model_friend_room->edit( $idRoom, $this->request->post );
 
@@ -397,6 +398,16 @@ class ControllerApiMessage extends Controller {
 		if ( $oRoom ){
 			$aRoom = $this->model_tool_object->formatRoom( $oRoom );
 		}
+
+		$sActivityType = $this->config->get('pusher')['message']['remove-user'];
+		$this->model_tool_chat->pushMessage( 
+			$idRoom, 
+			$sActivityType,
+			array(
+				'room' => $aRoom,
+				'user_slug' => $this->request->post['user_slug']
+			)
+		);
 
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',

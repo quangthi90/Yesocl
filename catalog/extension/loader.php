@@ -60,7 +60,8 @@ class ExtensionLoader
             new Twig_SimpleFunction('get_datetime_from_now', array($this, 'getDatetimeFromNow')),
             new Twig_SimpleFunction('localized_date', array($this, 'localizedDate')),
             new Twig_SimpleFunction('get_routing_list', array($this, 'getRoutingList')),
-            new Twig_SimpleFunction('get_fb_api_id', array($this, 'getFbApiId'))
+            new Twig_SimpleFunction('get_fb_api_id', array($this, 'getFbApiId')),
+            new Twig_SimpleFunction('get_live_time_events', array($this, 'getLiveTimeEvents'))
         );
     }
 
@@ -236,5 +237,9 @@ class ExtensionLoader
 
     public function getFbApiId(){
         return FB_API_ID;
+    }
+
+    public function getLiveTimeEvents(){
+        return json_encode($this->config->get('pusher')['message']);
     }
 }

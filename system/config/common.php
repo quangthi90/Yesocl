@@ -52,5 +52,6 @@ $_['finance']['longterm']['roe']				= 'ROE';
 $_['finance']['shortterm']['doanh-thu']			= 'Doanh thu';
 $_['finance']['shortterm']['loi-nhuan']			= 'Lợi nhuận';
 
-$_['pusher']['message']['new-message']			= 'new_message';
+$_['pusher']['message']['new_message']			= 'new_message';
+$_['pusher']['message']['remove_user']			= 'remove_user';
 ?>
