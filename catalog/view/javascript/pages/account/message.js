@@ -290,7 +290,11 @@
 
 		function _subscribeMessageChanel(){
 			$(window).on(Y.Constants.Triggers.PUSHER_NEW_MESSAGE, function(e) {
-				_addMessageDataToRoom(e.response, function() {
+				var response = e.response;
+				if(response.message.user.id === Y.CurrentUser.id) {
+					return;
+				}
+				_addMessageDataToRoom(response, function() {
 					if(self.activeRoom() == null && self.roomList().length > 0) {
 						self.activeRoom(self.roomList()[0]);
 					}
@@ -352,6 +356,7 @@
 		/* ============= START PROPERTIES ================== */
 		var modalEle = options.ele || undefined;
 		self.activeRoom = ko.observable(options.activeRoom || null);
+		self.currentUserId = Y.CurrentUser.id;
 
 		/*  ============= END PROPERTIES ==================== */
 
@@ -361,7 +366,7 @@
 				return self.activeRoom().members() || [];	
 			}
 			return [];
-		});
+		});		
 
 		self.open = function(){
 			if(self.activeRoom() === null){
