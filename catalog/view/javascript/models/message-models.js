@@ -4,6 +4,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 	Y.Models.RoomModel = function (data) {
 		var that = this;
 		var backupName = "";
+
 		/* ============= START PROPERTIES ================== */
 		that.id = data.id || '';
 		that.author = data.author || {};
@@ -166,6 +167,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 			if(that.unread() === 0) {
 				return;
 			}
+			that.unread(0);
 			var ajaxOptions = {
 				url: Y.Routing.generate("ApiPutRoomRead", { room_id: that.id }),
 				showLoading: false
@@ -230,7 +232,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 					failCallback(data);
 				}
 			});
-		};
+		}
 
 		function _addMessageToRoom(messageData, sucCallback, failCallback){
 			var ajaxOptions = {

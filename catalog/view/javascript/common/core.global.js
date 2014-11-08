@@ -39,7 +39,8 @@ var YesGlobal = YesGlobal || {};
 			NEW_MESSAGE_LOADED: "NEW_MESSAGE_LOADED",
 			PUSHER_RECONNECTED: "PUSHER_RECONNECTED",
 			CURRENT_USER_CHANGED: "CURRENT_USER_CHANGED",
-			ELEMENT_REMOVED_BY_KO: "ELEMENT_REMOVED_BY_KO"
+			ELEMENT_REMOVED_BY_KO: "ELEMENT_REMOVED_BY_KO",
+			PUSHER_NEW_MESSAGE: "new_message"
 		},
 		SettingKeys : {
 			SHOW_LEFT_SIDEBAR : "SHOW_LEFT_SIDEBAR",
@@ -643,39 +644,29 @@ var YesGlobal = YesGlobal || {};
 		var self = this;
 
 		var debugMode = options.debugMode || true;
-		var pusherKey = "22dc8822a1badda84d02";		
-		var defaultOptions = {
+		var pusherKey = "22dc8822a1badda84d02";
+		var defaultOptions = {			
 		};
-		
-		self.options = $.extend({}, defaultOptions, options);		
-		self.GlobalChanel = undefined;
-		self.IsGlobalChanelEnabled = false;
+
+		self.Instance = undefined;
+		self.options = $.extend({}, defaultOptions, options);
 
 		//Public handling
 		window.onbeforeunload = function(){
 			_turnOffPusher();
 			return undefined;
 		};
-		$(window).on(Y.Constants.Triggers.CURRENT_USER_CHANGED, function(){
-			if(!self.Instance){
-				_initPusher();
-			}
-			if(!Y.CurrentUser.live_token) return;
-			
-			self.GlobalChanel = self.Instance.subscribe(Y.CurrentUser.live_token);
-			if(self.GlobalChanel) {
-				self.GlobalChanel.bind('pusher:subscription_succeeded', function() {
-					self.IsGlobalChanelEnabled = true;
-				});
 
-				self.GlobalChanel.bind('pusher:subscription_error', function(status) {
-					self.IsGlobalChanelEnabled = false;
-				});
-			}			
+		$(window).on(Y.Constants.Triggers.CURRENT_USER_CHANGED, function(){
+			_initPusher();
 		});
 
+		self.subscribeChanel = function(name, success, fail) {
+			_subscribeChanel(name, success, fail);
+		}
+
 		//Private handling	
-		function _initPusher()	{
+		function _initPusher(){
 			self.Instance = new Pusher(pusherKey, this.options);
 
 			//Add eventlisteners
@@ -688,7 +679,63 @@ var YesGlobal = YesGlobal || {};
 			self.Instance.connection.bind("connecting_in", function(delay) {
 				_debug("The connection came again");
 			});
+
+			_subscribeChanel(Y.CurrentUser.live_token);
+			_registerGlobalEvents();
 		}
+
+		function _subscribeChanel(name, success, fail){
+			if(!self.Instance){
+				_initPusher();
+			}
+			if(!name) return;
+
+			var chanel = self.Instance.subscribe(name);
+			chanel.bind('pusher:subscription_succeeded', function() {
+				_debug("Chanel '" + name + "' subscribed !");
+				if(success && typeof success === "function"){
+					success();
+				}
+			});
+			chanel.bind('pusher:subscription_error', function(status){
+				_debug(status);
+				if(fail && typeof fail === "function"){
+					fail(data);
+				}
+			});
+		}
+
+		function _getExistingChanel (name) {
+			var chanels = _getAllChanels();
+			for (var i = self.chanels.length - 1; i >= 0; i--) {
+				var c = self.chanels[i];
+				if(c.name === name)
+					return c;
+			};
+			return undefined;
+		}
+
+		function _getAllChanels(){
+			if(!self.Instance){
+				_debug("Pusher is not initialized !");
+				return [];
+			}
+			return self.Instance.channels.all();
+		}
+
+		function _registerGlobalEvents(){
+			if(!self.Instance){
+				_initPusher();
+			}
+
+			self.Instance.bind(Y.Constants.Triggers.PUSHER_NEW_MESSAGE, function(data) {
+				$(window).trigger({
+					type : Y.Constants.Triggers.PUSHER_NEW_MESSAGE,
+					response : data
+				});
+			});
+		}
+
 		function _handleError(err) {
 			Y.Utils.log(err);
 			if(err.data.code === 4004 ) {
@@ -697,6 +744,7 @@ var YesGlobal = YesGlobal || {};
 		  		_debug(err);
 		  	}
 		}
+
 		function _handleConnectionState(state){
 			_debug("The connection state changed: " + state.previous + " => " + state.current);
 			var current = state.current;
@@ -716,19 +764,19 @@ var YesGlobal = YesGlobal || {};
 					break;
 			}
 		}
+
 		function _turnOffPusher() {
 			if(self.Instance) {
 				self.Instance.disconnect();
 				_debug("Disconnected Pusher !")
 			}
 		}
+
 		function _debug(obj){
 			if(debugMode){
 				Y.Utils.log(obj);
 			}
 		}
-		
-		_initPusher();
 	};
 	Y.PusherManager = new _PusherManager({});
 	/*===== END PUSHER ===== */

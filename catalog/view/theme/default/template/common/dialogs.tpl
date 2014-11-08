@@ -22,7 +22,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="innerAll half nice-scroll" style="max-height: 500px;">
+                    <div class="innerAll half nice-scroll">
                         <ul class="list-unstyled clearfix user-list" data-bind="foreach: members">
                             <li class="box-shadow-light pull-left bg-white user-item">                                
                                 <div class="media innerAll">
@@ -35,7 +35,7 @@
                                         <a data-bind="link: { title: $data.username, text: $data.username, route: 'WallPage', params: { user_slug: $data.slug } }" class="strong text-small truncated-text display-block"></a>
                                         <div class="text-small truncated-text" data-bind="text: $data.current">working on fly</div>
                                     </div>
-                                    <a class="btn btn-default btn-sm border-none remove"><i class="fa fa-trash-o"></i></a>
+                                    <a data-bind="click: $parent.removeMember" class="btn btn-default btn-sm border-none remove"><i class="fa fa-trash-o"></i></a>
                                 </div>
                             </li>
                         </ul>                        

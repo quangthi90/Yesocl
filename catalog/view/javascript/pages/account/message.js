@@ -13,7 +13,6 @@
 		self.isNewMessage = ko.observable(false);
 		self.isProcessNewMessage = ko.observable(false);
 		self.canLoadMore = ko.observable(options.canLoadMore || false);
-		self.isPusherInitialized = ko.observable(false);	
 
 		self.roomQuery = ko.observable("");
 		self.realRoomQuery = ko.computed(self.roomQuery).extend({ throttle: 300 });
@@ -44,7 +43,7 @@
 			ko.utils.arrayForEach(self.roomList(), function(r) {
 				r.visible(r.name().toLowerCase().indexOf(value) >= 0);
 			});
-		});
+		});		
 		self.noRoomAvailable = ko.computed(function(){
 			if(self.roomList().length === 0) return true;
 			var temp = ko.utils.arrayFirst(self.roomList(), function(r){
@@ -185,6 +184,9 @@
 						r.newMessageCallback =  _newMessageCallback;
 						var roomItem = new Y.Models.RoomModel(r);
 						self.roomList.push(roomItem);
+
+						//Subscribe room chanel:
+						Y.PusherManager.subscribeChanel(roomItem.id);
 					});
 					self.totalRoom(data.total_room);
 					self.canLoadMore(data.canLoadMore || false);
@@ -261,7 +263,11 @@
 			else { 
 				var newRoom = new Y.Models.RoomModel(returnRoom);
 				newRoom.messageList.push(newMessage);
-				self.roomList.unshift(newRoom);				
+				self.roomList.unshift(newRoom);
+
+				//Subscribe room chanel:
+				Y.PusherManager.subscribeChanel(newRoom.id);
+
 				if(returnMessage.user.id == Y.CurrentUser.id) {
 					self.activeRoom(newRoom);
 					_newMessageCallback();
@@ -283,27 +289,13 @@
 		}		
 
 		function _subscribeMessageChanel(){
-			if(Y.PusherManager && Y.PusherManager.Instance && Y.PusherManager.GlobalChanel) {
-				self.isPusherInitialized(true);
-
-				//Register event for message:
-				Y.PusherManager.GlobalChanel.bind(self.eventType, function(responseData) {
-					_addMessageDataToRoom(responseData, function(){
-						if(self.activeRoom() == null && self.roomList().length > 0) {
-							self.activeRoom(self.roomList()[0]);
-						}
-					});
-				});		
-
-			} else {
-				self.isPusherInitialized(true);
-				Y.Utils.log("Pusher is not initialized !");
-			}
-			if(!self.isPusherInitialized()) {
-				$(window).on(Y.Constants.Triggers.PUSHER_RECONNECTED, function(){
-					_subscribeMessageChanel();
+			$(window).on(Y.Constants.Triggers.PUSHER_NEW_MESSAGE, function(e) {
+				_addMessageDataToRoom(e.response, function() {
+					if(self.activeRoom() == null && self.roomList().length > 0) {
+						self.activeRoom(self.roomList()[0]);
+					}
 				});
-			}
+			});
 		}
 
 		function _updateOrderRoom(){
@@ -360,6 +352,7 @@
 		/* ============= START PROPERTIES ================== */
 		var modalEle = options.ele || undefined;
 		self.activeRoom = ko.observable(options.activeRoom || null);
+
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
@@ -369,6 +362,7 @@
 			}
 			return [];
 		});
+
 		self.open = function(){
 			if(self.activeRoom() === null){
 				return;
@@ -384,14 +378,36 @@
 				_openModal();
 			}
 		};
+
 		self.close = function(){
 			if(modalEle){
 				modalEle.modal("hide");	
 			}
 		};
+
 		self.setActiveRoom = function(room) {
 			self.activeRoom(room);
 		};
+
+		self.removeMember = function(mem){
+			var postData = {
+				roomId : self.activeRoom().id,
+				userSlug : mem.slug
+			};
+
+			Y.Utils.showConfirmMessage(Y.Constants.Messages.COMMON_CONFIRM, function(){
+				_removeMemeber(postData, function(data){
+					self.activeRoom().members.remove(mem);
+					self.activeRoom().name(data.room.name);
+				}, function(data){
+					//Message
+					alert("User was not removed !");
+				});
+			}, function(){
+				//Close or cancel event
+			});
+		};
+
 		/* ============= END PUBLIC METHODS ================ */
 
 		/* ============= START PRIVATE METHODS ============= */
@@ -413,12 +429,40 @@
 			//Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
 		}
+
+		function _removeMemeber(postData, sucCallback, failCallback) {
+			var ajaxOptions = {
+				url: Y.Routing.generate("ApiDeleteRoomUser", { room_id : postData.roomId }),
+				data: {
+					user_slug : postData.userSlug
+				}
+			};
+			var successCallback = function(data){
+				if(data.success === "ok"){					
+					if(sucCallback && typeof sucCallback === "function"){
+						sucCallback(data);
+					}				
+				}else {
+					if(failCallback && typeof failCallback === "function"){
+						failCallback(data);
+					}
+				}
+			};
+			//Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
+		}
+
 		function _openModal(){
 			if(!modalEle){
 				return;
 			}
 			modalEle.on("shown.bs.modal", function(){
-				window.makeNiceScroll(modalEle.find(".nice-scroll"));
+				var niceEle = modalEle.find(".nice-scroll");
+				if(niceEle){
+					var messageWidgetHeight = $(".widget-message-page").height();
+					niceEle.css("max-height", messageWidgetHeight > 200 ? messageWidgetHeight - 150: 150 + "px");
+					window.makeNiceScroll(niceEle);
+				}				
 			});
 			modalEle.modal("show");
 		}
