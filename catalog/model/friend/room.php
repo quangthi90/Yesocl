@@ -126,11 +126,6 @@ class ModelFriendRoom extends Model {
 			->limit($aData['limit'])
 			->sort(array($aData['sort'] => $aData['order']));
 
-		foreach ( $lRooms as $oRoom ) {
-			$oRoom->addUnRead( $this->customer->getId(), 0 );
-		}
-		$this->dm->flush();
-
 		return $lRooms;
 	}
 
