@@ -160,7 +160,7 @@ $_['route']['ApiSetPrivateSetting']			= 'api/user/setPrivateOption/';
 $_['route']['ApiGetDisplayOption']			= 'api/user/getDisplayoption/';
 
 // Message
-$_['route']['ApiGetRooms']					= 'api/message/getLastRooms/';
+$_['route']['ApiGetRooms']					= 'api/message/getRooms/';
 $_['route']['ApiGetMessages']				= 'api/message/getLastMessages/';
 $_['route']['ApiPostMessage']				= 'api/message/send/';
 $_['route']['ApiPutRoomName']				= 'api/message/changeRoomName/';

@@ -135,5 +135,39 @@ class ModelToolSearch extends Model
  
 		return $this->client->execute( $query );
 	}
+
+	public function searchRoomMessageByKeyword( $idCreator, $aData = array() ) {
+		if ( !isset( $aData['keyword'] ) || empty( $aData['keyword'] ) ) {
+			return array();
+		}
+
+		$query = $this->client->createSelect(
+    		array(
+				'mappedDocument' => 'Document\Friend\MessageRoom',
+			)
+    	);
+
+    	$sQuery .= 'solrCreator_t:' . $idCreator . ' AND ';
+		$sQuery = 'name_t:*' . $aData['keyword'] . '* OR ';
+		$sQuery .= 'solrUsers_t:*' . $aData['keyword'] . '*';
+
+		if ( isset( $aData['start'] ) ) {
+			$aData['start'] = (int)$aData['start'];
+		}else {
+			$aData['start'] = 0;
+		}
+
+		if ( isset( $aData['limit'] ) ) {
+			$aData['limit'] = (int)$aData['limit'];
+		}else {
+			$aData['limit'] = 5;
+		}
+
+		$query->setQuery( $sQuery );
+		$query->setRows( $aData['limit'] );
+		$query->setStart( $aData['start'] );
+ 
+		return $this->client->execute( $query );
+	}
 }
 ?>

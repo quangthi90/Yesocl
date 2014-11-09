@@ -10,36 +10,55 @@ class ControllerApiMessage extends Controller {
 	 *	- Get int page
 	 * @return: List object Rooms
 	 */
-	public function getLastRooms() {
+	public function getRooms() {
 		$oLoggedUser = $this->customer->getUser();
 
 		// Limit & page
-        if ( !empty($this->request->post['limit']) ){
+        if ( !empty($this->request->post['limit']) ) {
             $iLimit = (int)$this->request->post['limit'];
         }else{
             $iLimit = $this->limit;
         }
 
-        if ( !empty($this->request->get['page']) ){
+        if ( !empty($this->request->get['page']) ) {
             $iPage = (int)$this->request->get['page'];
         }else{
             $iPage = 1;
         }
 
-		$this->load->model('friend/message');
 		$this->load->model('tool/object');
+		$this->load->model('friend/room');
 
-		$lRoomMessages = $this->model_friend_message->getRooms($oLoggedUser->getId(), array(
-			'limit' => $iLimit,
-			'start' => $iLimit * ($iPage - 1)
-		));
+		// Keyword
+        if ( !empty($this->request->get['keyword']) ) {
+        	$this->load->model('tool/search');
+        	$lRoomResults = $this->model_tool_search->searchRoomMessageByKeyword($oLoggedUser->getId(), array(
+        		'keyword' => $this->request->get['keyword'],
+        		'limit' => $iLimit,
+        		'start' => $iLimit * ($iPage - 1)
+        	));
+        	$aRoomIds = array();
+        	foreach ( $lRoomResults as $oRoom ) {
+        		$aRoomIds[$oRoom->getId()] = $oRoom->getId();
+        	}
+        	$lRoomMessages = $this->model_friend_room->getRooms($oLoggedUser->getId(), array(
+        		'room_ids' => $aRoomIds,
+				'limit' => $iLimit,
+				'start' => $iLimit * ($iPage - 1)
+			));
+        } else {
+        	$lRoomMessages = $this->model_friend_room->getRooms($oLoggedUser->getId(), array(
+				'limit' => $iLimit,
+				'start' => $iLimit * ($iPage - 1)
+			));
+        }
 
 		$aRoomMessages = array();
 		$bCanLoadMore = false;
 		$iTotalRoomMessage = 0;
-		if ( $lRoomMessages ){
+		if ( $lRoomMessages ) {
 			$iTotalRoomMessage = $lRoomMessages->count();
-			if ( $iPage * $iLimit < $iTotalRoomMessage ){
+			if ( $iPage * $iLimit < $iTotalRoomMessage ) {
                 $bCanLoadMore = true;
             }
 			foreach ( $lRoomMessages as $oRoomMessage ) {
@@ -73,22 +92,22 @@ class ControllerApiMessage extends Controller {
 		}
 
 		// Limit & page
-        if ( !empty($this->request->post['limit']) ){
+        if ( !empty($this->request->post['limit']) ) {
             $iLimit = (int)$this->request->post['limit'];
         }else{
             $iLimit = $this->limit;
         }
 
-        if ( !empty($this->request->get['page']) ){
+        if ( !empty($this->request->get['page']) ) {
             $iPage = (int)$this->request->get['page'];
         }else{
             $iPage = 1;
         }
 
-		$this->load->model('friend/message');
+		$this->load->model('friend/room');
 		$this->load->model('tool/object');
 
-		$oRoom = $this->model_friend_message->getRoom( $idRoom );
+		$oRoom = $this->model_friend_room->getRoom( $idRoom );
 
 		$aMessages = array();
 		$bCanLoadMore = false;
@@ -122,9 +141,9 @@ class ControllerApiMessage extends Controller {
 	 *	- Post array string User's slugs
 	 * @return: List object Rooms
 	 */
-	public function send(){
+	public function send() {
 		// content is required
-		if ( empty($this->request->post['content']) ){
+		if ( empty($this->request->post['content']) ) {
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'content is empty'
@@ -158,7 +177,7 @@ class ControllerApiMessage extends Controller {
 			'stockTags' => empty($this->request->post['stockTags']) ? array() : $this->request->post['stockTags']
 		));
 
-		if ( !$oRoom ){
+		if ( !$oRoom ) {
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'send message not success'
@@ -206,9 +225,9 @@ class ControllerApiMessage extends Controller {
 	 *	- Get string Object Room ID
 	 * @return: Boolean Is success
 	 */
-	public function changeRoomName(){
+	public function changeRoomName() {
 		// name is required
-		if ( empty($this->request->post['name']) ){
+		if ( empty($this->request->post['name']) ) {
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'name is empty'
@@ -230,7 +249,7 @@ class ControllerApiMessage extends Controller {
 
 		$bResult = $this->model_friend_room->edit( $idRoom, array('name' => $sName) );
 
-		if ( !$bResult ){
+		if ( !$bResult ) {
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'Room ID not exist or this user is not creator'
@@ -248,7 +267,7 @@ class ControllerApiMessage extends Controller {
 	 * @param: Get string Object Room ID
 	 * @return: Boolean is Success
 	 */
-	public function readRoomMessage(){
+	public function readRoomMessage() {
 		// room ID
 		if ( !empty($this->request->get['room_id']) ) {
 			$idRoom = $this->request->get['room_id'];
@@ -263,7 +282,7 @@ class ControllerApiMessage extends Controller {
 
 		$bResult = $this->model_friend_room->read( $idRoom );
 
-		if ( !$bResult ){
+		if ( !$bResult ) {
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'read room message not success'
@@ -281,7 +300,7 @@ class ControllerApiMessage extends Controller {
 	 * @param: Get string Object Room ID
 	 * @return: Array Object Users
 	 */
-	public function getRoomUsers(){
+	public function getRoomUsers() {
 		// room ID
 		if ( !empty($this->request->get['room_id']) ) {
 			$idRoom = $this->request->get['room_id'];
@@ -297,7 +316,7 @@ class ControllerApiMessage extends Controller {
 
 		$oRoom = $this->model_friend_room->getRoom( $idRoom );
 
-		if ( !$oRoom ){
+		if ( !$oRoom ) {
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'Room\'id ' . $idRoom . ' is not exist'
@@ -324,7 +343,7 @@ class ControllerApiMessage extends Controller {
 	 *	- Post array User's Slugs
 	 * @return: Object Room
 	 */
-	public function addRoomUser(){
+	public function addRoomUser() {
 		// room ID
 		if ( !empty($this->request->get['room_id']) ) {
 			$idRoom = $this->request->get['room_id'];
@@ -347,7 +366,7 @@ class ControllerApiMessage extends Controller {
 
 		$oRoom = $this->model_friend_room->edit( $idRoom, $this->request->post );
 
-		if ( !$oRoom ){
+		if ( !$oRoom ) {
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'Room is not exist or permission deney'
@@ -370,7 +389,7 @@ class ControllerApiMessage extends Controller {
 	 *	- Post array User's Slugs
 	 * @return: Object Room
 	 */
-	public function removeRoomUser(){
+	public function removeRoomUser() {
 		// room ID
 		if ( !empty($this->request->get['room_id']) ) {
 			$idRoom = $this->request->get['room_id'];
@@ -390,13 +409,24 @@ class ControllerApiMessage extends Controller {
 
 		$this->load->model('friend/room');
 		$this->load->model('tool/object');
+		$this->load->model('tool/chat');
 
 		$oRoom = $this->model_friend_room->edit( $idRoom, $this->request->post );
 
 		$aRoom = array();
-		if ( $oRoom ){
+		if ( $oRoom ) {
 			$aRoom = $this->model_tool_object->formatRoom( $oRoom );
 		}
+
+		$sActivityType = $this->config->get('pusher')['message']['remove-user'];
+		$this->model_tool_chat->pushMessage( 
+			$idRoom, 
+			$sActivityType,
+			array(
+				'room' => $aRoom,
+				'user_slug' => $this->request->post['user_slug']
+			)
+		);
 
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',

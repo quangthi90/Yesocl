@@ -1,13 +1,16 @@
 <?php
 namespace Document\Friend;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /**
  * @MongoDB\Document(db="yesocl", collection="user_message")
+ * @SOLR\Document(collection="room_message")
  */
 Class MessageRoom {
 	/**
 	 * @MongoDB\Id
+	 * @SOLR\Field(type="id")
 	 */
 	private $id;
 
@@ -16,6 +19,7 @@ Class MessageRoom {
 
 	/**
 	 * @MongoDB\String
+	 * @SOLR\Field(type="text")
 	 */
 	private $name;
 
@@ -96,6 +100,13 @@ Class MessageRoom {
     {
     	$this->created = new \DateTime();
     	$this->updated = new \DateTime();
+    	$this->updateSolr();
+    }
+
+    /** @MongoDB\PreUpdate */
+    public function preUpdate()
+    {
+        $this->updateSolr();
     }
 
 	public function getId() {
@@ -169,5 +180,44 @@ Class MessageRoom {
 
 	public function getUpdated(){
 		return $this->updated;
+	}
+
+	//--------------- SOLR -----------------
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrUsers;
+
+	public function setSolrUsers( $solrUsers ){
+		$this->solrUsers = $solrUsers;
+	}
+
+	public function getSolrUsers(){
+		return $this->solrUsers;
+	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrCreatorId;
+
+	public function setSolrCreatorId( $solrCreatorId ){
+		$this->solrCreatorId = $solrCreatorId;
+	}
+
+	public function getSolrCreatorId(){
+		return $this->solrCreatorId;
+	}
+
+	private function updateSolr() {
+		$aUsernames = array();
+		foreach ( $this->getUsers() as $oUser ) {
+			$aUsernames[] = $oUser->getUsername();
+		}
+		$solrUsers = implode( ', ', $aUsernames );
+
+		$this->solrUsers = $solrUsers;
+
+		$this->setSolrCreatorId( $this->getCreator()->getId() );
 	}
 }
