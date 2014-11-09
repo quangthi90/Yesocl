@@ -153,7 +153,7 @@
                             </div>
                             <div class="btn-toolbar" role="toolbar">
                                 <div class="btn-group btn-group-sm pull-right">                                    
-                                    <a class="btn btn-nobg" title="Add a image"><i class="fa fa-picture-o"></i></a>
+                                    <a class="btn btn-nobg hidden" title="Add a image"><i class="fa fa-picture-o"></i></a>
                                     <a class="btn btn-nobg emotion-show" title="Add a icon"><i class="fa fa-meh-o"></i></a>
                                 </div>
                             </div>                      

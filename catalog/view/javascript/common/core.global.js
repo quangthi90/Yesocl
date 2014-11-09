@@ -677,8 +677,8 @@ var YesGlobal = YesGlobal || {};
 			self.Instance = new Pusher(pusherKey, this.options);
 
 			//Add eventlisteners
-			self.Instance.connection.bind("error", function( err ) { 
-				_handleError(err);
+			self.Instance.connection.bind("error", function( data ) { 
+				_handleError(data);
 			});
 			self.Instance.connection.bind("state_change", function(state) {
 				_handleConnectionState(state);
@@ -696,6 +696,9 @@ var YesGlobal = YesGlobal || {};
 				_initPusher();
 			}
 			if(!name) return;
+
+			var existingChanel = _getExistingChanel(name);
+			if(existingChanel) return;
 
 			var chanel = self.Instance.subscribe(name);
 			chanel.bind('pusher:subscription_succeeded', function() {
@@ -721,8 +724,10 @@ var YesGlobal = YesGlobal || {};
 
 		function _getExistingChanel (name) {
 			var chanels = _getAllChanels();
-			for (var i = self.chanels.length - 1; i >= 0; i--) {
-				var c = self.chanels[i];
+			if(chanels === undefined || chanels.length === 0) return undefined;
+
+			for (var i = chanels.length - 1; i >= 0; i--) {
+				var c = chanels[i];
 				if(c.name === name)
 					return c;
 			};
@@ -750,13 +755,8 @@ var YesGlobal = YesGlobal || {};
 			});
 		}
 
-		function _handleError(err) {
-			Y.Utils.log(err);
-			if(err.data.code === 4004 ) {
-			    _debug("Detected limit error");
-		  	}else {
-		  		_debug(err);
-		  	}
+		function _handleError(data) {
+			_debug(data);
 		}
 
 		function _handleConnectionState(state){
