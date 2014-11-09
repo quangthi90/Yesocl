@@ -147,6 +147,58 @@ body.loading #common-loading {
 
 /*================================== END COMMON ===================================*/
 
+/*=================================== CUSTOM TABS WIDGET ==========================*/
+.widget.widget-tabs.widget-tabs-sm {
+}
+.widget.widget-tabs.widget-tabs-sm .tab-content {
+}
+.widget.widget-tabs.widget-tabs-sm > .widget-head {
+  height: 35px;
+  line-height: 35px;
+  overflow: visible;
+}
+.widget.widget-tabs.widget-tabs-sm > .widget-head ul {
+  height: 35px;
+}
+.widget.widget-tabs.widget-tabs-sm > .widget-head ul li {
+  height: 35px;
+  line-height: 30px;
+}
+.widget.widget-tabs.widget-tabs-sm > .widget-head ul li a {
+  height: 35px;
+  padding: 0 20px;
+}
+.widget.widget-tabs.widget-tabs-sm > .widget-head ul li a i {
+  font-size: 20px;
+}
+.widget.widget-tabs.widget-tabs-sm > .widget-head ul li a i:before {
+  left: 8px;
+  top: 5px;
+}
+.widget.widget-tabs.widget-tabs-sm > .widget-head ul li a i.fa[class*="icon-"] {
+  vertical-align: middle;
+}
+.widget.widget-tabs.widget-tabs-sm > .widget-head ul li a.glyphicons {
+  padding: 0 15px 0 40px;
+}
+.widget.widget-tabs.widget-tabs-sm > .widget-head ul li a .label.pull-right {
+}
+.widget.widget-tabs.widget-tabs-sm > .widget-head ul li.active {
+}
+.widget.widget-tabs.widget-tabs-sm > .widget-head ul li.active a {
+}
+.widget.widget-tabs.widget-tabs-sm > .widget-head ul li.active a i,
+.widget.widget-tabs.widget-tabs-sm > .widget-head ul li.active a i:before {
+}
+.widget.widget-tabs.widget-tabs-sm > .widget-head ul li.active:first-child {
+  -webkit-border-radius: 0px 0 0 0;
+  -moz-border-radius: 0px 0 0 0;
+  border-radius: 0px 0 0 0;
+}
+.widget.widget-tabs.widget-tabs-sm > .widget-head ul li.pull-right {
+}
+/*===================================END CUSTOM TABS WIDGET =======================*/
+
 /*================================== START POST ===================================*/
 .post-item {
 	position: relative;	

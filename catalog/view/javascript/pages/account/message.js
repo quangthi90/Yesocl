@@ -21,7 +21,7 @@
 		self.totalRoom = ko.observable(0);
 		self.activeRoom = ko.observable();
 		self.globalNewMessage = ko.observable(new Y.Models.MessageModel({}));
-		self.toTags = ko.observable([]);
+		self.toUserIds = ko.observable([]);
 
 		self.messageTo = ko.observable("");
 		self.messageContent = ko.observable("");
@@ -104,9 +104,9 @@
 		};
 
 		self.addGlobalMessage = function(){
-			var toSlugs = self.toTags();
+			var toUserIds = self.toUserIds();
 			var messageContent = self.globalNewMessage().content().trim();
-			if(toSlugs.length === 0 || messageContent.length === 0){
+			if(toUserIds.length === 0 || messageContent.length === 0){
 				return;
 			}
 			var tags = Y.Utils.parseTagsInfo(messageContent);
@@ -114,7 +114,7 @@
 				content: messageContent,
 				userTags: tags.userTags,
 				stockTags: tags.stockTags,
-				user_slugs: toSlugs
+				user_ids: toUserIds
 			};
 
 			self.isProcessNewMessage(true);
@@ -122,7 +122,7 @@
 				_addMessageDataToRoom(data, function(){
 					self.isProcessNewMessage(false);
 					self.globalNewMessage().reset();
-					self.toTags([]);
+					self.toUserIds([]);
 					self.isNewMessage(false);
 				});
 			}, function(data) {
@@ -147,11 +147,11 @@
 					});
 					data.results = ko.utils.arrayMap(temp, function(item) {
 						return {
-							id : item.slug,
+							id : item.id,
 							text: item.username,
 							avatar: item.avatar
 						};
-					})
+					});
 				}
 			});
 			return data;
@@ -262,7 +262,7 @@
 			// New room
 			else { 
 				var newRoom = new Y.Models.RoomModel(returnRoom);
-				newRoom.messageList.push(newMessage);
+				//newRoom.messageList.push(newMessage);
 				self.roomList.unshift(newRoom);
 
 				//Subscribe room chanel:
@@ -300,6 +300,50 @@
 					}
 				});
 			});
+
+			$(window).on(Y.Constants.Triggers.PUSHER_ROOM_REMOVED, function(e) {
+				_handleUserRemovedFromRoom(e.response.room, e.response.removed_user);
+			});
+
+			$(window).on(Y.Constants.Triggers.PUSHER_MEMBER_LEFT, function(e) {
+				_handleUserLeftFromRoom(e.response.room, e.response.removed_user);
+			});
+		}
+
+		function _handleUserRemovedFromRoom(room, userId) {
+			var existingRoom = ko.utils.arrayFirst(self.roomList(), function(r) {
+				return r.id === room.id;
+			});
+
+			if(Y.CurrentUser.id === userId){
+				//Unsubscribe chanel
+				Y.PusherManager.unsubscribeChanel(room.id);
+
+				//Remove room from list
+				if(existingRoom){
+					self.roomList.remove(existingRoom);
+					_selectFirstRoom();
+				}
+				//Inform to user
+				Y.Utils.showInfoMessage(Y.Constants.Messages.ROOM_REMOVED_INFO, function(){					
+				});
+			}else {
+				if(existingRoom){
+					existingRoom.name(room.name);
+				}
+				//Inform that user was removed from room
+			}
+		}
+
+		function _handleUserLeftFromRoom(room, userId) {
+			var existingRoom = ko.utils.arrayFirst(self.roomList(), function(r) {
+				return r.id === room.id;
+			});
+
+			if(existingRoom){
+				existingRoom.name(room.name);
+			}
+			//Inform that user left from room
 		}
 
 		function _updateOrderRoom(){
@@ -355,23 +399,31 @@
 
 		/* ============= START PROPERTIES ================== */
 		var modalEle = options.ele || undefined;
+		self.actualMembers = ko.observableArray([]);
 		self.activeRoom = ko.observable(options.activeRoom || null);
 		self.currentUserId = Y.CurrentUser.id;
+		self.addedUserIds = ko.observableArray([]);		
 
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
 		self.members = ko.computed(function(){
 			if(self.activeRoom() !== null && self.activeRoom().members){
-				return self.activeRoom().members() || [];	
+				self.actualMembers(self.activeRoom().members() || []);
+				return self.actualMembers();
 			}
 			return [];
-		});		
+		});
+
+		self.canAddMore = ko.computed(function(){
+			return (self.addedUserIds().length >= 0);
+		});
 
 		self.open = function(){
 			if(self.activeRoom() === null){
 				return;
 			}
+			self.addedUserIds([]);
 			if(self.activeRoom().members().length === 0){
 				_loadMembers({ room_id : self.activeRoom().id }, function(data){
 					self.activeRoom().members(data.users);
@@ -413,6 +465,57 @@
 			});
 		};
 
+		self.addMember = function(){
+			if(self.addedUserIds().length === 0) return;
+			
+			var postData = {
+				roomId: self.activeRoom().id,
+				userIds: self.addedUserIds()
+			};
+			_addMemeber(postData, function(data){
+
+			}, function(data){
+				//Message
+				alert("User was not added !");
+			});
+		};
+
+		self.userDataRequest = function(query){
+			var term = query.term.toLowerCase();
+			var data = { results: [] };
+
+			Y.Utils.initFriendList(function(returnData) {
+				if(returnData){
+					var temp = ko.utils.arrayFilter(returnData, function(item){
+						var existing = ko.utils.arrayFirst(self.actualMembers(), function(u){
+							return  u.id == item.id;
+						});
+
+						if(existing) return false;
+						return item.username.toLowerCase().indexOf(term) >= 0;
+					});
+					data.results = ko.utils.arrayMap(temp, function(item) {
+						return {
+							id : item.id,
+							text: item.username,
+							avatar: item.avatar
+						};
+					})
+				}
+			});
+			return data;
+		};
+
+		self.formatResult = function(item){
+			var html = "<img height='30' width='30' style='float: left; margin-right: 10px;' src='" + item.avatar + "' alt='" + item.text + "'/>";
+			html += item.text;
+			return html;
+		};
+
+		self.clearTags = function(){
+			self.addedUserIds.removeAll();
+		};
+
 		/* ============= END PUBLIC METHODS ================ */
 
 		/* ============= START PRIVATE METHODS ============= */
@@ -440,6 +543,28 @@
 				url: Y.Routing.generate("ApiDeleteRoomUser", { room_id : postData.roomId }),
 				data: {
 					user_slug : postData.userSlug
+				}
+			};
+			var successCallback = function(data){
+				if(data.success === "ok"){					
+					if(sucCallback && typeof sucCallback === "function"){
+						sucCallback(data);
+					}				
+				}else {
+					if(failCallback && typeof failCallback === "function"){
+						failCallback(data);
+					}
+				}
+			};
+			//Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
+		}
+
+		function _addMemeber(postData, sucCallback, failCallback) {
+			var ajaxOptions = {
+				url: Y.Routing.generate("ApiPutRoomUser", { room_id : postData.roomId }),
+				data: {
+					user_ids : postData.userIds
 				}
 			};
 			var successCallback = function(data){

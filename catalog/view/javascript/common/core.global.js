@@ -30,7 +30,8 @@ var YesGlobal = YesGlobal || {};
 		},
 		Messages: {
 			COMMON_CONFIRM : "Are you sure you want to do this selection ?",
-			DELETE_UPLOAD_FILE_CONFIRM : "Are you sure you want to remove uploaded files ?"
+			DELETE_UPLOAD_FILE_CONFIRM : "Are you sure you want to remove uploaded files ?",
+			ROOM_REMOVED_INFO: "Sorry !!! You may be removed from '[ROOM]' by room owner !"
 		},
 		Triggers: {
 			MENU_VISIBILITY_CHANGED : "MENU_VISIBILITY_CHANGED",
@@ -40,7 +41,9 @@ var YesGlobal = YesGlobal || {};
 			PUSHER_RECONNECTED: "PUSHER_RECONNECTED",
 			CURRENT_USER_CHANGED: "CURRENT_USER_CHANGED",
 			ELEMENT_REMOVED_BY_KO: "ELEMENT_REMOVED_BY_KO",
-			PUSHER_NEW_MESSAGE: "new_message"
+			PUSHER_NEW_MESSAGE: "new_message",
+			PUSHER_ROOM_REMOVED: "room_removed",
+			PUSHER_MEMBER_LEFT: "member_left"
 		},
 		SettingKeys : {
 			SHOW_LEFT_SIDEBAR : "SHOW_LEFT_SIDEBAR",
@@ -663,7 +666,11 @@ var YesGlobal = YesGlobal || {};
 
 		self.subscribeChanel = function(name, success, fail) {
 			_subscribeChanel(name, success, fail);
-		}
+		};
+
+		self.unsubscribeChanel = function(name) {
+			_unsubscribe(name);
+		};
 
 		//Private handling	
 		function _initPusher(){
@@ -703,6 +710,13 @@ var YesGlobal = YesGlobal || {};
 					fail(data);
 				}
 			});
+		}
+
+		function _unsubscribe(name){
+			if(!self.Instance || !name){
+				return;
+			}
+			self.Instance.unsubscribe(name);
 		}
 
 		function _getExistingChanel (name) {

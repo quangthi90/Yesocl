@@ -130,7 +130,7 @@
                     <!-- ko ifnot: $data.activeRoom() != null && !$data.isNewMessage() -->
                     <div class="active-room-container">
                         <div class="bg-primary hidden" style="opacity: 0.4;z-index: 999;position:absolute;width: 100%; height: 100%;background-color: #F0F0F0;" data-bind="css: { 'hidden': !$data.isProcessNewMessage() }">
-                            <p style="text-align: center;padding-top: 10%;font-weight: bold;"><i class="fa fa-spin fa-refresh"></i> {% trans %}Sending{% endtrans %} ...</p>
+                            <p style="text-align: center;padding-top: 20%;font-weight: bold;"><i class="fa fa-spin fa-refresh"></i> {% trans %}Sending{% endtrans %} ...</p>
                         </div>
                         <div class="bg-gray innerAll" class="room-info-container">
                             <div class="row">
@@ -145,7 +145,7 @@
                             </div>
                         </div>   
                         <div class="inner-2x innerAll border-top new-message-info">
-                            <input data-bind="autoCompleteTag: toTags, autoOptions: { dataRequest: $data.userDataRequest, formatResult: $data.formatResult }" type="text" id="msg-to" class="form-control" placeholder="Find user(s) to send ...">
+                            <input data-bind="autoCompleteTag: toUserIds, autoOptions: { dataRequest: $data.userDataRequest, formatResult: $data.formatResult }" type="text" id="msg-to" class="form-control" placeholder="Find user(s) to send ...">
                         </div>                     
                         <div class="new-messsage-container" data-bind="with: $data.globalNewMessage, emoticon: true">
                             <div class="border-top border-bottom">
