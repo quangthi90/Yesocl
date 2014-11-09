@@ -95,13 +95,53 @@ class ModelFriendRoom extends Model {
 	}
 
 	/**
-	 * Get Room By Room ID
+	 * Get last 20 users have new message
 	 * @author: Bommer <lqthi.khtn@gmail.com>
 	 * @param: 
-	 *	- Object MongoID Room
+	 * 	String User Slug
+	 * 	Int Start
+	 *	Int Limit
+	 * @return: array objects Message
+	 */
+	public function getRooms( $idUserAuthor, $aData = array() ){
+		// Limit & start
+		if (  empty($aData['start']) ){
+			$aData['start'] = 0;
+		}
+		if ( empty($aData['limit']) ){
+			$aData['limit'] = 10;
+		}
+
+		// Sort & order
+		if ( empty($aData['sort']) ){
+			$aData['sort'] = 'updated';
+		}
+
+		if ( empty($aData['order']) ){
+			$aData['order'] = -1;
+		}
+
+		$lRooms = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array('users.id' => $idUserAuthor))
+			->skip($aData['start'])
+			->limit($aData['limit'])
+			->sort(array($aData['sort'] => $aData['order']));
+
+		foreach ( $lRooms as $oRoom ) {
+			$oRoom->addUnRead( $this->customer->getId(), 0 );
+		}
+		$this->dm->flush();
+
+		return $lRooms;
+	}
+
+	/**
+	 * 10/02/2014
+	 * Get Room by Room ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: Object MongoID
 	 * @return: Object Room
 	 */
-	public function getRoom( $idRoom ){
+	public function getRoom( $idRoom ) {
 		$oRoom = $this->dm->getRepository('Document\Friend\MessageRoom')->find( $idRoom );
 
 		return $oRoom;
