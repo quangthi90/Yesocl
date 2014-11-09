@@ -45,9 +45,10 @@ class ModelFriendMessage extends Model {
 			$lUserTos = $this->dm->getRepository('Document\User\User')->findBy(array(
 				'id' => array('$in' => $aData['user_to_ids'])
 			));
-			$oRoom->setUsers( $lUserTos );
 			$oRoom->addUser( $oUserFrom );
-
+			foreach ( $lUserTos as $oUser ) {
+				$oRoom->addUser( $oUser );
+			}
 			$this->dm->persist( $oRoom );
 		}
 
