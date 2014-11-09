@@ -121,10 +121,19 @@ class ModelFriendRoom extends Model {
 			$aData['order'] = -1;
 		}
 
-		$lRooms = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array('users.id' => $idUserAuthor))
-			->skip($aData['start'])
-			->limit($aData['limit'])
-			->sort(array($aData['sort'] => $aData['order']));
+		if ( !empty($aData['room_ids']) ) {
+			$lRooms = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array(
+				'users.id' => $idUserAuthor, 'id' => array( '$in' => $aData['room_ids'] )
+			))
+				->skip($aData['start'])
+				->limit($aData['limit'])
+				->sort(array($aData['sort'] => $aData['order']));
+		} else {
+			$lRooms = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array('users.id' => $idUserAuthor))
+				->skip($aData['start'])
+				->limit($aData['limit'])
+				->sort(array($aData['sort'] => $aData['order']));
+		}
 
 		return $lRooms;
 	}

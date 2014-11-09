@@ -42,6 +42,7 @@ class ControllerApiMessage extends Controller {
         		$aRoomIds[$oRoom->getId()] = $oRoom->getId();
         	}
         	$lRoomMessages = $this->model_friend_room->getRooms($oLoggedUser->getId(), array(
+        		'room_ids' => $aRoomIds,
 				'limit' => $iLimit,
 				'start' => $iLimit * ($iPage - 1)
 			));
