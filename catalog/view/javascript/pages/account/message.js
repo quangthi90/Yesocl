@@ -449,7 +449,7 @@
 		self.removeMember = function(mem){
 			var postData = {
 				roomId : self.activeRoom().id,
-				userSlug : mem.slug
+				userId : mem.id
 			};
 
 			Y.Utils.showConfirmMessage(Y.Constants.Messages.COMMON_CONFIRM, function(){
@@ -467,7 +467,7 @@
 
 		self.addMember = function(){
 			if(self.addedUserIds().length === 0) return;
-			
+
 			var postData = {
 				roomId: self.activeRoom().id,
 				userIds: self.addedUserIds()
@@ -542,7 +542,7 @@
 			var ajaxOptions = {
 				url: Y.Routing.generate("ApiDeleteRoomUser", { room_id : postData.roomId }),
 				data: {
-					user_slug : postData.userSlug
+					user_id : postData.userId
 				}
 			};
 			var successCallback = function(data){
