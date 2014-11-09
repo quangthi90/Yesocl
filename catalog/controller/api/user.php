@@ -199,17 +199,9 @@ class ControllerApiUser extends Controller {
         foreach ( $lFriends as $oFriend ) {
             $oUser = $oFriend->getUser();
 
-            $aUser = $oUser->formatToCache();
+            $aUser = $this->model_tool_object->formatUser( $oUser );
 
-            // Mapping to return for tag js
-            // Check again when change libs tag js
-            $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-            $aUser['name'] = $aUser['username'];
-            $aUser['id'] = $aUser['slug'];
-            $aUser['type'] = 'contact';
-            $aUser['wall'] = $this->model_tool_object->path('WallPage', array('user_slug' => $aUser['slug']));
-
-            $aFriends[$aUser['slug']] = $aUser;
+            $aFriends[$aUser['id']] = $aUser;
         }
 
         return $this->response->setOutput( json_encode(array(
