@@ -50,6 +50,10 @@ class ModelFriendMessage extends Model {
 				$oRoom->addUser( $oUser );
 			}
 			$this->dm->persist( $oRoom );
+		} else {
+			if ( !isset($oRoom->getUnReads()[$oUserFrom->getId()]) ) {
+				return false;
+			}
 		}
 
 		// Add unread message for users in room
