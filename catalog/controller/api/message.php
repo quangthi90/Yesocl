@@ -32,7 +32,7 @@ class ControllerApiMessage extends Controller {
 		// Keyword
         if ( !empty($this->request->get['keyword']) ) {
         	$this->load->model('tool/search');
-        	$lRoomResults = $this->model_tool_search->searchRoomMessageByKeyword(array(
+        	$lRoomResults = $this->model_tool_search->searchRoomMessageByKeyword($oLoggedUser->getId(), array(
         		'keyword' => $this->request->get['keyword'],
         		'limit' => $iLimit,
         		'start' => $iLimit * ($iPage - 1)

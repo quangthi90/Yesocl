@@ -136,7 +136,7 @@ class ModelToolSearch extends Model
 		return $this->client->execute( $query );
 	}
 
-	public function searchRoomMessageByKeyword( $aData = array() ) {
+	public function searchRoomMessageByKeyword( $idCreator, $aData = array() ) {
 		if ( !isset( $aData['keyword'] ) || empty( $aData['keyword'] ) ) {
 			return array();
 		}
@@ -146,9 +146,10 @@ class ModelToolSearch extends Model
 				'mappedDocument' => 'Document\Friend\MessageRoom',
 			)
     	);
- 
+
+    	$sQuery .= 'solrCreator_t:' . $idCreator . ' AND ';
 		$sQuery = 'name_t:*' . $aData['keyword'] . '* OR ';
-		$sQuery .= 'solrUsers_t:*' . $aData['keyword'] . '* OR ';
+		$sQuery .= 'solrUsers_t:*' . $aData['keyword'] . '*';
 
 		if ( isset( $aData['start'] ) ) {
 			$aData['start'] = (int)$aData['start'];
