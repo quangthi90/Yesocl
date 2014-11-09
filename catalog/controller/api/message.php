@@ -200,7 +200,7 @@ class ControllerApiMessage extends Controller {
 		} else {
 			$aChannelNames = array( $idRoom );
 		}
-		$sActivityType = $this->config->get('pusher')['message']['new-message'];
+		$sActivityType = $this->config->get('pusher')['message']['new_message'];
 		$this->model_tool_chat->pushMessage( 
 			$aChannelNames, 
 			$sActivityType,
@@ -418,7 +418,7 @@ class ControllerApiMessage extends Controller {
 			$aRoom = $this->model_tool_object->formatRoom( $oRoom );
 		}
 
-		$sActivityType = $this->config->get('pusher')['message']['remove-user'];
+		$sActivityType = $this->config->get('pusher')['message']['remove_user'];
 		$this->model_tool_chat->pushMessage( 
 			$idRoom, 
 			$sActivityType,
