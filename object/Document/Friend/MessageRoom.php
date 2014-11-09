@@ -100,13 +100,13 @@ Class MessageRoom {
     {
     	$this->created = new \DateTime();
     	$this->updated = new \DateTime();
-    	$this->updateSolrUsers();
+    	$this->updateSolr();
     }
 
     /** @MongoDB\PreUpdate */
     public function preUpdate()
     {
-        $this->updateSolrUsers();
+        $this->updateSolr();
     }
 
 	public function getId() {
@@ -196,7 +196,20 @@ Class MessageRoom {
 		return $this->solrUsers;
 	}
 
-	private function updateSolrUsers() {
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrCreatorId;
+
+	public function setSolrCreatorId( $solrCreatorId ){
+		$this->solrCreatorId = $solrCreatorId;
+	}
+
+	public function getSolrCreatorId(){
+		return $this->solrCreatorId;
+	}
+
+	private function updateSolr() {
 		$aUsernames = array();
 		foreach ( $this->getUsers() as $oUser ) {
 			$aUsernames[] = $oUser->getUsername();
@@ -204,5 +217,7 @@ Class MessageRoom {
 		$solrUsers = implode( ', ', $aUsernames );
 
 		$this->solrUsers = $solrUsers;
+
+		$this->setSolrCreatorId( $this->getCreator()->getId() );
 	}
 }
