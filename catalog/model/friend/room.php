@@ -26,12 +26,12 @@ class ModelFriendRoom extends Model {
 		if ( !empty($aData['name']) )
 			$oRoom->setName( $aData['name'] );
 
-		// user_slugs is add user
-		if ( !empty($aData['user_slugs']) ) {
-			foreach ( $aData['user_slugs'] as $sUserSlug ) {
-				$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
-				if ( !$oUser ) continue;
-
+		// user_ids is add user
+		if ( !empty($aData['user_ids']) ) {
+			$lUsers = $this->dm->getRepository('Document\User\User')->findBy(array(
+				'id' => array('$in' => $aData['user_ids'])
+			));
+			foreach ( $lUsers as $oUser ) {
 				if ( !isset($oRoom->getUnReads()[$oUser->getId()]) ) {
 					$oRoom->addUnRead( $oUser->getId(), 0 );
 					$oRoom->addUser( $oUser );
@@ -39,14 +39,14 @@ class ModelFriendRoom extends Model {
 			}
 		}
 
-		// user_slug is remove user
-		if ( !empty($aData['user_slug']) ) {
-			if ( $oRoom->getCreator()->getSlug() == $aData['user_slug'] || $oRoom->getUsers()->count() == 2 ) {
+		// user_id is remove user
+		if ( !empty($aData['user_id']) ) {
+			if ( $oRoom->getCreator()->getId() == $aData['user_id'] || $oRoom->getUsers()->count() == 2 ) {
 				$this->delete( $oRoom->getId() );
 				return null;
 			}
 
-			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aData['user_slug'] );
+			$oUser = $this->dm->getRepository('Document\User\User')->find( $aData['user_id'] );
 			$oRoom->getUsers()->removeElement( $oUser );
 			$aUnReads = $oRoom->getUnReads();
 			unset($aUnReads[$oUser->getId()]);

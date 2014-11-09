@@ -159,10 +159,10 @@ class ControllerApiMessage extends Controller {
 		}
 
 		// array User To Slugs
-		if ( !empty($this->request->post['user_slugs']) ) {
-			$aUserToSlugs = $this->request->post['user_slugs'];
+		if ( !empty($this->request->post['user_ids']) ) {
+			$aUserToIds = $this->request->post['user_ids'];
 		} else {
-			$aUserToSlugs = array();
+			$aUserToIds = array();
 		}
 
 		$this->load->model('friend/message');
@@ -171,7 +171,7 @@ class ControllerApiMessage extends Controller {
 
 		$oRoom = $this->model_friend_message->add($idRoom, array(
 			'user_from_id' => $this->customer->getId(), 
-			'user_to_slugs' => $aUserToSlugs, 
+			'user_to_ids' => $aUserToIds, 
 			'content' => $sContent,
 			'userTags' => empty($this->request->post['userTags']) ? array() : $this->request->post['userTags'],
 			'stockTags' => empty($this->request->post['stockTags']) ? array() : $this->request->post['stockTags']
@@ -354,10 +354,10 @@ class ControllerApiMessage extends Controller {
             )));
 		}
 
-		if ( empty($this->request->post['user_slugs']) ) {
+		if ( empty($this->request->post['user_ids']) ) {
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
-                'error' => 'user slugs is empty'
+                'error' => 'user ID is empty'
             )));
 		}
 
@@ -400,10 +400,10 @@ class ControllerApiMessage extends Controller {
             )));
 		}
 
-		if ( empty($this->request->post['user_slug']) ) {
+		if ( empty($this->request->post['user_id']) ) {
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
-                'error' => 'user slug is empty'
+                'error' => 'user ID is empty'
             )));
 		}
 
@@ -424,7 +424,7 @@ class ControllerApiMessage extends Controller {
 			$sActivityType,
 			array(
 				'room' => $aRoom,
-				'user_slug' => $this->request->post['user_slug']
+				'user_id' => $this->request->post['user_id']
 			)
 		);
 

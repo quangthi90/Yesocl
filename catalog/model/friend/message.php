@@ -21,8 +21,8 @@ class ModelFriendMessage extends Model {
 			$oRoom = $this->dm->getRepository('Document\Friend\MessageRoom')->find( $idRoom );
 
 		// Check exist room if 1 - 1
-		} elseif ( count($aData['user_to_slugs']) == 1 ) {
-			$oUserTo = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aData['user_to_slugs'][0] );
+		} elseif ( count($aData['user_to_ids']) == 1 ) {
+			$oUserTo = $this->dm->getRepository('Document\User\User')->find( $aData['user_to_ids'][0] );
 			if ( $oUserTo ) {
 				$aUserIds = array( $aData['user_from_id'], $oUserTo->getId() );
 				$lRooms = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array(
@@ -42,11 +42,11 @@ class ModelFriendMessage extends Model {
 		if ( !$oRoom ) {
 			$oRoom = new MessageRoom();
 			$oRoom->setCreator( $oUserFrom );
+			$lUserTos = $this->dm->getRepository('Document\User\User')->findBy(array(
+				'id' => array('$in' => $aData['user_to_ids'])
+			));
+			$oRoom->setUsers( $lUserTos );
 			$oRoom->addUser( $oUserFrom );
-			foreach ( $aData['user_to_slugs'] as $sUserToSlug ) {
-				$oUserTo = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserToSlug );
-				$oRoom->addUser( $oUserTo );
-			}
 
 			$this->dm->persist( $oRoom );
 		}
