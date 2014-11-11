@@ -367,6 +367,13 @@
 			}
 		}
 
+		function _scrollToTopRoomList() {
+			var roomList = ele.find(".room-list");
+			if(roomList.length > 0){
+				roomList.animate({ scrollTop: 0 }, 200);
+			}
+		}
+
 		function _newMessageCallback(data){
 			_scrollToBottomMessageList();
 			_updateOrderRoom();

@@ -46,6 +46,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.loadMessage = function(sucCallback, failCallback) {
 			_loadMessage(
 				function(data) {
+					that.unread (0);
 					ko.utils.arrayForEach(data.messages, function(m){
 						var messageItem = new Y.Models.MessageModel(m);
 						that.messageList.push(messageItem);
@@ -53,7 +54,6 @@ YesGlobal.Models = YesGlobal.Models || {};
 					if(that.newMessageCallback && typeof that.newMessageCallback === "function"){
 						that.newMessageCallback();
 					}
-
 					if(sucCallback && typeof sucCallback === "function"){
 						sucCallback(data);
 					}
@@ -71,6 +71,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 			that.currentPage(that.currentPage() + 1);
 			_loadMessage(
 				function(data) {
+					that.unread (0);
 					for (var i = data.messages.length - 1; i >= 0; i--) {
 						var messageItem = new Y.Models.MessageModel(data.messages[i]);
 						that.messageList.unshift(messageItem);						
