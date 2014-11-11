@@ -418,9 +418,9 @@ class ControllerApiMessage extends Controller {
 			$aRoom = $this->model_tool_object->formatRoom( $oRoom );
 		}
 
-		$sActivityType = $this->config->get('pusher')['message']['remove_user'];
+		$sActivityType = $this->config->get('pusher')['message']['remove_user'];		
 		$this->model_tool_chat->pushMessage( 
-			$idRoom, 
+			array($idRoom),
 			$sActivityType,
 			array(
 				'room' => $aRoom,

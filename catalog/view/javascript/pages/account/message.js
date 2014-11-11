@@ -289,7 +289,7 @@
 		}		
 
 		function _subscribeMessageChanel(){
-			$(window).on(Y.Constants.Triggers.PUSHER_NEW_MESSAGE, function(e) {
+			$(window).on(Y.Constants.PusherMessages.new_message, function(e) {
 				var response = e.response;
 				if(response.message.user.id === Y.CurrentUser.id) {
 					return;
@@ -301,16 +301,21 @@
 				});
 			});
 
-			$(window).on(Y.Constants.Triggers.PUSHER_ROOM_REMOVED, function(e) {
-				_handleUserRemovedFromRoom(e.response.room, e.response.removed_user);
+			$(window).on(Y.Constants.PusherMessages.remove_user, function(e) {
+				_handleUserRemovedFromRoom(e.response.room, e.response.user_id);
 			});
 
 			$(window).on(Y.Constants.Triggers.PUSHER_MEMBER_LEFT, function(e) {
-				_handleUserLeftFromRoom(e.response.room, e.response.removed_user);
+				console.log(e.response);
+				//_handleUserLeftFromRoom(e.response.room, e.response.removed_user);
 			});
 		}
 
 		function _handleUserRemovedFromRoom(room, userId) {
+			if(room.author && room.author.id === Y.CurrentUser.id){
+				return;
+			}
+
 			var existingRoom = ko.utils.arrayFirst(self.roomList(), function(r) {
 				return r.id === room.id;
 			});
@@ -323,10 +328,11 @@
 				if(existingRoom){
 					self.roomList.remove(existingRoom);
 					_selectFirstRoom();
-				}
-				//Inform to user
-				Y.Utils.showInfoMessage(Y.Constants.Messages.ROOM_REMOVED_INFO, function(){					
-				});
+					//Inform to user
+					var message = Y.Constants.Messages.ROOM_REMOVED_INFO.replace("[ROOM]", room.name);
+					Y.Utils.showInfoMessage(message, function(){
+					});
+				}				
 			}else {
 				if(existingRoom){
 					existingRoom.name(room.name);

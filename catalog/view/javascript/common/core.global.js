@@ -33,6 +33,8 @@ var YesGlobal = YesGlobal || {};
 			DELETE_UPLOAD_FILE_CONFIRM : "Are you sure you want to remove uploaded files ?",
 			ROOM_REMOVED_INFO: "Sorry !!! You may be removed from '[ROOM]' by room owner !"
 		},
+		PusherMessages: {			
+		},
 		Triggers: {
 			MENU_VISIBILITY_CHANGED : "MENU_VISIBILITY_CHANGED",
 			INPUT_CONTENT_CHANGED : "INPUT_CONTENT_CHANGED",
@@ -40,10 +42,7 @@ var YesGlobal = YesGlobal || {};
 			NEW_MESSAGE_LOADED: "NEW_MESSAGE_LOADED",
 			PUSHER_RECONNECTED: "PUSHER_RECONNECTED",
 			CURRENT_USER_CHANGED: "CURRENT_USER_CHANGED",
-			ELEMENT_REMOVED_BY_KO: "ELEMENT_REMOVED_BY_KO",
-			PUSHER_NEW_MESSAGE: "new_message",
-			PUSHER_ROOM_REMOVED: "room_removed",
-			PUSHER_MEMBER_LEFT: "member_left"
+			ELEMENT_REMOVED_BY_KO: "ELEMENT_REMOVED_BY_KO"
 		},
 		SettingKeys : {
 			SHOW_LEFT_SIDEBAR : "SHOW_LEFT_SIDEBAR",
@@ -747,9 +746,16 @@ var YesGlobal = YesGlobal || {};
 				_initPusher();
 			}
 
-			self.Instance.bind(Y.Constants.Triggers.PUSHER_NEW_MESSAGE, function(data) {
+			self.Instance.bind(Y.Constants.PusherMessages.new_message, function(data) {
 				$(window).trigger({
-					type : Y.Constants.Triggers.PUSHER_NEW_MESSAGE,
+					type : Y.Constants.PusherMessages.new_message,
+					response : data
+				});
+			});
+
+			self.Instance.bind(Y.Constants.PusherMessages.remove_user, function(data) {
+				$(window).trigger({
+					type : Y.Constants.PusherMessages.remove_user,
 					response : data
 				});
 			});
