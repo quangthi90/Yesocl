@@ -111,13 +111,14 @@
     <script src="{{ asset_js('pages/common/widgets.js') }}"></script>    
     <script id="Yes.Global">
         (function(Y, undefined) {
-            var user = '{{ get_current_user()|json_encode()|raw }}';
             var routing = '{{ get_routing_list()|raw }}';
             Y.Routing = new Y.RoutingManager( JSON.parse(routing) );
+            Y.Routing.BaseUrl = '{{ base }}'.toLowerCase();     
+            Y.Constants.PusherMessages = JSON.parse('{{ get_live_time_events()| raw }}');
+            var user = '{{ get_current_user()|json_encode()|raw }}';
             if (user){
                 Y.Utils.setCurrentUser(JSON.parse(user));
-            }
-            Y.Routing.BaseUrl = '{{ base }}'.toLowerCase();
+            }            
         }(YesGlobal));
     </script>
     {% block common_javascript %}
