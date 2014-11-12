@@ -256,6 +256,15 @@ class ControllerApiMessage extends Controller {
             )));
 		}
 
+		$sActivityType = $this->config->get('pusher')['message']['rename_room'];		
+		$this->model_tool_chat->pushMessage( 
+			array($idRoom),
+			$sActivityType,
+			array(
+				'room' => $aRoom
+			)
+		);
+
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok'
         )));
@@ -374,6 +383,25 @@ class ControllerApiMessage extends Controller {
 		}
 
 		$aRoom = $this->model_tool_object->formatRoom( $oRoom );
+
+		
+		$aUsers = array();
+		foreach ( $this->request->post['user_ids'] as $idUser ) {
+			$oUser = $oRoom->getUserById( $idUser );
+			if ( $oUser ) {
+				$aUsers[$idUser] = $this->model_tool_object->formatUser( $oUser );
+			}
+		}
+
+		$sActivityType = $this->config->get('pusher')['message']['add_user'];		
+		$this->model_tool_chat->pushMessage( 
+			array($idRoom),
+			$sActivityType,
+			array(
+				'room' => $aRoom,
+				'users' => array_values($aUsers)
+			)
+		);
 
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',

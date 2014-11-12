@@ -54,4 +54,6 @@ $_['finance']['shortterm']['loi-nhuan']			= 'Lợi nhuận';
 
 $_['pusher']['message']['new_message']			= 'new_message';
 $_['pusher']['message']['remove_user']			= 'remove_user';
+$_['pusher']['message']['add_user']	 			= 'add_user';
+$_['pusher']['message']['rename_room']			= 'rename_room';
 ?>

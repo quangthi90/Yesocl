@@ -95,6 +95,21 @@ Class MessageRoom {
 		return $oUser;
 	}
 
+	/**
+	 * 11/12/2014
+	 * Get user by ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: null
+	 * @return: string room name
+	 */
+	public function getUserById( $idUser ) {
+		foreach ( $this->getUsers() as $oUser ) {
+			if ( $oUser->getId() != $idUser ) return $oUser;
+		}
+
+		return null;
+	}
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
