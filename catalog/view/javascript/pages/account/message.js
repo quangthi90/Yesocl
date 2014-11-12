@@ -253,9 +253,10 @@
 					_newMessageCallback();
 				}else {
 					if(self.activeRoom() != null && self.activeRoom().id == returnRoom.id){
-						_scrollToBottomMessageList();
+						_newMessageCallback();
 					}else{
 						existingRoom.unread(existingRoom.unread() + 1);
+						_updateOrderRoom();
 					}					
 				}		
 			} 
@@ -376,6 +377,7 @@
 
 		function _newMessageCallback(data){
 			_scrollToBottomMessageList();
+			_scrollToTopRoomList();
 			_updateOrderRoom();
 		}
 
