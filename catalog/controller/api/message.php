@@ -225,7 +225,7 @@ class ControllerApiMessage extends Controller {
 	 *	- Get string Object Room ID
 	 * @return: Boolean Is success
 	 */
-	public function changeRoomName() {
+	public function renameRoom() {
 		// name is required
 		if ( empty($this->request->post['name']) ) {
 			return $this->response->setOutput(json_encode(array(
