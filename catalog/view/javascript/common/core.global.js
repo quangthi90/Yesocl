@@ -760,6 +760,20 @@ var YesGlobal = YesGlobal || {};
 					response : data
 				});
 			});
+
+			self.Instance.bind(Y.Constants.PusherMessages.add_user, function(data) {
+				$(window).trigger({
+					type : Y.Constants.PusherMessages.add_user,
+					response : data
+				});
+			});
+
+			self.Instance.bind(Y.Constants.PusherMessages.rename_room, function(data) {
+				$(window).trigger({
+					type : Y.Constants.PusherMessages.rename_room,
+					response : data
+				});
+			});
 		}
 
 		function _handleError(data) {

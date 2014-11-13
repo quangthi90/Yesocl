@@ -306,9 +306,8 @@
 				_handleUserRemovedFromRoom(e.response.room, e.response.user_id);
 			});
 
-			$(window).on(Y.Constants.Triggers.PUSHER_MEMBER_LEFT, function(e) {
-				console.log(e.response);
-				//_handleUserLeftFromRoom(e.response.room, e.response.removed_user);
+			$(window).on(Y.Constants.PusherMessages.rename_room, function(e) {
+				_handleRoomNameChanged(r.response.room);
 			});
 		}
 
@@ -351,6 +350,15 @@
 				existingRoom.name(room.name);
 			}
 			//Inform that user left from room
+		}
+
+		function _handleRoomNameChanged(room){
+			var existingRoom = ko.utils.arrayFirst(self.roomList(), function(r) {
+				return r.id === room.id;
+			});
+			if(existingRoom){
+				existingRoom.name(room.name);
+			}
 		}
 
 		function _updateOrderRoom(){
@@ -417,7 +425,8 @@
 		self.actualMembers = ko.observableArray([]);
 		self.activeRoom = ko.observable(options.activeRoom || null);
 		self.currentUserId = Y.CurrentUser.id;
-		self.addedUserIds = ko.observableArray([]);		
+		self.addedUserIds = ko.observableArray([]);
+		self.numberOfAddedMember = ko.observable(0);
 
 		/*  ============= END PROPERTIES ==================== */
 
@@ -431,7 +440,7 @@
 		});
 
 		self.canAddMore = ko.computed(function(){
-			return (self.addedUserIds().length >= 0);
+			return (self.addedUserIds().length > 0);
 		});
 
 		self.open = function(){
@@ -439,6 +448,7 @@
 				return;
 			}
 			self.addedUserIds([]);
+			self.numberOfAddedMember(0);
 			if(self.activeRoom().members().length === 0){
 				_loadMembers({ room_id : self.activeRoom().id }, function(data){
 					self.activeRoom().members(data.users);
@@ -488,7 +498,8 @@
 				userIds: self.addedUserIds()
 			};
 			_addMemeber(postData, function(data){
-
+				self.numberOfAddedMember(self.addedUserIds().length);
+				self.addedUserIds.removeAll();
 			}, function(data){
 				//Message
 				alert("User was not added !");

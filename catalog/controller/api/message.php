@@ -246,6 +246,7 @@ class ControllerApiMessage extends Controller {
 		}
 
 		$this->load->model('friend/room');
+		$this->load->model('tool/chat');
 
 		$bResult = $this->model_friend_room->edit( $idRoom, array('name' => $sName) );
 
@@ -372,6 +373,7 @@ class ControllerApiMessage extends Controller {
 
 		$this->load->model('friend/room');
 		$this->load->model('tool/object');
+		$this->load->model('tool/chat');
 
 		$oRoom = $this->model_friend_room->edit( $idRoom, $this->request->post );
 

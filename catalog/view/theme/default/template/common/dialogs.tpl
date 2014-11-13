@@ -45,6 +45,16 @@
                                 </div>
                                 <div id="tab-2" class="tab-pane">
                                     <div class="innerAll half">
+                                        <!--ko if: numberOfAddedMember() == 1 -->
+                                        <div class="bg-success">
+                                            {% trans %}<strong>1</strong> user has been added to room !{% endtrans %}
+                                        </div>
+                                        <!-- /ko -->
+                                        <!--ko if: numberOfAddedMember() > 1 -->
+                                        <div class="bg-success">
+                                            {% trans %}<strong data-bind="text: numberOfAddedMember"></strong> user has been added to room !{% endtrans %}
+                                        </div>
+                                        <!-- /ko -->
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <input data-bind="autoCompleteTag: addedUserIds, autoOptions: { dataRequest: $data.userDataRequest, formatResult: $data.formatResult }" type="text" id="more-member-input" class="form-control input-sm" placeholder="Find user(s) to add ...">
@@ -53,8 +63,8 @@
                                         <div style="height: 20px;"></div>
                                         <div class="row">
                                             <div class="col-xs-12 text-center">
-                                                <button data-bind="enable: canAddMore" class="btn btn-primary btn-sm" title="{% trans %}Add to room{% endtrans %}"><i class="fa fa-plus"></i> Add to room</button>
-                                                <button data-bind="click: clearTags" class="btn btn-default btn-sm" title="{% trans %}Clear{% endtrans %}"><i class="fa fa-trash-o"></i> Clear</button>
+                                                <button data-bind="enable: canAddMore, click: addMember" class="btn btn-primary btn-sm" title="{% trans %}Add to room{% endtrans %}"><i class="fa fa-plus"></i> Add to room</button>
+                                                <button data-bind="click: clearTags, enable: canAddMore" class="btn btn-default btn-sm" title="{% trans %}Clear{% endtrans %}"><i class="fa fa-trash-o"></i> Clear</button>
                                             </div>
                                         </div>
                                     </div>
