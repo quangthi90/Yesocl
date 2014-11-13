@@ -306,6 +306,10 @@
 				_handleUserRemovedFromRoom(e.response.room, e.response.user_id);
 			});
 
+			$(window).on(Y.Constants.PusherMessages.add_user, function(e) {
+				_handleUserAdded(e.response.room, e.response.users);
+			});
+
 			$(window).on(Y.Constants.PusherMessages.rename_room, function(e) {
 				_handleRoomNameChanged(r.response.room);
 			});
@@ -358,6 +362,19 @@
 			});
 			if(existingRoom){
 				existingRoom.name(room.name);
+			}
+		}
+
+		function _handleUserAdded (room, addedUsers){
+			var existingRoom = ko.utils.arrayFirst(self.roomList(), function(r) {
+				return r.id === room.id;
+			});
+			if(!existingRoom){
+				var newRoom = new Y.Models.RoomModel(room);
+				self.roomList.unshift(newRoom);				
+
+				//Subscribe room chanel:
+				Y.PusherManager.subscribeChanel(newRoom.id);
 			}
 		}
 

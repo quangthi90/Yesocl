@@ -41,6 +41,14 @@ a.black-color:hover {
 .modal {
 	overflow-y: auto;
 }
+.bottom10 {
+	display: block;
+	margin-bottom: 10px;
+}
+.bottom20 {
+	display: block;
+	margin-bottom: 20px;
+}
 
 textarea {
 	min-height: 35px;	

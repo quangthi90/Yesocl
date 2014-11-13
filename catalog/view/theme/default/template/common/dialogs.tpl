@@ -46,12 +46,12 @@
                                 <div id="tab-2" class="tab-pane">
                                     <div class="innerAll half">
                                         <!--ko if: numberOfAddedMember() == 1 -->
-                                        <div class="bg-success">
+                                        <div class="bg-success innerAll half bottom10">
                                             {% trans %}<strong>1</strong> user has been added to room !{% endtrans %}
                                         </div>
                                         <!-- /ko -->
                                         <!--ko if: numberOfAddedMember() > 1 -->
-                                        <div class="bg-success">
+                                        <div class="bg-success innerAll half bottom10">
                                             {% trans %}<strong data-bind="text: numberOfAddedMember"></strong> user has been added to room !{% endtrans %}
                                         </div>
                                         <!-- /ko -->
