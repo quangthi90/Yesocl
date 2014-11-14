@@ -247,15 +247,18 @@ class ControllerApiMessage extends Controller {
 
 		$this->load->model('friend/room');
 		$this->load->model('tool/chat');
+		$this->load->model('tool/object');
 
-		$bResult = $this->model_friend_room->edit( $idRoom, array('name' => $sName) );
+		$oRoom = $this->model_friend_room->edit( $idRoom, array('name' => $sName) );
 
-		if ( !$bResult ) {
+		if ( !$oRoom ) {
 			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'Room ID not exist or this user is not creator'
             )));
 		}
+
+		$aRoom = $this->model_tool_object->formatRoom( $oRoom );
 
 		$sActivityType = $this->config->get('pusher')['message']['rename_room'];		
 		$this->model_tool_chat->pushMessage( 
