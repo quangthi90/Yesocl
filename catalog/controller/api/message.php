@@ -446,7 +446,7 @@ class ControllerApiMessage extends Controller {
 
 		$oRoom = $this->model_friend_room->edit( $idRoom, $this->request->post );
 
-		$aRoom = array();
+		$aRoom = array('id' => $idRoom);
 		if ( $oRoom ) {
 			$aRoom = $this->model_tool_object->formatRoom( $oRoom );
 		}
