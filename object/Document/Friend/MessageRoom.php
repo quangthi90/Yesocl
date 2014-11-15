@@ -56,6 +56,7 @@ Class MessageRoom {
 		return array(
 			'id' => $this->getId(),
 			'name' => $this->getRoomName( $oLoggedUser ),
+			'is_room' => $this->getIsRoom(),
 			'updated' => $updated,
 			'created' => $created
 		);

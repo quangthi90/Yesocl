@@ -259,6 +259,9 @@ class ModelToolObject extends Model
 	 * @return: Array Object Message formated
 	 */
 	public function formatMessage( $oMessage, $iWidth = 60, $iHeight = 60 ) {
+		if ( !$oMessage ) {
+			return array();
+		}
 		$aMessage = $oMessage->formatToCache();
 
 		$oUser = $oMessage->getAuthor();

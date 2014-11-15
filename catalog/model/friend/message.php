@@ -26,7 +26,8 @@ class ModelFriendMessage extends Model {
 			if ( $oUserTo ) {
 				$aUserIds = array( $aData['user_from_id'], $oUserTo->getId() );
 				$lRooms = $this->dm->getRepository('Document\Friend\MessageRoom')->findBy(array(
-					'users.id' => array( '$all' => $aUserIds )
+					'users.id' => array( '$all' => $aUserIds ),
+					'isRoom' => false
 				));
 				foreach ( $lRooms as $oRoom ) {
 					if ( $oRoom->getUsers()->count() <= 2 ) {
@@ -63,6 +64,13 @@ class ModelFriendMessage extends Model {
 			else
 				$iUnRead = 0;
 			$oRoom->addUnRead( $oUser->getId(), $iUnRead );
+		}
+
+		// Check is room
+		if ( count($oRoom->getUnReads()) > 2 ) {
+			$oRoom->setIsRoom( true );
+		} else {
+			$oRoom->setIsRoom( false );
 		}
 
 		$oMessage = new Message();

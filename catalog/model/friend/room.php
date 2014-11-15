@@ -28,6 +28,14 @@ class ModelFriendRoom extends Model {
 
 		// user_ids is add user
 		if ( !empty($aData['user_ids']) ) {
+			if ( !$oRoom->getIsRoom() ) {
+				$oOldRoom = $oRoom;
+				$oRoom = new MessageRoom();
+				$oRoom->setIsRoom( true );
+				$oRoom->setCreator( $oOldRoom->getCreator() );
+				$oRoom->setUsers( $oOldRoom->getUsers() );
+				$this->dm->persist( $oRoom );
+			}
 			$lUsers = $this->dm->getRepository('Document\User\User')->findBy(array(
 				'id' => array('$in' => $aData['user_ids'])
 			));
