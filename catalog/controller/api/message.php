@@ -411,7 +411,8 @@ class ControllerApiMessage extends Controller {
 
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'room' => $aRoom
+            'room' => $aRoom,
+            'users' => $aUsers
         )));
 	}
 
