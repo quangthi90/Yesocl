@@ -367,7 +367,7 @@
 			if(room.author && room.author.id === Y.CurrentUser.id){
 				return;
 			}
-			
+
 			var existingRoom = ko.utils.arrayFirst(self.roomList(), function(r) {
 				return r.id === room.id;
 			});
@@ -384,7 +384,7 @@
 
 					//Subscribe room chanel:
 					Y.PusherManager.subscribeChanel(newRoom.id);
-				}			
+				}		
 			}else {
 				existingRoom.name(room.name);
 				existingRoom.lastUser(room.last_user);
@@ -452,19 +452,25 @@
 
 		/* ============= START PROPERTIES ================== */
 		var modalEle = options.ele || undefined;
-		self.actualMembers = ko.observableArray([]);
 		self.activeRoom = ko.observable(options.activeRoom || null);
 		self.currentUserId = Y.CurrentUser.id;
 		self.addedUserIds = ko.observableArray([]);
 		self.numberOfAddedMember = ko.observable(0);
+		self.query = ko.observable("");
 
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
 		self.members = ko.computed(function(){
-			if(self.activeRoom() !== null && self.activeRoom().members){
-				self.actualMembers(self.activeRoom().members() || []);
-				return self.actualMembers();
+			if(self.activeRoom() !== null && self.activeRoom().members) {
+				var query = self.query().trim().toLowerCase();
+				if(query.length === 0){
+					return self.activeRoom().members();
+				}
+				var result = ko.utils.arrayFilter(self.activeRoom().members(), function(u) {
+					return u.username.toLowerCase().indexOf(query) >= 0;
+				});
+				return result;
 			}
 			return [];
 		});
@@ -527,9 +533,14 @@
 				roomId: self.activeRoom().id,
 				userIds: self.addedUserIds()
 			};
-			_addMemeber(postData, function(data){
+			_addMemeber(postData, function(data){				
 				self.numberOfAddedMember(self.addedUserIds().length);
 				self.addedUserIds.removeAll();
+
+				//Add members:				
+				for(var userId in data.users){
+					self.activeRoom().members.push(data.users[userId]);
+				}
 			}, function(data){
 				//Message
 				alert("User was not added !");
@@ -543,7 +554,7 @@
 			Y.Utils.initFriendList(function(returnData) {
 				if(returnData){
 					var temp = ko.utils.arrayFilter(returnData, function(item){
-						var existing = ko.utils.arrayFirst(self.actualMembers(), function(u){
+						var existing = ko.utils.arrayFirst(self.activeRoom().members(), function(u){
 							return  u.id == item.id;
 						});
 

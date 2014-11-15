@@ -20,7 +20,7 @@
                                     <div class="innerAll half">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <input type="text" class="form-control input-sm" placeholder="{% trans %}Search member{% endtrans %} ...">
+                                                <input type="text" data-bind="value: query, valueUpdate:'afterkeydown'" class="form-control input-sm" placeholder="{% trans %}Search member{% endtrans %} ...">
                                             </div>
                                         </div>
                                     </div>
