@@ -46,6 +46,8 @@ class ModelFriendRoom extends Model {
 						$oNewRoom->addUser( $oUser );
 					}
 				}
+				$this->dm->flush();
+				return $oNewRoom;
 			} else {
 				foreach ( $lUsers as $oUser ) {
 					if ( !isset($oRoom->getUnReads()[$oUser->getId()]) ) {
