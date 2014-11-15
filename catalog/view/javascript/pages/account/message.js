@@ -61,7 +61,7 @@
 
 		self.clickRoomItem = function(item, event){
 			self.isNewMessage(false);
-			if(self.activeRoom() != null && self.activeRoom().id != item.id) {
+			if(self.activeRoom() == null || self.activeRoom().id != item.id) {
 				self.activeRoom(item);
 			}
 			self.activeRoom().updateReadStatus();
@@ -452,6 +452,7 @@
 
 		/* ============= START PROPERTIES ================== */
 		var modalEle = options.ele || undefined;
+		self.isProcessing = ko.observable(false);
 		self.activeRoom = ko.observable(options.activeRoom || null);
 		self.currentUserId = Y.CurrentUser.id;
 		self.addedUserIds = ko.observableArray([]);
@@ -475,8 +476,16 @@
 			return [];
 		});
 
+		self.isAuthor = ko.computed(function(){
+			if(self.activeRoom() !== null) {
+				return self.activeRoom().author.id === Y.CurrentUser.id;
+			}
+			return false;
+		});
+
 		self.canAddMore = ko.computed(function(){
-			return (self.addedUserIds().length > 0);
+			return (self.activeRoom() !== null && self.activeRoom().author.id === Y.CurrentUser.id && 
+				self.isAuthor() && self.addedUserIds().length > 0 && !self.isProcessing());
 		});
 
 		self.open = function(){
@@ -508,32 +517,36 @@
 		};
 
 		self.removeMember = function(mem){
+			if(self.isProcessing()) return;
+
 			var postData = {
 				roomId : self.activeRoom().id,
 				userId : mem.id
 			};
 
 			Y.Utils.showConfirmMessage(Y.Constants.Messages.COMMON_CONFIRM, function(){
+				self.isProcessing(true);
 				_removeMemeber(postData, function(data){
 					self.activeRoom().members.remove(mem);
 					self.activeRoom().name(data.room.name);
+					self.isProcessing(false);
 				}, function(data){
 					//Message
 					alert("User was not removed !");
+					self.isProcessing(false);
 				});
-			}, function(){
-				//Close or cancel event
 			});
 		};
 
 		self.addMember = function(){
-			if(self.addedUserIds().length === 0) return;
+			if(self.addedUserIds().length === 0 || self.isProcessing()) return;
 
 			var postData = {
 				roomId: self.activeRoom().id,
 				userIds: self.addedUserIds()
 			};
-			_addMemeber(postData, function(data){				
+			self.isProcessing(true);
+			_addMember(postData, function(data){				
 				self.numberOfAddedMember(self.addedUserIds().length);
 				self.addedUserIds.removeAll();
 
@@ -541,9 +554,11 @@
 				for(var userId in data.users){
 					self.activeRoom().members.push(data.users[userId]);
 				}
+				self.isProcessing(false);
 			}, function(data){
 				//Message
 				alert("User was not added !");
+				self.isProcessing(false);
 			});
 		};
 
@@ -627,7 +642,7 @@
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
 		}
 
-		function _addMemeber(postData, sucCallback, failCallback) {
+		function _addMember(postData, sucCallback, failCallback) {
 			var ajaxOptions = {
 				url: Y.Routing.generate("ApiPutRoomUser", { room_id : postData.roomId }),
 				data: {
@@ -659,7 +674,10 @@
 					var messageWidgetHeight = $(".widget-message-page").height();
 					niceEle.css("max-height", messageWidgetHeight > 200 ? messageWidgetHeight - 150: 150 + "px");
 					window.makeNiceScroll(niceEle);
-				}				
+				}
+				setTimeout(function(){
+					modalEle.find(".widget-tabs ul.tabs li:first-child a").click();
+				}, 100);			
 			});
 			modalEle.modal("show");
 		}

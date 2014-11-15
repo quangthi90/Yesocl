@@ -9,9 +9,11 @@
                 <div class="modal-body bg-gray">                    
                     <div class="widget widget-tabs widget-tabs-responsive widget-tabs-sm">    
                         <div class="widget-head">
-                            <ul>
+                            <ul class="tabs">
                                 <li class="active"><a data-toggle="tab" href="#tab-1" class="glyphicons group"><i></i>Members</a></li>
-                                <li class=""><a data-toggle="tab" href="#tab-2" class="glyphicons user_add"><i></i>Add member(s)</a></li>
+                                <!-- ko if: isAuthor() -->
+                                <li><a data-toggle="tab" href="#tab-2" class="glyphicons user_add"><i></i>Add member(s)</a></li>
+                                <!-- /ko -->
                             </ul>
                         </div>                        
                         <div class="widget-body">
@@ -25,6 +27,7 @@
                                         </div>
                                     </div>
                                     <div class="innerAll half nice-scroll">
+                                        <!-- ko if: members().length > 0 -->
                                         <ul class="list-unstyled clearfix user-list" data-bind="foreach: members">
                                             <li class="box-shadow-light pull-left bg-white user-item">
                                                 <div class="media innerAll">
@@ -37,12 +40,19 @@
                                                         <a data-bind="link: { title: $data.username, text: $data.username, route: 'WallPage', params: { user_slug: $data.slug } }" class="strong text-small truncated-text display-block"></a>
                                                         <div class="text-small truncated-text" data-bind="text: $data.current">working on fly</div>
                                                     </div>
-                                                    <a data-bind="click: $parent.removeMember, visible: $data.id != $parent.currentUserId" class="btn btn-default btn-sm border-none remove"><i class="fa fa-trash-o"></i></a>
+                                                    <a data-bind="click: $parent.removeMember, visible: $parent.isAuthor() && $data.id != $parent.currentUserId" class="btn btn-default btn-sm border-none remove"><i class="fa fa-trash-o"></i></a>
                                                 </div>
                                             </li>
-                                        </ul>                        
+                                        </ul>
+                                        <!-- /ko -->
+                                        <!-- ko if: members().length === 0 -->
+                                        <div class="bg-default innerAll half">
+                                            {% trans %}No result for '<b data-bind="text: query"></b>' !{% endtrans %}
+                                        </div>
+                                        <!-- /ko -->
                                     </div>
                                 </div>
+                                <!-- ko if: isAuthor() -->
                                 <div id="tab-2" class="tab-pane">
                                     <div class="innerAll half">
                                         <!--ko if: numberOfAddedMember() == 1 -->
@@ -68,7 +78,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>                            
+                                </div>
+                                <!-- /ko -->                      
                             </div>
                         </div>
                     </div>

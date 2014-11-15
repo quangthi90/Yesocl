@@ -77,7 +77,7 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li data-bind="visible: isCreator"><a data-bind="click: toggleEditRoom">{% trans %}Edit room name{% endtrans %}</a></li>
-                                            <li data-bind="visible: isCreator"><a data-bind="click: $parent.openMembers">{% trans %}Manage members{% endtrans %}</a></li>
+                                            <li><a data-bind="click: $parent.openMembers">{% trans %}Members{% endtrans %}</a></li>
                                             <li><a>{% trans %}Leave room{% endtrans %}</a></li>
                                         </ul>
                                     </div>
