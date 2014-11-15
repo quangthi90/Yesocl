@@ -34,6 +34,11 @@ Class MessageRoom {
 	/** @MongoDB\EmbedMany(targetDocument="Message") */
 	private $messages = array();
 
+	/**
+	 * @MongoDB\Boolean
+	 */
+	private $isRoom = false;
+
     /** @MongoDB\Date */
 	private $created;
 
@@ -104,7 +109,7 @@ Class MessageRoom {
 	 */
 	public function getUserById( $idUser ) {
 		foreach ( $this->getUsers() as $oUser ) {
-			if ( $oUser->getId() != $idUser ) return $oUser;
+			if ( $oUser->getId() == $idUser ) return $oUser;
 		}
 
 		return null;
