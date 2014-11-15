@@ -144,6 +144,7 @@ Class MessageRoom {
 
 	public function addUser( User $user ){
 		$this->users[] = $user;
+		$this->addUnRead( $user->getId(), 0 );
 	}
 
 	public function setUsers( $users ){
