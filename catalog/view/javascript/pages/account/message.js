@@ -311,7 +311,7 @@
 			});
 
 			$(window).on(Y.Constants.PusherMessages.rename_room, function(e) {
-				_handleRoomNameChanged(r.response.room);
+				_handleRoomNameChanged(e.response.room);
 			});
 		}
 
@@ -324,24 +324,22 @@
 				return r.id === room.id;
 			});
 
-			if(Y.CurrentUser.id === userId){
-				//Unsubscribe chanel
-				Y.PusherManager.unsubscribeChanel(room.id);
+			if(existingRoom) {
+				if(Y.CurrentUser.id === userId){
+					//Unsubscribe chanel
+					Y.PusherManager.unsubscribeChanel(room.id);
 
-				//Remove room from list
-				if(existingRoom){
+					//Remove room from list
 					self.roomList.remove(existingRoom);
 					_selectFirstRoom();
+					
 					//Inform to user
-					var message = Y.Constants.Messages.ROOM_REMOVED_INFO.replace("[ROOM]", room.name);
-					Y.Utils.showInfoMessage(message, function(){
-					});
-				}				
-			}else {
-				if(existingRoom){
+					Y.Utils.showInfoMessage(Y.Constants.Messages.ROOM_REMOVED_INFO.replace("[ROOM]", room.name));
+				}else {
 					existingRoom.name(room.name);
+					existingRoom.lastUser(room.last_user);
+					//Inform that user was removed from room
 				}
-				//Inform that user was removed from room
 			}
 		}
 
@@ -366,15 +364,30 @@
 		}
 
 		function _handleUserAdded (room, addedUsers){
+			if(room.author && room.author.id === Y.CurrentUser.id){
+				return;
+			}
+			
 			var existingRoom = ko.utils.arrayFirst(self.roomList(), function(r) {
 				return r.id === room.id;
 			});
-			if(!existingRoom){
-				var newRoom = new Y.Models.RoomModel(room);
-				self.roomList.unshift(newRoom);				
 
-				//Subscribe room chanel:
-				Y.PusherManager.subscribeChanel(newRoom.id);
+			if(!existingRoom){
+				
+				var userChecked = ko.utils.arrayFirst(addedUsers, function(u){
+					return Y.CurrentUser.id === u.id;
+				});
+
+				if(userChecked){
+					var newRoom = new Y.Models.RoomModel(room);
+					self.roomList.unshift(newRoom);
+
+					//Subscribe room chanel:
+					Y.PusherManager.subscribeChanel(newRoom.id);
+				}			
+			}else {
+				existingRoom.name(room.name);
+				existingRoom.lastUser(room.last_user);
 			}
 		}
 

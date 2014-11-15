@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header bg-primary">
                     <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                    <h3 class="modal-title">{% trans %}Room members{% endtrans %} </h3>
+                    <h3 class="modal-title" style="color: #FFF;">{% trans %}Room members{% endtrans %} </h3>
                 </div>
                 <div class="modal-body bg-gray">                    
                     <div class="widget widget-tabs widget-tabs-responsive widget-tabs-sm">    
