@@ -389,18 +389,19 @@ class ControllerApiMessage extends Controller {
 
 		$aRoom = $this->model_tool_object->formatRoom( $oRoom );
 
-		
+		$aChannelNames = array($idRoom);
 		$aUsers = array();
 		foreach ( $this->request->post['user_ids'] as $idUser ) {
 			$oUser = $oRoom->getUserById( $idUser );
 			if ( $oUser ) {
 				$aUsers[$idUser] = $this->model_tool_object->formatUser( $oUser );
+				$aChannelNames[] = $idUser;
 			}
 		}
 
 		$sActivityType = $this->config->get('pusher')['message']['add_user'];		
 		$this->model_tool_chat->pushMessage( 
-			array($idRoom),
+			$aChannelNames,
 			$sActivityType,
 			array(
 				'room' => $aRoom,

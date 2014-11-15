@@ -186,6 +186,14 @@ Class MessageRoom {
 		return $this->messages;
 	}
 
+	public function setIsRoom( $isRoom ){
+		$this->isRoom = $isRoom;
+	}
+
+	public function getIsRoom(){
+		return $this->isRoom;
+	}
+
 	public function setCreated( $created ){
 		$this->created = $created;
 	}
