@@ -21,7 +21,7 @@ class ModelFriendRoom extends Model {
 		if ( !$oRoom ) return false;
 
 		// check is author
-		if ( $oRoom->getCreator()->getId() != $this->customer->getId() ) return false;
+		if ( $oRoom->getIsRoom() && $oRoom->getCreator()->getId() != $this->customer->getId() ) return false;
 
 		if ( !empty($aData['name']) )
 			$oRoom->setName( $aData['name'] );
