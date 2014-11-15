@@ -286,6 +286,8 @@
 		function _selectFirstRoom() {
 			if(self.roomList().length > 0){
 				self.activeRoom(self.roomList()[0]);
+			}else {
+				self.activeRoom(null);
 			}
 		}		
 
@@ -312,6 +314,16 @@
 
 			$(window).on(Y.Constants.PusherMessages.rename_room, function(e) {
 				_handleRoomNameChanged(e.response.room);
+			});
+
+			$(window).on(Y.Constants.Triggers.NEW_ROOM_ADDED, function(e) {
+				var newRoom = new Y.Models.RoomModel(e.response);
+				self.roomList.unshift(newRoom);
+				self.activeRoom(newRoom);
+				_scrollToTopRoomList();				
+
+				//Subscribe room chanel:
+				Y.PusherManager.subscribeChanel(newRoom.id);	
 			});
 		}
 
@@ -373,18 +385,11 @@
 			});
 
 			if(!existingRoom){
-				
-				var userChecked = ko.utils.arrayFirst(addedUsers, function(u){
-					return Y.CurrentUser.id === u.id;
-				});
+				var newRoom = new Y.Models.RoomModel(room);
+				self.roomList.unshift(newRoom);
 
-				if(userChecked){
-					var newRoom = new Y.Models.RoomModel(room);
-					self.roomList.unshift(newRoom);
-
-					//Subscribe room chanel:
-					Y.PusherManager.subscribeChanel(newRoom.id);
-				}		
+				//Subscribe room chanel:
+				Y.PusherManager.subscribeChanel(newRoom.id);		
 			}else {
 				existingRoom.name(room.name);
 				existingRoom.lastUser(room.last_user);
@@ -546,7 +551,8 @@
 				userIds: self.addedUserIds()
 			};
 			self.isProcessing(true);
-			_addMember(postData, function(data){				
+			_addMember(postData, function(data){
+				self.isProcessing(false);
 				self.numberOfAddedMember(self.addedUserIds().length);
 				self.addedUserIds.removeAll();
 
@@ -554,7 +560,16 @@
 				for(var userId in data.users){
 					self.activeRoom().members.push(data.users[userId]);
 				}
-				self.isProcessing(false);
+
+				if(self.activeRoom().id != data.room.id) {
+					//Trigger room added
+					$(window).trigger({
+						type: Y.Constants.Triggers.NEW_ROOM_ADDED,
+						response: data.room
+					});
+					self.close();
+				}
+				
 			}, function(data){
 				//Message
 				alert("User was not added !");
