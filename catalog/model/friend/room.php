@@ -58,7 +58,8 @@ class ModelFriendRoom extends Model {
 		}
 
 		// user_id is remove user
-		if ( !empty($aData['user_id']) && $oRoom->getIsRoom() ) {
+		if ( !empty($aData['user_id']) ) {
+			if ( $oRoom->getIsRoom() ) return false;
 			if ( $oRoom->getCreator()->getId() == $aData['user_id'] || $oRoom->getUsers()->count() == 2 ) {
 				$this->delete( $oRoom->getId() );
 				return null;
