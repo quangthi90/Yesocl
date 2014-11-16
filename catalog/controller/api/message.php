@@ -435,22 +435,23 @@ class ControllerApiMessage extends Controller {
             )));
 		}
 
-		if ( empty($this->request->post['user_id']) ) {
-			return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok',
-                'error' => 'user ID is empty'
-            )));
+		if ( !empty($this->request->post['user_id']) ) {
+			$idUser = $this->request->post['user_id'];
+		} else {
+			$idUser = $this->customer->getId();
 		}
 
 		$this->load->model('friend/room');
 		$this->load->model('tool/object');
 		$this->load->model('tool/chat');
 
-		$oRoom = $this->model_friend_room->edit( $idRoom, $this->request->post );
+		$oRoom = $this->model_friend_room->edit( $idRoom, array('user_id' => $idUser) );
 
 		$aRoom = array('id' => $idRoom);
+		$bIsDeleted = true;
 		if ( $oRoom ) {
 			$aRoom = $this->model_tool_object->formatRoom( $oRoom );
+			$bIsDeleted = false;
 		}
 
 		$sActivityType = $this->config->get('pusher')['message']['remove_user'];		
@@ -459,13 +460,15 @@ class ControllerApiMessage extends Controller {
 			$sActivityType,
 			array(
 				'room' => $aRoom,
-				'user_id' => $this->request->post['user_id']
+				'user_id' => $idUser,
+				'is_deleted' => $bIsDeleted
 			)
 		);
 
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'room' => $aRoom
+            'room' => $aRoom,
+            'is_deleted' => $bIsDeleted
         )));
 	}
 }
