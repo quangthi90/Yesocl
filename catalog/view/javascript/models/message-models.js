@@ -40,7 +40,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 				var rawContent = message.content;
 				return Y.Utils.parseTaggedText(rawContent);
 			}
-			return "";
+			return "***";
 		});
 
 		that.loadMessage = function(sucCallback, failCallback) {
