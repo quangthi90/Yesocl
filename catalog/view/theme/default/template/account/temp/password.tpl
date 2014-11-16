@@ -8,41 +8,43 @@
 {% endblock %}
 
 {% block body %}
-<div id="y-content" class="no-header-fixed">
-  <div id="y-main-content">
-    <div class="y-frm" id="y-frm-password">
-        <div class="frm-title">{% trans %}Change password{% endtrans %}</div>
-        {% if has_flash('success') == true %}
-        <div class="alert alert-success">{{ get_flash('success') }}</div>
-        {% elseif has_flash('warning') == true %}
-        <div class="alert alert-error">{{ get_flash('warning') }}</div>
-        {% endif %}
-        <div class="frm-content">            
-            <form action="{{ path('ChangePassword') }}" method="post">
-                {% if show_old_pass == true %}
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-lock icon-2x"></i> {% trans %}Old{% endtrans %}</span>
-                    <input name="oldPass" class="span3" id="old-password" type="password" placeholder="Old password">
+<div class="y-frm" id="y-frm-password">
+    <div class="frm-title">{% trans %}Change password{% endtrans %}</div>
+    {% if has_flash('success') == true %}
+    <div class="bg-success innerAll half">{{ get_flash('success') }}</div>
+    {% elseif has_flash('warning') == true %}
+    <div class="bg-danger innerAll half">{{ get_flash('warning') }}</div>
+    {% endif %}
+    <div class="frm-content">
+        <form action="{{ path('ChangePassword') }}" method="post" role="form" class="form-horizontal">
+            {% if show_old_pass == true %}
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="old-password">{% trans %}Old password{% endtrans %}</label>
+                <div class="col-sm-8">
+                    <input name="oldPass" class="form-control" id="old-password" type="password" placeholder="Old password">
                 </div>
-                {% endif %}
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-lock icon-2x"></i> {% trans %}New{% endtrans %}</span>
-                    <input name="password" class="span3" id="new-password" type="password" placeholder="New password">
+            </div>
+            {% endif %}
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="new-password">{% trans %}New password{% endtrans %}</label>
+                <div class="col-sm-8">
+                    <input name="password" class="form-control" id="new-password" type="password" placeholder="New password">
                 </div>
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-lock icon-2x"></i>{% trans %}Re-New{% endtrans %}</span>
-                    <input name="confirm" class="span3" id="re-new-password" type="password" placeholder="Re-type new password">
-                </div>         
-                <div class="btns">
-                     <button type="submit" class="btn btn-success">{% trans %}Change{% endtrans %}</button>   
-                     <a class="btn" href="{{ path('HomePage') }}">{% trans %}Cancel{% endtrans %}</a>   
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label" for="re-new-password">{% trans %}Re-type password{% endtrans %}</label>
+                <div class="col-sm-8">
+                    <input name="confirm" class="form-control" id="re-new-password" type="password" placeholder="Re-type new password">
                 </div>
-            </form>     
-        </div>
-        <div class="frm-footer">            
-        </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button type="submit" class="btn btn-primary">{% trans %}Change{% endtrans %}</button>
+                    <a class="btn btn-default" href="{{ path('HomePage') }}">{% trans %}Cancel{% endtrans %}</a> 
+                </div>
+            </div>
+        </form>  
     </div>
-  </div>
 </div>
 {% endblock %}
 

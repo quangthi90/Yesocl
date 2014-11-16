@@ -68,7 +68,7 @@
                                 <div class="col-xs-4">
                                     <div class="pull-right">
                                         <a class="btn btn-default bg-white btn-sm" data-bind="click: $parent.toggleNewMessage"><i class="fa fa-pencil"></i> <span class="hidden-xs">{% trans %}New Message{% endtrans %}</span></a>
-                                    </div>
+                                    </div>                                    
                                     <div class="btn-group btn-group-sm pull-right">
                                         <button data-toggle="dropdown" class="btn btn-default bg-white dropdown-toggle" type="button">
                                             <i class="fa fa-cog"></i>
@@ -76,9 +76,9 @@
                                             <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li data-bind="visible: isCreator"><a data-bind="click: toggleEditRoom">{% trans %}Edit room name{% endtrans %}</a></li>
+                                            <li data-bind="visible: isCreator"><a data-bind="click: toggleEditRoom">{% trans %}Edit name{% endtrans %}</a></li>
                                             <li><a data-bind="click: $parent.openMembers">{% trans %}Members{% endtrans %}</a></li>
-                                            <li><a data-bind="click: $parent.leaveRoom">{% trans %}Leave room{% endtrans %}</a></li>
+                                            <li data-bind="visible: isRoom"><a data-bind="click: $parent.leaveRoom">{% trans %}Leave room{% endtrans %}</a></li>
                                         </ul>
                                     </div>
                                 </div>

@@ -48,7 +48,8 @@ class ControllerAccountAvatar extends Controller {
     $aParts = explode('/', $this->request->post['image'] );
     $sFilename = $aParts[count($aParts) - 1];
     $sImageLink = DIR_IMAGE . $this->config->get('common')['image']['upload_cache'] . $sFilename;
-    $sExtension = explode('.', $sFilename)[1];
+    $sExts = explode('.', $sFilename);
+    $sExtension = $sExts[count($sExts) - 1];
 
     $aDatas = array('avatar' => array(
       'x' => $this->request->post['cropX'],

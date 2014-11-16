@@ -69,35 +69,6 @@ div.radio.active, div.checker.active{
 /*end Format Yes Style*/
 /*OVERLOAD BOOTSTRAP*/
 
-textarea, 
-input[type="text"], 
-input[type="password"], 
-input[type="datetime"], 
-input[type="datetime-local"], 
-input[type="date"], 
-input[type="month"], 
-input[type="time"], 
-input[type="week"], 
-input[type="number"], 
-input[type="email"], 
-input[type="url"], 
-input[type="search"], 
-input[type="tel"], 
-input[type="color"], .uneditable-input
-{
-    font-size: 13px;
-    height: 16px;
-}
-
-.input-append .add-on, .input-prepend .add-on
-{
-    font-size:13px;
-}
-
-.input-append input, .input-prepend input, .input-append select, .input-prepend select, .input-append .uneditable-input, .input-prepend .uneditable-input, .input-append .dropdown-menu, .input-prepend .dropdown-menu, .input-append .popover, .input-prepend .popover {
-  font-size: 12px;
-}
-
 form
 {
   margin:0px;
@@ -1834,7 +1805,7 @@ a.btn-notification:hover .notification-item-name > i {
 
 .y-frm .frm-content
 {
-    padding: 10px 0px 25px 90px;
+    padding: 15px;
     border-bottom: 1px solid #ddd;
 }
 

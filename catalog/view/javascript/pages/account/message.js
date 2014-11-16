@@ -264,13 +264,13 @@
 
 		function _leaveRoom(room, sucCallback, failCallback){
 			var ajaxOptions = {
-				url: Y.Routing.generate("ApiPutLeaveRoom"),
-				data : { room_id : room.id }
+				url: Y.Routing.generate("ApiDeleteRoomUser", { room_id : room.id }),
+				data : {}
 			};
 
 			var successCallback = function(data){				
 				if(data.success === "ok"){
-					self.roomList.remove(room);					
+					self.roomList.remove(room);		
 
 					//Unsubscribe chanel
 					Y.PusherManager.unsubscribeChanel(room.id);
@@ -313,10 +313,10 @@
 						existingRoom.unread(existingRoom.unread() + 1);
 						_updateOrderRoom();
 					}					
-				}		
+				}
 			} 
 			// New room
-			else { 
+			else {
 				var newRoom = new Y.Models.RoomModel(returnRoom);
 				//newRoom.messageList.push(newMessage);
 				self.roomList.unshift(newRoom);
@@ -630,7 +630,7 @@
 
 			Y.Utils.showConfirmMessage(msg, function(){
 				self.isProcessing(true);
-				_removeMemeber(postData, function(data){
+				_removeMember(postData, function(data){
 					self.isProcessing(false);
 					if(data.is_deleted){
 						$(window).trigger({
@@ -742,7 +742,7 @@
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
 		}
 
-		function _removeMemeber(postData, sucCallback, failCallback) {
+		function _removeMember(postData, sucCallback, failCallback) {
 			var ajaxOptions = {
 				url: Y.Routing.generate("ApiDeleteRoomUser", { room_id : postData.roomId }),
 				data: {

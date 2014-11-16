@@ -1,5 +1,5 @@
 body { 
-  background: #000 url(../image/b-bg.png) repeat top left;
+  /*background: #000 url(../image/b-bg.png) repeat top left;*/
 }
 
 #y-login-header {
@@ -51,8 +51,9 @@ body {
 }
 
 #y-frm-login .frm-content {
-    padding: 10px 0px 25px 90px;
-    border-bottom: 1px solid #ddd;
+  padding-left: 90px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #F0F0F0;
 }
 
 #y-frm-login .frm-content .checkbox-container {
@@ -104,9 +105,12 @@ body {
   height: 23px;
 }
 
+#y-frm-password {
+  width: 600px;
+}
+
 #y-frm-password .frm-content {
-  border-bottom: none;
-  padding-left: 70px;
+  border-bottom: none;  
 }
 
 #y-frm-password .input-prepend span.add-on {

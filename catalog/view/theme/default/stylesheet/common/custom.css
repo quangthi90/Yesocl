@@ -81,6 +81,9 @@ ul.dropdown-menu.action-options li a {
 ul.dropdown-menu.action-options li a i {	
 	font-size: 11px;
 }
+.jcrop-holder img{
+	border-radius: 0px !important;
+}
 
 #common-loading {
     left: 0;
