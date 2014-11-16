@@ -447,7 +447,7 @@ class ControllerApiMessage extends Controller {
 
 		$oRoom = $this->model_friend_room->edit( $idRoom, array('user_id' => $idUser) );
 
-		if ( $oRoom == false ) {
+		if ( $oRoom === false ) {
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'not ok',
 	            'error' => 'permission deny!'
