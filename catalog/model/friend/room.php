@@ -35,7 +35,7 @@ class ModelFriendRoom extends Model {
 			if ( !$oRoom->getIsRoom() ) {
 				$oNewRoom = new MessageRoom();
 				$oNewRoom->setIsRoom( true );
-				$oNewRoom->setCreator( $oRoom->getCreator() );
+				$oNewRoom->setCreator( $this->customer->getUser() );
 				foreach ($oRoom->getUsers() as $oUser) {
 					$oNewRoom->addUser( $oUser );
 				}
