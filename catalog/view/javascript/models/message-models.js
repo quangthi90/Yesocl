@@ -12,10 +12,11 @@ YesGlobal.Models = YesGlobal.Models || {};
 		that.lastUser = ko.observable(data.last_user || {});
 		that.created = data.created || null;
 		that.updated = ko.observable(data.updated || null);
+		that.isRoom = ko.observable(data.is_room || false);
 		that.lastMessage = ko.observable(data.last_message || {});
 		that.messageList = ko.observableArray([]);
 		that.members = ko.observableArray([]);
-		that.newMessage = ko.observable(new Y.Models.MessageModel({}));
+		that.newMessage = ko.observable(new Y.Models.MessageModel({}));		
 		
 		that.visible = ko.observable(true);
 		that.unread = ko.observable(data.unread_count || 0);
