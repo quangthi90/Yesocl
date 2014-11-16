@@ -136,6 +136,35 @@
 			self.roomMemberManager.open();
 		};
 
+		self.leaveRoom = function(){
+
+			var activeRoomAuthor = self.activeRoom().author;
+			if(!activeRoomAuthor) return;
+
+			//Room author is current user
+			if(activeRoomAuthor.id === Y.CurrentUser.id){
+				Y.Utils.showConfirmMessage(Y.Constants.Messages.OWNER_ROOM_LEAVE_CONFIRM, function(){
+					_leaveRoom(self.activeRoom(), function(data){
+						_selectFirstRoom();
+						_scrollToTopRoomList();
+					}, function(){
+						//Message
+						alert("You can not leave now !");
+					});
+				});
+			}else{
+				Y.Utils.showConfirmMessage(Y.Constants.Messages.ROOM_LEAVE_CONFIRM, function(){
+					_leaveRoom(self.activeRoom(), function(data){
+						_selectFirstRoom();
+						_scrollToTopRoomList();
+					}, function(){
+						//Message
+						alert("You can not leave now !");
+					});
+				});
+			}
+		};
+
 		self.userDataRequest = function(query){
 			var term = query.term.toLowerCase();
 			var data = { results: [] };
@@ -233,6 +262,32 @@
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
 		}
 
+		function _leaveRoom(room, sucCallback, failCallback){
+			var ajaxOptions = {
+				url: Y.Routing.generate("ApiPutLeaveRoom"),
+				data : { room_id : room.id }
+			};
+
+			var successCallback = function(data){				
+				if(data.success === "ok"){
+					self.roomList.remove(room);					
+
+					//Unsubscribe chanel
+					Y.PusherManager.unsubscribeChanel(room.id);
+
+					if(sucCallback && typeof sucCallback === "function"){
+						sucCallback(data);
+					}
+				}else {
+					if(failCallback && typeof failCallback === "function"){
+						failCallback(data);
+					}
+				}
+			};
+			//Call common ajax Call:
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, failCallback);
+		}
+
 		function _addMessageDataToRoom(data, callback){
 			if(!data.room || !data.message) return;
 
@@ -305,7 +360,11 @@
 			});
 
 			$(window).on(Y.Constants.PusherMessages.remove_user, function(e) {
-				_handleUserRemovedFromRoom(e.response.room, e.response.user_id);
+				_handleUserRemovedFromRoom(e.response.room, e.response.user_id, e.response.is_deleted || false);
+			});
+
+			$(window).on(Y.Constants.PusherMessages.leave_room, function(e) {
+				_handleUserLeftFromRoom(e.response.room, e.response.user);
 			});
 
 			$(window).on(Y.Constants.PusherMessages.add_user, function(e) {
@@ -325,9 +384,25 @@
 				//Subscribe room chanel:
 				Y.PusherManager.subscribeChanel(newRoom.id);	
 			});
+
+			$(window).on(Y.Constants.Triggers.NEW_ROOM_REMOVED, function(e) {
+				var roomId = e.response.roomId;
+				var existingRoom = ko.utils.arrayFirst(self.roomList(), function(r){
+					return r.id === roomId;
+				});
+
+				if(existingRoom){
+					//Remove room from list
+					self.roomList.remove(existingRoom);
+					_selectFirstRoom();
+
+					//UnSubscribe room chanel:
+					Y.PusherManager.unsubscribeChanel(existingRoom.id);
+				}				
+			});
 		}
 
-		function _handleUserRemovedFromRoom(room, userId) {
+		function _handleUserRemovedFromRoom(room, userId, isDeleted) {
 			if(room.author && room.author.id === Y.CurrentUser.id){
 				return;
 			}
@@ -337,7 +412,7 @@
 			});
 
 			if(existingRoom) {
-				if(Y.CurrentUser.id === userId){
+				if(Y.CurrentUser.id === userId || isDeleted){
 					//Unsubscribe chanel
 					Y.PusherManager.unsubscribeChanel(room.id);
 
@@ -346,7 +421,11 @@
 					_selectFirstRoom();
 					
 					//Inform to user
-					Y.Utils.showInfoMessage(Y.Constants.Messages.ROOM_REMOVED_INFO.replace("[ROOM]", room.name));
+					if(isDeleted){
+						Y.Utils.showInfoMessage(Y.Constants.Messages.ROOM_DELETED_INFO, room.name);
+					}else{
+						Y.Utils.showInfoMessage(Y.Constants.Messages.ROOM_REMOVED_INFO.replace("[ROOM]", room.name));
+					}
 				}else {
 					existingRoom.name(room.name);
 					existingRoom.lastUser(room.last_user);
@@ -355,15 +434,23 @@
 			}
 		}
 
-		function _handleUserLeftFromRoom(room, userId) {
-			var existingRoom = ko.utils.arrayFirst(self.roomList(), function(r) {
-				return r.id === room.id;
-			});
+		function _handleUserLeftFromRoom(room, user) {
+			if(user.id === Y.CurrentUser.id) return;
 
-			if(existingRoom){
-				existingRoom.name(room.name);
+			//Room was deleted
+			if(room === null){
+
+			}else{
+				var existingRoom = ko.utils.arrayFirst(self.roomList(), function(r) {
+					return r.id === room.id;
+				});
+
+				if(existingRoom){
+					existingRoom.name(room.name);
+					existingRoom.lastUser(room.last_user);
+					//Inform that user left from room
+				}
 			}
-			//Inform that user left from room
 		}
 
 		function _handleRoomNameChanged(room){
@@ -488,6 +575,13 @@
 			return false;
 		});
 
+		self.canRemove = ko.computed(function(){
+			if(self.activeRoom() !== null) {
+				return self.activeRoom().isRoom() && self.activeRoom().author.id === Y.CurrentUser.id;		
+			}
+			return false;
+		});
+
 		self.canAddMore = ko.computed(function(){
 			return (self.activeRoom() !== null && self.activeRoom().author.id === Y.CurrentUser.id && 
 				self.isAuthor() && self.addedUserIds().length > 0 && !self.isProcessing());
@@ -529,12 +623,25 @@
 				userId : mem.id
 			};
 
-			Y.Utils.showConfirmMessage(Y.Constants.Messages.COMMON_CONFIRM, function(){
+			var msg = Y.Constants.Messages.COMMON_CONFIRM;
+			if(self.activeRoom().members().length == 2){
+				msg = Y.Constants.Messages.ROOM_DELETED_WARN;
+			}
+
+			Y.Utils.showConfirmMessage(msg, function(){
 				self.isProcessing(true);
 				_removeMemeber(postData, function(data){
-					self.activeRoom().members.remove(mem);
-					self.activeRoom().name(data.room.name);
 					self.isProcessing(false);
+					if(data.is_deleted){
+						$(window).trigger({
+							type: Y.Constants.Triggers.ROOM_REMOVED,
+							response: data.room.id
+						});
+						self.close();
+					}else{
+						self.activeRoom().members.remove(mem);
+						self.activeRoom().name(data.room.name);	
+					}
 				}, function(data){
 					//Message
 					alert("User was not removed !");

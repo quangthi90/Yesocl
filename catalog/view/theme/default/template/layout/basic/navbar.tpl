@@ -59,6 +59,8 @@
               <ul class="dropdown-menu">
                   <li><a class="black-color" href="{{ path('MessagePage') }}">Messages</a></li>
                   <li><a class="black-color" href="{{ path('ProfilePage', {user_slug: currUser.slug}) }}">{% trans %}Profile{% endtrans %}</a></li>
+                  <li><a class="black-color" href="{{ path('ChangeAvatar') }}">{% trans %}Change avatar{% endtrans %}</a></li>
+                  <li><a class="black-color" href="{{ path('ChangePassword') }}">{% trans %}Change password{% endtrans %}</a></li>
                   <li><a class="black-color" href="{{ path('Logout') }}">{% trans %}Log out{% endtrans %}</a></li>
               </ul>
           </div>

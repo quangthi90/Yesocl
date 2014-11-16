@@ -31,7 +31,11 @@ var YesGlobal = YesGlobal || {};
 		Messages: {
 			COMMON_CONFIRM : "Are you sure you want to do this selection ?",
 			DELETE_UPLOAD_FILE_CONFIRM : "Are you sure you want to remove uploaded files ?",
-			ROOM_REMOVED_INFO: "Sorry !!! You may be removed from '[ROOM]' by room owner !"
+			OWNER_ROOM_LEAVE_CONFIRM : "You are room owner, this room will be removed also. Are you sure you want to leave this room ?",
+			ROOM_LEAVE_CONFIRM : "Are you sure you want to leave this room ?",
+			ROOM_REMOVED_INFO: "Sorry !!! You may be removed from '[ROOM]' by room owner !",
+			ROOM_DELETED_INFO: "Sorry !!! The active room was deleted by room owner !",
+			ROOM_DELETED_WARN: "Room will be deleted if you do this selection ! Are you sure you want to continue ?"
 		},
 		PusherMessages: {			
 		},
@@ -41,6 +45,7 @@ var YesGlobal = YesGlobal || {};
 			POST_LOADED : "POST_LOADED",
 			NEW_MESSAGE_LOADED: "NEW_MESSAGE_LOADED",
 			NEW_ROOM_ADDED: "NEW_ROOM_ADDED",
+			ROOM_REMOVED: "ROOM_REMOVED",
 			PUSHER_RECONNECTED: "PUSHER_RECONNECTED",
 			CURRENT_USER_CHANGED: "CURRENT_USER_CHANGED",
 			ELEMENT_REMOVED_BY_KO: "ELEMENT_REMOVED_BY_KO"
