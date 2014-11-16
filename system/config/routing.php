@@ -85,7 +85,6 @@ $_['routing']['NotificationPage']				= 'notification/page/';
 
 // Avatar
 $_['routing']['ChangeAvatar']					= 'avatar/change/';
-$_['routing']['SaveAvatar']						= 'avatar/save/';
 
 // Message
 $_['routing']['MessagePage']					= 'message/page/';
@@ -156,6 +155,7 @@ $_['routing']['ApiGetFriends']					= 'services/get/friend/page/{page}/';
 $_['routing']['ApiGetUserPost']					= 'services/get/user/{user_slug}/posts/{page}/';
 $_['routing']['ApiSetPrivateSetting']			= 'services/set/privateoption/';
 $_['routing']['ApiGetDisplayOption']			= 'services/get/setting/what-s-new/display/option/';
+$_['routing']['ApiPutUserAvatar']				= 'services/put/user/avatar/';
 
 // Message
 $_['routing']['ApiGetRooms']					= 'services/get/room/page/{page}/keyword/{keyword}/';

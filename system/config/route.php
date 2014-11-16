@@ -87,7 +87,6 @@ $_['route']['NotificationPage']				= 'common/notification/';
 
 // Avatar
 $_['route']['ChangeAvatar']					= 'account/avatar';
-$_['route']['SaveAvatar']					= 'account/avatar/save';
 
 // Message
 $_['route']['MessagePage']					= 'account/message';
@@ -158,6 +157,7 @@ $_['route']['ApiGetFriends']				= 'api/user/getFriends/';
 $_['route']['ApiGetUserPost']				= 'api/user/getPosts/';
 $_['route']['ApiSetPrivateSetting']			= 'api/user/setPrivateOption/';
 $_['route']['ApiGetDisplayOption']			= 'api/user/getDisplayoption/';
+$_['route']['ApiPutUserAvatar']				= 'api/user/saveAvatar/';
 
 // Message
 $_['route']['ApiGetRooms']					= 'api/message/getRooms/';
