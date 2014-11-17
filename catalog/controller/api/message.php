@@ -447,6 +447,7 @@ class ControllerApiMessage extends Controller {
 
 		$oRoom = $this->model_friend_room->edit( $idRoom, array('user_id' => $idUser) );
 
+		// Permission deney
 		if ( $oRoom === false ) {
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'not ok',
@@ -456,11 +457,14 @@ class ControllerApiMessage extends Controller {
 
 		$aRoom = array('id' => $idRoom);
 		$bIsDeleted = true;
-		if ( $oRoom ) {
+		// User leave room
+		if ( $oRoom && $oRoom->getId() ) {
 			$aRoom = $this->model_tool_object->formatRoom( $oRoom );
 			$bIsDeleted = false;
+		// Creator leave room
+		}else{
+			$aRoom['author'] = $this->model_tool_object->formatUser( $oRoom->getCreator() );
 		}
-
 		$sActivityType = $this->config->get('pusher')['message']['remove_user'];		
 		$this->model_tool_chat->pushMessage( 
 			array($idRoom),
