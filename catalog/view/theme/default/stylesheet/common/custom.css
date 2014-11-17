@@ -329,4 +329,20 @@ body.loading #common-loading {
 .user-list .user-item:hover .remove{
 	display: block;
 }
+
+.friend-list {	
+}
+.friend-list .user-item {
+	box-shadow: 0 0 3px #bbb;
+    margin-bottom: 15px;
+    position: relative;
+}
+.user-item .user-item-options{
+	position: absolute;
+	top: 18px;
+	right: 10px;
+}
+.user-item:hover .user-item-options {
+	display: block;
+}
 /*================================== END USER =====================================*/

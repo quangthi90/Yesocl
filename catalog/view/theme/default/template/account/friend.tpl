@@ -17,56 +17,42 @@
 {% block body %}
     <div class="innerAll">
         <div class="row">
-            <div class="col-lg-9 col-md-8"> 
-				<!-- Friend page -->
+            <div class="col-lg-9 col-md-8">
                 {{ block('timeline_cover')}}
-                {#<h1 data-bind="text: Hello"></h1>
-                <h1 data-bind="text: UserList"></h1>#}
-                <div class="input-group innerB">
+                <div class="input-group innerB inner-2x">
                     <input type="text" class="form-control " placeholder="Search contacts">
-                    <div class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></div>
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                    </div>
                 </div>
                 <div class="row row-merge">                    
-                    <div id="#friend-list" data-bind="with:PageFriendView">
+                    <div id="#friend-list" class="friend-list" data-bind="with:PageFriendView">
                     <!-- ko foreach: friendList-->
-                        <div class="col-md-12 col-lg-6 bg-white border-bottom">
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <div class="media">
-                                        <a class="pull-left margin-none" data-bind="link: {route: 'WallPage', params: { user_slug: $data.userslug } }">
-                                            <img class="img-clean" data-bind="attr : { 'src' : $data.avatar, alt : $data.username }">
-                                        </a>
-                                        <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
-                                             <h4 class="media-heading"><a class="text-inverse" data-bind="text: $data.username, link: {route: 'WallPage', params: { user_slug: $data.userslug } }"></a></h4>
-                                             <p>
-                                                <i class="fa fa-fw fa-map-marker text-muted" ></i><span data-bind="text: $data.current"></span></p> 
-                                        </div>
-                                    </div>
+                        <div class="col-md-12 col-lg-6">
+                            <div class="media bg-white user-item">
+                                <a class="pull-left margin-none" data-bind="link: {route: 'WallPage', params: { user_slug: $data.userslug } }">
+                                    <img class="img-clean" data-bind="attr : { 'src' : $data.avatar, alt : $data.username }">
+                                </a>
+                                <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
+                                    <h4 class="media-heading truncated-text" data-bind="attr:{ 'title': $data.username }"><a class="text-inverse" data-bind="text: $data.username, link: {route: 'WallPage', params: { user_slug: $data.userslug } }"></a></h4>
+                                     <!-- ko if: $data.current -->
+                                    <p class="truncated-text" data-bind="attr:{ 'title': $data.current }"><i class="fa fa-fw fa-map-marker text-muted" ></i><span data-bind="text: $data.current"></span>
+                                    </p> 
+                                     <!-- /ko -->                                    
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="text-right" style="margin-top: 9px;">
-                                        <div class="option_friend_follow btn-group-vertical btn-group-sm pull-left ">
-                                            <div class="dropdown"  style="width: 100%">
-                                                <a class="dropdown-toggle btn btn-primary btn-sm option_friend_follow" id="btn_option_friend" data-toggle="dropdown" style="width: 100%">
-                                                <i class="fa fa-check"></i> &nbsp; 
-                                               {% trans %} Friend {% endtrans %}</a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="pull-left "><a data-bind="click: $parent.unFriend">{% trans %} Unfriend {% endtrans%}</a></li>
-                                                </ul>
-                                            </div>
-                                            <a class="btn btn-default option_friend_follow" data-bind="click: clickFollow">
+                                <div class="user-item-options">
+                                    <div class="btn-group-vertical btn-group-xs" role="group">
+                                        <button class="btn btn-primary" data-bind="click: $parent.unFriend">
+                                            <i class="fa fa-check"></i> {% trans %} Unfriend {% endtrans%}
+                                        </button> 
+                                        <button class="btn btn-default" data-bind="click: clickFollow">
                                             <!-- ko if: $data.followStatus() == 0 || $data.followStatus() == 3 -->
-                                            <i class="fa fa-check  "></i>&nbsp; 
-                                           {% trans %} Follow {% endtrans %} 
+                                            <i class="fa fa-check"></i>&nbsp; {% trans %} Follow {% endtrans %}
                                             <!-- /ko -->
                                             <!-- ko if: $data.followStatus() == 2-->
-                                            <i class="fa fa-rss  "></i>&nbsp; 
-                                            {% trans %} UnFollow {% endtrans %}
-                                            <!-- /ko -->
-                                            </a>
-                                          
-                                            <!-- <a class="btn btn-default" style="margin-left: -4px" data-toggle="sidr-open" data-menu="menu-right"><i class="fa fa-weixin  "></i> {% trans %} &nbsp; Chat {% endtrans %}</a> -->
-                                        </div>
+                                            <i class="fa fa-rss"></i>&nbsp; {% trans %} UnFollow {% endtrans %}
+                                            <!-- /ko -->                                            
+                                        </button> 
                                     </div>
                                 </div>
                             </div>
@@ -74,12 +60,10 @@
                     <!-- /ko -->
                     <!-- <button type="button" class=" pull-right btn btn-info" data-bind="click: $data.loadMore">Load More</button> -->
                     </div>
-
                 </div>
             </div>
             <!-- WIDGET -->
-            <div class="col-md-4 col-lg-3">
-            {{ block('widget_recent_news') }}           
+            <div class="col-md-4 col-lg-3">         
             </div>
             <!-- END WIDGET -->
         </div>
