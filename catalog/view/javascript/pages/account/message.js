@@ -34,6 +34,7 @@
 		/* ============= START PUBLIC METHODS ============== */
 		self.activeRoom.subscribe(function(item){
 			if(item === null) return;
+			self.activeRoom().updateReadStatus();
 			if(item.messageList().length === 0){
 				item.loadMessage();	
 			}
@@ -363,10 +364,6 @@
 				_handleUserRemovedFromRoom(e.response.room, e.response.user_id, e.response.is_deleted || false);
 			});
 
-			$(window).on(Y.Constants.PusherMessages.leave_room, function(e) {
-				_handleUserLeftFromRoom(e.response.room, e.response.user);
-			});
-
 			$(window).on(Y.Constants.PusherMessages.add_user, function(e) {
 				_handleUserAdded(e.response.room, e.response.users);
 			});
@@ -385,7 +382,7 @@
 				Y.PusherManager.subscribeChanel(newRoom.id);	
 			});
 
-			$(window).on(Y.Constants.Triggers.NEW_ROOM_REMOVED, function(e) {
+			$(window).on(Y.Constants.Triggers.ROOM_REMOVED, function(e) {
 				var roomId = e.response.roomId;
 				var existingRoom = ko.utils.arrayFirst(self.roomList(), function(r){
 					return r.id === roomId;
@@ -429,26 +426,13 @@
 				}else {
 					existingRoom.name(room.name);
 					existingRoom.lastUser(room.last_user);
+
+					if(existing.members().length > 0){
+						existing.members.remove(function(u){
+							return u.id === userId;
+						});
+					}
 					//Inform that user was removed from room
-				}
-			}
-		}
-
-		function _handleUserLeftFromRoom(room, user) {
-			if(user.id === Y.CurrentUser.id) return;
-
-			//Room was deleted
-			if(room === null){
-
-			}else{
-				var existingRoom = ko.utils.arrayFirst(self.roomList(), function(r) {
-					return r.id === room.id;
-				});
-
-				if(existingRoom){
-					existingRoom.name(room.name);
-					existingRoom.lastUser(room.last_user);
-					//Inform that user left from room
 				}
 			}
 		}
@@ -480,6 +464,13 @@
 			}else {
 				existingRoom.name(room.name);
 				existingRoom.lastUser(room.last_user);
+
+				//Update members
+				if(existing.members().length > 0){
+					ko.utils.arrayForEach(addedUsers, function(u){
+						existing.members.push(u);
+					});
+				}
 			}
 		}
 
@@ -569,10 +560,12 @@
 		});
 
 		self.isAuthor = ko.computed(function(){
-			if(self.activeRoom() !== null) {
-				return self.activeRoom().author.id === Y.CurrentUser.id;
+			if(self.activeRoom() === null) {
+				return false;				
 			}
-			return false;
+			if(!self.activeRoom().isRoom())
+				return true;
+			return self.activeRoom().author.id === Y.CurrentUser.id;		
 		});
 
 		self.canRemove = ko.computed(function(){
@@ -583,8 +576,7 @@
 		});
 
 		self.canAddMore = ko.computed(function(){
-			return (self.activeRoom() !== null && self.activeRoom().author.id === Y.CurrentUser.id && 
-				self.isAuthor() && self.addedUserIds().length > 0 && !self.isProcessing());
+			return (self.isAuthor() && self.addedUserIds().length > 0 && !self.isProcessing());
 		});
 
 		self.open = function(){
@@ -663,11 +655,6 @@
 				self.numberOfAddedMember(self.addedUserIds().length);
 				self.addedUserIds.removeAll();
 
-				//Add members:				
-				for(var userId in data.users){
-					self.activeRoom().members.push(data.users[userId]);
-				}
-
 				if(self.activeRoom().id != data.room.id) {
 					//Trigger room added
 					$(window).trigger({
@@ -675,6 +662,11 @@
 						response: data.room
 					});
 					self.close();
+				}else{
+					//Add members:				
+					for(var userId in data.users){
+						self.activeRoom().members.push(data.users[userId]);
+					}
 				}
 				
 			}, function(data){

@@ -249,6 +249,18 @@ var YesGlobal = YesGlobal || {};
 		        } else {
 		            $(element).text('-');
 		        }
+		    },
+		    update: function (element, valueAccessor, allBindingsAccessor) {
+		        var value = valueAccessor(), allBindings = allBindingsAccessor();
+		        var dateFormat = allBindings.dateFormat;
+		        var dateValue = ko.utils.unwrapObservable(value);
+		        if (dateValue) {
+		        	var text = Y.Utils.convertDateToString(dateValue, dateFormat);
+		            $(element).text(text);
+		            $(element).attr("title", Y.Utils.convertDateToString(dateValue, "LLLL"));
+		        } else {
+		            $(element).text('-');
+		        }
 		    }
 		};
 		ko.bindingHandlers.seeMore = {

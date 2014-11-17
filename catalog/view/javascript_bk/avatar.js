@@ -214,7 +214,7 @@
 
         var promise = $.ajax({
             type: 'POST',
-            url:  Y.Routing.generate('SaveAvatar'),
+            url:  Y.Routing.generate('ApiPutUserAvatar'),
             data: that.data,
             dataType: 'json'
         });

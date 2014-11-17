@@ -724,7 +724,10 @@ var YesGlobal = YesGlobal || {};
 			if(!self.Instance || !name){
 				return;
 			}
-			self.Instance.unsubscribe(name);
+			var existingChanel = _getExistingChanel(name);
+			if(existingChanel) {
+				self.Instance.unsubscribe(name);	
+			}
 		}
 
 		function _getExistingChanel (name) {
