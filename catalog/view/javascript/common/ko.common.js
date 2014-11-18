@@ -104,8 +104,6 @@ var YesGlobal = YesGlobal || {};
 		}); 
 	}
 
-
-
 	/*
 	Custom KO Handlers
 	*/
@@ -482,4 +480,4 @@ var YesGlobal = YesGlobal || {};
 	initBindingHanler();
 	//End KO custom handlers	
 	
-})(jQuery, ko, window, YesGlobal);
+}) (jQuery, ko, window, YesGlobal);

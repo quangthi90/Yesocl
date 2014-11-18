@@ -12,19 +12,10 @@
 		self.user_slug = ko.observable || "";
 		self.currentPage = ko.observable(1);
 		self.friendList = ko.observableArray([]);
-
 		self.canLoadMore = ko.observable(false);
-
-
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
-		self.unFriend = function(selectingFriend) {
-			selectingFriend.unFriend(function(){
-				self.friendList.remove(selectingFriend);
-			});
-		};
-
 		self.loadMore = function(){
 			if(self.canLoadMore()){
 				self.currentPage(self.currentPage() + 1);
@@ -32,12 +23,24 @@
 			}
 		};
 
-		self.unFollow = function(selectingFriend){
-			selectingFriend.unFollow(function(){
-				
-			});
+		self.unFriend = function(selectingFriend) {
+			Y.Utils.showConfirmMessage(Y.Constants.Messages.COMMON_CONFIRM, function(){
+				selectingFriend.unFriend(function(data) {
+					self.friendList.remove(selectingFriend);
+				});
+			});			
+		};
 
-		}
+		self.follow = function(selectingFriend){
+			selectingFriend.follow(function(data) {});
+		};
+
+		self.unFollow = function(selectingFriend){
+			Y.Utils.showConfirmMessage(Y.Constants.Messages.COMMON_CONFIRM, function(){
+				selectingFriend.unFollow(function(data) {
+				});
+			});			
+		};
 		/* ============= END PUBLIC METHODS ================ */
 
 		/* ============= START PRIVATE METHODS ============= */
@@ -46,14 +49,14 @@
 			var ajaxOptions = {
 			url: Y.Routing.generate(self.apiUrls, {page: self.currentPage()}),
 			data : {
-				limit : 10
+				limit : 100
 			}};
 
 			var successCallback = function(data){
 				if(data.success === "ok"){
 					self.canLoadMore(data.canLoadMore);
 					ko.utils.arrayForEach(data.friends, function(p){
-						var friendItem = new Y.Models.FriendModel(p);
+						var friendItem = new Y.Models.UserModel(p);
 						self.friendList.push(friendItem);
 					});
 				}
@@ -61,9 +64,8 @@
 			};
 			
 			//Call common ajax Call:
-			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
-			
-		};
+			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);			
+		}
 
 		function _init(){
             $(window).scroll(function(e) {
@@ -75,10 +77,10 @@
             _loadFriend(function(){
             	$(window).scrollTop(0);
             });
-		};
+		}
 
 		_init();
 		/* ============= END PRIVATE METHODS =============== */
 	}
 	
-}(jQuery, ko, window, YesGlobal));
+})(jQuery, ko, window, YesGlobal);

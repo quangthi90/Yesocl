@@ -858,4 +858,4 @@ var YesGlobal = YesGlobal || {};
 	}
 	_initGlobal();
 	/ ========================== END COMMON INIT ============================== /
-})(jQuery, ko, window, YesGlobal);
+}) (jQuery, ko, window, YesGlobal);

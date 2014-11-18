@@ -4,16 +4,8 @@
 {% block title %}{{ heading_title }}{% endblock %}
 
 {% block stylesheet %}
- <style type="text/css">
-    .menu_friend{
-        color: #25AD9F;
-    }
-    .option_friend_follow{
-        /*margin-top: 9px;*/
-        width: 100px;
-    }
- </style>   
-{% endblock %}
+ {% endblock %}
+
 {% block body %}
     <div class="innerAll">
         <div class="row">
@@ -34,9 +26,11 @@
                                     <img class="img-clean" data-bind="attr : { 'src' : $data.avatar, alt : $data.username }">
                                 </a>
                                 <div class="media-body innerAll inner-2x padding-right-none padding-bottom-none">
-                                    <h4 class="media-heading truncated-text" data-bind="attr:{ 'title': $data.username }"><a class="text-inverse" data-bind="text: $data.username, link: {route: 'WallPage', params: { user_slug: $data.userslug } }"></a></h4>
+                                    <h5 class="media-heading truncated-text strong" data-bind="attr:{ 'title': $data.username }">
+                                        <a class="text-inverse" data-bind="text: $data.username, link: {route: 'WallPage', params: { user_slug: $data.userslug } }"></a>
+                                    </h5>
                                      <!-- ko if: $data.current -->
-                                    <p class="truncated-text" data-bind="attr:{ 'title': $data.current }"><i class="fa fa-fw fa-map-marker text-muted" ></i><span data-bind="text: $data.current"></span>
+                                    <p class="truncated-text" data-bind="attr:{ 'title': $data.current }"><span data-bind="text: $data.current"></span>
                                     </p> 
                                      <!-- /ko -->                                    
                                 </div>
@@ -45,20 +39,21 @@
                                         <button class="btn btn-primary" data-bind="click: $parent.unFriend">
                                             <i class="fa fa-check"></i> {% trans %} Unfriend {% endtrans%}
                                         </button> 
-                                        <button class="btn btn-default" data-bind="click: clickFollow">
-                                            <!-- ko if: $data.followStatus() == 0 || $data.followStatus() == 3 -->
-                                            <i class="fa fa-check"></i>&nbsp; {% trans %} Follow {% endtrans %}
-                                            <!-- /ko -->
-                                            <!-- ko if: $data.followStatus() == 2-->
-                                            <i class="fa fa-rss"></i>&nbsp; {% trans %} UnFollow {% endtrans %}
-                                            <!-- /ko -->                                            
+                                        <!-- ko if: $data.followStatus() == 0 || $data.followStatus() == 3 -->
+                                        <button class="btn btn-default" data-bind="click: $parent.follow">
+                                            <i class="fa fa-check"></i>&nbsp; {% trans %} Follow {% endtrans %}  
                                         </button> 
+                                        <!-- /ko -->
+                                        <!-- ko if: $data.followStatus() == 2 -->
+                                        <button class="btn btn-default" data-bind="click: $parent.unFollow">
+                                            <i class="fa fa-rss"></i>&nbsp; {% trans %} UnFollow {% endtrans %}
+                                        </button> 
+                                        <!-- /ko -->
                                     </div>
                                 </div>
                             </div>
                         </div>
                     <!-- /ko -->
-                    <!-- <button type="button" class=" pull-right btn btn-info" data-bind="click: $data.loadMore">Load More</button> -->
                     </div>
                 </div>
             </div>
@@ -72,7 +67,6 @@
 {% block library_javascript %}
 {% endblock %}
 {% block common_javascript %}
-<script src="{{ asset_js('models/friend-models.js') }}"></script>
 <script src="{{ asset_js('pages/account/friend.js') }}"></script>
 {% endblock %}
 {% block javascript %}

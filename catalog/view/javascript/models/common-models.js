@@ -12,7 +12,7 @@ YesGlobal.Models = YesGlobal.Models || {};
 			var value = ko.utils.unwrapObservable(that.title);
 			return $("<div>").html(value).text();
 		});
-	}
+	};
 
 	Y.Models.RefreshOptionConfigModel = function (options) {
 		var that = this;
@@ -87,5 +87,122 @@ YesGlobal.Models = YesGlobal.Models || {};
 		}
 
 		_init();
-	}
+	};
+
+	Y.Models.UserModel = function (data) {
+		var that = this;
+
+		that.id = data.id || "";
+		that.username = data.username || "";
+		that.slug = data.slug || "";
+		that.avatar = data.avatar || "";
+		that.current = data.current || ""
+		that.friendStatus = ko.observable(data.fr_status || 0);
+		that.followStatus = ko.observable(data.fl_status || 0);
+
+		that.makeFriend = function(success, fail){
+			var ajaxOptions = {
+				url : Y.Routing.generate("ApiPutMakeFriend", {
+					user_slug: that.slug
+				})
+			};
+			var successCallback = function(data){
+				if(data.success === "ok"){
+					that.friendStatus(data.status);
+					if(success && typeof success == "function"){
+						success(data);
+					}
+				} else {
+					if(fail && typeof fail == "function"){
+						fail(data);
+					}
+				}
+			};
+			YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, fail);
+		};
+
+		that.unFriend = function(success, fail) {
+			var ajaxOptions = {
+				url : Y.Routing.generate("ApiPutUnfriend", {
+					user_slug : that.slug
+				})
+			};
+			var successCallback = function(data){
+				if(data.success === "ok"){
+					that.friendStatus(data.status);
+					if(success && typeof success == "function"){
+						success(data);
+					}
+				} else {
+					if(fail && typeof fail == "function"){
+						fail(data);
+					}
+				}
+			};
+			YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, fail);
+		};
+
+		that.cancelRequest = function(success, fail){
+			var ajaxOptions = {
+				url : Y.Routing.generate("ApiPutCancelRequest", {
+					user_slug: that.slug
+				})
+			};
+			var successCallback = function(data){
+				if(data.success === "ok"){
+					that.friendStatus(data.status);
+					if(success && typeof success == "function"){
+						success(data);
+					}
+				} else {
+					if(fail && typeof fail == "function"){
+						fail(data);
+					}
+				}
+			};
+			YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, fail);
+		};
+
+		that.follow = function(success, fail){
+			var ajaxOptions = {
+				url : Y.Routing.generate("ApiPutAddFollower", {
+					user_slug: that.slug
+				})
+			};
+			var successCallback = function(data){
+				if(data.success === "ok"){
+					that.followStatus(data.status);
+					if(success && typeof success == "function"){
+						success(data);
+					}
+				} else {
+					if(fail && typeof fail == "function"){
+						fail(data);
+					}
+				}
+			};
+			YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, fail);
+		};
+
+		that.unFollow = function(success, fail){
+			var ajaxOptions = {
+				url : Y.Routing.generate("ApiPutRemoveFollower", {
+					user_slug: that.slug
+				})
+			};
+			var successCallback = function(data){
+				if(data.success === "ok"){
+					that.followStatus(data.status);
+					if(success && typeof success == "function"){
+						success(data);
+					}
+				} else {
+					if(fail && typeof fail == "function"){
+						fail(data);
+					}
+				}
+			};
+			YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, fail);
+		};
+	};
 })(jQuery, ko, YesGlobal);
