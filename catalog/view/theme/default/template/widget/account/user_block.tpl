@@ -17,12 +17,11 @@
                 <div class="photo">
                     <img src="{{ currUser.avatar }}" width="120" alt="" class="img-circle">
                 </div>
-                <div class="innerAll border-right pull-left">
+                <div class="innerAll pull-left">
                     <h3 class="margin-none">{{ currUser.username }}</h3>
                     <span>{{ currUser.current }}</span>
                 </div>
-                <div class="innerAll pull-left">
-                    <p class="lead margin-none "> <i class="fa fa-quote-left text-muted fa-fw"></i> What a fun Partyyy</p>
+                <div class="innerAll pull-left">                    
                 </div>
             </div>
             <div class="clearfix"></div>
