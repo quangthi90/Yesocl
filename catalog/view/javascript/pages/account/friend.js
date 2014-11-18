@@ -9,13 +9,20 @@
 		self.apiUrls = options.apiUrls || "";
 		self.isLoadSuccess = ko.observable(false);
 
-		self.user_slug = ko.observable || "";
+		self.query = ko.observable("");
 		self.currentPage = ko.observable(1);
 		self.friendList = ko.observableArray([]);
 		self.canLoadMore = ko.observable(false);
 		/*  ============= END PROPERTIES ==================== */
 
 		/* ============= START PUBLIC METHODS ============== */
+		self.friendListView = ko.computed(function(){
+			var query = self.query().trim().toLowerCase();
+			return ko.utils.arrayFilter(self.friendList(), function(f){
+				return f.username.toLowerCase().indexOf(query) >= 0;
+			});
+		});
+
 		self.loadMore = function(){
 			if(self.canLoadMore()){
 				self.currentPage(self.currentPage() + 1);
@@ -49,7 +56,7 @@
 			var ajaxOptions = {
 			url: Y.Routing.generate(self.apiUrls, {page: self.currentPage()}),
 			data : {
-				limit : 100
+				limit : 1000
 			}};
 
 			var successCallback = function(data){
@@ -61,8 +68,7 @@
 					});
 				}
 				self.isLoadSuccess(true);
-			};
-			
+			};			
 			//Call common ajax Call:
 			Y.Utils.ajaxCall(ajaxOptions, null, successCallback, null);			
 		}
