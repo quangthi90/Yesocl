@@ -31,7 +31,7 @@
                             <div>
                                 <a class="text-black strong" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a>
                                 <!-- ko if: !$data.isOwner -->
-                                <span><i class="icon-caret-right"></i></span>
+                                <span class="innerL innerR half"><i class="fa fa-angle-double-right"></i></span>
                                 <a data-bind="attr: { href: $data.ownerHref, title : $data.ownerName }, text: $data.ownerName"></a>
                                 <!-- /ko -->
                             </div>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="display-inline post-content-details">
                         <!-- ko if: $data.title() != '' -->
-                        <h4 class="heading" data-bind="text: $data.title"></h4>
+                        <a data-bind="link: { title: $data.title(), route: 'PostPage', params: { post_slug: $data.slug, post_type: $data.type } }"><h4 class="heading" data-bind="text: $data.title"></h4></a>
                         <!-- /ko -->
                         <div data-bind="html: $data.contentDisplay, zoomImageInContent: true, seeMore: true"></div>
                     </div>
