@@ -1,5 +1,5 @@
 {% block timeline_cover %}
-    {% set currUser = get_current_user() %}
+    {% set currUser = current_user %}
     <div class="timeline-cover">
         <div class="cover image">
             <div class="top">
