@@ -1,11 +1,8 @@
 {% extends '@template/default/template/layout/basic/master.tpl' %}
-{% use '@template/default/template/common/dialogs.tpl' %}
 
 {% block title %}{{ heading_title }}{% endblock %}
 
-{% block stylesheet %}
-    {{ block('common_ko_template_style') }}
-    <link href="{{ asset_css('post-detail.css') }}" rel="stylesheet" media="screen" />    
+{% block stylesheet %}       
 {% endblock %}
 
 {% block body %}
@@ -105,42 +102,7 @@
             </div>
         </div>
     </div>
-    {{ block('common_ko_template_comment') }}
-    {{ block('common_ko_template_user_box') }}
 </div>
 {% endblock %}
 {% block javascript %}
-<script type="text/javascript" src="{{ asset_js('ko-vms.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('ko-detail.js') }}"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        var detailInfo = {
-            isLogged : {{ is_logged() }},
-            postData : {
-                id: '{{ post.id|raw }}',
-                slug: '{{ post.slug|raw }}',
-                type: '{{ post.type|raw }}',
-                created: '{{ post.created|raw }}',
-                comment_count: {{ post.comment_count }},
-                like_count: {{ post.like_count }},
-                count_viewer: {{ post.count_viewer }},
-                isLiked: '{{ post.isLiked|raw }}' === '1',
-                category_id: '{{ post.category_id|raw }}',
-                category_slug: '{{ post.category_slug|raw }}',
-                category_name: '{{ post.category_name|raw }}'
-            }
-        };
-        var commentBoxOptions = {
-            Id : "comment-box"
-        };
-        var userBoxOptions = {
-        };
-        var viewModel = {
-            detailModel: new DetailFormView(detailInfo),
-            commentBoxModel : new CommentBoxViewModel(commentBoxOptions),
-            userBoxModel : new UserBoxViewModel(userBoxOptions)
-        };
-        ko.applyBindings(viewModel, document.getElementById(YesGlobal.Configs.defaultBindingElement));
-    });
-</script>
 {% endblock %}
