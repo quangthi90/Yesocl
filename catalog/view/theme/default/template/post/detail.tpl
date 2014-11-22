@@ -1,134 +1,146 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 sidebar sidebar-social footer-sticky"> <![endif]-->
-<!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 sidebar sidebar-social footer-sticky"> <![endif]-->
-<!--[if IE 8]>    <html class="ie lt-ie9 sidebar sidebar-social footer-sticky"> <![endif]-->
-<!--[if gt IE 8]> <html class="ie sidebar sidebar-social footer-sticky"> <![endif]-->
-<!--[if !IE]><!-->
-<html class="sidebar sidebar-social footer-sticky">
-<!-- <![endif]-->
-<head>
-    <title>{% block title %}{% trans %}Home Feed{% endtrans %}{% endblock %} | Yesocl - {% trans %}Social Network{% endtrans %}</title>
-    <base href="{{ base }}" />
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-    <link rel="shortcut icon" href="image/template/favicon.png">
-    <!--[if lt IE 9]>
-        <link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css" />
-    <![endif]-->
-    <link rel="stylesheet" href="{{ asset_css('common/core.css') }}" />
-    <link rel="stylesheet" href="{{ asset_css('common/custom.css') }}" />
+{% extends '@template/default/template/layout/basic/master.tpl' %}
+{% use '@template/default/template/common/dialogs.tpl' %}
 
-    {% block stylesheet %}
-    {% endblock %}
-        
-    {#  HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries #}
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif] -->    
+{% block title %}{{ heading_title }}{% endblock %}
 
-    {# HEADER SCRIPTS GO HERE #}
-    <script> if ( /*@cc_on!@*/ false && document.documentMode === 10) { document.documentElement.className += ' ie ie10'; } </script>
-</head>
-<body class="menu-right-hidden">
-    <div id="common-loading">
-        <div class="spinner">
-            <div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div><span class="text">Processing</span>
-        </div>    
-    </div>    
-    <div class="container-fluid menu-hidden">
-        <!-- SIDEBAR LEFT -->
-        {% block sidebarLeft %}
-            {% if is_logged() == true %}
-                {{ include(template_from_string( leftsidebar )) }}            
-            {% endif %}
-        {% endblock %}
-        
-        <!-- SIDEBAR CHAT RIGHT -->
-        {% block sidebarChatRight %}
-            {{ include(template_from_string( rightsidebar )) }}
-        {% endblock %}  
-        <div id="content">
-            <!-- NAVBAR FOR FLUID LAYOUT HERE -->
-            {% block navbar %}
-                {{ include(template_from_string( navbar )) }}
-            {% endblock %}
-            <!-- CONTENT -->
-            {% block body %}
-            {% endblock %}                  
+{% block stylesheet %}
+    {{ block('common_ko_template_style') }}
+    <link href="{{ asset_css('post-detail.css') }}" rel="stylesheet" media="screen" />    
+{% endblock %}
+
+{% block body %}
+<div class="innerAll">
+    <div id="post-detail" data-bind="with: detailModel">
+        <div id="detail-header">
+            <div class="goback-link fl">
+                <a class="tooltip-bottom btn-goback" title="Go back" > 
+                    <i class="icon-arrow-left medium-icon"></i>                 
+                </a>
+            </div>
+            <div class="post-title-container">              
+                <h2 class="post-title" title="{{ post.title }}">{{ post.title }}</h2>
+                <div class="post-detail-meta">
+                    <div class="post-user-time fl">
+                        <a href="{{ path('WallPage', {user_slug: post.user_slug}) }}">
+                            <img class="small-avatar" src="{{ post.user.avatar }}" alt="{{ post.author }}">
+                        </a>
+                        <a href="{{ path('WallPage', {user_slug: post.user_slug}) }}">
+                            {{ post.author }}
+                        </a>
+                        <span style="color: #CCC;">&nbsp;|&nbsp;</span>
+                        <span class="post-time" data-bind="timeAgo: {{ post.created }}"></span>
+                        {% if post.is_owner == false %}
+                            <span style="color: #CCC;">&nbsp;|&nbsp;</span>
+                            <a href="{{ post.owner.href }}">{{ post.owner.username }}</a>
+                        {% endif  %}                    
+                    </div>
+                    <ul class="post-actions fr post-item">
+                        {% if is_logged() == true %}
+                        <li>
+                            <!-- ko if: !postData.isLiked() -->
+                            <a class="like-post hidden" title="{% trans %}Like{% endtrans %}" data-bind="click: likePost">
+                                <i class="icon-thumbs-up medium-icon"></i>
+                            </a>
+                            <!-- /ko -->
+                            <!-- ko if: postData.isLiked() -->
+                            <span class="unlike-post hidden" data-bind="click: likePost">
+                                <a title="{% trans %}Unlike{% endtrans %}">
+                                    <i class="icon-thumbs-down"></i>
+                                </a>
+                            </span>
+                            <!-- /ko -->
+                            <span class="number">
+                                <a class="post-liked-list" title="View who liked" data-bind="click: showLikers">
+                                    <d data-bind="text: postData.likeCount">{{ post.like_count }}</d>
+                                </a>
+                            </span>
+                        </li>
+                        <li class="toggle-comment">
+                            <a class="open-comment" data-bind="click: showComment" title="{% trans %}Open comment box{% endtrans %}">
+                                <i class="icon-comments-alt"></i>
+                            </a>
+                            <span class="number">
+                                <d data-bind="text: postData.commentCount">{{ post.comment_count }}</d>
+                            </span>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a class="disabled">
+                                <i class="icon-thumbs-up medium-icon"></i>
+                            </a>
+                            <span class="number">
+                                <d>{{ post.like_count }}</d>
+                            </span>
+                        </li>
+                        <li class="toggle-comment">
+                            <a class="disabled">
+                                <i class="icon-comments-alt"></i>
+                            </a>
+                            <span class="number">
+                                <d>{{ post.comment_count }}</d>
+                            </span>
+                        </li>
+                        {% endif  %}
+                        <li>
+                            <a class="disabled">
+                                <i class="icon-eye-open"></i>
+                            </a>
+                            <span class="number">
+                                <d>{{ post.count_viewer }}</d>
+                            </span>
+                        </li>           
+                    </ul>           
+                    <div class="clear"></div>   
+                </div>
+            </div>
         </div>
-        <div class="clearfix"></div>
-        <!-- FOOTER HERE -->
-        {% block footer %}
-            {{ include(template_from_string( footer )) }}
-        {% endblock %}
+        <div id="detail-content">
+            <div id="post-content">
+                {{ post.content|raw }}
+            </div>
+            <div id="detail-scroll">
+                <a class="btn-link-round fl" id="detail-first" style="display: none;">
+                    <i class="icon-arrow-left"></i>
+                </a>
+            </div>
+        </div>
     </div>
-    {% block common_html %}   
-    {% endblock %}    
-    <!-- REQUIRED VARIABLES SCRIPTS -->
-    <script data-id="App.Config">
-        var App = {}; 
-        var primaryColor = "#25ad9f",
-        dangerColor = "#b55151",
-        successColor = "#609450",
-        infoColor = "#4a8bc2",
-        warningColor = "#ab7a4b",
-        inverseColor = "#45484d";
-    </script>
-    <!-- FOOTER SCRIPTS -->
-    <!-- Library Script -->
-    <script src="{{ asset_js('library/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset_js('library/jquery/jquery-migrate.min.js') }}"></script>
-    <script src="{{ asset_js('library/modernizr/modernizr.js') }}"></script>
-    <script src="{{ asset_js('library/bootstrap/js/bootstrap.min.js') }}"></script> 
-    <script src="{{ asset_js('library/momment/moment.min.js') }}"></script>
-    <script src="{{ asset_js('library/knockout/knockout.js') }}"></script>
-    <script src="{{ asset_js('library/pusher/pusher.min.js') }}"></script>
-    {#<script src="{{ asset_js('library/core_less-js/less.min.js') }}"></script>#}
-    <script src="{{ asset_js('library/core_browser/ie/ie.prototype.polyfill.js') }}"></script>     
-    <script src="{{ asset_js('library/core_nicescroll/jquery.nicescroll.min.js') }}"></script>
-    <script src="{{ asset_js('library/core_breakpoints/breakpoints.js') }}"></script>
-    <script src="{{ asset_js('library/menu_sidr/jquery.sidr.js') }}"></script>
-    <script src="{{ asset_js('library/ui_modals/bootbox.min.js') }}"></script>
-    <script src="{{ asset_js('library/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset_js('library/expander/expander.min.js') }}"></script>
-    <script src="{{ asset_js('library/autosize/jquery.autosize.min.js') }}"></script>
-    <script src="{{ asset_js('library/mention/jquery.elastic.js') }}"></script>
-    <script src="{{ asset_js('library/mention/underscore.min.js') }}"></script>
-    <script src="{{ asset_js('library/mention/jquery.mentions.js') }}"></script>
-    {% block library_javascript %}
-    {% endblock %}
-
-    <!-- Common Script -->    
-    <script src="{{ asset_js('common/core.global.js') }}"></script>
-    <script src="{{ asset_js('common/core.effects_init.js') }}"></script>
-    <script src="{{ asset_js('common/sidebar.main_init.js') }}"></script>
-    <script src="{{ asset_js('common/sidebar.collapse_init.js') }}"></script>
-    <script src="{{ asset_js('common/menus.sidebar.chat_init.js') }}"></script>
-    <script src="{{ asset_js('common/ko.common.js') }}"></script>
-    <script src="{{ asset_js('models/common-models.js') }}"></script>
-    <script src="{{ asset_js('pages/common/widgets.js') }}"></script>    
-    <script id="Yes.Global">
-        (function(Y, undefined) {
-            var routing = '{{ get_routing_list()|raw }}';
-            Y.Routing = new Y.RoutingManager( JSON.parse(routing) );
-            Y.Routing.BaseUrl = '{{ base }}'.toLowerCase();     
-            Y.Constants.PusherMessages = JSON.parse('{{ get_live_time_events()| raw }}');
-            var user = '{{ get_current_user()|json_encode()|raw }}';
-            if (user){
-                Y.Utils.setCurrentUser(JSON.parse(user));
-            }            
-        }(YesGlobal));
-    </script>
-    {% block common_javascript %}
-    {% endblock %}
-    
-    {# Custom Script #}
-    {% block javascript %} 
-    {% endblock %}
-    {# Defined Data for Script #}
-    {% block datascript %}
-    {% endblock %}
-
-</body>
+    {{ block('common_ko_template_comment') }}
+    {{ block('common_ko_template_user_box') }}
+</div>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript" src="{{ asset_js('ko-vms.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('ko-detail.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var detailInfo = {
+            isLogged : {{ is_logged() }},
+            postData : {
+                id: '{{ post.id|raw }}',
+                slug: '{{ post.slug|raw }}',
+                type: '{{ post.type|raw }}',
+                created: '{{ post.created|raw }}',
+                comment_count: {{ post.comment_count }},
+                like_count: {{ post.like_count }},
+                count_viewer: {{ post.count_viewer }},
+                isLiked: '{{ post.isLiked|raw }}' === '1',
+                category_id: '{{ post.category_id|raw }}',
+                category_slug: '{{ post.category_slug|raw }}',
+                category_name: '{{ post.category_name|raw }}'
+            }
+        };
+        var commentBoxOptions = {
+            Id : "comment-box"
+        };
+        var userBoxOptions = {
+        };
+        var viewModel = {
+            detailModel: new DetailFormView(detailInfo),
+            commentBoxModel : new CommentBoxViewModel(commentBoxOptions),
+            userBoxModel : new UserBoxViewModel(userBoxOptions)
+        };
+        ko.applyBindings(viewModel, document.getElementById(YesGlobal.Configs.defaultBindingElement));
+    });
+</script>
+{% endblock %}

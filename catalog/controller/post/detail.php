@@ -44,10 +44,17 @@ class ControllerPostDetail extends Controller {
 			$this->template = 'default/template/post/detail.tpl';
 		}
 
-		$this->children = array(
+		/*$this->children = array(
 			'common/sidebar_control',
 			'common/footer',
 			'common/header'
+		);*/
+		$this->children = array(
+			'layout/basic/leftsidebar',
+			'layout/basic/rightsidebar',
+			'layout/basic/navbar',
+			'layout/basic/footer',
+			//'widget/account/user'
 		);
 
 		$this->response->setOutput($this->twig_render());
