@@ -346,3 +346,17 @@ body.loading #common-loading {
 	display: block;
 }
 /*================================== END USER =====================================*/
+/*================================= BEGIN FRIEND BUTTONS ==========================*/
+.y-friend-button {
+}
+.y-friend-button .btn-friend {	
+}
+.y-friend-button .btn-friend .dropdown-menu {	
+}
+.y-friend-button .btn-friend .dropdown-menu li {	
+}
+.y-friend-button .btn-friend .dropdown-menu li a {	
+}
+.y-friend-button .btn-friend .dropdown-menu li a:hover {	
+}
+/*================================== END FRIEND BUTTONS ===========================*/

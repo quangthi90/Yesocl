@@ -390,5 +390,4 @@
 		}
 		/* ============= END PRIVATE METHODS ================ */
 	};
-
 }(jQuery, ko, window, YesGlobal));

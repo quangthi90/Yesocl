@@ -1,3 +1,4 @@
+{% use '@template/default/template/widget/widget-templates.tpl' %}
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 sidebar sidebar-social footer-sticky"> <![endif]-->
 <!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 sidebar sidebar-social footer-sticky"> <![endif]-->
@@ -64,6 +65,7 @@
             {{ include(template_from_string( footer )) }}
         {% endblock %}
     </div>
+    {{ block('widget_templates')}}
     {% block common_html %}   
     {% endblock %}    
     <!-- REQUIRED VARIABLES SCRIPTS -->
@@ -99,7 +101,6 @@
     <script src="{{ asset_js('library/mention/jquery.mentions.js') }}"></script>
     {% block library_javascript %}
     {% endblock %}
-
     <!-- Common Script -->    
     <script src="{{ asset_js('common/core.global.js') }}"></script>
     <script src="{{ asset_js('common/core.effects_init.js') }}"></script>
@@ -122,13 +123,11 @@
         }(YesGlobal));
     </script>
     {% block common_javascript %}
-    {% endblock %}
-    
+    {% endblock %}    
     {# Custom Script #}
     {% block javascript %} 
     {% endblock %}
     {# Defined Data for Script #}
     {% block datascript %}
     {% endblock %}
-
 </body>

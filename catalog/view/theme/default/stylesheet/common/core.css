@@ -9324,7 +9324,7 @@ html.app .loginWrapper #content {
   opacity: 1;
   background: #efefef;
 }
-.timeline-cover .cover ul {
+.timeline-cover .cover > ul {
   position: absolute;
   overflow: hidden;
   float: left;
@@ -9333,7 +9333,7 @@ html.app .loginWrapper #content {
   padding: 0;
   background: rgba(0, 0, 0, 0.24);
 }
-.timeline-cover .cover ul li {
+.timeline-cover .cover > ul li {
   display: block;
   float: left;
   margin-right: 0;
@@ -9341,26 +9341,26 @@ html.app .loginWrapper #content {
   line-height: 40px;
   height: 40px;
 }
-.timeline-cover .cover ul li a {
+.timeline-cover .cover > ul li a {
   color: #fff;
   font-weight: bold;
   display: block;
   height: 40px;
   line-height: 40px;
 }
-.timeline-cover .cover ul li a small {
+.timeline-cover .cover > ul li a small {
   font-weight: 400;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.5);
 }
-.timeline-cover .cover ul li a [class*="icon-"] {
+.timeline-cover .cover > ul li a [class*="icon-"] {
   vertical-align: middle;
 }
-.timeline-cover .cover ul li a i {
+.timeline-cover .cover > ul li a i {
   font-size: 18px;
 }
-.timeline-cover .cover ul li:hover,
-.timeline-cover .cover ul li.active {
+.timeline-cover .cover > ul li:hover,
+.timeline-cover .cover > ul li.active {
   background: rgba(0, 0, 0, 0.7);
 }
 .timeline-cover .cover .rankings {
@@ -9392,7 +9392,7 @@ html.app .loginWrapper #content {
 .timeline-cover .cover .rankings div a span:hover {
   color: #fff;
 }
-.timeline-cover .cover.image ul {
+.timeline-cover .cover.image > ul {
   padding-left: 150px;
 }
 .timeline-cover .cover.image .photo {
