@@ -7,12 +7,329 @@
 {% block body %}
     <div class="innerAll">
         <div class="row">
-            <div class="col-lg-9 col-md-8">            
+            <div class="col-lg-12">
+                <div id="news-featured-2" class="owl-carousel owl-theme">
+                    <div class="item">
+                        <div class="box-generic padding-none margin-none overflow-hidden">
+                            <div class="relativeWrap overflow-hidden" data-height="175px">
+                                <img src="image/no-branch-post.jpg" alt="" class="img-responsive padding-none border-none" />
+                                <div class="fixed-bottom bg-inverse-faded">
+                                    <div class="media margin-none innerAll">
+                                        <a href="#" class="pull-left">
+                                            <img src="image/no_user_avatar.jpg" alt="" /></a>
+                                        <div class="media-body text-white">
+                                            by <strong>Ewan Shelah</strong>
+                                            <p class="text-small margin-none"><i class="fa fa-fw fa-clock-o"></i>2 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="innerAll inner-2x border-bottom">
+                                <h4>Getting the job done</h4>
+                                <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, magnam necessitatibus libero eaque dolore.</p>
+                            </div>
+                            <div class="row row-merge">
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-comment-fill-1"></i>466</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-star-fill"></i>61</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-generic padding-none margin-none overflow-hidden">
+                            <div class="relativeWrap overflow-hidden" data-height="175px">
+                                <img src="image/no-branch-post.jpg" alt="" class="img-responsive padding-none border-none" />
+                                <div class="fixed-bottom bg-inverse-faded">
+                                    <div class="media margin-none innerAll">
+                                        <a href="#" class="pull-left">
+                                            <img src="image/no_user_avatar.jpg" alt="" /></a>
+                                        <div class="media-body text-white">
+                                            by <strong>Ewan Shelah</strong>
+                                            <p class="text-small margin-none"><i class="fa fa-fw fa-clock-o"></i>2 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="innerAll inner-2x border-bottom">
+                                <h4>Getting the job done</h4>
+                                <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, magnam necessitatibus libero eaque dolore.</p>
+                            </div>
+                            <div class="row row-merge">
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-comment-fill-1"></i>466</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-star-fill"></i>61</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-generic padding-none margin-none overflow-hidden">
+                            <div class="relativeWrap overflow-hidden" data-height="175px">
+                                <img src="image/no-branch-post.jpg" alt="" class="img-responsive padding-none border-none" />
+                                <div class="fixed-bottom bg-inverse-faded">
+                                    <div class="media margin-none innerAll">
+                                        <a href="#" class="pull-left">
+                                            <img src="image/no_user_avatar.jpg" alt="" /></a>
+                                        <div class="media-body text-white">
+                                            by <strong>Ewan Shelah</strong>
+                                            <p class="text-small margin-none"><i class="fa fa-fw fa-clock-o"></i>2 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="innerAll inner-2x border-bottom">
+                                <h4>Getting the job done</h4>
+                                <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, magnam necessitatibus libero eaque dolore.</p>
+                            </div>
+                            <div class="row row-merge">
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-comment-fill-1"></i>466</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-star-fill"></i>61</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-generic padding-none margin-none overflow-hidden">
+                            <div class="relativeWrap overflow-hidden" data-height="175px">
+                                <img src="image/no-branch-post.jpg" alt="" class="img-responsive padding-none border-none" />
+                                <div class="fixed-bottom bg-inverse-faded">
+                                    <div class="media margin-none innerAll">
+                                        <a href="#" class="pull-left">
+                                            <img src="image/no_user_avatar.jpg" alt="" /></a>
+                                        <div class="media-body text-white">
+                                            by <strong>Ewan Shelah</strong>
+                                            <p class="text-small margin-none"><i class="fa fa-fw fa-clock-o"></i>2 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="innerAll inner-2x border-bottom">
+                                <h4>Getting the job done</h4>
+                                <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, magnam necessitatibus libero eaque dolore.</p>
+                            </div>
+                            <div class="row row-merge">
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-comment-fill-1"></i>466</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-star-fill"></i>61</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-generic padding-none margin-none overflow-hidden">
+                            <div class="relativeWrap overflow-hidden" data-height="175px">
+                                <img src="image/no-branch-post.jpg" alt="" class="img-responsive padding-none border-none" />
+                                <div class="fixed-bottom bg-inverse-faded">
+                                    <div class="media margin-none innerAll">
+                                        <a href="#" class="pull-left">
+                                            <img src="image/no_user_avatar.jpg" alt="" /></a>
+                                        <div class="media-body text-white">
+                                            by <strong>Ewan Shelah</strong>
+                                            <p class="text-small margin-none"><i class="fa fa-fw fa-clock-o"></i>2 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="innerAll inner-2x border-bottom">
+                                <h4>Getting the job done</h4>
+                                <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, magnam necessitatibus libero eaque dolore.</p>
+                            </div>
+                            <div class="row row-merge">
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-comment-fill-1"></i>466</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-star-fill"></i>61</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-generic padding-none margin-none overflow-hidden">
+                            <div class="relativeWrap overflow-hidden" data-height="175px">
+                                <img src="image/no-branch-post.jpg" alt="" class="img-responsive padding-none border-none" />
+                                <div class="fixed-bottom bg-inverse-faded">
+                                    <div class="media margin-none innerAll">
+                                        <a href="#" class="pull-left">
+                                            <img src="image/no_user_avatar.jpg" alt="" /></a>
+                                        <div class="media-body text-white">
+                                            by <strong>Ewan Shelah</strong>
+                                            <p class="text-small margin-none"><i class="fa fa-fw fa-clock-o"></i>2 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="innerAll inner-2x border-bottom">
+                                <h4>Getting the job done</h4>
+                                <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, magnam necessitatibus libero eaque dolore.</p>
+                            </div>
+                            <div class="row row-merge">
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-comment-fill-1"></i>466</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-star-fill"></i>61</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-generic padding-none margin-none overflow-hidden">
+                            <div class="relativeWrap overflow-hidden" data-height="175px">
+                                <img src="image/no-branch-post.jpg" alt="" class="img-responsive padding-none border-none" />
+                                <div class="fixed-bottom bg-inverse-faded">
+                                    <div class="media margin-none innerAll">
+                                        <a href="#" class="pull-left">
+                                            <img src="image/no_user_avatar.jpg" alt="" /></a>
+                                        <div class="media-body text-white">
+                                            by <strong>Ewan Shelah</strong>
+                                            <p class="text-small margin-none"><i class="fa fa-fw fa-clock-o"></i>2 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="innerAll inner-2x border-bottom">
+                                <h4>Getting the job done</h4>
+                                <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, magnam necessitatibus libero eaque dolore.</p>
+                            </div>
+                            <div class="row row-merge">
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-comment-fill-1"></i>466</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-star-fill"></i>61</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-generic padding-none margin-none overflow-hidden">
+                            <div class="relativeWrap overflow-hidden" data-height="175px">
+                                <img src="image/no-branch-post.jpg" alt="" class="img-responsive padding-none border-none" />
+                                <div class="fixed-bottom bg-inverse-faded">
+                                    <div class="media margin-none innerAll">
+                                        <a href="#" class="pull-left">
+                                            <img src="image/no_user_avatar.jpg" alt="" /></a>
+                                        <div class="media-body text-white">
+                                            by <strong>Ewan Shelah</strong>
+                                            <p class="text-small margin-none"><i class="fa fa-fw fa-clock-o"></i>2 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="innerAll inner-2x border-bottom">
+                                <h4>Getting the job done</h4>
+                                <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, magnam necessitatibus libero eaque dolore.</p>
+                            </div>
+                            <div class="row row-merge">
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-comment-fill-1"></i>466</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-star-fill"></i>61</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-generic padding-none margin-none overflow-hidden">
+                            <div class="relativeWrap overflow-hidden" data-height="175px">
+                                <img src="image/no-branch-post.jpg" alt="" class="img-responsive padding-none border-none" />
+                                <div class="fixed-bottom bg-inverse-faded">
+                                    <div class="media margin-none innerAll">
+                                        <a href="#" class="pull-left">
+                                            <img src="image/no_user_avatar.jpg" alt="" /></a>
+                                        <div class="media-body text-white">
+                                            by <strong>Ewan Shelah</strong>
+                                            <p class="text-small margin-none"><i class="fa fa-fw fa-clock-o"></i>2 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="innerAll inner-2x border-bottom">
+                                <h4>Getting the job done</h4>
+                                <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, magnam necessitatibus libero eaque dolore.</p>
+                            </div>
+                            <div class="row row-merge">
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-comment-fill-1"></i>466</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-star-fill"></i>61</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-generic padding-none margin-none overflow-hidden">
+                            <div class="relativeWrap overflow-hidden" data-height="175px">
+                                <img src="image/no-branch-post.jpg" alt="" class="img-responsive padding-none border-none" />
+                                <div class="fixed-bottom bg-inverse-faded">
+                                    <div class="media margin-none innerAll">
+                                        <a href="#" class="pull-left">
+                                            <img src="image/no_user_avatar.jpg" alt="" /></a>
+                                        <div class="media-body text-white">
+                                            by <strong>Ewan Shelah</strong>
+                                            <p class="text-small margin-none"><i class="fa fa-fw fa-clock-o"></i>2 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="innerAll inner-2x border-bottom">
+                                <h4>Getting the job done</h4>
+                                <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, magnam necessitatibus libero eaque dolore.</p>
+                            </div>
+                            <div class="row row-merge">
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-comment-fill-1"></i>466</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-star-fill"></i>61</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box-generic padding-none margin-none overflow-hidden">
+                            <div class="relativeWrap overflow-hidden" data-height="175px">
+                                <img src="image/no-branch-post.jpg" alt="" class="img-responsive padding-none border-none" />
+                                <div class="fixed-bottom bg-inverse-faded">
+                                    <div class="media margin-none innerAll">
+                                        <a href="#" class="pull-left">
+                                            <img src="image/no_user_avatar.jpg" alt="" /></a>
+                                        <div class="media-body text-white">
+                                            by <strong>Ewan Shelah</strong>
+                                            <p class="text-small margin-none"><i class="fa fa-fw fa-clock-o"></i>2 hours ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="innerAll inner-2x border-bottom">
+                                <h4>Getting the job done</h4>
+                                <p class="margin-none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, magnam necessitatibus libero eaque dolore.</p>
+                            </div>
+                            <div class="row row-merge">
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-comment-fill-1"></i>466</a>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="innerAll text-center display-block text-muted"><i class="fa fa-fw icon-star-fill"></i>61</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- WIDGET -->
-            <div class="col-md-4 col-lg-3">            
-            </div>
-            <!-- END WIDGET -->
         </div>
     </div>
 {% endblock %}
