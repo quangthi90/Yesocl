@@ -8,7 +8,7 @@
 {% block title %}{{ heading_title }}{% endblock %}
 
 {% block stylesheet %}
-    {{ block('wall_post_block_stylesheet') }}    
+    {{ block('wall_post_block_stylesheet') }}
 {% endblock %}
 {% block body %}
     <div class="innerAll">

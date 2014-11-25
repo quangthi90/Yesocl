@@ -10,6 +10,8 @@
 @import '../library/dropzone/dropzone.css';
 @import '../library/magnific-popup/magnific-popup.css';
 @import '../library/mention/mention.css';
+@import '../library/owl_carousel/owl.carousel.css';
+@import '../library/owl_carousel/owl.theme.css';
 @import '../library/notifications_gritter/jquery.gritter.css';
 
 .scripts-async .container-fluid {
