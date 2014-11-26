@@ -8292,9 +8292,9 @@ div.DTCR_pointer {
   padding: 10px;
   position: relative;
   background: #ffffff;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  -moz-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
   margin: 0 0 10px;
 }
 .box-generic .box-generic-footer .btn-group {

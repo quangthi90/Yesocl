@@ -15,7 +15,7 @@
                 {% set block_href = path('BranchCategory', {category_slug: category.slug}) %}
                 <div class="widget widget-heading-simple widget-body-white category-block">
                     <div class="widget-head">
-                        <h3 class="heading glyphicons show_thumbnails"><i></i> <a href="{{block_href}}">{{block_info.name}}</a></h3>
+                        <h3 class="heading glyphicons show_thumbnails"><i></i> <a class="text-uppercase text-black" href="{{block_href}}">{{block_info.name}}</a></h3>
                     </div>
                     <div class="widget-body">
                         {% if posts|length > 0 %}
@@ -39,8 +39,10 @@
                                             </div>
                                         </div>
                                         <div class="innerAll inner-2x border-bottom">
-                                            <h4><a class="strong" href="{{ path('PostPage', { post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a></h4>
-                                            <p class="margin-none">{{ post.description|raw }}</p>
+                                            <h4 style="height: 60px; overflow: hidden;">
+                                                <a class="strong" href="{{ path('PostPage', { post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a>
+                                            </h4>
+                                            <p class="margin-none" style="overflow: hidden; height: 50px;">{{ post.description|raw }}</p>
                                         </div>
                                         <div class="row row-merge">
                                             <div class="col-md-4">
@@ -62,7 +64,8 @@
                             <p class="innerAll bg-default">No posts found !</p>
                         {% endif %}
                     </div>
-                </div>            
+                </div>
+                <div class="innerAll"></div>         
         {% endfor %}
     </div>
 {% endblock %}
@@ -78,19 +81,8 @@
             slideSpeed : 300,
             paginationSpeed : 400,
             navigation: false,
-            autoPlay: 5000,
-            items: 4,
-            itemsCustom : [
-                [0, 1],
-                [450, 1],
-                [600, 1],
-                [700, 1],
-                [880, 2],
-                [1100, 2],
-                [1200, 3],
-                [1400, 4],
-                [1600, 4]
-            ],
+            autoPlay: false,
+            items: 3,
             navigationText: ['Newer', 'Older']
         });
     })(jQuery);
