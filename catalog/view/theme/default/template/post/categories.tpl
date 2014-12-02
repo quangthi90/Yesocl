@@ -33,7 +33,7 @@
                                                     </a>
                                                     <div class="media-body text-white">
                                                         <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="text-white">{{ user.username }}</a>
-                                                        <p class="text-small margin-none">{{ post.created}}</p>
+                                                        <p class="text-small margin-none" data-bind="dateTimeText: {{ post.created}}">{{ post.created}}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -75,16 +75,5 @@
 {% block common_javascript %}
 {% endblock %}
 {% block javascript %}
-<script type="text/javascript">
-    (function($) {
-        $(".owl-carousel").owlCarousel({
-            slideSpeed : 300,
-            paginationSpeed : 400,
-            navigation: false,
-            autoPlay: false,
-            items: 3,
-            navigationText: ['Newer', 'Older']
-        });
-    })(jQuery);
-</script>
+<script src="{{ asset_js('pages/post/categories.js') }}"></script>
 {% endblock %}
