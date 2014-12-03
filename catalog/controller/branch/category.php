@@ -69,7 +69,7 @@ class ControllerBranchCategory extends Controller {
 
 			// thumb
 			if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
-				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
+				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 800, 500);
 			}else{
 				$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
 			}
