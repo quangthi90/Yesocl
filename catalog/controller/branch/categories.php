@@ -15,8 +15,6 @@ class ControllerBranchCategories extends Controller {
 		$this->load->model('branch/branch');
 		$this->load->model('branch/category');
 		$this->load->model('branch/post');
-		$this->load->model('user/user');
-		$this->load->model('tool/image');
 		$this->load->model('tool/object');
 
 		$oBranch = $this->model_branch_branch->getBranch( array('branch_slug' => $this->request->get['branch_slug']) );
@@ -49,18 +47,6 @@ class ControllerBranchCategories extends Controller {
 			$aPosts = $this->model_tool_object->formatPosts( $lPosts, false, true, 800, 500);
 
 			$this->data['all_posts'][$oCategory->getId()] = $aPosts;
-		}
-
-		$this->data['users'] = array();
-
-		$lUsers = $this->model_user_user->getUsers( array('user_ids' => $aUserIds) );
-
-		foreach ( $lUsers as $oUser ) {
-			$aUser = $oUser->formatToCache();
-
-			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-
-			$this->data['users'][$aUser['id']] = $aUser;
 		}
 
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
