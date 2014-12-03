@@ -498,6 +498,36 @@ var YesGlobal = YesGlobal || {};
 	//End KO custom handlers
 
 	function initComponents(){
+		ko.components.register('ybutton-like', {
+		    viewModel: function(params) {
+		    	var self = this;
+		    	self.likeCount = ko.observable(params.likeCount || 0);
+		    	self.isLiked = ko.observable(params.isLiked || false);
+		    	var postType = params.postType || "";
+		    	var postSlug = params.postSlug || "";
+
+		    	self.like = function() {
+		    		var ajaxOptions = {
+						url : Y.Routing.generate("ApiPutPostLike", {
+							post_type: postType,
+							post_slug: postSlug
+						})
+					};
+					var successCallback = function(data) {
+						if(data.success === "ok"){
+							self.isLiked(!self.isLiked());
+							self.likeCount(data.like_count || 0);
+						}else {
+							//Not OK
+						}
+					};
+					YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, function(){
+						//Error
+					});
+		    	};
+		    },
+		    template:  { element : "template-yLikePost" }
+		});
 		ko.components.register('ybutton-friend', {
 		    viewModel: function(params) {
 		    	var self = this;

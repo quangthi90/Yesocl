@@ -310,6 +310,28 @@ body.loading #common-loading {
 .new-post-part {
 	margin-bottom: 15px;
 }
+
+.post-details {
+
+}
+.post-details .detail-header {	
+}
+.post-details .detail-header .post-meta {	
+}
+.post-details .detail-header .post-title {	
+}
+.post-details .detail-header .post-author {	
+}
+.post-details .detail-header .post-owner {	
+}
+.post-details .detail-header .post-actions {	
+}
+.post-details .post-content {	
+	color: #444;	
+}
+.post-details .post-content ul {	
+	list-style: none;	
+}
 /*================================== END POST =====================================*/
 /*================================= START USER ====================================*/
 .user-list{	

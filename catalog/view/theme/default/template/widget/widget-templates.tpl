@@ -37,4 +37,15 @@
     <!-- /ko -->
   </div>
 </template>
+<template id='template-yLikePost'>
+    <a class="innerAll text-center text-muted">
+        <!-- ko if: isLiked() -->
+        <span data-bind="click: like"><i class="icon-thumbs-down"></i></span>
+        <!-- /ko -->
+        <!-- ko ifnot: isLiked() -->
+        <span data-bind="click: like"><i class="icon-thumbs-up-fill"></i></span>        
+        <!-- /ko -->
+        <span class="innerL half" data-bind="text: likeCount"></span>
+    </a>
+</template>
 {% endblock %}}
