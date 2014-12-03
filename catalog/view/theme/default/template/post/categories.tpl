@@ -21,7 +21,7 @@
                         {% if posts|length > 0 %}
                             <div id="category-{{block_info.id}}" class="owl-carousel owl-theme">
                                 {% for post in posts %}
-                                {% set user = users[post.user_id] %}
+                                {% set user = post.user %}
                                 <div class="item">
                                     <div class="box-generic padding-none margin-none overflow-hidden">
                                         <div class="relativeWrap overflow-hidden" data-height="175px">
@@ -52,7 +52,7 @@
                                                 <a class="innerAll text-center display-block text-muted"><i class="icon-comment-fill-2"></i> <span class="innerL half">{{ post.comment_count }}</span></a>
                                             </div>
                                             <div class="col-md-4">
-                                                <a class="innerAll text-center display-block text-muted"><i class="icon-visual-eye-fill"></i> <span class="innerL half">{{ post.view_count }}</span></a>
+                                                <a class="innerAll text-center display-block text-muted"><i class="icon-visual-eye-fill"></i> <span class="innerL half">{{ post.count_viewer }}</span></a>
                                             </div>
                                         </div>
                                     </div>
