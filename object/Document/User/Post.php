@@ -20,9 +20,6 @@ Class Post extends AbstractPost {
 	 */
 	private $content;
 
-    /** @MongoDB\String */
-	private $ownerSlug;
-
 	/** 
 	 * @MongoDB\String
 	 */
@@ -87,14 +84,6 @@ Class Post extends AbstractPost {
 
 	public function getContent(){
 		return $this->content;
-	}
-
-	public function setOwnerSlug( $ownerSlug ){
-		$this->ownerSlug = $ownerSlug;
-	}
-
-	public function getOwnerSlug(){
-		return $this->ownerSlug;
 	}
 
 	public function setStockPostId( $stockPostId ){
