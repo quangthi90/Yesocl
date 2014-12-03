@@ -12,11 +12,12 @@ class ControllerBranchCategories extends Controller {
 
 		$this->data['heading_title'] = $this->config->get('config_title');
 
-		$this->load->model( 'branch/branch' );
-		$this->load->model( 'branch/category' );
-		$this->load->model( 'branch/post' );
-		$this->load->model( 'user/user' );
-		$this->load->model( 'tool/image' );
+		$this->load->model('branch/branch');
+		$this->load->model('branch/category');
+		$this->load->model('branch/post');
+		$this->load->model('user/user');
+		$this->load->model('tool/image');
+		$this->load->model('tool/object');
 
 		$oBranch = $this->model_branch_branch->getBranch( array('branch_slug' => $this->request->get['branch_slug']) );
 
@@ -31,12 +32,11 @@ class ControllerBranchCategories extends Controller {
 		$aUserIds = array();
 
 		foreach ( $lCategories as $oCategory ) {
-			$aPosts = $this->model_branch_post->getLastPostByCategory( 
-				$oBranch->getId(),
-				$oCategory->getId()
-			);
-			
-			if ( count($aPosts) == 0 ){
+			$lPosts = $this->model_branch_post->getPosts(array(
+				'branch_id' => $oBranch->getId(),
+				'category_id' => $oCategory->getId()
+			));
+			if ( $lPosts->count() == 0 ){
 				continue;
 			}
 
@@ -46,22 +46,7 @@ class ControllerBranchCategories extends Controller {
 				'slug' => $oCategory->getSlug()
 			);
 			
-			foreach ($aPosts as $i => $aPost) {
-				if ( in_array($this->customer->getId(), $aPost['liker_ids']) ){
-					$aPosts[$i]['isUserLiked'] = true;
-				}else{
-					$aPosts[$i]['isUserLiked'] = false;
-				}
-
-				// thumb
-				if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
-					$aPosts[$i]['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
-				}else{
-					$aPosts[$i]['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
-				}
-
-				$aUserIds[$aPost['user_id']] = $aPost['user_id'];
-			}
+			$aPosts = $this->model_tool_object->formatPosts( $lPosts, false, true, 344, 175 );
 
 			$this->data['all_posts'][$oCategory->getId()] = $aPosts;
 		}

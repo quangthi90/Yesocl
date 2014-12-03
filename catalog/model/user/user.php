@@ -211,7 +211,7 @@ class ModelUserUser extends Model {
 		if ( !empty($aData['user_ids']) ){
 			return $this->dm->getRepository('Document\User\User')->findBy(array(
 				'deleted' => false,
-				'id' => array('$in' => $aData['user_ids'])
+				'id' => array('$in' => array_values($aData['user_ids']))
 			));
 		}
 

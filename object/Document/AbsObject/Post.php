@@ -55,6 +55,9 @@ Abstract Class Post {
 	/** @MongoDB\Collection */
 	private $userTags = array();
 
+    /** @MongoDB\String */
+	private $ownerSlug;
+
 	/**
 	 * Get Comment By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -226,5 +229,13 @@ Abstract Class Post {
 
 	public function getUserTags(){
 		return $this->userTags;
+	}
+
+	public function setOwnerSlug( $ownerSlug ){
+		$this->ownerSlug = $ownerSlug;
+	}
+
+	public function getOwnerSlug(){
+		return $this->ownerSlug;
 	}
 }

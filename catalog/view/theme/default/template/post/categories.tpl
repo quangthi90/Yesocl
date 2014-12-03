@@ -22,8 +22,7 @@
                         {% if posts|length > 0 %}
                             <div id="category-{{block_info.id}}" class="owl-carousel owl-theme">
                                 {% for post in posts %}
-                                {{ block('post_item_base_block')}}
-                                {% endfor %}
+                                {{ block('post_item_base_block')}}                                {% endfor %}
                             </div>
                         {% endif %}
                         {% if posts|length == 0 %}
