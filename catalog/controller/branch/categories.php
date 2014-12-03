@@ -44,7 +44,7 @@ class ControllerBranchCategories extends Controller {
 				'slug' => $oCategory->getSlug()
 			);
 			
-			$aPosts = $this->model_tool_object->formatPosts( $lPosts, false, true, 344, 175 );
+			$aPosts = $this->model_tool_object->formatPosts( $lPosts, false, true, 800, 500);
 
 			$this->data['all_posts'][$oCategory->getId()] = $aPosts;
 		}
