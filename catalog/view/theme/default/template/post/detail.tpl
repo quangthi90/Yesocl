@@ -21,7 +21,7 @@
                 <img class="pull-left" width="80" class="small-avatar" src="{{ post.user.avatar }}" alt="{{ post.author }}">
             </a>
             <div class="media-body innerL">
-                <h3 class="margin-none innerB half post-title" title="{{ post.title }}">{{ post.title }}</h3>           
+                <h3 class="margin-none innerB half post-title" title="{{ post.title }}">{{ post.title }}</h3>          
                 <div class="row">
                     <div class="col-md-6">
                         <a class="text-black strong post-author" href="{{ path('WallPage', {user_slug: post.user_slug}) }}">{{ post.author }}</a>
@@ -45,6 +45,49 @@
             </div>
         </div>        
     </div>
+    <div style="height: 20px;"></div>
+    <div id="slider_container" style="margin: 0 auto;position: relative; top: 0px; left: 0px;
+        height: 456px; width: 800px; background: #24262e; overflow: hidden;">
+        <!-- Loading Screen -->
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+            <div class="loading-bg" style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+            <div class="loading-icon" style="position: absolute; display: block; background: url(http://www.jssor.com/img/loading.gif) no-repeat center center; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+        </div>
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 800px; height: 356px; overflow: hidden;">
+            <div>
+                <img u="image" src="http://www.jssor.com/img/alila/01.jpg" />
+                <img u="thumb" src="http://www.jssor.com/img/alila/thumb-01.jpg" />
+            </div>
+            <div>
+                <img u="image" src="http://www.jssor.com/img/alila/02.jpg" />
+                <img u="thumb" src="http://www.jssor.com/img/alila/thumb-02.jpg" />
+            </div>
+            <div>
+                <img u="image" src="http://www.jssor.com/img/alila/03.jpg" />
+                <img u="thumb" src="http://www.jssor.com/img/alila/thumb-03.jpg" />
+            </div>
+            <div>
+                <img u="image" src="http://www.jssor.com/img/alila/04.jpg" />
+                <img u="thumb" src="http://www.jssor.com/img/alila/thumb-04.jpg" />
+            </div>
+            <div>
+                <img u="image" src="http://www.jssor.com/img/alila/05.jpg" />
+                <img u="thumb" src="http://www.jssor.com/img/alila/thumb-05.jpg" />
+            </div>
+        </div>
+        <div u="thumbnavigator" class="jssort07" style="position: absolute; width: 800px; height: 100px; left:0px; bottom: 0px;">
+            <div u="slides" style="cursor: move;">
+                <div u="prototype" class="p" style="position: absolute; width: 72px; height: 72px; top: 0; left: 0;">
+                    <div u="thumbnailtemplate" class="i" style="position:absolute;"></div>
+                    <div class="o">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="innerAll inner-2x post-content">
         {{ post.content|raw }}
     </div>
@@ -52,4 +95,42 @@
 {% endblock %}
 {% block javascript %}
 <script src="{{ asset_js('pages/post/detail.js') }}"></script>
+<script src="{{ asset_js('library/jssor/jssor.slider.min.js') }}"></script>
+<script>
+    jssor_slider_starter = function (containerId) {
+        var options = {
+            $AutoPlay: true,
+            $SlideDuration: 500,
+            $ThumbnailNavigatorOptions: {
+                $Class: $JssorThumbnailNavigator$,
+                $ChanceToShow: 2,
+                $ActionMode: 1,
+                $SpacingX: 8,
+                $DisplayPieces: 10,
+                $ParkingPosition: 360
+            }
+        };
+        var jssor_slider = new $JssorSlider$(containerId, options);
+        //responsive code begin
+        //you can remove responsive code if you don't want the slider scales
+        //while window resizes
+        function ScaleSlider() {
+            var parentWidth = $('#' + containerId).parent().width();
+            if (parentWidth) {
+                jssor_slider.$ScaleWidth(parentWidth);
+            }
+            else
+                window.setTimeout(ScaleSlider, 30);
+        }
+        //Scale slider after document ready
+        //ScaleSlider();
+                                        
+        //Scale slider while window load/resize/orientationchange.
+        //$(window).bind("load", ScaleSlider);
+        //$(window).bind("resize", ScaleSlider);
+        //$(window).bind("orientationchange", ScaleSlider);
+        //responsive code end
+    };
+    jssor_slider_starter('slider_container');
+</script>
 {% endblock %}

@@ -37,6 +37,7 @@
 	$('.navbar.main .btn-navbar.btn-open-left, #menu .btn-navbar.btn-open-left').click(function(e)
 	{
 		e.preventDefault();
+		$(window).trigger("resize");
 		toggleMenuHidden();		
 	});
 

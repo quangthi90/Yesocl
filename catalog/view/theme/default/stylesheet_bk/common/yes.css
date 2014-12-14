@@ -151,6 +151,7 @@ a i.icon-spin{
   -webkit-border-radius: 0px;
   border-radius: 0px;
   font-weight: bold;
+  white-space: nowrap;
 }
 .btn-yes {
   color: #fff;
